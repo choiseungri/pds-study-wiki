@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>의사소통: 환자중심진료 - 학습자료</title>
+<style>
+  :root {
+    --text:#171717; --muted:#666; --line:#d7d7d7; --soft:#f8f8f8; --ink:#111;
+    --accent:#0f5f7a; --danger:#b42318; --mark:#fff38a;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    margin:0; color:var(--text); background:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;
+    line-height:1.72; word-break:keep-all;
+  }
+  #progress { position:fixed; top:0; left:0; height:4px; background:var(--accent); width:0; z-index:1000; }
+  .wrap { max-width:1120px; margin:0 auto; padding:0 22px; }
+  header { padding:56px 0 28px; border-bottom:1px solid var(--line); }
+  h1 { font-size:clamp(2rem,4.2vw,4rem); letter-spacing:-.045em; margin:0 0 12px; line-height:1.12; }
+  h2 { font-size:clamp(1.62rem,3vw,2.35rem); letter-spacing:-.04em; margin:72px 0 20px; padding-bottom:10px; border-bottom:2px solid var(--line); }
+  h3 { font-size:1.32rem; letter-spacing:-.03em; margin:34px 0 10px; }
+  h4 { font-size:1.08rem; margin:22px 0 8px; }
+  p { margin:10px 0; }
+  a { color:var(--accent); text-decoration-thickness:.08em; text-underline-offset:.18em; }
+  nav { position:sticky; top:4px; z-index:900; background:rgba(255,255,255,.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  nav .wrap { display:flex; gap:12px; align-items:center; overflow:auto; padding-top:10px; padding-bottom:10px; }
+  nav a, nav button { white-space:nowrap; font-size:.95rem; color:var(--text); border:1px solid var(--line); border-radius:999px; padding:6px 12px; background:#fff; cursor:pointer; text-decoration:none; }
+  nav a:hover, nav button:hover { border-color:#777; }
+  .meta { color:var(--muted); font-size:.98rem; }
+  .lead { font-size:1.16rem; max-width:900px; }
+  .grid { display:grid; gap:18px; }
+  .two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  @media (max-width:860px) { .two,.three { grid-template-columns:1fr; } }
+  .plain-card { border:1px solid var(--line); border-radius:18px; padding:18px; background:#fff; }
+  .plain-card h3:first-child, .plain-card h4:first-child { margin-top:0; }
+  .tight li { margin:4px 0; }
+  mark, .hl { background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 .08em; }
+  .u { text-decoration:underline; text-decoration-thickness:.15em; text-underline-offset:.16em; text-decoration-color:#dd4a4a; }
+  .exam { font-weight:800; text-decoration:underline; text-decoration-thickness:.14em; text-underline-offset:.18em; text-decoration-color:#e8c100; }
+  .red { color:var(--danger); font-weight:700; }
+  .muted { color:var(--muted); }
+  .small { font-size:.92rem; }
+  .page-ref { color:#555; font-size:.86em; }
+  table { width:100%; border-collapse:collapse; margin:14px 0 22px; }
+  th, td { border-bottom:1px solid var(--line); padding:10px 8px; vertical-align:top; text-align:left; }
+  th { font-weight:800; }
+  details { border:1px solid var(--line); border-radius:16px; padding:12px 16px; background:#fff; margin:12px 0; }
+  summary { cursor:pointer; font-weight:800; }
+  .practice-toggle { margin:26px 0 36px; }
+  .practice-toggle summary { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:1.12rem; }
+  .practice-toggle summary::after { content:"열기"; font-size:.86rem; color:var(--muted); font-weight:700; }
+  .practice-toggle[open] summary::after { content:"닫기"; }
+  .practice-note { margin-top:12px; color:var(--muted); font-size:.92rem; }
+  .source-line { margin:0 0 6px; font-size:.9rem; }
+  .source-label { font-weight:900; color:var(--accent); text-decoration:underline; text-decoration-thickness:.14em; text-underline-offset:.18em; }
+  .source-note { color:var(--muted); margin-left:6px; }
+  .mcq { border-top:1px solid var(--line); padding:18px 0; }
+  .mcq:first-of-type { border-top:0; }
+  .mcq .stem { font-weight:800; margin-bottom:8px; }
+  .options { display:grid; gap:8px; margin:8px 0; }
+  .options button { text-align:left; border:1px solid var(--line); border-radius:12px; background:#fff; padding:9px 12px; cursor:pointer; font:inherit; }
+  .options button:hover { border-color:#888; }
+  .options button[aria-pressed="true"] { border-color:var(--ink); outline:2px solid #111; outline-offset:1px; }
+  .feedback { min-height:1.4em; font-weight:700; margin-top:8px; }
+  .answer-toggle { margin-top:10px; padding:10px 12px; border-radius:12px; }
+  .exam-only { display:none; }
+  body.exam-mode .deep { display:none !important; }
+  body.exam-mode .exam-only { display:block; }
+  body.exam-mode h2 { margin-top:44px; }
+  .venn-box { display:flex; align-items:center; justify-content:center; padding:6px 0; overflow:auto; }
+  svg.venn { width:min(100%,720px); height:auto; }
+  .legend { display:flex; flex-wrap:wrap; gap:10px; font-size:.92rem; color:var(--muted); margin:8px 0 0; }
+  .legend span { border:1px solid var(--line); border-radius:999px; padding:3px 10px; }
+  .mini-venn { max-width:420px; margin:8px auto 16px; }
+  .toc { columns:2; column-gap:36px; }
+  .toc li { break-inside:avoid; margin:5px 0; }
+  @media (max-width:700px) { .toc { columns:1; } }
+  .copybtn { border:1px solid var(--line); border-radius:12px; background:#fff; padding:10px 14px; font:inherit; cursor:pointer; }
+  .foot { border-top:1px solid var(--line); margin-top:70px; padding:26px 0 50px; color:var(--muted); }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<header>
+  <div class="wrap">
+    <p class="meta">2026학년도 본과 4학년 환자·의사·사회 · 가정의학과 박계영</p>
+    <h1>의사소통: 환자중심진료</h1>
+    <p class="lead">핵심은 환자를 단순한 <mark>질병(disease)</mark>이 아니라 <mark>아픔의 경험(illness)</mark>과 <mark>건강 인식(health)</mark>을 가진 한 사람으로 이해하는 것이다. 구성요소는 <b>질병·질병경험·건강 탐색</b>, <b>전인적 이해</b>, <b>공통 기반 찾기</b>, <b>환자-의사 관계 강화</b> 네 가지다.</p>
+    <p class="meta">원본 강의록 범위: 1-34쪽. 작년에 처음 생긴 강의라 기출·형성 문항은 26년도 자료가 중심이다. 본문 중 <span class="exam">밑줄 표시</span>는 반복 강조·출제 포인트다.</p>
+  </div>
+</header>
+<nav aria-label="본문 이동">
+  <div class="wrap">
+    <a href="#overview">개요</a>
+    <a href="#dih">Disease·Illness·Health</a>
+    <a href="#communication">의사소통 사례</a>
+    <a href="#four">4요소</a>
+    <a href="#element1">요소1</a>
+    <a href="#element2">요소2</a>
+    <a href="#element3">요소3</a>
+    <a href="#element4">요소4</a>
+    <a href="#cases">사례 적용</a>
+    <a href="#archive">기출 모아보기</a>
+    <button type="button" onclick="toggleExamMode()">시험 직전 모드</button>
+  </div>
+</nav>
+<main class="wrap">
+  <section id="overview">
+    <h2>1. 학습목표와 전체 흐름</h2>
+    <div class="grid two">
+      <div class="plain-card">
+        <h3>학습목표</h3>
+        <ul class="tight">
+          <li>환자중심진료의 <b>개념</b>을 이해한다.</li>
+          <li>환자중심진료의 <b>핵심 구성요소</b>를 열거한다.</li>
+          <li>핵심 구성요소가 <b>의사소통에서 어떤 역할</b>을 하는지 이해한다.</li>
+        </ul>
+      </div>
+      <div class="plain-card">
+        <h3>참고문헌과 학습 위치</h3>
+        <p>참고문헌은 <i>Patient-Centered Medicine: Transforming the Clinical Method</i>, 4th Edition, Routledge다.</p>
+        <p>환자중심 의료는 예과의 사람·의료·사회, 본과의 환자·의사·사회, CPX, 실제 진료로 이어지는 의사소통 역량의 축이다.</p>
+      </div>
+    </div>
+    <p class="deep">슬라이드의 계단 그림은 “사람의료사회(예과) → 환자의사사회(본과) → CPX(의사면허) → 실전 진료”로 이어지는 흐름을 보여준다. 이 흐름의 목적은 <b>환자를 질병명으로 환원하지 않고 한 사람으로 바라보는 진료 방식</b>을 실제 진료까지 가져가는 데 있다.</p>
+
+    <details class="deep">
+      <summary>전체 목차</summary>
+      <ol class="toc">
+        <li>환자중심진료의 학습목표</li>
+        <li>Disease, Illness, Health의 구분</li>
+        <li>잘 된 의사소통과 잘못된 의사소통</li>
+        <li>환자중심성 4가지 구성요소</li>
+        <li>요소 1: 질병과 질병 경험, 건강에 대한 탐색</li>
+        <li>요소 2: 전인적 이해</li>
+        <li>요소 3: 공통 기반 찾기</li>
+        <li>요소 4: 환자-의사 관계 강화</li>
+        <li>사례에서 빠진 구성요소 찾기</li>
+        <li>26년도 형성·총괄문항 모아보기</li>
+      </ol>
+    </details>
+  </section>
+
+  <section id="dih">
+    <h2>2. Disease, Illness, Health를 분리해서 본다</h2>
+    <p class="exam-only"><b>시험 직전:</b> Disease는 의사가 정의하는 문제, Illness는 환자의 주관적 경험, Health는 질병 유무와 독립적으로 의미 있는 삶을 영위할 수 있는 능력이다. 세 요소는 서로 겹치기도 하고 분리되기도 한다.</p>
+
+    <div class="grid two">
+      <div>
+        <h3>환자중심진료의 출발점</h3>
+        <p>환자중심 의료는 <b>질병(disease), 아픔(illness), 건강(health)</b>의 균형을 이해하는 데서 시작한다. 같은 치료를 해도 결과가 다르고, 설명을 충분히 했는데도 환자가 약을 먹지 않으며, 의사가 점점 지치는 이유를 이 세 축에서 다시 볼 수 있다.</p>
+        <p><span class="exam">Disease ≠ Illness</span>다. 의사가 검사와 진단으로 정의한 문제가 환자가 경험하는 고통과 항상 일치하지 않는다.</p>
+      </div>
+      <div class="venn-box deep" aria-label="Disease, Illness, Health Venn diagram">
+        <svg class="venn" viewBox="0 0 640 360" role="img" aria-labelledby="vennTitle vennDesc">
+          <title id="vennTitle">Disease, Illness, Health 관계</title>
+          <desc id="vennDesc">Disease, Illness, Health 세 원이 겹치는 벤다이어그램</desc>
+          <circle cx="320" cy="130" r="115" fill="rgba(239,132,82,.38)" stroke="#e77d4e" stroke-width="3" />
+          <circle cx="250" cy="230" r="115" fill="rgba(122,184,224,.38)" stroke="#62a8d8" stroke-width="3" />
+          <circle cx="390" cy="230" r="115" fill="rgba(247,207,73,.38)" stroke="#e0ba31" stroke-width="3" />
+          <text x="320" y="120" text-anchor="middle" font-size="28" font-weight="800">Disease</text>
+          <text x="205" y="250" text-anchor="middle" font-size="28" font-weight="800">Illness</text>
+          <text x="445" y="250" text-anchor="middle" font-size="28" font-weight="800">Health</text>
+          <text x="320" y="230" text-anchor="middle" font-size="24" font-weight="900">환자중심</text>
+        </svg>
+      </div>
+    </div>
+
+    <table>
+      <thead><tr><th>개념</th><th>정의</th><th>의사소통 포인트</th></tr></thead>
+      <tbody>
+        <tr><td><b>Disease</b></td><td>구조·기능 이상, 진단명, 검사 결과. 병력청취, 신체진찰, 실험실 검사, 영상 검사 등을 통해 <b>의사가 정의하는 문제</b>다.</td><td>진단명과 병태생리를 설명하는 데 필요하지만, 여기서 멈추면 환자의 고통이 빠진다.</td></tr>
+        <tr><td><b>Illness</b></td><td>환자가 개인적으로 경험하는 건강 문제다. 감정, 생각, 기능, 기대를 포함하며 각 환자의 질환 경험은 고유하다.</td><td><b>진단명이 아닌 경험</b>을 탐색한다. 두려움, 걱정, 일상 기능 저하, 기대를 묻는다.</td></tr>
+        <tr><td><b>Health</b></td><td><span class="u">건강은 질병이 없는 상태가 아니다.</span> 질병이나 증상이 있어도 자신의 삶의 목적과 목표를 추구할 수 있는 능력이다.</td><td>질병 유무와 독립적으로 환자가 의미 있는 삶을 영위할 수 있는지 확인한다.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>겹침과 분리: 시험에 바로 연결되는 예시</h3>
+    <table>
+      <thead><tr><th>상태</th><th>예시</th><th>핵심 문장</th></tr></thead>
+      <tbody>
+        <tr><td>Disease + Illness</td><td>급성 심근경색 직후 환자, 진행성 암으로 통증이 심한 환자, 급성 악화 COPD 환자</td><td>질병이 있고, 아프다고 느낀다. 우리에게 가장 익숙한 형태의 “환자”다.</td></tr>
+        <tr><td>Illness without Disease</td><td>일시적인 문제, 초기 상태, 경계선 문제, 증상이 아직 분화되지 않은 상태, 증상의 근원이 신체 장기 자체보다 삶의 맥락에 있는 경우</td><td><span class="exam">질병이 없다고 해서 고통이 없는 것은 아니다.</span> 의료적으로 다루기 어렵지만 환자의 고통은 실제다.</td></tr>
+        <tr><td>Disease without Illness</td><td>아프다고 느끼지는 않지만 질병이 있다는 사실을 알고 있는 상태</td><td>“나는 아프진 않지만, 병이 있다는 사실은 알고 있다.”</td></tr>
+        <tr><td>Disease + Health</td><td>초기 고혈압, 당뇨, 이상지질혈증, 무증상 HIV 감염 등</td><td>증상은 없지만 질병이 삶의 방향에 영향을 준다고 인식한다.</td></tr>
+        <tr><td>Disease + Illness + Health</td><td>질병도 있고 아픔의 경험도 있으며, 자신이 건강을 어떻게 인식하는지도 드러나는 상태</td><td><span class="exam">환자중심 의료가 가장 적극적으로 작동하는 지점</span>이다.</td></tr>
+      </tbody>
+    </table>
+
+    <details class="quiz practice-toggle" id="practice-dih">
+      <summary><span>26년도 총괄문항: Disease·Illness·Health</span></summary>
+      <p class="practice-note">두 문항 모두 슬라이드에서 강조된 총괄문항이다. 기본 그림과 정의를 연결해 풀면 된다.</p>
+      <div class="mcq" data-answer="①" data-explain="A는 Disease, Illness, Health가 함께 드러나는 지점이다. 만성 신부전과 투석은 질병과 질환 경험을 보여 주고, 삶의 만족도가 좋다는 정보가 health 축을 함께 드러낸다.">
+        <p class="source-line"><span class="source-label">[26총괄]</span><span class="source-note">원본 10쪽</span></p>
+        <p class="stem">다음 중 A에 해당하는 사례는? ☆</p>
+        <div class="mini-venn venn-box">
+          <svg class="venn" viewBox="0 0 420 260" role="img" aria-label="A가 세 원의 교차부에 있는 Venn diagram">
+            <circle cx="210" cy="90" r="78" fill="none" stroke="#222" stroke-width="2" />
+            <circle cx="155" cy="165" r="78" fill="none" stroke="#222" stroke-width="2" />
+            <circle cx="265" cy="165" r="78" fill="none" stroke="#222" stroke-width="2" />
+            <path d="M210 128 C228 145 236 166 228 185 L192 185 C184 166 192 145 210 128 Z" fill="#fff38a" stroke="#222" stroke-width="1.5" />
+            <text x="210" y="82" text-anchor="middle" font-size="20">Disease</text>
+            <text x="120" y="170" text-anchor="middle" font-size="20">Illness</text>
+            <text x="300" y="170" text-anchor="middle" font-size="20">Health</text>
+            <text x="210" y="170" text-anchor="middle" font-size="22" font-weight="900">A</text>
+          </svg>
+        </div>
+        <div class="options">
+          <button data-choice="①">① 만성 신부전으로 투석중이지만 삶의 만족도가 좋은 환자</button>
+          <button data-choice="②">② 초기 고혈압을 진단받았지만 치료받지 않는 환자</button>
+          <button data-choice="③">③ 급성 통증으로 응급실에 내원한 환자</button>
+          <button data-choice="④">④ 건강검진 상에서 아무런 이상이 없는 건강한 사람</button>
+          <button data-choice="⑤">⑤ 아프다고 느끼지만 치료받지 않는 사람</button>
+        </div>
+        <p class="feedback" aria-live="polite"></p>
+        <details class="answer-toggle"><summary>정답·해설 보기</summary><p><b>정답 ①.</b> A는 세 요소가 동시에 걸리는 지점이다. ②는 질병 인식은 있으나 illness 경험과 건강 인식이 충분히 드러나지 않는다. ③은 disease+illness 쪽, ④는 health only, ⑤는 illness 중심으로 분류한다.</p></details>
+      </div>
+
+      <div class="mcq" data-answer="①" data-explain="검사상 진단받은 질환은 없으므로 disease로 확정하지 않는다. 그러나 증상이 있고 일상생활 기능에 영향을 주므로 illness를 중심으로 탐색해야 하며, 기능과 삶의 맥락도 함께 보아야 한다.">
+        <p class="source-line"><span class="source-label">[26총괄]</span><span class="source-note">원본 10쪽</span></p>
+        <p class="stem">45세 남성이 흉부불편감을 주소로 내원하였다. 가슴이 답답해서 일상생활에도 지장이 생긴다고 했다. 병원에 내원하여 각종 검사를 시행하였으나 진단받은 질환은 없었다. 이 환자에 있어서의 Disease-Health-Illness에 관한 설명으로 옳은 것은? ☆</p>
+        <div class="options">
+          <button data-choice="①">① 질환은 없지만 증상이 있으므로 환자의 기능과 삶에 영향을 주는 상태이다.</button>
+          <button data-choice="②">② 질병을 찾기 위해 추가적인 검사를 진행한다.</button>
+          <button data-choice="③">③ 기능적 이상은 없지만 증상이 있으므로 심리적 요인이 문제라고 판단한다.</button>
+          <button data-choice="④">④ 기능적 이상이 없으므로 건강하다고 판단한다.</button>
+          <button data-choice="⑤">⑤ 증상이 있으므로 질병이 있는 것으로 본다.</button>
+        </div>
+        <p class="feedback" aria-live="polite"></p>
+        <details class="answer-toggle"><summary>정답·해설 보기</summary><p><b>정답 ①.</b> 환자는 disease 진단은 없지만 illness를 경험한다. ②는 필요한 경우 고려할 수 있으나 이 문항의 핵심은 환자중심성이다. ③은 섣부른 심리화, ④는 환자의 고통을 무시하는 판단, ⑤는 disease와 illness를 혼동한 답이다.</p></details>
+      </div>
+    </details>
+  </section>
+
+  <section id="communication">
+    <h2>3. 잘 된 의사소통과 잘못된 의사소통</h2>
+    <p>슬라이드는 드라마 장면을 이용해 같은 의학적 상황에서도 의사소통 방식이 달라질 수 있음을 보여준다. 영상 속 사례의 핵심은 의학 지식의 양보다 <b>환자의 단서에 반응하는지</b>, <b>환자의 걱정과 기대를 묻는지</b>, <b>공통 기반을 만들고 관계를 유지하는지</b>다.</p>
+    <div class="grid two deep">
+      <div class="plain-card">
+        <h3>협심증·스텐트 시술 병력 환자</h3>
+        <p>협심증으로 스텐트 시술을 받은 70세 환자와 보호자가 의사와 대화한다. 환자와 보호자가 약, 부작용, 생활관리와 관련된 생각을 내비칠 때 이를 단서로 받아야 한다.</p>
+      </div>
+      <div class="plain-card">
+        <h3>감염성 심내막염 초진환자</h3>
+        <p>수술이 필요한 감염성 심내막염 초진환자와 의사의 대화다. 초진 상황에서는 질병 설명뿐 아니라 환자가 어떤 의미로 받아들이는지, 치료 결정에 어떤 공통 기반을 만들지 확인해야 한다.</p>
+      </div>
+    </div>
+    <details class="deep">
+      <summary>사례 장면을 볼 때 확인할 질문</summary>
+      <ul>
+        <li>환자의 <b>감정</b>, 특히 두려움이 드러났는가?</li>
+        <li>환자가 질병을 어떻게 <b>생각</b>하는지 말할 기회를 얻었는가?</li>
+        <li>증상이나 치료가 일상 <b>기능</b>에 미치는 영향을 확인했는가?</li>
+        <li>치료에 대한 <b>기대</b>를 묻고 조율했는가?</li>
+        <li>의사와 환자가 문제의 본질, 목표, 역할에 대해 <b>공통 기반</b>을 만들었는가?</li>
+      </ul>
+    </details>
+  </section>
+
+  <section id="four">
+    <h2>4. 환자중심성의 네 가지 핵심 구성요소</h2>
+    <p>환자중심성(patient-centeredness)은 네 구성요소로 정리된다. 원본 슬라이드는 네 요소를 한 화면에 반복해 제시하므로, <span class="exam">영어 표현과 한국어 의미를 함께 외우는 것</span>이 좋다.</p>
+    <table>
+      <thead><tr><th>영어 표현</th><th>한국어</th><th>한 줄 기능</th></tr></thead>
+      <tbody>
+        <tr><td><b>Exploring Health, Disease, and Illness Experience</b></td><td>질병과 질병 경험, 건강에 대한 탐색</td><td>환자가 겪는 문제를 disease만이 아니라 illness와 health까지 확장해 듣는다.</td></tr>
+        <tr><td><b>Understanding the Whole Person</b></td><td>전인적 이해</td><td>환자가 어떤 삶의 맥락과 인생 주기에 놓였는지 이해한다.</td></tr>
+        <tr><td><b>Finding Common Ground</b></td><td>치료에 대한 공통 기반점 찾기</td><td>문제, 목표, 역할에 대해 의사와 환자가 상호 합의에 도달한다.</td></tr>
+        <tr><td><b>Enhancing the Patient-Physician Relationship</b></td><td>환자-의사 관계 강화</td><td>신뢰와 관계를 유지하여 어려운 의사소통도 치료 과정의 일부로 만든다.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="element1">
+    <h2>5. 요소 1: 질병과 질병 경험, 건강에 대한 탐색</h2>
+    <p class="exam-only"><b>시험 직전:</b> Illness 탐색의 네 축은 <mark>F-I-F-E</mark>다. Feelings: 질병에 대한 감정, Ideas: 질병에 대한 생각, Function: 기능에 미치는 영향, Expectations: 치료에 대한 기대.</p>
+    <p>요소 1은 환자의 문제를 disease로만 정리하지 않고, 환자가 개인적으로 경험하는 illness와 health 인식까지 함께 묻는 단계다. disease는 “환자의 문제를 신체 기관 및 시스템의 구조와 기능 이상으로 설명하려는 이론적 개념”이고, 진단명과 동일 질병군의 공통 특징을 포함한다. illness는 “환자가 개인적으로 경험하는 건강 문제”이며 각 환자의 질환 경험은 고유하다.</p>
+
+    <h3>Illness 탐색: FIFE</h3>
+    <table>
+      <thead><tr><th>축</th><th>확인 내용</th><th>예시 질문</th></tr></thead>
+      <tbody>
+        <tr><td><b>F</b>eelings</td><td><span class="exam">질병에 대한 감정, 특히 두려움</span></td><td>“이 문제 때문에 가장 걱정되는 점이 무엇인가요?”</td></tr>
+        <tr><td><b>I</b>deas</td><td><span class="exam">질병에 대한 생각</span></td><td>“환자분은 원인이 무엇이라고 생각하시나요?”</td></tr>
+        <tr><td><b>F</b>unction</td><td><span class="exam">기능에 미치는 영향</span></td><td>“일상생활에서 무엇이 가장 불편해졌나요?”</td></tr>
+        <tr><td><b>E</b>xpectations</td><td><span class="exam">치료에 대한 기대</span></td><td>“오늘 진료에서 꼭 해결하고 싶은 점은 무엇인가요?”</td></tr>
+      </tbody>
+    </table>
+    <p><span class="exam">핵심은 환자의 단서를 주의 깊게 듣고, 그들의 경험을 그들의 관점에서 이해하는 것</span>이다. 환자가 “스텐트 시술하고 나면 약 때문에 변비가 생긴다고 하던데요. 유산균 먹으면 좋지 않을까요?”라고 말하면, 이것은 단순한 잡담이 아니라 <b>질병에 대한 생각</b>과 <b>치료에 대한 기대</b>가 드러난 단서다.</p>
+
+    <h3>박가정씨 사례로 보는 Illness 탐색</h3>
+    <p>박가정씨(45세, 여성)는 소화 불량으로 내원했고 아버지가 위암에 걸린 가족력 때문에 걱정이 많았으며 추가 검사가 필요할지 궁금해했다. 내시경 결과 위염이었다고 해서 “스트레스 줄이고 약 드시면 괜찮아질 겁니다”로 끝내면, 환자의 <b>두려움</b>과 <b>추가 검사에 대한 기대</b>가 남는다. 이 사례는 요소 1과 요소 3이 함께 빠지기 쉽다.</p>
+
+    <details class="quiz practice-toggle" id="practice-element1">
+      <summary><span>26년도 형성문항: Illness 탐색</span></summary>
+      <div class="mcq" data-answer="①" data-explain="환자는 무릎 관절염이라는 disease보다 넘어질까 봐 밖에 나가지 못하고 시장도 못 가는 illness 경험을 말하고 있다. 따라서 일상생활의 불편과 기능 저하를 자세히 탐색해야 한다.">
+        <p class="source-line"><span class="source-label">[26형성]</span><span class="source-note">원본 19쪽</span></p>
+        <p class="stem">70세 여성이 무릎 통증으로 내원하였다. 영상 검사에서도 중등도 퇴행성 무릎 관절염이 확인되었다. 의사는 영상 소견을 설명하며 진통제와 물리치료를 권유하였다. 환자는 고개를 끄덕였지만, 진료가 끝날 무렵 이렇게 말했다. “약은 먹을 수 있겠는데요… 요즘은 밖에 나가는 게 겁이 나서요. 혼자 넘어질까 봐 시장도 못 가요.” 이때 Disease-Health-Illness의 관점에서 환자 중심성을 고려했을 때 해야 할 말로 가장 적절한 것은?</p>
+        <div class="options">
+          <button data-choice="①">① 환자가 일상생활에서 겪고 있는 불편함에 대해 자세히 탐색한다.</button>
+          <button data-choice="②">② 추가적인 영상 검사를 통해 수술 적응증에 해당하는지 확인한다.</button>
+          <button data-choice="③">③ “그 나이에는 원래 그런 거예요”라고 안심시킨다.</button>
+          <button data-choice="④">④ 무릎의 퇴행성 관절염에 대해서 쉽고 자세하게 설명해 준다.</button>
+          <button data-choice="⑤">⑤ 약물 적응증을 확인하여 추가적인 약물 치료를 시행한다.</button>
+        </div>
+        <p class="feedback" aria-live="polite"></p>
+        <details class="answer-toggle"><summary>정답·해설 보기</summary><p><b>정답 ①.</b> 영상 소견 설명과 진통제 권유는 disease 접근이다. 환자가 말한 “밖에 나가는 게 겁이 난다, 시장도 못 간다”는 기능 저하와 두려움을 포함하는 illness 단서다. ②, ④, ⑤는 disease 중심이고 ③은 환자 경험을 닫아 버린다.</p></details>
+      </div>
+    </details>
+  </section>
+
+  <section id="element2">
+    <h2>6. 요소 2: 전인적 이해</h2>
+    <p class="exam-only"><b>시험 직전:</b> 전인적 이해는 <mark>환자가 인생 주기의 어느 시점에 있는지, 어떤 삶의 맥락 속에 있는지 이해하는 것</mark>이다. 불규칙 근무 때문에 혈압약을 못 먹는 환자에게는 삶의 맥락을 파악해야 한다.</p>
+    <p>전인적 이해는 환자가 인생 주기의 어느 시점에 있는지, 어떤 삶의 맥락 속에 있는지 이해하는 것이다. 같은 진단명도 환자의 가족, 소득, 직업, 돌봄, 지역사회, 문화, 제도에 따라 의미가 달라진다.</p>
+
+    <h3>개인과 가족 차원</h3>
+    <p>가족, 소득, 교육, 고용, 직업, 여가, 지지를 살핀다. 같은 암 진단이라도 가족의 생계를 책임지는 가장, 사별하고 혼자 사는 노인, 배우자의 돌봄을 받는 사람에게 의미가 완전히 다르다.</p>
+
+    <h3>맥락 차원</h3>
+    <p>지역사회, 문화, 국가, 제도를 본다. 같은 암 진단이라도 대도시 3차 병원 접근이 쉬운 지역, 병가와 휴직 제도가 잘 마련된 직장, 치료비가 국가 보험으로 충분히 보장되는 국가, 지역 암 환자 지원센터와 사회복지 연계가 있는 지역에서는 치료 가능성이 달라진다.</p>
+
+    <details class="quiz practice-toggle" id="practice-element2">
+      <summary><span>26년도 형성문항: 전인적 이해</span></summary>
+      <div class="mcq" data-answer="①" data-explain="약을 못 먹는 이유가 지식 부족이 아니라 불규칙한 근무시간이라는 삶의 맥락이다. 전인적 이해에 해당하므로 환자의 생활 조건과 복용 가능 전략을 함께 파악해야 한다.">
+        <p class="source-line"><span class="source-label">[26형성]</span><span class="source-note">원본 24쪽</span></p>
+        <p class="stem">60세 여성이 “고혈압으로 혈압약을 규칙적으로 복용해야 하는데, 근무시간이 불규칙적이어서 약을 먹기 힘들어요”라고 한다. 이럴 때 환자 중심성 요소로 고려해야 할 것은?</p>
+        <div class="options">
+          <button data-choice="①">① 환자의 삶의 맥락을 파악해야 한다.</button>
+          <button data-choice="②">② 환자에게 질병에 대해 자세히 설명한다.</button>
+          <button data-choice="③">③ 환자에게 규칙적인 약물 복용의 필요성에 관해 설명한다.</button>
+          <button data-choice="④">④ 환자-의사 관계의 질을 파악한다.</button>
+        </div>
+        <p class="feedback" aria-live="polite"></p>
+        <details class="answer-toggle"><summary>정답·해설 보기</summary><p><b>정답 ①.</b> 근무시간이 불규칙해 약을 먹기 힘든 상황은 개인의 생활·직업 맥락이다. ②와 ③은 설명 중심 접근이고, ④는 중요한 요소지만 이 발화의 직접 단서는 전인적 이해다.</p></details>
+      </div>
+    </details>
+  </section>
+
+  <section id="element3">
+    <h2>7. 요소 3: 공통 기반 찾기</h2>
+    <p class="exam-only"><b>시험 직전:</b> 공통 기반은 ① 문제의 본질과 우선순위, ② 치료 및 관리 목표, ③ 환자와 의사의 역할을 상호 합의하는 과정이다.</p>
+    <p>공통 기반 찾기(finding common ground)는 의사와 환자가 서로 다른 견해를 가지고 있음을 전제로 한다. 환자중심진료에서는 이 차이를 덮거나 강제로 설득하지 않고, 서로 합의 가능한 기반을 만든다.</p>
+    <table>
+      <thead><tr><th>공통 기반의 영역</th><th>의미</th></tr></thead>
+      <tbody>
+        <tr><td><b>1. 문제의 본질과 우선순위 정하기</b></td><td>무엇이 문제인지, 무엇을 먼저 다룰지 합의한다.</td></tr>
+        <tr><td><b>2. 치료 및 관리 목표 정하기</b></td><td>치료가 무엇을 목표로 하는지, 환자가 원하는 결과와 의학적 목표를 조율한다.</td></tr>
+        <tr><td><b>3. 환자와 의사의 역할 정의</b></td><td>환자와 의사가 각각 무엇을 할지, 의사결정 참여 정도를 정한다.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>1) 문제의 본질과 우선순위</h3>
+    <p>의사와 환자가 원인에 대해 서로 다른 생각을 가지고 있을 때 문제가 발생한다. 환자는 노화와 퇴행성 관절염 때문에 허리 통증이 있다고 생각하지만, 의사는 유방암 전이를 의심할 수 있다. 의사는 고혈압을 진단했지만 환자는 과중한 업무 때문에 혈압이 높아졌다고 생각하고 이를 문제로 받아들이지 않을 수 있다. 6세 아이의 부모는 1년에 6회 감기를 심각한 문제로 보지만, 의사는 정상 범위이며 부모가 과보호한다고 생각할 수 있다.</p>
+    <p><span class="exam">적극적으로 들어주는 것만으로도</span> 환자의 아픈 증상을 알아내고 공감대를 형성하는 데 유용하다.</p>
+
+    <h3>2) 치료 및 관리 목표</h3>
+    <p>목표가 다르면 “비순응(non-compliance)”처럼 보이는 행동이 생긴다. 환자는 계속되는 허리통증으로 MRI를 요구하지만 의사는 저절로 좋아지는 mechanical back pain이라고 생각할 수 있다. 의사는 골다공증 예방을 위해 치료 regimen을 추천하지만 환자는 식이와 운동으로 충분하다고 믿을 수 있다. 환자는 유방암 공포를 완화하기 위해 genetic testing을 요구하지만, 의사는 현재 risk factor나 family history가 없다는 것을 알고 있을 수 있다.</p>
+    <p>목표를 정의할 때는 명확하게 질문한다. 예를 들어 “당뇨병이 잘 조절되도록 함께 무엇을 할 수 있을지 말해 보실까요?”라고 묻는다. 환자가 “지난번 주신 약은 별로 효과가 없었어요”라고 말해도 방어적으로 반응하지 않는다. 환자들은 먼저 제안하는 것을 어려워할 수 있고, 환자의 표현은 치료목표에 대한 의견충돌을 보여 주는 단서일 수 있다.</p>
+
+    <h3>3) 환자와 의사의 역할</h3>
+    <p>“처방 드린 혈압약이 혈압을 얼마나 낮추는지 한 달 후에 다시 봅시다”라고 말할 때, 의사는 환자가 처방된 약을 복용하고 follow-up하기를 원한다. 하지만 환자는 약보다 식사와 운동으로 혈압을 먼저 낮춰 보고 싶을 수 있다. 환자가 동의하지 않으면 의사는 대립하기보다 환자의 걱정과 의견에 귀 기울인다.</p>
+    <p>환자의 질병경험과 독특한 상황을 이해하고, 환자의 감정 상태나 신체적 능력에 따라 의사결정 과정 참여 정도가 다양할 수 있음을 인정한다. 암환자와 만성질환 환자는 의사결정 참여 방식도 달라질 수 있다.</p>
+
+    <details class="deep">
+      <summary>슬기로운 의사생활 사례: 조기양막파수 산모</summary>
+      <p>19주 5일 산모가 조기양막파수로 입원한다. 같은 환자를 두고 두 교수의 판단이 서로 다르게 나타난다. 이 장면은 의학적 판단의 차이뿐 아니라 환자와 가족이 받아들일 치료 목표와 역할을 어떻게 조율할지를 생각하게 한다.</p>
+    </details>
+  </section>
+
+  <section id="element4">
+    <h2>8. 요소 4: 환자-의사 관계 강화</h2>
+    <p>환자-의사 관계 강화는 나머지 세 요소가 작동하도록 받쳐 주는 기반이다. 관계가 약하면 질병 설명은 전달되어도 환자의 두려움, 기대, 맥락이 진료 안으로 들어오지 못한다.</p>
+    <p>슬라이드는 어린이날을 앞두고 불의의 사고를 겪은 아버지가 뇌사 상태에 빠져 장기 기증을 하게 되는 상황을 제시한다. 이런 상황에서는 의학적 사실 전달만으로 충분하지 않다. 가족이 감당해야 하는 상실, 결정의 무게, 의료진에 대한 신뢰가 모두 의사소통의 일부가 된다.</p>
+    <table>
+      <thead><tr><th>관계가 약할 때</th><th>관계가 강화될 때</th></tr></thead>
+      <tbody>
+        <tr><td>의사는 설명했다고 느끼지만 환자는 이해받지 못했다고 느낀다.</td><td>환자의 단서를 따라가며 감정과 의미를 확인한다.</td></tr>
+        <tr><td>치료 계획은 제시되지만 환자의 삶에 맞지 않아 실행되지 않는다.</td><td>환자의 맥락 안에서 실행 가능한 계획을 함께 만든다.</td></tr>
+        <tr><td>의견 차이가 대립으로 변한다.</td><td>문제, 목표, 역할을 조율하는 대화로 전환한다.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="cases">
+    <h2>9. 사례 적용: 빠진 환자중심성 구성요소 찾기</h2>
+    <p>원본은 세 사례를 먼저 제시하고, 마지막에 빠진 구성요소를 다시 확인한다. 핵심은 <b>의사가 틀린 의학 지식을 말했는가</b>가 아니라, <b>환자중심성의 어떤 요소가 빠졌는가</b>다.</p>
+
+    <div class="grid three">
+      <div class="plain-card">
+        <h3>사례 1: 김영자씨</h3>
+        <p>김영자(60세, 여성)씨는 건강검진에서 고혈압 진단을 받고 내원했다. 의사는 “혈압이 높으니 약을 드셔야 합니다. 이 약을 하루 한 번 드세요.”라고 말하고 처방 후 진료를 종료했다.</p>
+        <details><summary>빠진 요소</summary><p><b>요소 1: illness 경험 탐색</b>이 빠졌다. 고혈압을 어떻게 받아들이는지, 약 복용에 대한 걱정과 기대, 일상에서 실행 가능한지 확인해야 한다.</p></details>
+      </div>
+      <div class="plain-card">
+        <h3>사례 2: 이한양씨</h3>
+        <p>이한양(35세, 남성)씨는 허리 통증으로 내원했다. 의사는 허리를 진찰한 뒤 “디스크 초기 증상입니다. 물리치료와 진통제 처방을 드리겠습니다.”라고 말했다.</p>
+        <details><summary>빠진 요소</summary><p><b>요소 1</b>이 빠졌다. 허리 통증에 대한 두려움, 원인에 대한 생각, 직장·운동·일상 기능에 미치는 영향, 환자가 기대하는 치료를 묻지 않았다.</p></details>
+      </div>
+      <div class="plain-card">
+        <h3>사례 3: 박가정씨</h3>
+        <p>박가정(45세, 여성)씨는 최근 소화 불량으로 내원했다. 아버지가 위암에 걸린 가족력이 있어 걱정이 많았고 추가 검사가 필요할지 궁금했다. 내시경 결과 위염 진단을 받았고 의사는 “위염이네요. 스트레스 줄이고, 이 약 드시면 괜찮아질 겁니다.”라고 말했다.</p>
+        <details><summary>빠진 요소</summary><p><b>요소 1과 요소 3</b>이 빠졌다. 위암에 대한 두려움과 추가 검사 기대를 탐색해야 하고, 의학적 판단과 환자의 걱정 사이에서 공통 기반을 만들어야 한다.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="archive">
+    <h2>10. 26년도 형성·총괄문항 모아보기</h2>
+    <p>마지막 슬라이드는 26년도 형성문항 두 개와 총괄문항 두 개를 한 화면에 모아 둔다. 이 HTML에서는 각각 관련 본문 바로 뒤에 배치했다.</p>
+    <table>
+      <thead><tr><th>문항</th><th>핵심 정답</th><th>배치 위치</th></tr></thead>
+      <tbody>
+        <tr><td>60세 여성, 불규칙 근무로 혈압약 복용 어려움</td><td>환자의 삶의 맥락 파악</td><td><a href="#practice-element2">요소 2 연습문제</a></td></tr>
+        <tr><td>70세 여성, 무릎 관절염과 외출 두려움</td><td>일상생활 불편함 자세히 탐색</td><td><a href="#practice-element1">요소 1 연습문제</a></td></tr>
+        <tr><td>Venn diagram A에 해당하는 사례</td><td>만성 신부전으로 투석중이지만 삶의 만족도가 좋은 환자</td><td><a href="#practice-dih">Disease·Illness·Health 총괄문항</a></td></tr>
+        <tr><td>45세 남성, 흉부불편감이나 질환 없음</td><td>질환은 없지만 증상이 기능과 삶에 영향을 주는 상태</td><td><a href="#practice-dih">Disease·Illness·Health 총괄문항</a></td></tr>
+      </tbody>
+    </table>
+
+    <h3>시험 직전 요약</h3>
+    <ol class="tight">
+      <li><b>환자중심진료</b>는 환자를 질병이 아니라 한 사람으로 바라보는 진료다.</li>
+      <li><b>Disease</b>는 의사가 정의하는 구조·기능 이상, 진단명, 검사 결과다.</li>
+      <li><b>Illness</b>는 환자의 주관적 경험이며 <b>감정·생각·기능·기대(FIFE)</b>로 탐색한다.</li>
+      <li><b>Health</b>는 질병이 없는 상태가 아니라 의미 있는 삶을 영위할 수 있는 능력이다.</li>
+      <li><b>전인적 이해</b>는 개인·가족·지역사회·문화·국가·제도 맥락을 이해하는 것이다.</li>
+      <li><b>공통 기반 찾기</b>는 문제의 본질과 우선순위, 치료 목표, 환자와 의사의 역할에 대한 합의다.</li>
+      <li><b>환자-의사 관계</b>는 어려운 결정과 감정이 있는 상황에서 신뢰를 유지하게 한다.</li>
+    </ol>
+
+    <h3>환자중심 면담 문장 예시</h3>
+    <p id="patientScript">“검사 결과와 진단도 중요하지만, 이 문제가 환자분 생활에 어떤 영향을 주는지도 같이 보고 싶습니다. 가장 걱정되는 점, 원인에 대해 생각하시는 점, 일상에서 불편해진 점, 오늘 진료에서 기대하시는 점을 차례로 이야기해 주실 수 있을까요? 그 내용을 바탕으로 치료 목표와 역할을 함께 정해 보겠습니다.”</p>
+    <button class="copybtn" type="button" onclick="copyScript()">면담 문장 복사</button>
+    <span id="copyState" class="small muted"></span>
+
+    <details class="deep">
+      <summary>누락 점검표</summary>
+      <table>
+        <thead><tr><th>원본 요소</th><th>반영 위치</th></tr></thead>
+        <tbody>
+          <tr><td>학습목표와 참고문헌</td><td>1단원</td></tr>
+          <tr><td>환자중심 의료 정의와 교육과정 흐름</td><td>1단원</td></tr>
+          <tr><td>Disease·Illness·Health 정의와 Venn diagram 의미</td><td>2단원</td></tr>
+          <tr><td>26년도 총괄문항 2개</td><td>2단원 연습문제</td></tr>
+          <tr><td>슬기로운 의사생활 의사소통 사례</td><td>3단원, 7단원, 8단원</td></tr>
+          <tr><td>환자중심성 4요소</td><td>4단원</td></tr>
+          <tr><td>요소 1과 FIFE</td><td>5단원</td></tr>
+          <tr><td>26년도 형성문항: 무릎 관절염</td><td>5단원 연습문제</td></tr>
+          <tr><td>요소 2 전인적 이해와 26년도 형성문항</td><td>6단원</td></tr>
+          <tr><td>요소 3 공통 기반 찾기 세 영역</td><td>7단원</td></tr>
+          <tr><td>요소 4 환자-의사 관계</td><td>8단원</td></tr>
+          <tr><td>세 사례의 빠진 구성요소</td><td>9단원</td></tr>
+          <tr><td>모아보기</td><td>10단원</td></tr>
+        </tbody>
+      </table>
+    </details>
+  </section>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <p>의사소통: 환자중심진료 강의록을 학습 흐름에 맞게 재구성한 인터랙티브 HTML 자료입니다.</p>
+  </div>
+</footer>
+<script>
+function toggleExamMode(){
+  document.body.classList.toggle('exam-mode');
+}
+window.addEventListener('scroll', function(){
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop || document.body.scrollTop) / ((h.scrollHeight - h.clientHeight) || 1);
+  document.getElementById('progress').style.width = (scrolled * 100) + '%';
+});
+document.querySelectorAll('.mcq .options button').forEach(function(btn){
+  btn.setAttribute('aria-pressed','false');
+  btn.addEventListener('click', function(){
+    const mcq = btn.closest('.mcq');
+    const answer = mcq.dataset.answer;
+    mcq.querySelectorAll('.options button').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
+    btn.setAttribute('aria-pressed','true');
+    const feedback = mcq.querySelector('.feedback');
+    const correct = btn.dataset.choice === answer;
+    feedback.textContent = (correct ? '정답입니다. ' : '다시 확인하세요. ') + mcq.dataset.explain;
+  });
+});
+function copyScript(){
+  const text = document.getElementById('patientScript').innerText;
+  navigator.clipboard.writeText(text).then(function(){
+    document.getElementById('copyState').textContent = '복사되었습니다.';
+  }).catch(function(){
+    document.getElementById('copyState').textContent = '복사 기능을 사용할 수 없습니다.';
+  });
+}
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 window.PDS_SITE_DATA = {
-  "generatedAt": "2026-05-11T11:23:44.625Z",
+  "generatedAt": "2026-05-11T14:55:18.952Z",
   "config": {
     "siteTitle": "PDS 학습 위키",
     "subtitle": "본과 4학년 PDS HTML 학습자료",
@@ -64,6 +64,7 @@ window.PDS_SITE_DATA = {
       "0428_3_domestic-violence-counseling.html": "박훈기",
       "0428_4_sexual-violence-counseling.html": "박훈기",
       "0429_1_health-functional-foods.html": "박훈기",
+      "0429_2_patient-centered-care.html": "박계영",
       "0429_4_inpatient-attending-role.html": "손정식",
       "0429_5_healthcare-understanding.html": "신영전",
       "0430_1_healthcare-resources-organization-management.html": "김민주",
@@ -79,6 +80,7 @@ window.PDS_SITE_DATA = {
       "0506_4_health-promotion-regional-health-act.html": "김민주",
       "0506_5_death.html": "김원규",
       "0506_6_forensic-postmortem-interval.html": "김원규",
+      "0507_1_health-security.html": "신영전",
       "0507_5_injury-death.html": "김원규"
     },
     "pageSpans": {
@@ -88,6 +90,7 @@ window.PDS_SITE_DATA = {
       "0430_5_health-policy-public-health-history.html": 2,
       "0501_3_community-health.html": 2,
       "0506_1_health-management-health-behaviors.html": 2,
+      "0507_1_health-security.html": 2,
       "0507_5_injury-death.html": 2
     },
     "professorRules": [
@@ -246,6 +249,20 @@ window.PDS_SITE_DATA = {
       "endPeriod": 1,
       "span": 1,
       "periodLabel": "1교시 08:00-08:50"
+    },
+    {
+      "file": "0429_2_patient-centered-care.html",
+      "title": "의사소통: 환자중심진료",
+      "professor": "박계영",
+      "tag": "박계영",
+      "dateKey": "2026-04-29",
+      "dateLabel": "04/29",
+      "weekday": "수요일",
+      "weekKey": "2026-04-27",
+      "period": 2,
+      "endPeriod": 2,
+      "span": 1,
+      "periodLabel": "2교시 09:00-09:50"
     },
     {
       "file": "0429_4_inpatient-attending-role.html",
@@ -456,6 +473,20 @@ window.PDS_SITE_DATA = {
       "endPeriod": 6,
       "span": 1,
       "periodLabel": "6교시 14:00-14:50"
+    },
+    {
+      "file": "0507_1_health-security.html",
+      "title": "의료보장 I,II",
+      "professor": "신영전",
+      "tag": "신영전",
+      "dateKey": "2026-05-07",
+      "dateLabel": "05/07",
+      "weekday": "목요일",
+      "weekKey": "2026-05-04",
+      "period": 1,
+      "endPeriod": 2,
+      "span": 2,
+      "periodLabel": "1-2교시 08:00-09:50"
     },
     {
       "file": "0507_5_injury-death.html",

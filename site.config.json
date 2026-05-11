@@ -22,6 +22,7 @@
     "0428_3_domestic-violence-counseling.html": "박훈기",
     "0428_4_sexual-violence-counseling.html": "박훈기",
     "0429_1_health-functional-foods.html": "박훈기",
+    "0429_2_patient-centered-care.html": "박계영",
     "0429_4_inpatient-attending-role.html": "손정식",
     "0429_5_healthcare-understanding.html": "신영전",
     "0430_1_healthcare-resources-organization-management.html": "김민주",
@@ -37,6 +38,7 @@
     "0506_4_health-promotion-regional-health-act.html": "김민주",
     "0506_5_death.html": "김원규",
     "0506_6_forensic-postmortem-interval.html": "김원규",
+    "0507_1_health-security.html": "신영전",
     "0507_5_injury-death.html": "김원규"
   },
   "pageSpans": {
@@ -46,6 +48,7 @@
     "0430_5_health-policy-public-health-history.html": 2,
     "0501_3_community-health.html": 2,
     "0506_1_health-management-health-behaviors.html": 2,
+    "0507_1_health-security.html": 2,
     "0507_5_injury-death.html": 2
   },
   "professorRules": [
