@@ -1,0 +1,11 @@
+{
+  "name": "pds-study-wiki",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/generate-site-data.mjs",
+    "check": "node scripts/generate-site-data.mjs",
+    "serve": "node scripts/serve.mjs"
+  }
+}

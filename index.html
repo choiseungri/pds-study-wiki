@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PDS 학습 위키</title>
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell header-layout">
+      <div>
+        <p class="eyebrow">본과 4학년 PDS</p>
+        <h1>PDS 학습 위키</h1>
+        <p class="subtitle">시간표에서 강의를 고르면 해당 HTML 학습자료가 바로 열립니다.</p>
+      </div>
+      <div class="status-panel" aria-live="polite">
+        <span class="status-label">자료</span>
+        <strong id="total-count">0개</strong>
+        <span id="generated-at">목록 준비 중</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="toolbar-band">
+      <div class="shell toolbar">
+        <label class="search-box">
+          <span>검색</span>
+          <input id="search-input" type="search" placeholder="강의명, 날짜, 교시, 교수님" autocomplete="off" />
+        </label>
+        <div class="filter-chips" id="tag-filters" aria-label="담당 교수 필터"></div>
+      </div>
+    </section>
+
+    <section class="shell section-block" aria-labelledby="schedule-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Timetable</p>
+          <h2 id="schedule-title">시간표</h2>
+        </div>
+        <p id="visible-count" class="section-meta">전체 자료</p>
+      </div>
+      <div id="schedule-view" class="schedule-view"></div>
+    </section>
+
+    <section class="shell section-block" aria-labelledby="list-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Index</p>
+          <h2 id="list-title">전체 자료</h2>
+        </div>
+      </div>
+      <div id="lecture-list" class="lecture-list"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      새 HTML 파일은 <code>MMDD_교시_english-slug.html</code> 형식으로 추가하고 <code>npm run build</code>를 실행하면 홈 목록이 갱신됩니다.
+    </div>
+  </footer>
+
+  <script src="site-data.js"></script>
+  <script src="assets/home.js"></script>
+</body>
+</html>

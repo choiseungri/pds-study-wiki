@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>다양한 공직의사의 길 PART I - 독립 학습 교재</title>
+<style>
+  :root{--text:#171717;--muted:#666;--line:#d7d7d7;--ink:#111;--accent:#0f5f7a;--danger:#b42318;--mark:#fff38a;--soft:#f7f7f7}
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0;color:var(--text);background:white;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;line-height:1.72;word-break:keep-all}
+  #progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--accent);z-index:1000}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+  header{padding:56px 0 28px;border-bottom:1px solid var(--line)}
+  h1{font-size:clamp(2rem,4.1vw,4rem);letter-spacing:-.04em;line-height:1.12;margin:0 0 12px}
+  h2{font-size:clamp(1.55rem,3vw,2.35rem);letter-spacing:-.04em;margin:72px 0 20px;padding-bottom:10px;border-bottom:2px solid var(--line)}
+  h3{font-size:1.3rem;letter-spacing:-.03em;margin:34px 0 10px}
+  h4{font-size:1.06rem;margin:22px 0 8px} p{margin:10px 0}
+  nav{position:sticky;top:4px;z-index:900;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;gap:10px;align-items:center;overflow:auto;padding-top:10px;padding-bottom:10px}
+  nav a,nav button{white-space:nowrap;color:var(--text);background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;text-decoration:none;font:inherit;font-size:.94rem;cursor:pointer}
+  nav a:hover,nav button:hover{border-color:#777}
+  .meta,.muted{color:var(--muted)} .lead{font-size:1.15rem;max-width:920px}
+  .grid{display:grid;gap:18px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+  @media(max-width:860px){.two,.three{grid-template-columns:1fr}}
+  .plain-card{border:1px solid var(--line);border-radius:18px;padding:18px;background:#fff}
+  .tight li{margin:4px 0}
+  mark,.hl{background:linear-gradient(transparent 58%,var(--mark) 58%);padding:0 .08em}
+  .exam{font-weight:800;text-decoration:underline;text-decoration-thickness:.14em;text-underline-offset:.18em;text-decoration-color:#e8c100}
+  .red{color:var(--danger);font-weight:700}.small{font-size:.92rem}
+  table{width:100%;border-collapse:collapse;margin:14px 0 22px}
+  th,td{border-bottom:1px solid var(--line);padding:10px 8px;vertical-align:top;text-align:left}
+  th{font-weight:800}
+  details{border:1px solid var(--line);border-radius:16px;padding:12px 16px;background:#fff;margin:12px 0}
+  summary{cursor:pointer;font-weight:800}
+  .toc{columns:2;column-gap:36px}.toc li{break-inside:avoid;margin:5px 0}@media(max-width:700px){.toc{columns:1}}
+  .flow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0}
+  .node{border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:#fff;font-weight:700}
+  .arrow{color:var(--muted);font-weight:800}
+  .timeline{border-left:2px solid var(--line);padding-left:18px}
+  .timeline p{position:relative}.timeline p::before{content:"";position:absolute;left:-25px;top:.72em;width:10px;height:10px;border:2px solid var(--ink);border-radius:50%;background:#fff}
+  .practice-toggle{margin:26px 0 36px}
+  .practice-toggle summary{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:1.1rem}
+  .practice-toggle summary::after{content:"열기";font-size:.86rem;color:var(--muted);font-weight:700}
+  .practice-toggle[open] summary::after{content:"닫기"}
+  .mcq{border-top:1px solid var(--line);padding:18px 0}.mcq:first-child{border-top:0}
+  .stem{font-weight:800;margin-bottom:8px}.options{display:grid;gap:8px;margin:8px 0}
+  .options button{text-align:left;border:1px solid var(--line);border-radius:12px;background:#fff;padding:9px 12px;cursor:pointer;font:inherit}
+  .options button:hover{border-color:#888}.options button[aria-pressed="true"]{border-color:var(--ink);outline:2px solid #111;outline-offset:1px}
+  .feedback{min-height:1.4em;font-weight:700;margin-top:8px}
+  .source-line{margin:0 0 6px;font-size:.9rem}.source-label{font-weight:900}.source-label.past{color:var(--accent);text-decoration:underline;text-decoration-thickness:.14em;text-underline-offset:.18em}.source-label.creative{color:#555}.source-note{color:var(--muted);margin-left:6px}
+  .searchbar{display:flex;gap:10px;margin:22px 0}.searchbar input{width:100%;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font:inherit}.searchbar button{border:1px solid var(--line);border-radius:999px;background:#fff;padding:10px 14px;font:inherit;cursor:pointer}
+  .exam-only{display:none}body.exam-mode .deep{display:none!important}body.exam-mode .exam-only{display:block}body.exam-mode h2{margin-top:44px}
+  .foot{border-top:1px solid var(--line);margin-top:70px;padding:26px 0 50px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<header>
+  <div class="wrap">
+    <p class="meta">예방의학 · 공직의사 진로 · 공공보건과 시스템</p>
+    <h1>다양한 공직의사의 길 PART I</h1>
+    <p class="lead">의사 면허는 병원 진료실 안에서만 쓰이지 않는다. 공중보건의사, 지방공무원 의사, 국가공무원 의사, 별정직 공무원은 서로 다른 제도와 현장에서 작동한다. 이 교재는 <mark>남극세종과학기지</mark>, <mark>대전서구보건소</mark>, <mark>법무부 여수출입국사무소</mark>라는 세 현장을 따라가며 공직의사의 일을 하나의 지도로 정리한다.</p>
+    <p class="meta">기출문제는 관련 단원 중간중간에 배치했다. 본문은 이 파일 하나로 읽히도록 현장 경험, 개념, 제도, 시스템 구조를 독립 교재 형태로 풀어 썼다.</p>
+  </div>
+</header>
+<nav aria-label="본문 이동">
+  <div class="wrap">
+    <a href="#map">전체지도</a><a href="#career">경력지도</a><a href="#public-doctor">개념구분</a><a href="#antarctica">남극</a><a href="#polar-medicine">극지의학</a><a href="#healthcenter">보건소</a><a href="#system">시스템</a><a href="#justice">법무의료</a><a href="#moj">법무부체계</a><button type="button" onclick="toggleExamMode()">시험 직전 모드</button>
+  </div>
+</nav>
+<main class="wrap">
+  <div class="searchbar deep"><input id="searchInput" placeholder="본문에서 찾기: 예) 별정직공무원, medevac, LNOB, 헬스케어연속체, 치료감호소" /><button onclick="clearSearch()">초기화</button></div>
+
+  <section id="map" data-keywords="전체지도 공직의사 진로 남극 보건소 법무부">
+    <h2>0. 전체 지도</h2>
+    <p>이 강의의 큰 질문은 “공공의료의사, 공중보건의사, 공무원 의사는 어떻게 다른가?”이다. 답은 명칭 암기가 아니라 <b>어떤 법적 신분으로, 어느 조직에 속해, 누구의 건강문제를, 어떤 자원과 권한으로 해결하는가</b>를 구분하는 데 있다.</p>
+    <div class="grid three">
+      <div class="plain-card">
+        <h3>남극세종과학기지</h3>
+        <p>공중보건의사로 극지 현장에 파견된 사례다. 병역 대체복무의 틀 안에서 의료대원, 응급의학 담당자, 고립된 공동체의 안전관리자로 움직인다.</p>
+      </div>
+      <div class="plain-card">
+        <h3>대전서구보건소</h3>
+        <p>지방공무원/일반직 관리의사 사례다. 진료보다 넓은 지역사회 보건, 감염병 대응, 공공의료, 행정과 정책의 언어를 익히는 현장이다.</p>
+      </div>
+      <div class="plain-card">
+        <h3>법무부 여수출입국사무소</h3>
+        <p>국가공무원/일반직 의무과장 사례다. 보호외국인, 수용자, 난민, 소년, 치료감호 대상자처럼 사법행정 안에 있는 사람들의 건강권을 다룬다.</p>
+      </div>
+    </div>
+    <h3>이 교재의 읽는 순서</h3>
+    <ol class="toc tight">
+      <li>의사 면허가 공직으로 들어가는 여러 경로</li>
+      <li>공공의료의사, 공중보건의사, 공무원 의사의 차이</li>
+      <li>남극세종과학기지와 극지 응급의학</li>
+      <li>대전서구보건소와 지역사회 보건</li>
+      <li>의료·데이터 사이언스 이후의 시스템 접근</li>
+      <li>헬스케어연속체와 Healthcare Engineering</li>
+      <li>Health and Justice와 LNOB</li>
+      <li>법무부 보건의료체계의 5개 구성요소</li>
+      <li>관련 단원에서 기출문제 확인</li>
+    </ol>
+    <p class="exam-only"><b>시험 직전:</b> 국회의원 비서관은 <mark>별정직공무원</mark>이다. 의사 면허자는 국가공무원, 지방공무원, 특수 분야 기관, 국회·지방의회 관련 특수경력직 경로까지 가능하다. 공공의료병원 성격 구분에서는 <mark>국립중앙의료원</mark>이 다른 선택지와 성격이 다르게 출제되었다.</p>
+  </section>
+
+  <section id="career" data-keywords="이어진 경력 공학박사 경영학석사 의학사 국회 선임비서관">
+    <h2>1. 한 의사의 경력으로 보는 공직의사 지도</h2>
+    <p>공직의사라는 말은 하나의 직업명이 아니다. 같은 의사 면허라도 공보의로 파견될 수 있고, 지방자치단체 소속 의사가 될 수 있으며, 중앙부처의 국가공무원으로 일하거나 국회에서 정책 업무를 맡을 수도 있다. 이 경로를 이해하려면 연도와 소속, 법적 신분을 함께 봐야 한다.</p>
+    <div class="timeline">
+      <p><b>2009년: 남극세종과학기지</b>에서 공중보건의사로 근무했다. 인천광역시와 극지연구소 파견 구조 안에서 기지 의료대원으로 활동했다.</p>
+      <p><b>2014년: 대전서구보건소</b>에서 지방공무원/일반직 관리의사로 일했다. 보건소는 지역사회 건강문제를 행정과 사업으로 다루는 곳이다.</p>
+      <p><b>2016년: 법무부 여수출입국사무소</b>에서 국가공무원/일반직 의무과장으로 일했다. 외국인 보호, 출입국 행정, 법무의료가 만나는 현장이다.</p>
+      <p><b>2021년: 연세의대와 aSSIST</b>에서 포닥·교수로 활동했다. 이 구간은 비공무원 경로다.</p>
+      <p><b>2024년: 국회의원 선임비서관</b>으로 일했다. 국회 비서관은 일반 행정공무원이 아니라 <b>별정직공무원</b>에 해당한다.</p>
+    </div>
+    <p>학문적 배경도 진로의 폭을 설명한다. 의학사에 더해 경영학석사, 공학박사, AI 첨단대학원·경영전문대학원 경력이 연결된다. 연구 분야는 공중보건, 법무의료, 디지털헬스, 이주민 건강, 원격의료, VR/AR, 빅데이터, AI, 극지·우주과학, 헬스케어공학, 병원경영학으로 확장된다. 공직의사는 환자 진료만 하는 사람이 아니라 <mark>현장, 제도, 기술, 연구, 정책 사이를 잇는 사람</mark>이 될 수 있다.</p>
+    <table>
+      <thead><tr><th>시기</th><th>소속·역할</th><th>공직 분류</th><th>학습 포인트</th></tr></thead>
+      <tbody>
+        <tr><td>2009</td><td>남극세종과학기지</td><td>공중보건의사</td><td>고립·극지·후송 한계 속에서 의료를 시스템으로 본다.</td></tr>
+        <tr><td>2014</td><td>대전서구보건소 관리의사</td><td>지방공무원/일반직</td><td>지역사회 보건과 지방행정의 언어를 배운다.</td></tr>
+        <tr><td>2016</td><td>법무부 여수출입국사무소 의무과장</td><td>국가공무원/일반직</td><td>사법행정과 건강권이 만나는 영역을 다룬다.</td></tr>
+        <tr><td>2021</td><td>연세의대/aSSIST</td><td>비공무원</td><td>연구와 교육으로 현장 경험을 확장한다.</td></tr>
+        <tr><td>2024</td><td>국회의원 선임비서관</td><td>국가공무원/별정직</td><td>의료전문성이 입법·정책 영역으로 이동한다.</td></tr>
+      </tbody>
+    </table>
+    <details class="practice-toggle">
+      <summary><span>기출문제: 공무원 분류</span></summary>
+      <div class="mcq" data-answer="A" data-explain="정답: ① 별정직공무원"><p class="source-line"><span class="source-label past">[2025년도]</span></p><p class="stem">의사의 다양한 진로 중에는 국회의원 비서관도 있다. 국가공무원법에 입각하였을 때 국회의원 비서관은 어디에 속하는가? ☆</p><div class="options"><button>① 별정직공무원</button><button>② 정무직공무원</button><button>③ 특정직공무원</button><button>④ 지방공무원</button><button>⑤ 국가공무원</button></div><p class="feedback"></p></div>
+    </details>
+  </section>
+
+  <section id="public-doctor" data-keywords="공공의료의사 공중보건의사 공무원 의사 지방공무원 국가공무원 별정직">
+    <h2>2. 공공의료의사, 공중보건의사, 공무원 의사</h2>
+    <p>세 용어는 서로 겹치지만 같은 말은 아니다. 시험에서는 이 구분이 객관식으로 나오지만, 실제 이해는 더 넓어야 한다. <b>공공의료</b>는 목적과 기능의 말이고, <b>공중보건의사</b>는 병역·배치 제도의 말이며, <b>공무원 의사</b>는 신분과 임용의 말이다.</p>
+    <table>
+      <thead><tr><th>구분</th><th>핵심 의미</th><th>대표 현장</th><th>오해하기 쉬운 점</th></tr></thead>
+      <tbody>
+        <tr><td><b>공공의료의사</b></td><td>공공성 높은 의료기관이나 공공보건 기능을 수행하는 의사</td><td>국립병원, 지방의료원, 공공보건기관, 특수목적병원</td><td>반드시 공무원 신분이라는 뜻은 아니다.</td></tr>
+        <tr><td><b>공중보건의사</b></td><td>의사 면허자가 병역 의무를 공공보건 업무로 수행하는 제도적 경로</td><td>보건지소, 공공병원, 특수 파견지, 극지 파견 등</td><td>공보의는 공공의료와 겹치지만 모든 공공의료의사가 공보의는 아니다.</td></tr>
+        <tr><td><b>공무원 의사</b></td><td>국가 또는 지방자치단체에 임용되어 공무원 신분으로 일하는 의사</td><td>보건복지부, 법무부, 환경부, 국방부, 보건소, 특수기관, 국회 등</td><td>일반직, 특정직, 정무직, 별정직 등 분류를 구분해야 한다.</td></tr>
+      </tbody>
+    </table>
+    <h3>의사 면허가 필요한 공직의 범위</h3>
+    <p>의사는 보건복지부, 법무부, 환경부, 행정안전부, 국방부 같은 정부 부처에서 국가공무원으로 일할 수 있다. 보건소 의사처럼 지방공무원으로도 일할 수 있다. 법원, 검찰, 경찰, 소방, 군, 국가정보원, 감사원 같은 특수 분야 기관에서도 의학 전문성이 필요할 수 있다. 국회나 지방의회의 정무직·별정직 경로도 열린다. 따라서 “의사 면허를 가진 공무원의 길”을 한두 부처로 좁혀 이해하면 틀린다.</p>
+    <details class="practice-toggle">
+      <summary><span>기출문제: 의사 면허와 공직 경로</span></summary>
+      <div class="mcq" data-answer="E" data-explain="정답: e. 답 없음"><p class="source-line"><span class="source-label past">[2023년도]</span></p><p class="stem">117. 의사 면허의 자격이 필요하거나 이점을 가지는 공무원의 길 중에 틀린 것을 고르시오.</p><div class="options"><button>a. 보건복지부, 법무부, 환경부, 행정안전부 등 국가공무원으로 일할 수 있다.</button><button>b. 보건소 의사와 같이 지방공무원으로 일할 수 있다.</button><button>c. 법원, 검찰, 경찰공무원, 소방공무원, 군인, 국가정보원, 감사원 같은 특수 분야의 업무를 담당하는 기관에서도 가능하다.</button><button>d. 특수경력직공무원으로 국회나 지방의회의 정무직공무원, 국회의원 비서관 등의 별정직공무원도 가능하다.</button><button>e. 답 없음</button></div><p class="feedback"></p></div>
+      <div class="mcq" data-answer="A" data-explain="정답: O"><p class="source-line"><span class="source-label past">[2023년도]</span></p><p class="stem">119.공무원의 경우 경력직공무원과 특수경력직 공무원으로 구분할 수 있는데 경력직공무원의 경우 일반직공무원과 특정직공무원으로 구분할 수 있고 특수경력직공무원의 경우 정무직공무원과 별정직공무원으로 구분할 수 있다. (O/X)</p><div class="options"><button>O</button><button>X</button></div><p class="feedback"></p></div>
+    </details>
+    <details class="practice-toggle">
+      <summary><span>기출문제: 정부 부처</span></summary>
+      <p class="source-line"><span class="source-label past">[2025년도]</span></p>
+      <p class="stem">지난 10년간 공무원으로서 의사를 선발한 정부 부처를 3가지 이상 쓰시오. (주)</p>
+      <details><summary>정답 보기</summary><p><b>답: 보건복지부, 국방부, 환경부, 법무부 등</b></p></details>
+    </details>
+    <details class="practice-toggle">
+      <summary><span>기출문제: 공공의료병원과 의사 공무원</span></summary>
+      <div class="mcq" data-answer="A" data-explain="정답: ① 국립중앙의료원 (공공의료 분야)"><p class="source-line"><span class="source-label past">[2025년도]</span></p><p class="stem">다음은 모두 공공의료병원이다. 나머지 넷과 성격이 다른 하나는? ☆</p><div class="options"><button>① 국립중앙의료원 (공공의료 분야)</button><button>② 국립정신건강센터 (정신건강)</button><button>③ 국립법무병원 (치료감호)</button><button>④ 국립마산병원 (결핵)</button><button>⑤ 국립교통재활병원 (교통사고 재활)</button></div><p class="feedback"></p></div>
+      <div class="mcq" data-answer="B" data-explain="정답: 국립 중앙 의료원 (공공보건)"><p class="source-line"><span class="source-label past">[2023년도]</span></p><p class="stem">118.의사 공무원이 아닌 것은?</p><div class="options"><button>● 국립 마산병원 (결핵)</button><button>● 국립 중앙 의료원 (공공보건)</button><button>● 국립정신건강센터</button><button>● 국립법무병원</button><button>● 국립교통재활병원</button></div><p class="feedback"></p></div>
+    </details>
+  </section>
+
+  <section id="antarctica" data-keywords="남극 세종과학기지 스마트폰 2009 공중보건의사 극즉반 궁즉통 아라온">
+    <h2>3. 남극세종과학기지: 의사로서 첫 공공 임무</h2>
+    <p>첫 현장은 남극세종과학기지다. 2009년은 스마트폰이 보편화되기 전이었다. 의사국가고시, 가자지구 긴급구호, 의과대학 졸업식, 자취방 이사, 하와이 스바루전문대 기초군사훈련, 쇄빙선 아라온 건조, 남극세종기지가 짧은 시간 안에 이어졌다. 병원 수련으로 바로 들어가는 동기들과 다른 길이었고, 의료대원으로서 고립된 현장에 들어가는 경험이었다.</p>
+    <h3>극지 현장이 의사에게 요구하는 것</h3>
+    <p>남극은 의료자원이 풍부한 장소가 아니다. 전문과별 협진, 즉시 가능한 영상검사, 가족 보호자, 빠른 전원 같은 도시 의료의 기본 전제가 흔들린다. 그래서 남극 의료는 “내가 무엇을 직접 할 수 있는가”뿐 아니라 “언제 버티고, 언제 후송하며, 어떤 위험을 사전에 줄일 것인가”를 묻는다.</p>
+    <p><b>극즉반</b>과 <b>궁즉통</b>은 이 장을 관통하는 태도다. 극단에 이르면 방향이 바뀌고, 막다른 곳에 이르면 길을 찾는다. 달 탐사, 극지 탐험, 카약과 카누의 차이, 영화와 만화 이미지가 함께 놓이는 이유도 같다. 공직의사의 일은 이미 정해진 진료 알고리즘만 따르는 일이 아니라, 낯선 조건에서 의료의 의미를 다시 구성하는 일이다.</p>
+    <h3>고립된 공동체에서 의사는 팀의 일부가 된다</h3>
+    <p>세종기지 의료대원은 의사이기 전에 월동대의 구성원이다. 같은 공간에서 생활하고, 같은 기상과 물류 조건을 견디며, 응급상황이 생기면 동료를 살려야 한다. 환자와 의료진이 명확히 분리된 병원과 달리, 남극에서는 공동체 내부의 신뢰가 곧 안전망이다.</p>
+    <h3>아라온과 이동의 문제</h3>
+    <p>쇄빙선 아라온, 세종기지의 위치, 항로와 기상 조건은 의료 판단의 일부다. 남극에서 “병원으로 보내면 된다”는 말은 간단하지 않다. 후송에는 날씨, 선박, 항공, 주변 기지 협력, 거리, 시간, 국제 협력이 모두 필요하다. 그래서 극지 의료는 응급의학이면서 동시에 물류와 시스템의학이다.</p>
+  </section>
+
+  <section id="polar-medicine" data-keywords="극지의학 Emergency Medicine pre-departure expedition disaster medevac field 탈수 한랭손상 설맹">
+    <h2>4. 극지 응급의학: 준비, 현장, 재난, 후송</h2>
+    <p>극지 응급의학은 다섯 단계로 이해하면 쉽다. 출발 전 준비, 탐사·기지 생활 중 진료, 재난 대응, 의학적 후송, 현장성이 하나의 묶음이다.</p>
+    <div class="flow">
+      <span class="node">pre-departure<br><small>출발 전 교육</small></span><span class="arrow">→</span>
+      <span class="node">expedition<br><small>기지·탐사 의료</small></span><span class="arrow">→</span>
+      <span class="node">disaster<br><small>재난 대응</small></span><span class="arrow">→</span>
+      <span class="node">medevac<br><small>의학적 후송</small></span><span class="arrow">→</span>
+      <span class="node">field<br><small>현장 판단</small></span>
+    </div>
+    <table>
+      <thead><tr><th>단계</th><th>핵심 업무</th><th>의사의 판단</th></tr></thead>
+      <tbody>
+        <tr><td>출발 전</td><td>안전교육, 의료교육, 기본 처치 훈련, 약품·장비 준비</td><td>현장에 가기 전에 위험을 줄인다.</td></tr>
+        <tr><td>탐사·기지 생활</td><td>일상 진료, 작은 외상 처치, 만성질환 관리, 감염 예방</td><td>작은 문제가 후송 불가능한 큰 문제로 커지지 않게 한다.</td></tr>
+        <tr><td>재난</td><td>선박 사고, 화재, 기상 악화, 대량 환자 가능성 대응</td><td>한 명의 환자만 보는 것이 아니라 공동체 생존을 본다.</td></tr>
+        <tr><td>후송</td><td>Medevac 경로 판단, 타 기지·선박·항공 협력</td><td>후송의 이익과 지연·위험을 함께 계산한다.</td></tr>
+        <tr><td>현장</td><td>제한된 장비와 인력으로 즉시 판단</td><td>완벽한 조건이 아니라 가능한 조건에서 최선의 결정을 한다.</td></tr>
+      </tbody>
+    </table>
+    <h3>극지 특이 건강문제</h3>
+    <p>대표 문제는 탈수, 한랭손상, 일광화상, 설맹, polar hands/foot, 일산화탄소 중독, 동물 물림이다. 극지는 춥기만 한 곳이 아니다. 건조한 환경, 강한 자외선, 눈과 얼음의 반사, 고립, 야간 활동, 제한된 대피 경로가 모두 건강위험이 된다. 설맹처럼 환경 노출만으로 생기는 문제도 있고, 일산화탄소 중독처럼 난방·발전·실내 생활과 연결되는 문제도 있다.</p>
+  </section>
+
+  <section id="healthcenter" data-keywords="대전서구보건소 관리의사 지방공무원 질병관리청 현장실습 지역사회 보건">
+    <h2>5. 대전서구보건소: 지역사회 보건을 배우는 자리</h2>
+    <p>두 번째 현장은 대전서구보건소다. 여기서 의사는 지방공무원/일반직 관리의사로 일한다. 보건소는 지역주민 진료만 하는 곳이 아니다. 감염병 관리, 예방접종, 결핵관리, 방문보건, 만성질환 관리, 모자보건, 정신건강, 건강증진, 지역사회 자원 연계, 재난·위기 대응을 다룬다. 의사는 개인 환자의 증상뿐 아니라 지역 전체의 건강지표와 행정체계를 함께 본다.</p>
+    <h3>보건소에서 얻는 것</h3>
+    <p>보건소 경험의 핵심은 <b>공공보건의 시야</b>다. 병원은 찾아온 환자를 중심으로 움직이지만, 보건소는 아직 병원에 오지 않은 사람, 의료 접근성이 낮은 사람, 지역사회 전체의 위험을 다룬다. 의사가 보건소에서 배우는 것은 약 처방 기술보다 <mark>문제를 정의하고, 자원을 연결하고, 사업을 설계하고, 집단 수준의 결과를 평가하는 능력</mark>이다.</p>
+    <h3>미래 공중보건 인력 현장실습의 의미</h3>
+    <p>질병관리청 현장실습 프로그램은 의과대학생이 공중보건 정책과 현장을 직접 보도록 설계된 과정이다. 5일 동안 질병관리청 주요 정책, 현장 견학, 공중보건 위기상황 대응, 공공의료와 지역의료, 다양한 진로 탐색을 다룬다. 일정에는 질병관리청장 오찬, 감염병 감시·진단·역학조사, 의료감염과 항생제 내성, 만성질환·희귀질환, 국가 건강조사, 기후변화 건강 영향, 지역사회 보건의료, 국가 보건의료 정책, 의사공무원의 길, 의사과학자의 길, 국제보건 전문가의 길, 종합상황실과 공공백신센터 견학이 들어간다.</p>
+    <p>이 일정이 중요한 이유는 의대 교육이 병원 실습에만 머물기 쉽기 때문이다. 공중보건 현장실습은 의학지식이 <b>질병관리청, 보건소, 공공병원, 지방정부, 중앙부처, 국제보건</b>과 어떻게 연결되는지 보여준다.</p>
+  </section>
+
+  <section id="paradigm" data-keywords="패러다임 ART EBM 데이터 사이언스 루닛 공리주의 생명윤리">
+    <h2>6. 의료·데이터 사이언스 다음은 무엇인가</h2>
+    <p>의료의 패러다임은 기예와 경험의 의학에서 근거중심의학, 데이터 사이언스로 이동해 왔다. 인공지능과 디지털헬스는 이미 의료의 중요한 도구가 되었다. 하지만 데이터만 많아진다고 건강문제가 해결되지는 않는다. 다음 질문은 <b>데이터와 기술을 어떤 시스템 안에서, 누구를 위해, 어떤 윤리와 비용 구조로 쓸 것인가</b>다.</p>
+    <h3>의학 및 헬스케어 연구의 다섯 특징</h3>
+    <table>
+      <thead><tr><th>특징</th><th>설명</th><th>예시</th></tr></thead>
+      <tbody>
+        <tr><td>사람+의료는 시스템으로 작동한다</td><td>환자, 의료진, 기관, 지불자, 법, 데이터, 지역사회가 엮인다.</td><td>AI 진단기기가 있어도 병원 업무흐름과 수가가 맞지 않으면 쓰기 어렵다.</td></tr>
+        <tr><td>의료와 의학 연구는 선순환한다</td><td>현장 문제는 연구 질문이 되고, 연구 결과는 다시 진료와 정책을 바꾼다.</td><td>감염병 감시 자료가 역학 연구와 대응 정책으로 이어진다.</td></tr>
+        <tr><td>생명윤리가 필요하다</td><td>사람을 대상으로 하므로 동의, 개인정보, 위험-편익, 취약집단 보호가 중요하다.</td><td>디지털헬스 연구에서도 개인정보와 알고리즘 편향을 다뤄야 한다.</td></tr>
+        <tr><td>분자-개인-집단-국가가 연결된다</td><td>세포 수준 발견도 개인 치료, 집단 선별, 국가 정책으로 이어질 수 있다.</td><td>백신 연구는 개인 면역과 국가 예방접종 사업을 동시에 바꾼다.</td></tr>
+        <tr><td>공리주의만으로 충분하지 않다</td><td>최대 다수의 최대 행복은 중요하지만, 소수자 권리와 형평을 희생할 수 있다.</td><td>감염병 격리, 교정시설 의료, 난민 건강은 효율만으로 결정하기 어렵다.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="system" data-keywords="시스템 어프로치 Healthcare Engineering 헬스케어연속체 SDGs Health Systems stakeholders">
+    <h2>7. 건강문제와 시스템 어프로치</h2>
+    <p>건강문제를 제대로 다루려면 세 가지를 동시에 봐야 한다. 첫째, 해결하려는 문제나 주요 이슈가 무엇인지 정의한다. 둘째, 달성할 건강목표를 정한다. 셋째, 문제를 해결할 기술이나 시스템을 선택한다. 여기서 기술은 목적이 아니라 수단이다.</p>
+    <div class="flow">
+      <span class="node">Issue / Case<br><small>문제 정의</small></span><span class="arrow">→</span>
+      <span class="node">Goals<br><small>건강목표</small></span><span class="arrow">→</span>
+      <span class="node">Technology / System<br><small>해결 수단</small></span>
+    </div>
+    <h3>헬스케어연속체</h3>
+    <div class="flow">
+      <span class="node">Prevention<br><small>예방</small></span><span class="arrow">→</span>
+      <span class="node">Screening<br><small>선별</small></span><span class="arrow">→</span>
+      <span class="node">Diagnosis<br><small>진단</small></span><span class="arrow">→</span>
+      <span class="node">Treatment<br><small>치료</small></span><span class="arrow">→</span>
+      <span class="node">Rehabilitation<br><small>재활</small></span>
+    </div>
+    <p>헬스케어연속체는 예방, 선별, 진단, 치료, 재활로 이어진다. 공중보건과 의공학, 헬스케어공학의 접점도 여기에 있다. 기술은 진단기기나 AI 모델만이 아니라 예방사업, 선별체계, 치료전달, 재활서비스, 데이터 기반 추적관리로 구현될 수 있다.</p>
+    <h3>Healthcare Engineering의 네 질문</h3>
+    <table>
+      <thead><tr><th>질문</th><th>해석</th></tr></thead>
+      <tbody>
+        <tr><td>What are the major health problems?</td><td>개인, 지역, 국가, 글로벌 수준에서 중요한 건강문제가 무엇인지 묻는다.</td></tr>
+        <tr><td>Who pays?</td><td>비용을 누가 부담하고, 재정 구조가 어떤 행동을 유도하는지 묻는다.</td></tr>
+        <tr><td>How can we use technology to solve the health problems?</td><td>기술을 문제 해결에 어떻게 배치할지 묻는다.</td></tr>
+        <tr><td>How can we move the new technology from the lab to the bedside?</td><td>연구실 기술을 현장 진료와 공중보건 사업으로 옮기는 경로를 묻는다.</td></tr>
+      </tbody>
+    </table>
+    <h3>세 층위: 개인, 집단, 국가, 그리고 글로벌</h3>
+    <p>건강문제는 개인 수준에서 시작해도 집단과 국가로 확장된다. 고혈압 환자 한 명은 개인 진료의 문제지만, 고혈압 유병률은 지역사회 건강증진사업의 문제이고, 약제 접근성과 건강보험은 국가정책의 문제다. 감염병, 이주민 건강, 기후변화 건강 영향은 글로벌 층위까지 확장된다. SDGs에서 건강은 3번 목표인 <b>Good Health & Well-Being</b>으로 정리되지만, 불평등 감소, 빈곤, 교육, 기후, 평화와도 연결된다.</p>
+    <h3>Health Systems와 이해관계자</h3>
+    <p>보건의료서비스 전달에는 1차 진료, 응급진료, 외래진료, 2차·3차·4차 진료, 가정·지역사회 진료가 포함된다. 시스템을 움직이는 동인은 재정, 인구집단 건강과 웰니스, 형평, 질과 환자안전, 전자건강기록, 원격의료와 현장진료, 개인맞춤의학이다.</p>
+    <p>주요 이해관계자는 소비자·환자·보호자, 환자옹호단체, 구매자와 지불자, 정부 보건정책결정자, 임상의와 전문직 단체, 병원과 의료체계, 의료기기·제약회사, 보건산업협회, 연구기관이다. 공직의사는 이 이해관계자들 사이의 간극을 메우는 역할을 할 수 있다. 이것이 <mark>Filling 또는 Bridging the gap</mark>이다.</p>
+  </section>
+
+  <section id="justice" data-keywords="법무의료 Health Justice LNOB 교정의료 출입국 외국인보호 난민 수용자">
+    <h2>8. 법무부 여수출입국사무소: Health and Justice</h2>
+    <p>세 번째 현장은 법무부 여수출입국사무소다. 여기서 의사는 국가공무원/일반직 의무과장으로 일한다. 법무부 의료는 병원 중심 공공의료와 다르다. 환자는 교정시설 수용자, 소년원 보호소년, 치료감호 대상자, 외국인보호소 보호외국인, 난민, 출입국 관련 지원 대상자가 될 수 있다. 공통점은 사법·행정 절차 안에 놓인 사람이라는 점이다.</p>
+    <h3>왜 Health and Justice인가</h3>
+    <p>건강은 자유롭게 병원을 선택할 수 있는 사람에게만 중요한 권리가 아니다. 감옥, 보호시설, 출입국 행정, 난민 절차 안에 있는 사람은 더 취약할 수 있다. 그래서 법무의료는 건강과 정의의 교차점에 선다. “수용자도 건강권을 갖는가”, “보호외국인과 난민의 진료 접근성은 어떻게 보장할 것인가”, “치료감호와 정신건강은 형벌과 치료 사이에서 어떻게 설계해야 하는가”가 핵심 질문이다.</p>
+    <h3>Leave No One Behind</h3>
+    <p>SDGs의 핵심 원칙 중 하나는 <b>Leave No One Behind</b>, 즉 누구도 뒤처지게 하지 않는다는 것이다. 이 원칙은 교정시설, 이민자, 난민, 보호외국인에게도 적용된다. 국제보건, 공중보건, 교정의료, 법무의료는 서로 분리된 섬이 아니다. 이주와 수용, 불평등, 감염병, 정신건강, 인권은 서로 연결된다.</p>
+    <h3>공무원 의사의 규모 감각</h3>
+    <p>의사 공무원은 큰 직군이 아니다. 2023년 면허 소지자 공무원 수를 비교하면 변호사 2,959명, 의사 1,358명, 수의사 2,214명, 약사 707명, 간호사 28,074명 수준이다. 의사 면허가 공직에서 필요하지만, 숫자로 보면 의사 공무원은 상대적으로 작고 드문 집단이다. 그래서 한 명의 의사가 맡는 제도적 영향이 클 수 있다.</p>
+    <details class="practice-toggle">
+      <summary><span>기출문제: 면허 소지자 공무원 수</span></summary>
+      <div class="mcq" data-answer="A" data-explain="정답: O"><p class="source-line"><span class="source-label past">[2025년도]</span></p><p class="stem">다음 선지를 읽고 정/오(O/X)를 고르시오.<br>2023년 면허 소지자 공무원 총조사에서 의사 수는 변호사 수보다 적었다. (다툼이 있을 때, 인사혁신처 자료를 기준으로 판단함)</p><div class="options"><button>O</button><button>X</button></div><p class="feedback"></p></div>
+      <div class="mcq" data-answer="B" data-explain="정답: X"><p class="source-line"><span class="source-label past">[2023년도]</span></p><p class="stem">116. 변호사 공무원 숫자의 증가폭은 의사 공무원 숫자보다 크지만 증가한 퍼센트의 경우 의사 공무원이 변호사 공무원보다 크다. (O/X)</p><div class="options"><button>O</button><button>X</button></div><p class="feedback"></p></div>
+    </details>
+    <h3>지역 맥락</h3>
+    <p>여수출입국사무소가 놓인 전남 지역은 인구 감소와 지역 의료자원 문제를 함께 안고 있다. 여수, 목포, 광양, 나주처럼 일정 규모를 가진 도시가 있는 반면, 구례, 곡성, 진도처럼 인구가 3만명 미만인 지역도 있다. 법무의료는 중앙부처 업무처럼 보이지만 실제 의료 접근성은 지역 의료자원과 깊게 연결된다.</p>
+  </section>
+
+  <section id="moj" data-keywords="법무부 보건의료체계 자원 조직적 배치 전달체계 경제적 지원 정책 관리 치료감호소 국립법무병원">
+    <h2>9. 법무부 보건의료체계</h2>
+    <p>법무부 보건의료체계는 공중보건 안에서 자주 중심에 놓이지 않는 영역이다. 그러나 수용자와 보호외국인, 소년, 치료감호 대상자의 건강은 국가가 직접 관리하는 건강문제다. 이 체계는 다섯 요소로 나눌 수 있다.</p>
+    <div class="flow">
+      <span class="node">자원</span><span class="arrow">→</span>
+      <span class="node">조직적 배치</span><span class="arrow">→</span>
+      <span class="node">서비스 전달</span><span class="arrow">→</span>
+      <span class="node">경제적 지원</span><span class="arrow">→</span>
+      <span class="node">정책 및 관리</span>
+    </div>
+    <h3>1. 법무보건의료 자원</h3>
+    <p>자원은 인력, 시설, 장비 및 물자, 지식으로 나뉜다. 인력에는 의사, 치과의사, 간호사, 약사, 의료기사, 응급구조사, 임상심리사 등이 포함된다. 시설에는 자체 병의원, 업무협약병원, 지정병동, 입원실, 병사, 치료시설이 들어간다. 장비와 물자는 X선 촬영기, 심전도, 자동제세동기, 초음파, 혈액투석기, 치과유닛, 원격진료유닛 등을 포함한다. 지식 자원에는 의무관 임상연구, 직무교육, 온라인 교육이 포함된다.</p>
+    <p>2015년 기준 비교에서 법무부 전체 의사는 104명, 간호사는 215명이고, 대상 인구 1,000명당 의사는 1.84명, 간호사는 3.80명이다. 일반인구 기준의 의사 2.25명, 간호사 6.57명보다 낮다. 법무부 의료가 자원 제약 속에서 작동한다는 점을 숫자로 확인할 수 있다.</p>
+    <h3>2. 자원의 조직적 배치</h3>
+    <p>법무부 안에는 교정본부, 범죄예방정책국, 출입국외국인정책본부가 있고, 각각 보건의료와 연결된 부서와 기관을 가진다. 교정본부에는 보안정책단 의료과와 심리치료과가 있다. 범죄예방정책국은 소년원, 소년분류심사원, 치료감호소와 연결된다. 출입국외국인정책본부는 외국인보호소, 출입국사무소, 출입국외국인지원센터와 연결된다.</p>
+    <table>
+      <thead><tr><th>영역</th><th>기관·부서</th><th>주요 건강업무</th></tr></thead>
+      <tbody>
+        <tr><td>교정본부</td><td>의료과, 심리치료과, 교도소, 구치소</td><td>수용자 진료, 위생, 약제·장비 관리, 건강검진, 정신건강 프로그램</td></tr>
+        <tr><td>범죄예방정책국</td><td>소년원, 소년분류심사원, 치료감호소</td><td>소년 의료, 분류심사 의료자문, 법정신의학, 정신재활, 약물중독 치료</td></tr>
+        <tr><td>출입국외국인정책본부</td><td>외국인보호소, 출입국사무소, 출입국외국인지원센터</td><td>보호외국인 진료, 위생업무, 재정착난민 진료</td></tr>
+      </tbody>
+    </table>
+    <h3>3. 법무보건의료서비스 전달체계</h3>
+    <p>법무부 의료전달체계는 지역단위 1차 의료에서 시작해 권역단위, 국가단위, 외부 일반의료기관으로 연결된다. 교도소, 구치소, 소년원, 출입국사무소 보건실은 1차 의료에 가깝다. 의료중점교도소, 의료소년원, 외국인보호소는 권역 단위 역할을 맡는다. 치료감호소(국립법무병원), 국립결핵병원, 국립소록도병원, 외부의료기관 원격진료는 더 높은 단계의 특수의료기관 역할을 한다.</p>
+    <p>정신질환, 결핵, 한센병, 혈액투석 환자, 중증 정신질환, 다제내성·광범위내성 결핵처럼 시설 안에서 다루기 어려운 문제는 단계적 의뢰와 외부 협력이 필요하다. 여기서 원격진료는 일부 질환에서 중요한 연결 장치가 된다.</p>
+    <h3>4. 경제적 지원</h3>
+    <p>교정본부 의료비 예산은 1989년부터 2015년까지 꾸준히 커졌다. 예를 들어 의료비 예산은 1990년 1,224백만원에서 2015년 15,394백만원 수준으로 증가했고, 1인당 의료비도 1990년 23,500원에서 2015년 285,600원으로 증가했다. 예산 증가는 필요 증가와 제도 개선을 반영하지만, 외부병원 이용과 집행 구조를 함께 봐야 한다.</p>
+    <h3>5. 정책 및 관리</h3>
+    <p>법무보건의료 관련 법체계는 헌법, 민법·형법, 법무부 소관법률, 보건의료 관련 법률이 겹친다. 직접 연결되는 법률에는 형집행법, 보호소년법, 치료감호법, 출입국관리법, 외국인보호규칙, 난민법이 있다. 여기에 보건의료기본법, 사회보장기본법, 의료법, 응급의료법, 감염병예방법, 결핵예방법, 국민건강보험법 관련 조항이 얹힌다.</p>
+  </section>
+
+  <section id="checklist" data-keywords="누락 점검">
+    <h2>10. 학습 점검표</h2>
+    <table>
+      <thead><tr><th>범위</th><th>스스로 설명할 수 있어야 하는 내용</th></tr></thead>
+      <tbody>
+        <tr><td>공직의사 개념</td><td>공공의료의사, 공중보건의사, 공무원 의사의 차이를 목적·제도·신분 기준으로 구분한다.</td></tr>
+        <tr><td>남극</td><td>고립, 환경, 후송, 공동체, 극지 특이 질환이 의사의 판단을 어떻게 바꾸는지 설명한다.</td></tr>
+        <tr><td>보건소</td><td>관리의사가 지역사회 보건, 감염병 대응, 사업 설계, 자원 연계를 어떻게 다루는지 설명한다.</td></tr>
+        <tr><td>시스템 접근</td><td>Issue-Goals-Technology/System, 개인-집단-국가-글로벌 층위, 헬스케어연속체를 연결한다.</td></tr>
+        <tr><td>법무의료</td><td>Health and Justice, LNOB, 교정의료·출입국의료·난민 건강을 공중보건 문제로 설명한다.</td></tr>
+        <tr><td>법무부 체계</td><td>자원, 조직적 배치, 전달체계, 경제적 지원, 정책 및 관리의 5요소를 말할 수 있다.</td></tr>
+        <tr><td>기출문제</td><td>별정직공무원, 의사 공무원 가능 경로, 국립중앙의료원 문항, 면허 소지자 공무원 수 비교를 확인한다.</td></tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+<footer class="wrap foot">
+  <p>제작 범위: 다양한 공직의사의 길 PART I. 목표는 시험 대비 요약이 아니라, 공직의사 진로와 공공보건 시스템을 독립적으로 이해할 수 있는 학습 교재다.</p>
+</footer>
+<script>
+function toggleExamMode(){document.body.classList.toggle('exam-mode')}
+function clearSearch(){const input=document.getElementById('searchInput');input.value='';document.querySelectorAll('main section').forEach(s=>s.style.display='')}
+document.getElementById('searchInput').addEventListener('input',e=>{
+  const q=e.target.value.trim().toLowerCase();
+  document.querySelectorAll('main section').forEach(s=>{
+    if(!q){s.style.display='';return}
+    s.style.display=s.innerText.toLowerCase().includes(q)||((s.dataset.keywords||'').toLowerCase().includes(q))?'':'none';
+  });
+});
+document.querySelectorAll('.mcq').forEach(q=>{
+  const ans=q.dataset.answer;
+  q.querySelectorAll('.options button').forEach((btn,idx)=>{
+    const label=String.fromCharCode(65+idx);
+    btn.addEventListener('click',()=>{
+      q.querySelectorAll('.options button').forEach(b=>b.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+      const fb=q.querySelector('.feedback');
+      if(label===ans){fb.textContent='정답. '+q.dataset.explain;fb.style.color='#0f5f7a'}
+      else{fb.textContent='오답. '+q.dataset.explain;fb.style.color='#b42318'}
+    });
+  });
+});
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('progress').style.width=p+'%';
+});
+</script>
+</body>
+</html>

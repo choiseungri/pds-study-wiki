@@ -1,0 +1,62 @@
+{
+  "siteTitle": "PDS 학습 위키",
+  "subtitle": "본과 4학년 PDS HTML 학습자료",
+  "academicYear": 2026,
+  "periods": [
+    { "period": 1, "label": "1교시", "time": "08:00-08:50" },
+    { "period": 2, "label": "2교시", "time": "09:00-09:50" },
+    { "period": 3, "label": "3교시", "time": "10:00-10:50" },
+    { "period": 4, "label": "4교시", "time": "11:00-11:50" },
+    { "period": 5, "label": "5교시", "time": "13:00-13:50" },
+    { "period": 6, "label": "6교시", "time": "14:00-14:50" },
+    { "period": 7, "label": "7교시", "time": "15:00-15:50" },
+    { "period": 8, "label": "8교시", "time": "16:00-16:50" },
+    { "period": 9, "label": "9교시", "time": "17:00-17:50" },
+    { "period": 10, "label": "10-11교시", "time": "18:00-20:00" }
+  ],
+  "pageProfessors": {
+    "0427_2_biofeedback-yoga-taichi.html": "박훈기",
+    "0427_3_homeopathy.html": "한승훈",
+    "0428_1_mind-body-medicine-overview.html": "김대호",
+    "0428_2_integrative-medicine-philosophy-science.html": "김대호",
+    "0428_3_domestic-violence-counseling.html": "박훈기",
+    "0428_4_sexual-violence-counseling.html": "박훈기",
+    "0429_1_health-functional-foods.html": "박훈기",
+    "0429_4_inpatient-attending-role.html": "손정식",
+    "0429_5_healthcare-understanding.html": "신영전",
+    "0430_1_healthcare-resources-organization-management.html": "김민주",
+    "0430_3_healthcare-utilization-quality.html": "김민주",
+    "0430_5_health-policy-public-health-history.html": "신영전",
+    "0501_2_public-doctor-paths-part1.html": "이어진",
+    "0501_3_community-health.html": "김민주",
+    "0504_1_alcohol-counseling.html": "박훈기",
+    "0504_2_medical-dispute-mediation-doctor-role.html": "송은섭",
+    "0504_3_public-doctor-paths-part2.html": "이어진",
+    "0506_1_health-management-health-behaviors.html": "신영전",
+    "0506_3_narcotics-control-act.html": "김민주",
+    "0506_4_health-promotion-regional-health-act.html": "김민주",
+    "0506_5_death.html": "김원규",
+    "0506_6_forensic-postmortem-interval.html": "김원규",
+    "0507_5_injury-death.html": "김원규"
+  },
+  "pageSpans": {
+    "0429_5_healthcare-understanding.html": 2,
+    "0430_1_healthcare-resources-organization-management.html": 2,
+    "0430_3_healthcare-utilization-quality.html": 2,
+    "0430_5_health-policy-public-health-history.html": 2,
+    "0501_3_community-health.html": 2,
+    "0506_1_health-management-health-behaviors.html": 2,
+    "0507_5_injury-death.html": 2
+  },
+  "professorRules": [
+    { "professor": "박훈기", "keywords": ["박훈기"] },
+    { "professor": "한승훈", "keywords": ["한승훈"] },
+    { "professor": "김대호", "keywords": ["김대호"] },
+    { "professor": "손정식", "keywords": ["손정식"] },
+    { "professor": "신영전", "keywords": ["신영전"] },
+    { "professor": "김민주", "keywords": ["김민주"] },
+    { "professor": "이어진", "keywords": ["이어진"] },
+    { "professor": "송은섭", "keywords": ["송은섭"] },
+    { "professor": "김원규", "keywords": ["김원규", "Won Kyu Kim"] }
+  ]
+}
