@@ -59,3 +59,7 @@
 - `.github/workflows/deploy.yml`의 `Configure Pages` 단계에 `enablement: true`를 추가해 첫 배포 시 Pages를 활성화하도록 수정했다.
 - 두 번째 실행은 Actions 토큰이 Pages site 생성 권한을 얻지 못해 실패했다.
 - GitHub 저장소 Settings > Pages에서 Source를 `GitHub Actions`로 직접 선택해 Pages를 활성화했다.
+- 세 번째 실행은 성공했다.
+- 배포 URL은 `https://choiseungri.github.io/pds-study-wiki/`이다.
+- 배포 후 홈 화면에서 `PDS 학습 위키`, 시간표, 교수님 태그, `5-6교시 13:00-14:50` span 표기가 보이는지 확인했다.
+- 개별 강의 URL `https://choiseungri.github.io/pds-study-wiki/0507_5_injury-death.html`도 열어 손상사 학습자료가 로딩되는 것을 확인했다.

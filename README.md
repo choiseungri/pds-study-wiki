@@ -2,6 +2,8 @@
 
 기존 HTML 강의자료를 시간표형 홈 화면으로 엮는 정적 사이트입니다. 별도 서버가 필요 없고 GitHub Pages, Cloudflare Pages, Netlify 같은 무료 정적 호스팅에 올릴 수 있습니다.
 
+배포 URL: https://choiseungri.github.io/pds-study-wiki/
+
 ## 자료 추가
 
 1. 새 HTML 파일을 이 폴더에 넣습니다.
