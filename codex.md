@@ -51,3 +51,9 @@
 - 홈 화면 렌더러는 span으로 덮인 다음 교시 칸을 만들지 않고, 시작 교시 셀이 CSS grid row span으로 두 칸을 차지하게 바꿨다.
 - 사용자가 시간표를 까먹지 않게 저장해두라고 요청했다.
 - 원본 이미지의 배치표 내용을 `timetable.md`에 전사했다. 앞으로 자료가 추가되면 이 파일을 기준으로 파일명, 담당 교수님, span을 맞춘다.
+
+## 2026-05-11 배포 시행착오
+
+- GitHub 저장소 `choiseungri/pds-study-wiki`를 공개 저장소로 만들고 `main` 브랜치에 첫 push를 했다.
+- 첫 GitHub Actions 배포는 새 저장소에서 Pages가 아직 활성화되지 않아 `actions/configure-pages`가 Pages site를 찾지 못하며 실패했다.
+- `.github/workflows/deploy.yml`의 `Configure Pages` 단계에 `enablement: true`를 추가해 첫 배포 시 Pages를 활성화하도록 수정했다.
