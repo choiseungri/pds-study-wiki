@@ -57,3 +57,5 @@
 - GitHub 저장소 `choiseungri/pds-study-wiki`를 공개 저장소로 만들고 `main` 브랜치에 첫 push를 했다.
 - 첫 GitHub Actions 배포는 새 저장소에서 Pages가 아직 활성화되지 않아 `actions/configure-pages`가 Pages site를 찾지 못하며 실패했다.
 - `.github/workflows/deploy.yml`의 `Configure Pages` 단계에 `enablement: true`를 추가해 첫 배포 시 Pages를 활성화하도록 수정했다.
+- 두 번째 실행은 Actions 토큰이 Pages site 생성 권한을 얻지 못해 실패했다.
+- GitHub 저장소 Settings > Pages에서 Source를 `GitHub Actions`로 직접 선택해 Pages를 활성화했다.
