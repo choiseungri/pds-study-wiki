@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>감염병의 예방 및 관리에 관한 법률 · 의사법규 학습자료</title>
+<style>
+  :root {
+    --text:#171717; --muted:#666; --line:#d7d7d7; --soft:#f7f7f7; --ink:#111;
+    --accent:#0f5f7a; --danger:#b42318; --mark:#fff38a;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    margin:0; color:var(--text); background:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;
+    line-height:1.72; word-break:keep-all;
+  }
+  #progress { position:fixed; top:0; left:0; height:4px; background:var(--accent); width:0; z-index:1000; }
+  .wrap { max-width:1120px; margin:0 auto; padding:0 22px; }
+  header { padding:56px 0 28px; border-bottom:1px solid var(--line); }
+  h1 { font-size:clamp(2rem,4.2vw,4rem); letter-spacing:-.04em; margin:0 0 12px; line-height:1.12; }
+  h2 { font-size:clamp(1.55rem,3vw,2.25rem); letter-spacing:-.04em; margin:72px 0 20px; padding-bottom:10px; border-bottom:2px solid var(--line); }
+  h3 { font-size:1.28rem; letter-spacing:-.03em; margin:34px 0 10px; }
+  h4 { font-size:1.05rem; margin:22px 0 8px; }
+  p { margin:10px 0; }
+  a { color:var(--accent); text-decoration-thickness:.08em; text-underline-offset:.18em; }
+  nav { position:sticky; top:4px; z-index:900; background:rgba(255,255,255,.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  nav .wrap { display:flex; gap:12px; align-items:center; overflow:auto; padding-top:10px; padding-bottom:10px; }
+  nav a, nav button { white-space:nowrap; font-size:.95rem; color:var(--text); border:1px solid var(--line); border-radius:999px; padding:6px 12px; background:#fff; cursor:pointer; text-decoration:none; }
+  nav a:hover, nav button:hover { border-color:#777; }
+  .meta { color:var(--muted); font-size:.98rem; }
+  .lead { font-size:1.16rem; max-width:930px; }
+  .grid { display:grid; gap:18px; }
+  .two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  @media (max-width:860px) { .two,.three { grid-template-columns:1fr; } }
+  .plain-card { border:1px solid var(--line); border-radius:18px; padding:18px; background:#fff; }
+  .tight li { margin:4px 0; }
+  mark, .hl { background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 .08em; }
+  .u { text-decoration:underline; text-decoration-thickness:.15em; text-underline-offset:.16em; text-decoration-color:#dd4a4a; }
+  .exam { font-weight:800; text-decoration:underline; text-decoration-thickness:.14em; text-underline-offset:.18em; text-decoration-color:#e8c100; }
+  .red { color:var(--danger); font-weight:700; }
+  .muted { color:var(--muted); }
+  .small { font-size:.92rem; }
+  table { width:100%; border-collapse:collapse; margin:14px 0 22px; }
+  th, td { border-bottom:1px solid var(--line); padding:10px 8px; vertical-align:top; text-align:left; }
+  th { font-weight:800; }
+  details { border:1px solid var(--line); border-radius:16px; padding:12px 16px; background:#fff; margin:12px 0; }
+  summary { cursor:pointer; font-weight:800; }
+  .q summary { font-size:1.02rem; }
+  .answer { margin-top:12px; padding-top:10px; border-top:1px solid var(--line); }
+  .answer b { color:var(--accent); }
+  .source-label { font-weight:900; color:var(--accent); text-decoration:underline; text-decoration-thickness:.12em; text-underline-offset:.18em; }
+  .source-note { color:var(--muted); margin-left:6px; font-size:.92rem; }
+  .page-ref { color:#555; font-size:.86em; }
+  .toc { columns:2; column-gap:36px; }
+  .toc li { break-inside:avoid; margin:5px 0; }
+  @media (max-width:700px) { .toc { columns:1; } }
+  .exam-only { display:none; }
+  body.exam-mode .deep { display:none !important; }
+  body.exam-mode .exam-only { display:block; }
+  body.exam-mode h2 { margin-top:44px; }
+  .foot { border-top:1px solid var(--line); margin-top:70px; padding:26px 0 50px; color:var(--muted); }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<header>
+  <div class="wrap">
+    <p class="meta">2026 PSD4 · 의사법규 · 김민주 교수님 강의록 재구성</p>
+    <h1>감염병의 예방 및 관리에 관한 법률</h1>
+    <p class="lead">슬라이드 76쪽의 조문 중심 내용을 읽는 순서로 다시 묶었습니다. 핵심은 <mark>감염병 분류</mark>, <mark>신고·보고 시한</mark>, <mark>역학조사와 자료제출</mark>, <mark>예방접종 기록·이상반응</mark>, <mark>방역·예방 조치</mark>, <mark>역학조사관·경비·벌칙</mark>입니다.</p>
+    <p class="meta">본문의 <span class="exam">밑줄 표시</span>와 형광펜은 강조·반복 출제 포인트입니다. 슬라이드에 포함된 형성·총괄·예제·과거 기출 문항은 발문과 선지를 보존하고 정답·해설을 붙였습니다.</p>
+  </div>
+</header>
+<nav aria-label="본문 이동">
+  <div class="wrap">
+    <a href="#overview">개요</a>
+    <a href="#classification">정의·분류</a>
+    <a href="#rights-plan">책무·계획</a>
+    <a href="#reporting">신고·감시</a>
+    <a href="#investigation">역학조사</a>
+    <a href="#vaccination">예방접종</a>
+    <a href="#measures">방역조치</a>
+    <a href="#personnel-costs">인력·경비</a>
+    <a href="#archive">문항</a>
+    <button type="button" onclick="toggleExamMode()">시험 직전 모드</button>
+    <button type="button" onclick="toggleAllDetails(true)">문항 모두 열기</button>
+    <button type="button" onclick="toggleAllDetails(false)">문항 닫기</button>
+  </div>
+</nav>
+<main class="wrap">
+  <section id="overview">
+    <h2>1. 학습 목표와 법의 큰 흐름</h2>
+    <div class="grid two">
+      <div class="plain-card">
+        <h3>학습 목표</h3>
+        <ul class="tight">
+          <li>감염병의 <b>정의와 종류</b>를 구분한다.</li>
+          <li>감염병 관리 및 감시 관련 <b>제도적 사항</b>을 이해한다.</li>
+          <li><b>예방접종</b> 관련 조문과 기록·보고를 설명한다.</li>
+          <li>감염병 관리와 관련한 <b>의료인의 역할과 책무</b>를 설명한다.</li>
+        </ul>
+      </div>
+      <div class="plain-card">
+        <h3>학습 내용</h3>
+        <ul class="tight">
+          <li>국가, 지방자치단체, 의료인, 국민의 책무</li>
+          <li>기본계획 및 사업</li>
+          <li>감염병 신고·보고, 감시, 역학조사</li>
+          <li>고위험병원체</li>
+          <li>감염 전파의 차단 조치</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>법의 역사</h3>
+    <p><b>1954년 전염병예방법</b>은 전염병 발생과 유행을 방지하여 국민보건을 향상·증진시키려는 법으로 출발했습니다. <b>2009년</b>에는 「감염병의 예방 및 관리에 관한 법률」로 전부 개정되면서 “전염병”을 “감염병”으로 바꾸고, 신종 감염병 국가관리, 감염병관리위원회, 예방·치료의약품 및 장비 비축·구매 근거를 마련했습니다.</p>
+    <p><b>2021년 COVID-19 이후</b>에는 방역조치 위반으로 감염병을 확산하거나 확산 위험성을 높인 자에 대한 손해배상 청구, 방역지침 위반 시설의 운영중단·폐쇄 명령 권한 확대, 감염병 대유행 시 개발 단계 백신·의약품에 대한 구매·공급 계약 근거가 추가되었습니다. <span class="page-ref">원본 3쪽</span></p>
+
+    <h3>법의 목적</h3>
+    <p>감염병예방법의 목적은 <span class="exam">국민 건강에 위해가 되는 감염병의 발생과 유행을 방지</span>하고, 그 예방·관리에 필요한 사항을 규정하여 <b>국민 건강의 증진 및 유지</b>에 이바지하는 것입니다. <span class="page-ref">원본 4쪽</span></p>
+
+    <h3>목차 재구성</h3>
+    <ol class="toc">
+      <li>감염병의 정의, 환자·의심자·감시·역학조사 개념</li>
+      <li>제1급·제2급·제3급·제4급 감염병 분류와 신고 시한</li>
+      <li>의료인·국민의 권리와 의무, 기본계획과 감염병관리위원회</li>
+      <li>의사·의료기관장·군의관·보건소장·기타 신고의무자</li>
+      <li>표본감시, 병원체 확인기관, 실태조사, 역학조사</li>
+      <li>고위험병원체와 생물테러감염병병원체</li>
+      <li>필수·임시예방접종, 예방접종 기록·이상반응·피해보상</li>
+      <li>감염병 위기관리대책, 강제처분, 방역·예방 조치, 소독</li>
+      <li>방역관·역학조사관·검역위원·예방위원, 경비와 벌칙</li>
+    </ol>
+  </section>
+
+  <section id="classification">
+    <h2>2. 감염병의 정의와 분류</h2>
+    <p class="exam-only"><b>시험 직전:</b> 1급은 <mark>즉시 신고 + 높은 수준 격리</mark>, 2급은 <mark>24시간 이내 신고 + 격리 필요</mark>, 3급은 <mark>24시간 이내 신고 + 계속 감시</mark>, 4급은 <mark>표본감시</mark>입니다.</p>
+
+    <h3>감염병의 정의</h3>
+    <p>“감염병”은 <b>제1급감염병, 제2급감염병, 제3급감염병, 제4급감염병, 기생충감염병, 세계보건기구 감시대상 감염병, 생물테러감염병, 성매개감염병, 인수공통감염병, 의료관련감염병</b>을 모두 포함합니다. <span class="page-ref">원본 5쪽</span></p>
+
+    <h3>제1급감염병</h3>
+    <p><b>제1급감염병</b>은 생물테러감염병 또는 치명률이 높거나 집단 발생 우려가 커서 <span class="exam">발생 또는 유행 즉시 신고</span>해야 하고, <span class="exam">음압격리와 같은 높은 수준의 격리</span>가 필요한 감염병입니다. 갑작스러운 국내 유입 또는 유행이 예견되어 긴급 예방·관리가 필요한 경우 질병관리청장이 보건복지부장관과 협의하여 지정하는 감염병도 포함합니다.</p>
+    <details class="deep">
+      <summary>제1급감염병 전체 목록 보기</summary>
+      <ol class="toc">
+        <li>에볼라바이러스병</li><li>마버그열</li><li>라싸열</li><li>크리미안콩고출혈열</li><li>남아메리카출혈열</li><li>리프트밸리열</li><li>두창</li><li>페스트</li><li>탄저</li><li>보툴리눔독소증</li><li>야토병</li><li>신종감염병증후군</li><li>중증급성호흡기증후군(SARS)</li><li>중동호흡기증후군(MERS)</li><li>동물인플루엔자 인체감염증</li><li>신종인플루엔자</li><li>디프테리아</li>
+      </ol>
+      <p class="page-ref">원본 6쪽</p>
+    </details>
+
+    <details class="q">
+      <summary><span class="source-label">25년도 형성</span><span class="source-note">제1급감염병 정의</span></summary>
+      <p><b>생물테러감염병 또는 치명률이 높거나 집단 발생의 우려가 커서 발생 또는 유행 즉시 신고하여야 하고, 음압 격리와 같은 높은 수준의 격리가 필요한 감염병은?</b></p>
+      <ol>
+        <li>신증후군출혈열</li><li>동물인플루엔자 인체감염증</li><li>크로이츠펠트야콥병</li><li>파라티푸스</li><li>중증급성열성혈소판증후군</li>
+      </ol>
+      <div class="answer"><b>정답: ② 동물인플루엔자 인체감염증</b><br>동물인플루엔자 인체감염증은 제1급감염병 목록에 있습니다. 신증후군출혈열, CJD/vCJD, SFTS는 제3급, 파라티푸스는 제2급입니다. <span class="page-ref">원본 7쪽</span></div>
+    </details>
+
+    <details class="q">
+      <summary><span class="source-label">예제 3</span><span class="source-note">제1급감염병 목록</span></summary>
+      <p><b>생물테러감염병 또는 치명률이 높거나 집단 발생의 우려가 커서 발생 또는 유행 즉시 신고하여야 하고, 음압격리와 같은 높은 수준의 격리가 필요한 감염병은?</b></p>
+      <ol>
+        <li>말라리아</li><li>홍역</li><li>결핵</li><li>보툴리눔독소증</li><li>반코마이신내성황색포도알균(VRSA) 감염증</li>
+      </ol>
+      <div class="answer"><b>정답: ④ 보툴리눔독소증</b><br>보툴리눔독소증은 제1급감염병입니다. 말라리아는 제3급, 홍역·결핵·VRSA 감염증은 제2급입니다. <span class="page-ref">원본 67-68쪽</span></div>
+    </details>
+
+    <h3>제2급감염병</h3>
+    <p><b>제2급감염병</b>은 전파가능성을 고려하여 발생 또는 유행 시 <span class="exam">24시간 이내 신고</span>해야 하고, <span class="exam">격리가 필요한</span> 감염병입니다. 긴급 예방·관리가 필요한 경우 질병관리청장이 보건복지부장관과 협의하여 지정하는 감염병도 포함합니다.</p>
+    <details class="deep">
+      <summary>제2급감염병 전체 목록 보기</summary>
+      <ol class="toc">
+        <li>결핵</li><li>수두</li><li>홍역</li><li>콜레라</li><li>장티푸스</li><li>파라티푸스</li><li>세균성이질</li><li>장출혈성대장균감염증</li><li>A형간염</li><li>백일해</li><li>유행성이하선염</li><li>풍진</li><li>폴리오</li><li>수막구균 감염증</li><li>b형헤모필루스인플루엔자</li><li>폐렴구균 감염증</li><li>한센병</li><li>성홍열</li><li>반코마이신내성황색포도알균(VRSA) 감염증</li><li>카바페넴내성장내세균목(CRE) 감염증</li><li>E형간염</li>
+      </ol>
+      <p class="page-ref">원본 8쪽</p>
+    </details>
+
+    <details class="q">
+      <summary><span class="source-label">25년도 형성</span><span class="source-note">제2급감염병 정의</span></summary>
+      <p><b>전파 가능성을 고려하여 발생 또는 유행 시 24시간 이내에 신고하여야 하고, 격리가 필요한 감염병은?</b></p>
+      <ol>
+        <li>A형 간염</li><li>B형 간염</li><li>두창</li><li>디프테리아</li><li>중증급성열성혈소판증후군</li>
+      </ol>
+      <div class="answer"><b>정답: ① A형 간염</b><br>A형간염은 제2급감염병으로 24시간 이내 신고와 격리 필요성이 연결됩니다. B형간염·SFTS는 제3급, 두창·디프테리아는 제1급입니다. <span class="page-ref">원본 9쪽</span></div>
+    </details>
+
+    <details class="q">
+      <summary><span class="source-label">25년도 총괄</span><span class="source-note">b형헤모필루스인플루엔자</span></summary>
+      <p><b>B형헤모필루스인플루엔자는 어떤 감염병에 해당하는가? ☆</b></p>
+      <ol>
+        <li>제1급 감염병</li><li>제2급 감염병</li><li>제3급 감염병</li><li>제4급 감염병</li><li>기생충감염병</li>
+      </ol>
+      <div class="answer"><b>정답: ② 제2급 감염병</b><br>b형헤모필루스인플루엔자는 제2급감염병 목록에 들어갑니다. <span class="page-ref">원본 9, 72쪽</span></div>
+    </details>
+
+    <h3>제3급감염병</h3>
+    <p><b>제3급감염병</b>은 발생을 계속 감시할 필요가 있어 발생 또는 유행 시 <span class="exam">24시간 이내 신고</span>해야 하는 감염병입니다. 긴급 예방·관리가 필요한 경우 질병관리청장이 보건복지부장관과 협의하여 지정하는 감염병도 포함합니다.</p>
+    <details class="deep">
+      <summary>제3급감염병 전체 목록 보기</summary>
+      <ol class="toc">
+        <li>파상풍</li><li>B형간염</li><li>일본뇌염</li><li>C형간염</li><li>말라리아</li><li>레지오넬라증</li><li>비브리오패혈증</li><li>발진티푸스</li><li>발진열</li><li>쯔쯔가무시증</li><li>렙토스피라증</li><li>브루셀라증</li><li>공수병</li><li>신증후군출혈열</li><li>후천성면역결핍증(AIDS)</li><li>크로이츠펠트-야콥병(CJD) 및 변종크로이츠펠트-야콥병(vCJD)</li><li>황열</li><li>뎅기열</li><li>큐열</li><li>웨스트나일열</li><li>라임병</li><li>진드기매개뇌염</li><li>유비저</li><li>치쿤구니야열</li><li>중증열성혈소판감소증후군(SFTS)</li><li>지카바이러스 감염증</li><li>매독</li>
+      </ol>
+      <p class="page-ref">원본 10쪽</p>
+    </details>
+
+    <h3>제4급감염병</h3>
+    <p><b>제4급감염병</b>은 제1급부터 제3급까지의 감염병 외에 유행 여부를 조사하기 위해 <span class="exam">표본감시 활동</span>이 필요한 감염병입니다. 질병관리청장이 지정하는 감염병도 포함합니다.</p>
+    <details class="deep">
+      <summary>제4급감염병 전체 목록 보기</summary>
+      <ol class="toc">
+        <li>인플루엔자</li><li>삭제 &lt;2023. 8. 8.&gt;</li><li>회충증</li><li>편충증</li><li>요충증</li><li>간흡충증</li><li>폐흡충증</li><li>장흡충증</li><li>수족구병</li><li>임질</li><li>클라미디아감염증</li><li>연성하감</li><li>성기단순포진</li><li>첨규콘딜롬</li><li>반코마이신내성장알균(VRE) 감염증</li><li>메티실린내성황색포도알균(MRSA) 감염증</li><li>다제내성녹농균(MRPA) 감염증</li><li>다제내성아시네토박터바우마니균(MRAB) 감염증</li><li>장관감염증</li><li>급성호흡기감염증</li><li>해외유입기생충감염증</li><li>엔테로바이러스감염증</li><li>사람유두종바이러스 감염증</li>
+      </ol>
+      <p class="page-ref">원본 11쪽</p>
+    </details>
+
+    <h3>환자·의심자·감시·역학조사의 기본 용어</h3>
+    <table>
+      <thead><tr><th>용어</th><th>핵심 정의</th></tr></thead>
+      <tbody>
+        <tr><td><b>감염병환자</b></td><td>감염병 병원체가 인체에 침입하여 증상을 나타내며, 의사·치과의사·한의사의 진단 또는 감염병병원체 확인기관의 실험실 검사로 확인된 사람</td></tr>
+        <tr><td><b>감염병의사환자</b></td><td>감염병병원체가 인체에 침입한 것으로 의심되지만 감염병환자로 확인되기 전 단계의 사람</td></tr>
+        <tr><td><b>병원체보유자</b></td><td>임상 증상은 없으나 감염병병원체를 보유한 사람</td></tr>
+        <tr><td><b>감염병의심자</b></td><td>환자·의사환자·병원체보유자와 접촉했거나 접촉이 의심되는 사람, 검역관리지역 또는 중점검역관리지역 체류·경유자로 감염 우려가 있는 사람, 병원체 등 위험요인에 노출되어 감염 우려가 있는 사람</td></tr>
+        <tr><td><b>감시</b></td><td>감염병·병원체·매개체 자료를 체계적·지속적으로 수집, 분석, 해석하고 필요한 사람에게 제때 배포하여 예방·관리에 쓰도록 하는 과정</td></tr>
+        <tr><td><b>표본감시</b></td><td>발생빈도가 높아 전수조사가 어렵고 중증도가 비교적 낮은 감염병에 대해 감시기관을 지정하여 정기적·지속적 의과학적 감시를 실시하는 것</td></tr>
+        <tr><td><b>역학조사</b></td><td>감염병환자등 발생 규모 파악, 감염원 추적 등 차단·확산 방지 활동과 예방접종 후 이상반응 또는 원인규명이 필요한 사례를 조사하는 활동</td></tr>
+        <tr><td><b>예방접종 후 이상반응</b></td><td>예방접종 후 그 접종으로 발생할 수 있는 모든 증상 또는 질병으로서 해당 접종과 시간적 관련성이 있는 것</td></tr>
+        <tr><td><b>고위험병원체</b></td><td>생물테러 목적에 이용되거나 사고 등으로 외부 유출 시 국민 건강에 심각한 위험을 초래할 수 있는 감염병병원체</td></tr>
+        <tr><td><b>관리대상 해외 신종감염병</b></td><td>변이·변종 또는 새로운 병원체로 국제 보건문제를 일으키고 국내 유입 대비가 필요한 감염병</td></tr>
+        <tr><td><b>의료·방역 물품</b></td><td>의약품·의약외품, 의료기기 등 의료 및 방역에 필요한 물품·장비로 질병관리청장이 지정하는 것</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="rights-plan">
+    <h2>3. 의료인·국민의 권리와 의무, 기본계획</h2>
+    <p class="exam-only"><b>시험 직전:</b> 의료인은 <mark>정보 제공받을 권리와 피해 보상 권리</mark>가 있고, 진단·관리·치료 및 행정명령·감시·역학조사에 협조해야 합니다. 국민은 <mark>피해보상·알 권리·진단치료 권리</mark>가 있고, 격리·치료 등 예방관리 활동에 협조해야 합니다.</p>
+
+    <h3>의료인 등의 책무와 권리</h3>
+    <ul>
+      <li>의료인 및 의료기관의 장 등은 감염병 환자의 진료에 관한 정보를 제공받을 권리가 있고, 진단·치료 등으로 발생한 피해에 대해 보상받을 수 있습니다.</li>
+      <li>감염병 환자의 진단·관리·치료 등에 최선을 다하고, 보건복지부장관·질병관리청장·지방자치단체장의 행정명령에 적극 협조해야 합니다.</li>
+      <li>국가와 지방자치단체가 수행하는 감염병 발생 감시, 예방·관리, 역학조사 업무에 적극 협조해야 합니다. <span class="page-ref">원본 16쪽</span></li>
+    </ul>
+
+    <h3>국민의 권리와 의무</h3>
+    <ul>
+      <li>감염병으로 격리·치료 등을 받은 경우 피해를 보상받을 수 있습니다.</li>
+      <li>감염병 발생 상황, 예방·관리, 대응방법을 알 권리가 있고, 국가와 지방자치단체는 신속하게 정보를 공개해야 합니다.</li>
+      <li>의료기관에서 감염병 진단·치료를 받을 권리가 있고, 국가와 지방자치단체는 이에 소요되는 비용을 부담해야 합니다.</li>
+      <li>치료·격리조치 등 국가와 지방자치단체의 감염병 예방·관리 활동에 적극 협조해야 합니다. <span class="page-ref">원본 17쪽</span></li>
+    </ul>
+
+    <h3>기본계획 및 사업</h3>
+    <table>
+      <thead><tr><th>조문</th><th>핵심 내용</th></tr></thead>
+      <tbody>
+        <tr><td><b>7조</b></td><td>질병관리청장은 보건복지부장관과 협의하여 감염병 예방 및 관리에 관한 <span class="exam">기본계획을 5년마다</span> 수립·시행합니다.</td></tr>
+        <tr><td><b>8조</b></td><td>질병관리청장 및 시·도지사는 기본계획·시행계획 시행과 국제협력 등을 지원하기 위해 민간전문가 등으로 구성된 감염병관리사업지원기구를 둘 수 있습니다.</td></tr>
+        <tr><td><b>8조의2</b></td><td>국가는 중앙감염병전문병원을 설립·지정하여 운영하고, 일정 규모 이상의 음압·격리병상 등을 갖춘 권역별 감염병전문병원을 설립·지정하여 운영합니다.</td></tr>
+        <tr><td><b>8조의3</b></td><td>보건복지부장관은 내성균 발생 예방 및 확산 방지를 위해 감염병관리위원회 심의를 거쳐 내성균 관리대책을 5년마다 수립·추진합니다.</td></tr>
+        <tr><td><b>8조의5</b></td><td>질병관리청장은 정보 수집·전파, 상황관리, 유입·유행 긴급상황 초동조치 및 지휘를 위해 상시 긴급상황실을 설치·운영합니다.</td></tr>
+        <tr><td><b>9조</b></td><td>감염병 예방 및 관리에 관한 주요 시책 심의를 위해 질병관리청에 감염병관리위원회를 둡니다.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="reporting">
+    <h2>4. 신고·보고, 인수공통감염병 통보, 표본감시</h2>
+    <p class="exam-only"><b>시험 직전:</b> 의료기관 소속 의사 등은 먼저 <mark>의료기관의 장에게 보고</mark>하고, 장은 1급 <mark>즉시</mark>, 2·3급 <mark>24시간 이내</mark>, 4급 <mark>7일 이내</mark> 질병관리청장 또는 관할 보건소장에게 신고합니다.</p>
+
+    <h3>의사 등의 신고: 누가, 누구에게, 언제</h3>
+    <p>의사·치과의사·한의사는 다음 사실이 있으면 소속 <span class="exam">의료기관의 장에게 보고</span>하고, 해당 환자와 동거인에게 질병관리청장이 정하는 감염 방지 방법을 지도해야 합니다. 의료기관에 소속되지 않은 의사·치과의사·한의사는 관할 보건소장에게 신고합니다.</p>
+    <ol>
+      <li>감염병환자등을 진단하거나 그 사체를 검안한 경우</li>
+      <li>예방접종 후 이상반응자를 진단하거나 그 사체를 검안한 경우</li>
+      <li>감염병환자등이 제1급부터 제3급까지의 감염병으로 사망한 경우</li>
+      <li>감염병환자로 의심되는 사람이 감염병병원체 검사를 거부하는 경우</li>
+    </ol>
+    <table>
+      <thead><tr><th>보고·신고 주체</th><th>상황</th><th>신고 대상과 시한</th></tr></thead>
+      <tbody>
+        <tr><td>의료기관의 장, 감염병병원체 확인기관의 장</td><td>보고를 받은 경우</td><td>제1급: 즉시 / 제2급·제3급: 24시간 이내 / 제4급: 7일 이내 질병관리청장 또는 관할 보건소장에게 신고</td></tr>
+        <tr><td>군의관</td><td>제11조 1항 각 호 사실을 확인</td><td>소속 부대장에게 보고</td></tr>
+        <tr><td>군 부대장</td><td>군의관 보고를 받은 경우</td><td>제1급: 즉시 / 제2급·제3급: 24시간 이내 관할 보건소장에게 신고</td></tr>
+      </tbody>
+    </table>
+
+    <details class="q">
+      <summary><span class="source-label">25년도 총괄</span><span class="source-note">세균성이질 신고 시한</span></summary>
+      <p><b>세균성 이질에 감염된 환자를 확인하였다. 병원장이 신고해야 하는 기간은? ☆</b></p>
+      <ol>
+        <li>신고의무 없음</li><li>즉시</li><li>24시간 이내</li><li>72시간 이내</li><li>7일 이내</li>
+      </ol>
+      <div class="answer"><b>정답: ③ 24시간 이내</b><br>세균성이질은 제2급감염병입니다. 의료기관장이 보고를 받으면 제2급·제3급은 24시간 이내 신고합니다. <span class="page-ref">원본 9, 72쪽</span></div>
+    </details>
+
+    <details class="q">
+      <summary><span class="source-label">예제 2</span><span class="source-note">SFTS와 의료기관장의 신고</span></summary>
+      <p><b>군 지역에 소재한 ‘A’ 병원의 병원장인 의사 ‘갑＇은, ‘A’ 병원 소속 의사 ‘을＇이 발열 및 구역, 구토 증상을 호소하는 60세 환자를 중증열성혈소판감소증후군(SFTS)으로 진단하였음을 보고 받았다. 이때 감염병의 예방 및 관리에 관한 법률에 따라 의사 ‘갑’이 취하여야 할 조치는?</b></p>
+      <ol>
+        <li>지체없이 의료기관 소재지 군수에게 감염병 발생신고</li>
+        <li>24시간 이내에 권역별 감염병전문병원장에게 감염병 발생신고</li>
+        <li>24시간 이내에 의료기관 소재지 관할 보건소장에게 감염병 발생신고</li>
+        <li>일주일 이내에 의료기관 소재지 관할 역학조사관에게 감염병 발생신고</li>
+        <li>일주일 이내에 환자의 주민등록주소지 관할 보건소장에게 감염병 발생신고</li>
+      </ol>
+      <div class="answer"><b>정답: ③ 24시간 이내에 의료기관 소재지 관할 보건소장에게 감염병 발생신고</b><br>SFTS는 제3급감염병입니다. 의료기관 소속 의사의 보고를 받은 의료기관장은 제2급·제3급 감염병을 24시간 이내 질병관리청장 또는 관할 보건소장에게 신고합니다. <span class="page-ref">원본 65-66쪽</span></div>
+    </details>
+
+    <h3>그 밖의 신고의무자</h3>
+    <p>제1급부터 제3급까지의 감염병 중 보건복지부령으로 정하는 감염병이 발생하면 다음 사람이 의사·치과의사·한의사의 진단·검안을 요구하거나 주소지 관할 보건소장에게 신고해야 합니다.</p>
+    <ol>
+      <li>일반가정의 세대주. 세대주가 부재 중이면 세대원</li>
+      <li>학교, 사회복지시설, 병원, 관공서, 회사, 공연장, 예배장소, 선박·항공기·열차 등 운송수단, 사무소·사업소, 음식점, 숙박업소 등 여러 사람이 모이는 장소의 관리인·경영자·대표자</li>
+      <li>약사·한약사 및 약국개설자</li>
+    </ol>
+    <p>신고의무자가 아니더라도 감염병환자등 또는 감염병 사망자로 의심되는 사람을 발견하면 보건소장에게 알려야 합니다. <span class="page-ref">원본 22쪽</span></p>
+
+    <h3>보건소장 등의 보고 흐름</h3>
+    <p>신고를 받은 보건소장은 관할 특별자치시장·특별자치도지사 또는 시장·군수·구청장에게 보고합니다. 보고를 받은 특별자치시장·특별자치도지사는 질병관리청장에게, 시장·군수·구청장은 질병관리청장 및 시·도지사에게 각각 보고합니다. 제1급감염병 의심자가 병원체 검사를 거부하는 경우에는 감염병병원체 검사를 하게 할 수 있습니다. <span class="page-ref">원본 23쪽</span></p>
+
+    <h3>인수공통감염병의 통보</h3>
+    <p>가축전염병 신고를 받은 국립가축방역기관장, 신고대상 가축 소재지 관할 시장·군수·구청장 또는 시·도 가축방역기관의 장은 다음 인수공통감염병을 <b>즉시 질병관리청장에게 통보</b>해야 합니다.</p>
+    <ol>
+      <li>탄저</li><li>고병원성조류인플루엔자</li><li>광견병</li><li>그 밖에 대통령령으로 정하는 인수공통감염병</li>
+    </ol>
+
+    <h3>감염병 표본감시와 병원체 확인기관</h3>
+    <p>질병관리청장은 감염병 표본감시를 위해 질병의 특성과 지역을 고려하여 보건의료기관이나 그 밖의 기관·단체를 <b>감염병 표본감시기관</b>으로 지정할 수 있습니다. 지정된 표본감시기관은 자료제출 요구와 예방·관리 협조 요청에 특별한 사유가 없으면 따라야 합니다.</p>
+    <details class="deep">
+      <summary>감염병병원체 확인기관 목록 보기</summary>
+      <ol class="toc">
+        <li>질병관리청</li><li>질병대응센터</li><li>보건환경연구원</li><li>보건소</li><li>의료기관 중 진단검사의학과 전문의가 상근하는 기관</li><li>진단검사의학과가 개설된 의과대학</li><li>대한결핵협회: 결핵환자 병원체 확인의 경우</li><li>한센병환자 등의 치료·재활 지원 목적 기관: 한센병환자 병원체 확인의 경우</li><li>인체 검사물을 국가·지자체·의료기관 등으로부터 위탁받아 처리하는 기관 중 진단검사의학과 전문의가 상근하는 기관</li>
+      </ol>
+      <p class="page-ref">원본 26쪽</p>
+    </details>
+  </section>
+
+  <section id="investigation">
+    <h2>5. 실태조사, 건강진단, 역학조사와 고위험병원체</h2>
+    <p class="exam-only"><b>시험 직전:</b> 역학조사는 감염병 발생·유행 우려 또는 원인조사 필요 시 <mark>지체 없이</mark> 실시합니다. 역학조사 거부·방해·회피, 거짓 진술·자료 제출, 사실 누락·은폐는 금지됩니다.</p>
+
+    <h3>실태조사와 성매개감염병 건강진단</h3>
+    <p>질병관리청장 및 시·도지사는 감염병 관리·감염 실태와 내성균 실태를 파악하기 위해 실태조사를 실시하고 결과를 공표해야 합니다. 성매개감염병 예방을 위해 건강진단이 필요한 직업 종사자와 성매개감염병 전염을 매개할 상당한 우려가 있다고 인정된 사람은 성매개감염병 건강진단을 받아야 합니다. <span class="page-ref">원본 27쪽</span></p>
+
+    <h3>역학조사</h3>
+    <p>질병관리청장, 시·도지사 또는 시장·군수·구청장은 감염병이 발생하여 유행할 우려가 있거나 감염병 여부가 불분명하나 발병 원인조사가 필요하다고 인정하면 <b>지체 없이 역학조사</b>를 해야 합니다. 조사 결과 정보는 필요한 범위에서 해당 의료기관에 제공하고, 지역확산 방지를 위해 필요한 경우 다른 의료기관에도 제공합니다.</p>
+    <p>역학조사를 위해 질병관리청장, 시·도지사, 시장·군수·구청장은 각각 역학조사반을 설치합니다. 누구든지 역학조사에서 <b>정당한 사유 없는 거부·방해·회피</b>, <b>거짓 진술 또는 거짓 자료 제출</b>, <b>고의적 사실 누락·은폐</b>를 해서는 안 됩니다. <span class="page-ref">원본 28쪽</span></p>
+
+    <h3>역학조사 자료제출 요구</h3>
+    <ul>
+      <li>질병관리청장은 효율적 역학조사를 위해 관계 중앙행정기관의 장, 대통령령으로 정하는 기관·단체 등에 자료제출을 요구할 수 있습니다.</li>
+      <li>시행령상 자료제출 요구 대상 기관·단체는 <b>의료기관, 국민건강보험공단, 건강보험심사평가원</b>입니다.</li>
+      <li>감염병과 관련하여 「재난 및 안전관리 기본법」상 <b>주의 이상의 위기경보</b>가 발령되면 질병관리청장 또는 시·도지사는 법인·단체·개인 등에 자료제출을 요구할 수 있습니다.</li>
+      <li>관계 중앙행정기관장에게 인력 파견 등 지원을 요청할 수 있고, 요구·요청을 받은 자는 특별한 사정이 없으면 따라야 합니다.</li>
+      <li>질병관리청장은 역학조사관 또는 수습역학조사관에게 정기적으로 교육·훈련을 실시할 수 있습니다. <span class="page-ref">원본 29-30쪽</span></li>
+    </ul>
+
+    <h3>건강진단, 해부명령, 시신 장사방법</h3>
+    <p>국민 건강에 중대한 위협을 미칠 우려가 있는 감염병으로 사망한 것으로 의심되고, 시체 해부 없이는 감염병 여부와 사망 원인을 규명할 수 없다고 인정되면 질병관리청장이 해부를 명할 수 있습니다. 감염병환자등이 사망한 경우에는 감염 차단과 확산 방지에 필요한 범위에서 시신의 장사방법 등을 제한할 수 있습니다. <span class="page-ref">원본 31쪽</span></p>
+
+    <h3>고위험병원체</h3>
+    <table>
+      <thead><tr><th>조문</th><th>핵심 내용</th></tr></thead>
+      <tbody>
+        <tr><td><b>21조</b></td><td>감염병환자, 식품, 동식물, 환경 등에서 고위험병원체를 분리한 자는 지체 없이 병원체 명칭, 검체명, 분리일자 등을 질병관리청장에게 신고해야 합니다.</td></tr>
+        <tr><td><b>22조</b></td><td>진단·학술연구 등을 목적으로 고위험병원체를 국내 반입하려면 요건을 갖추어 질병관리청장 허가를 받아야 합니다.</td></tr>
+        <tr><td><b>23조</b></td><td>고위험병원체를 검사·보유·관리·이동하려는 자는 고위험병원체 취급시설을 설치·운영하거나 해당 시설 사용계약을 체결해야 합니다.</td></tr>
+        <tr><td><b>23조의3</b></td><td>생물테러감염병병원체를 보유하려는 자는 사전에 질병관리청장 허가를 받아야 합니다.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="vaccination">
+    <h2>6. 예방접종: 필수·임시접종, 기록, 이상반응, 피해보상</h2>
+    <p class="exam-only"><b>시험 직전:</b> 필수예방접종은 법 목록 17종과 고시상 <mark>장티푸스·신증후군출혈열</mark>을 함께 기억합니다. 위탁받은 의료기관이 예방접종을 실시하면 기록·보고서는 <mark>특별자치시장·특별자치도지사 또는 시장·군수·구청장</mark>에게 제출합니다.</p>
+
+    <h3>필수예방접종</h3>
+    <p>특별자치시장·특별자치도지사 또는 시장·군수·구청장은 관할 보건소를 통하여 다음 질병에 대한 필수예방접종을 실시합니다.</p>
+    <details class="deep" open>
+      <summary>필수예방접종 법정 목록과 고시상 추가 지정</summary>
+      <ol class="toc">
+        <li>디프테리아</li><li>폴리오</li><li>백일해</li><li>홍역</li><li>파상풍</li><li>결핵</li><li>B형간염</li><li>유행성이하선염</li><li>풍진</li><li>수두</li><li>일본뇌염</li><li>b형헤모필루스인플루엔자</li><li>폐렴구균</li><li>인플루엔자</li><li>A형간염</li><li>사람유두종바이러스 감염증</li><li>그룹 A형 로타바이러스 감염증</li><li>그 밖에 질병관리청장이 감염병 예방을 위해 필요하다고 인정하여 지정하는 감염병: <b>장티푸스, 신증후군출혈열</b></li>
+      </ol>
+      <p>질병관리청고시 전부개정안은 2025.3.7. 시행 기준으로 국가예방접종 감염병 목록을 기존과 동일하게 <b>17종 + 장티푸스, 신증후군출혈열</b>로 정리합니다. <span class="page-ref">원본 33-35쪽</span></p>
+    </details>
+
+    <h3>위탁, 사전알림, 임시예방접종, 공고, 증명서</h3>
+    <ul>
+      <li>시장·군수·구청장 등은 필수예방접종업무를 대통령령에 따라 관할구역 안 의료기관에 위탁할 수 있습니다.</li>
+      <li>필수예방접종 대상 아동 부모 또는 법정대리인에게 예방접종을 사전에 알려야 하며, 이때 고유식별정보를 처리할 수 있습니다.</li>
+      <li>질병관리청장이 요청하거나 지방자치단체장이 필요하다고 인정하면 관할 보건소를 통하여 임시예방접종을 합니다.</li>
+      <li>임시예방접종 시 예방접종 일시·장소, 종류, 대상 범위를 인터넷 홈페이지에 미리 공고합니다.</li>
+      <li>필수·임시예방접종을 받은 사람 본인 또는 법정대리인에게 예방접종증명서를 발급해야 합니다. <span class="page-ref">원본 36-37쪽</span></li>
+    </ul>
+
+    <h3>예방접종 기록의 작성·보존·보고</h3>
+    <p>시장·군수·구청장 등이 필수·임시예방접종을 하거나 보고를 받은 경우에는 기록을 작성·보관하고 상급기관에 보고합니다. 시장·군수·구청장 등이 아닌 자가 이 법에 따른 예방접종을 하면 보건복지부령에 따라 시장·군수·구청장 등에게 보고해야 합니다. 시행규칙은 예방접종 실시 기록 및 보고서를 작성하여 <span class="exam">특별자치시장·특별자치도지사 또는 시장·군수·구청장에게 제출</span>하도록 합니다. <span class="page-ref">원본 38-39쪽</span></p>
+
+    <details class="q">
+      <summary><span class="source-label">예제 1</span><span class="source-note">위탁 예방접종 기록 제출</span></summary>
+      <p><b>군 지역에 의원을 개설한 의사 ‘갑＇은 관할구역 군수에게 인플루엔자 필수예방접종의무를 위탁받았다. 의사 ‘갑‘은 예방접종을 받으려는 사람에게 예방접종을 실시하였다. 그 후, 감염병의 예방 및 관리에 관한 법률에 따라 의사 ‘갑＇이 예방접종 실시 기록 및 보고서를 제출해야 하는 대상은?</b></p>
+      <ol>
+        <li>관할 군수</li><li>보건복지부장관</li><li>국립중앙의료원장</li><li>식품의약품안전처장</li><li>국민건강보험공단 이사장</li>
+      </ol>
+      <div class="answer"><b>정답: ① 관할 군수</b><br>군 지역 의원이 관할 군수에게 필수예방접종업무를 위탁받아 접종한 경우, 시행규칙상 예방접종 실시 기록 및 보고서는 특별자치시장·특별자치도지사 또는 시장·군수·구청장에게 제출합니다. <span class="page-ref">원본 63-64쪽</span></div>
+    </details>
+
+    <h3>예방접종 후 이상반응, 피해조사, 완료 여부 확인</h3>
+    <table>
+      <thead><tr><th>조문</th><th>핵심 내용</th></tr></thead>
+      <tbody>
+        <tr><td><b>29조</b></td><td>질병관리청장, 시·도지사 또는 시장·군수·구청장은 예방접종 후 이상반응 사례가 발생하면 원인을 밝히기 위해 역학조사를 해야 합니다.</td></tr>
+        <tr><td><b>29조의2</b></td><td>예방접종 후 이상반응에 대한 검사를 질병관리청장에게 의뢰할 수 있습니다.</td></tr>
+        <tr><td><b>30조</b></td><td>질병관리청에 예방접종피해조사반을 둡니다.</td></tr>
+        <tr><td><b>31조</b></td><td>시장·군수·구청장 등은 초등학교와 중학교의 장에게 예방접종 완료 여부 검사 기록 제출을 요청할 수 있습니다.</td></tr>
+        <tr><td><b>32조</b></td><td>질병관리청장은 국민의 예방접종 관심을 높이기 위해 예방접종주간을 설정할 수 있습니다.</td></tr>
+        <tr><td><b>32조의2</b></td><td>사업주는 예방접종을 받은 근로자에게 유급휴가를 줄 수 있고, 국가·지방자치단체는 필요한 경우 비용을 지원할 수 있습니다.</td></tr>
+      </tbody>
+    </table>
+
+    <details class="q">
+      <summary><span class="source-label">25년도 총괄</span><span class="source-note">예방접종 역학조사</span></summary>
+      <p><b>「감염병의 예방 및 관리에 관한 법률」에 따라 코로나바이러스감염증-19 예방접종에 대한 효과 및 이상반응에 대한 역학조사를 실시할 수 있는 자는? ☆</b></p>
+      <ol>
+        <li>대한의사협회장</li><li>질병관리청장</li><li>시군구청장</li><li>보건복지부 장관</li><li>보건소장</li>
+      </ol>
+      <div class="answer"><b>정답: ② 질병관리청장</b><br>예방접종 후 이상반응 사례의 원인 규명을 위한 역학조사 주체에 질병관리청장이 포함됩니다. 문항은 선택지 중 질병관리청장을 정답으로 표시합니다. <span class="page-ref">원본 41, 72쪽</span></div>
+    </details>
+
+    <details class="q">
+      <summary><span class="source-label">예제 4</span><span class="source-note">예방접종 후 이상반응 보고 경로</span></summary>
+      <p><b>종합병원 소아청소년과 전문의 ‘갑’은 디티에이피(DTaP) 예방접종 후 10일이 지난 아이에게 상완신경총 말초신경병증이 발생한 것으로 진단하였다. 전문의 ‘갑’은 이를 누구에게 신고하여야 하는가?</b></p>
+      <ol>
+        <li>질병관리본부장</li><li>보건복지부장관</li><li>의료기관의 소재지 관할 보건소장</li><li>의료기관의 소재지 관할 역학조사관</li><li>의료기관의 장</li>
+      </ol>
+      <div class="answer"><b>정답: ⑤ 의료기관의 장</b><br>의료기관에 소속된 의사가 예방접종 후 이상반응자를 진단하면 먼저 소속 의료기관의 장에게 보고합니다. 의료기관에 소속되지 않은 의사 등은 관할 보건소장에게 신고합니다. <span class="page-ref">원본 69-70쪽</span></div>
+    </details>
+
+    <h3>예방접종 약품과 예방접종통합관리시스템</h3>
+    <ul>
+      <li>질병관리청장은 예방접종약품 국내 공급이 부족하다고 판단되는 경우 예산 범위에서 필요한 수량을 미리 계산하여 의약품 제조업자에게 생산하게 할 수 있고, 연구자를 지원할 수 있습니다.</li>
+      <li>필수·임시예방접종이 원활하게 이루어지도록 위원회 심의를 거쳐 필요한 필수예방접종약품 등을 미리 비축하거나 장기 구매계약을 할 수 있습니다.</li>
+      <li>필수예방접종약품 등을 생산·수입하거나 하려는 자는 생산·수입 계획과 실적을 질병관리청장에게 보고해야 합니다.</li>
+      <li>질병관리청장은 예방접종업무 자료·정보 처리와 기록·관리 전산화를 위해 예방접종통합관리시스템을 구축·운영해야 합니다. <span class="page-ref">원본 42쪽</span></li>
+    </ul>
+  </section>
+
+  <section id="measures">
+    <h2>7. 감염병 위기관리, 강제처분, 방역·예방 조치</h2>
+    <p class="exam-only"><b>시험 직전:</b> 유행 시 47조는 <mark>장소 폐쇄·출입금지·이동제한, 의료기관 업무정지, 감염병의심자 입원·격리, 오염 물건 폐기·소독</mark>을 다룹니다. 49조는 <mark>교통 차단, 집합 제한·금지, 방역지침 명령, 의료인·병상·시설 동원, 의심자 격리</mark>까지 폭넓게 다룹니다.</p>
+
+    <h3>감염병 위기관리대책</h3>
+    <p>보건복지부장관 및 질병관리청장은 감염병 확산 또는 해외 신종감염병 국내 유입으로 인한 재난상황에 대처하기 위해 위원회 심의를 거쳐 감염병 위기관리대책을 수립·시행해야 합니다. 대책에는 대응체계와 기관별 역할, 위기경보 결정·관리체계, 동원할 전문인력·시설·의료기관 명부, 의료·방역 물품 비축·조달, 국민행동요령, 교육·도상연습·실제 훈련, 감염취약계층 보호조치와 사회복지시설 대응방안이 포함됩니다. 정기 훈련도 실시해야 합니다. <span class="page-ref">원본 43쪽</span></p>
+
+    <h3>감염병에 관한 강제처분</h3>
+    <p>질병관리청장, 시·도지사 또는 시장·군수·구청장은 해당 공무원이 감염병환자등이 있다고 인정되는 주거시설, 운송수단, 그 밖의 장소에 들어가 필요한 조사나 진찰을 하게 할 수 있습니다. 진찰 결과 감염병환자등으로 인정되면 동행하여 치료받게 하거나 입원시킬 수 있습니다.</p>
+    <p>대상은 제1급감염병, 제2급감염병 중 <b>결핵, 홍역, 콜레라, 장티푸스, 파라티푸스, 세균성이질, 장출혈성대장균감염증, A형간염, 수막구균 감염증, 폴리오, 성홍열 또는 질병관리청장이 정하는 감염병</b>, 제3급감염병 중 질병관리청장이 정하는 감염병, 세계보건기구 감시대상 감염병입니다. <span class="page-ref">원본 44쪽</span></p>
+
+    <h3>감염병환자 등에 대한 조치</h3>
+    <ul>
+      <li>입원치료가 필요한 경우 입원치료 대상자와 보호자에게 통지해야 합니다.</li>
+      <li>입원 또는 격리 조치를 할 때에는 대상자와 보호자에게 통지해야 합니다.</li>
+      <li>감염병환자등은 업무 성질상 일반인과 접촉이 많은 직업에 종사할 수 없고, 누구든지 그런 직업에 감염병환자등을 고용할 수 없습니다.</li>
+      <li>건강진단 및 예방접종 등의 조치를 할 수 있습니다. <span class="page-ref">원본 45쪽</span></li>
+    </ul>
+
+    <h3>감염병 유행에 대한 방역 조치</h3>
+    <p>감염병이 유행하면 질병관리청장, 시·도지사 또는 시장·군수·구청장은 감염병 전파를 막기 위해 다음 조치를 전부 또는 일부 시행해야 합니다.</p>
+    <ol>
+      <li>감염병환자등이 있는 장소 또는 오염 장소의 일시적 폐쇄, 일반 공중 출입금지, 장소 내 이동제한, 통행차단 조치</li>
+      <li>의료기관 업무 정지</li>
+      <li>감염병의심자를 적당한 장소에 일정 기간 입원 또는 격리</li>
+      <li>오염 또는 오염 의심 물건의 사용·접수·이동·폐기, 세척 금지, 소각 또는 폐기처분</li>
+      <li>오염 장소의 소독 또는 필요한 조치 명령</li>
+      <li>일정 장소에서 세탁 금지 또는 오물 처리 명령</li>
+    </ol>
+    <p>감염병환자등이 발생한 장소 또는 오염 의심 장소의 관리자는 의사, 한의사 또는 관계 공무원의 지시에 따라 소독 등 필요한 조치를 해야 합니다. <span class="page-ref">원본 46쪽</span></p>
+
+    <h3>감염병의 예방 조치</h3>
+    <p>감염병 예방을 위해 교통 차단, 집합 제한·금지, 출입자 명단 작성·마스크 착용 등 방역지침 준수 명령, 운송수단 이용자 방역지침 명령, 지역·기간을 정한 방역지침 준수 명령, 건강진단·시체 검안·해부, 음식물 판매·수령 금지와 폐기, 인수공통감염병 노출자 예방조치, 매개 물건 이동 제한·폐기, 의사 배치·시설 설치, 공중위생 시설·상하수도·우물·쓰레기장·화장실 조치, 쥐·위생해충 등 구제, 어로·수영·우물 사용 제한, 중간숙주 동물 포획·생식 금지, 의료인·의료관계요원 동원, 의료기관 병상·연수원·숙박시설 등 시설 동원, 오염 시설·장소 소독, 감염병의심자 입원·격리 조치를 할 수 있습니다.</p>
+    <p>방역지침 준수 명령을 따르지 않은 관리자·운영자에게는 해당 장소나 시설의 폐쇄 또는 3개월 이내 운영중단을 명할 수 있습니다. 운영중단기간 중 운영을 계속하면 폐쇄를 명해야 합니다. <span class="page-ref">원본 47-48쪽</span></p>
+
+    <h3>감염취약계층 보호와 한시적 비대면 진료</h3>
+    <p>호흡기 관련 감염병으로부터 저소득층과 사회복지시설을 이용하는 어린이, 노인, 장애인 등 감염취약계층을 보호하기 위해 주의 이상의 위기경보가 발령되면 의료·방역 물품 지급 등 필요한 조치를 할 수 있습니다.</p>
+    <p>감염병과 관련하여 심각 단계 이상의 위기경보가 발령되면 의사·치과의사·한의사는 환자, 의료인, 의료기관을 감염 위험에서 보호하기 위해 필요하다고 인정하는 경우 보건복지부장관이 정하는 범위에서 유선·무선·화상통신, 컴퓨터 등 정보통신기술을 활용하여 의료기관 외부 환자에게 건강 또는 질병의 지속적 관찰, 진단, 상담 및 처방을 할 수 있습니다. <span class="page-ref">원본 49-50쪽</span></p>
+
+    <h3>그 밖의 예방 조치와 소독</h3>
+    <p>교육부장관 또는 교육감이 감염병 발생 등을 이유로 학교 휴업·휴교 또는 유치원 휴업·휴원을 명령하려면 질병관리청장과 협의해야 합니다.</p>
+    <p>시장·군수·구청장은 감염병 예방을 위해 청소·소독 또는 쥐·위생해충 구제조치를 해야 하며, 소독은 사람 건강과 자연에 유해한 영향을 최소화하여 안전하게 실시해야 합니다. 대통령령으로 정하는 시설을 관리·운영하는 자도 보건복지부령에 따라 감염병 예방에 필요한 소독을 해야 합니다. 소독업을 하려는 자는 시설·장비·인력을 갖추어 시장·군수·구청장 등에게 신고해야 합니다. <span class="page-ref">원본 51-52쪽</span></p>
+    <details class="deep">
+      <summary>소독을 해야 하는 시설 보기</summary>
+      <ol class="toc">
+        <li>객실수 20인 이상 숙박업소</li><li>연면적 300㎡ 이상 식품접객업소</li><li>여객자동차, 항공기, 공항시설, 철도, 여객선 등</li><li>대형마트, 백화점, 쇼핑센터, 전통시장 등</li><li>병원급 의료기관</li><li>집단급식소</li><li>기숙사</li><li>50명 이상 합숙소</li><li>300석 이상 공연장</li><li>학교</li><li>연면적 1,000㎡ 이상의 학원</li><li>연면적 2,000㎡ 이상의 사무용 건축물·복합건축물</li><li>50명 이상 수용 어린이집 및 유치원</li><li>300세대 이상의 공동주택</li>
+      </ol>
+      <p class="page-ref">원본 53쪽</p>
+    </details>
+  </section>
+
+  <section id="personnel-costs">
+    <h2>8. 방역관·역학조사관, 경비·보상, 보칙·벌칙</h2>
+    <p class="exam-only"><b>시험 직전:</b> 역학조사관은 질병관리청 <mark>100명 이상</mark>, 시·도 <mark>각 2명 이상</mark>이고, 시·도 역학조사관 중 1명 이상은 의사여야 합니다. 예방접종 피해 국가보상 결정은 청구일부터 <mark>120일 이내</mark>입니다.</p>
+
+    <h3>방역관과 한시적 종사명령</h3>
+    <p>질병관리청장 및 시·도지사는 감염병 예방·방역 업무를 담당하는 <b>방역관</b>을 소속 공무원 중에서 임명합니다. 감염병 유입 또는 유행이 우려되거나 발생한 경우 질병관리청장 또는 시·도지사는 기간을 정하여 의료인에게 감염병관리기관, 중앙감염병전문병원 또는 권역별 감염병전문병원에서 방역업무에 종사하도록 명할 수 있습니다. <span class="page-ref">원본 54쪽</span></p>
+
+    <h3>역학조사관</h3>
+    <ul>
+      <li>감염병 역학조사 사무 처리를 위해 질병관리청 소속 공무원으로 <span class="exam">100명 이상</span>, 시·도 소속 공무원으로 <span class="exam">각각 2명 이상</span>의 역학조사관을 둡니다.</li>
+      <li>시·도 역학조사관 중 1명 이상은 의료인 중 의사로 임명해야 합니다.</li>
+      <li>시장·군수·구청장은 필요한 경우 소속 공무원으로 역학조사관을 둘 수 있고, 인구수 등을 고려하여 기준을 충족하는 시·군·구의 장은 1명 이상의 역학조사관을 두어야 합니다.</li>
+      <li>역학조사관은 방역·역학조사·예방접종 업무 담당 공무원, 의료인, 약사·수의사 등 감염병·역학 관련 전문가 중 역학조사 교육·훈련 과정을 이수한 사람에서 임명합니다. <span class="page-ref">원본 55-56쪽</span></li>
+    </ul>
+
+    <h3>검역위원, 예방위원, 한국건강관리협회</h3>
+    <p>시·도지사는 감염병 예방을 위해 필요하면 검역위원을 두고 검역 사무를 담당하게 하며, 특별히 필요하면 운송수단 등을 검역하게 할 수 있습니다. 시장·군수·구청장 등은 감염병이 유행하거나 유행할 우려가 있으면 예방위원을 둘 수 있습니다. 예방위원은 무보수이나 인구 2만 명당 1명 비율로 유급위원을 둘 수 있습니다. 기생충감염병 조사·연구 등 예방사업 수행을 위해 한국건강관리협회를 둡니다. <span class="page-ref">원본 57쪽</span></p>
+
+    <h3>경비와 예방접종 피해 국가보상</h3>
+    <p>법은 특별자치시·특별자치도와 시·군·구가 부담할 경비, 시·도가 부담하거나 보조할 경비, 국고 부담 경비, 국가가 보조할 경비를 구분합니다. 시장·군수·구청장 등은 감염병환자 관리와 강제처분에 따른 입원치료비 외에 본인의 지병 또는 새로 발병한 질환 등으로 인한 입원·진찰·검사·치료 경비를 본인이나 보호자로부터 징수할 수 있습니다. 손실보상, 손실보상심의위원회, 보건의료인력 등에 대한 재정적 지원, 감염병환자등에 대한 생활지원, 손실보상금 긴급지원, 심리지원 조항도 둡니다.</p>
+    <table>
+      <thead><tr><th>예방접종 피해</th><th>국가보상 내용</th></tr></thead>
+      <tbody>
+        <tr><td>질병으로 진료를 받은 사람</td><td>진료비 전액 및 정액 간병비</td></tr>
+        <tr><td>장애인이 된 사람</td><td>일시보상금</td></tr>
+        <tr><td>사망한 사람</td><td>유족 일시보상금 및 장제비</td></tr>
+      </tbody>
+    </table>
+    <p>보상 대상 질병·장애·사망은 예방접종약품 이상이나 예방접종 행위자 등의 과실 유무와 관계없이 해당 접종 또는 의약품 투여로 발생한 피해로서 질병관리청장이 인정하는 경우입니다. 질병관리청장은 보상청구가 있은 날부터 <span class="exam">120일 이내</span> 위원회 의견을 들어 보상 여부를 결정해야 합니다. <span class="page-ref">원본 58-60쪽</span></p>
+
+    <h3>보칙과 벌칙</h3>
+    <ul>
+      <li>감염병 관련 업무 종사자 또는 종사하였던 자는 업무상 알게 된 비밀을 누설하거나 업무목적 외 용도로 사용하면 안 됩니다.</li>
+      <li>질병관리청장은 감염병 예방·관리 및 감염 전파 차단을 위해 필요한 경우 감염병 정보를 분석하거나 감염병 관련 연구에 이용할 수 있습니다.</li>
+      <li>고위험병원체 반입 허가 없이 반입한 자, 생물테러감염병병원체 보유허가 없이 보유한 자, 의료·방역 물품을 위법하게 수출하거나 국외 반출한 자는 <span class="exam">5년 이하 징역 또는 5천만원 이하 벌금</span>에 처합니다. <span class="page-ref">원본 61-62쪽</span></li>
+    </ul>
+  </section>
+
+  <section id="archive">
+    <h2>9. 기출·형성·총괄 문항 모아보기</h2>
+    <p>본문 가까이에 이미 넣은 최신 문항 외에, 슬라이드 뒤쪽에 모아 둔 과거 문항을 함께 정리합니다. 구법 문항은 “제1군·제2군·제3군·제4군·제5군”, “질병관리본부장” 같은 과거 용어를 사용하므로, 현행 법 체계와 다른 부분을 해설에 따로 적었습니다.</p>
+
+    <h3>2023-2025 문항</h3>
+    <details class="q">
+      <summary><span class="source-label">23년도 총괄(신영전b)</span><span class="source-note">A형간염 신고 시한</span></summary>
+      <p><b>12. 봉직의사로부터 A형 간염이 발생했다는 소식을 들은 병원장은 몇시간 이내에 관할 보건소장에게 알려야하는가?</b></p>
+      <ul>
+        <li>12 시간이내</li><li>24 시간이내</li><li>48 시간이내</li><li>1 주일이내</li><li>즉시</li>
+      </ul>
+      <div class="answer"><b>정답: 24 시간이내</b><br>A형간염은 제2급감염병입니다. 의료기관의 장은 제2급·제3급 감염병을 24시간 이내 신고합니다. <span class="page-ref">원본 72쪽</span></div>
+    </details>
+
+    <h3>2022년도 총괄(최보율p)</h3>
+    <details class="q">
+      <summary><span class="source-label">22년도 총괄 1</span><span class="source-note">후천성면역결핍증 배우자 검진</span></summary>
+      <p><b>1. 후천성 면역 결핍증 환자의 배우자에 대한 검진은 몇 개월마다 진행하는가?</b></p>
+      <ul><li>1 개월</li><li>2 개월</li><li>4 개월</li><li>6 개월</li></ul>
+      <div class="answer"><b>정답: 6 개월</b><br>원본 하단 답안 표시가 4번이며, 네 번째 선지는 6개월입니다. <span class="page-ref">원본 73쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">22년도 총괄 2</span><span class="source-note">검역 감염병 묶음</span></summary>
+      <p><b>2. 다음중 검역 감염병끼리 묶은 것으로 알맞은 것은?</b></p>
+      <ul><li>페스트 - A 형간염</li><li>황열 - B 형간염</li><li>황열 - 장티푸스</li><li>황열-에볼라 바이러스</li></ul>
+      <div class="answer"><b>정답: 황열-에볼라 바이러스</b><br>원본 하단 답안 표시가 4번입니다. A형간염, B형간염, 장티푸스는 이 묶음의 검역감염병 조합으로 맞지 않습니다. <span class="page-ref">원본 73쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">22년도 총괄 3</span><span class="source-note">제1급감염병</span></summary>
+      <p><b>3. 다음중 생물테러감염병 또는 치명률이 높거나 집단 발생 우려가 커서 발생 또는 유행 즉시 신고하고 음압격리가 필요한 감염병으로 1 급 감염병에 해당하는 것은?</b></p>
+      <ul><li>콜레라</li><li>COVID-19</li></ul>
+      <div class="answer"><b>정답: COVID-19</b><br>원본 하단 답안 표시가 2번입니다. 과거 출제 당시 코로나19는 제1급감염병으로 다루었습니다. 현행 분류는 개정에 따라 달라질 수 있으므로 현재 강의 본문에서는 제1급 목록 자체를 우선 확인합니다. <span class="page-ref">원본 73쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">22년도 총괄 4</span><span class="source-note">SARS 분류</span></summary>
+      <p><b>4. 다음중 중증급성호흡기 증후군(SARS)는 감염병의 분류상 어디에 해당하는가?</b></p>
+      <ul><li>1 급 감염병</li><li>2 급 감염병</li><li>3 급 감염병</li><li>4 급 감염병</li><li>특별 지정 감염병</li></ul>
+      <div class="answer"><b>정답: 1 급 감염병</b><br>SARS는 제1급감염병입니다. <span class="page-ref">원본 73쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">22년도 총괄 5</span><span class="source-note">감염병 위기 정보 공개</span></summary>
+      <p><b>5. 감염병 위기시 감염병 환자의 정보 공개는 어디까지 허용되는가?</b></p>
+      <ul><li>이동 경로</li><li>이동 경로, 이동 수단</li><li>이동 경로, 이동 수단, 진료의료기관</li><li>이동 경로, 이동 수단, 진료의료기관, 접촉자 현황</li><li>이동 경로, 이동 수단, 진료의료기관, 접촉자 현황, 나이와 성별</li></ul>
+      <div class="answer"><b>정답: 이동 경로, 이동 수단, 진료의료기관, 접촉자 현황</b><br>원본 하단 답안 표시가 4번입니다. 감염병 전파 차단에 필요한 범위의 정보 공개를 묻는 문항이며, 나이와 성별까지 일반화해 공개하는 것은 오답 포인트입니다. <span class="page-ref">원본 73쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">22년도 총괄 6</span><span class="source-note">군의관 보고 후 신고 시한</span></summary>
+      <p><b>6. 군의관이 A형 간염을 진단하여 부대장에게 보고하였다. 부대장은 보건소장에게 언제까지 신고해야 하는가?</b></p>
+      <ul><li>즉시</li><li>24 시간</li><li>48 시간</li><li>7 일</li></ul>
+      <div class="answer"><b>정답: 24 시간</b><br>A형간염은 제2급감염병입니다. 군의관의 보고를 받은 부대장은 제2급·제3급감염병을 24시간 이내 관할 보건소장에게 신고합니다. <span class="page-ref">원본 73쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">22년도 총괄 7</span><span class="source-note">역학조사 사무 담당</span></summary>
+      <p><b>7. 다음 중 ‘역학조사 사무’를 처리하는 사람은?</b></p>
+      <ul><li>역학조사관</li><li>방역관</li><li>검역 조사관</li></ul>
+      <div class="answer"><b>정답: 역학조사관</b><br>법 60조의2는 감염병 역학조사에 관한 사무를 처리하기 위해 역학조사관을 둔다고 정합니다. 원본 하단에는 x 표시가 있어 당시 문항 처리에 이의 또는 메모가 있었던 것으로 보이나, 본문 조문 기준 정답은 역학조사관입니다. <span class="page-ref">원본 73쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">22년도 총괄 8</span><span class="source-note">병원체 확인기관</span></summary>
+      <p><b>8. 다음중 감염병 병원체 확인기관으로 옳은 것을 모두 고른 것은?</b></p>
+      <p>ㄱ. 국립검역소<br>ㄴ. 지역 보건소<br>ㄷ. 진단검사의학과 전문의가 상근하는 기관<br>ㄹ. 진단검사의학과가 개설된 의과대학</p>
+      <ul><li>ㄱ, ㄴ, ㄷ, ㄹ</li></ul>
+      <div class="answer"><b>원문 표시 정답: ㄱ, ㄴ, ㄷ, ㄹ</b><br>원본 하단 답안 표시가 1번입니다. 현행 강의 본문에서는 질병관리청, 질병대응센터, 보건환경연구원, 보건소, 진단검사의학과 전문의가 상근하는 의료기관, 진단검사의학과 개설 의과대학 등이 핵심입니다. <span class="page-ref">원본 26, 73쪽</span></div>
+    </details>
+
+    <h3>2021년도 총괄(최보율p)</h3>
+    <details class="q">
+      <summary><span class="source-label">21년도 총괄 1</span><span class="source-note">후천성면역결핍증 배우자 검진</span></summary>
+      <p><b>1. 후천성면역결핍증 환자의 배우자에 대한 검진은 몇 개월마다 진행하는가?</b></p>
+      <ol type="A"><li>1개월</li><li>2개월</li><li>4개월</li><li>6개월</li><li>12개월</li></ol>
+      <div class="answer"><b>정답: D. 6개월</b><br>원본 하단 답안 표시가 D입니다. <span class="page-ref">원본 74쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">21년도 총괄 2</span><span class="source-note">동물인플루엔자 인체감염증</span></summary>
+      <p><b>2. 동물인플루엔자 인체감염증은 다음 중 어디에 해당하는가?</b></p>
+      <ol type="A"><li>1급 감염병</li><li>2급 감염병</li><li>3급 감염병</li><li>4급 감염병</li><li>기생충 감염병</li></ol>
+      <div class="answer"><b>정답: A. 1급 감염병</b><br>동물인플루엔자 인체감염증은 제1급감염병입니다. <span class="page-ref">원본 74쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">21년도 총괄 3</span><span class="source-note">검역감염병 묶음</span></summary>
+      <p><b>3. 다음 중 “검역감염병”끼리 묶은 것으로 맞는 것은?</b></p>
+      <ol type="A"><li>황열 - B형 간염</li><li>황열 - 신종인플루엔자</li><li>페스트 - A형 간염</li><li>페스트 - 장티푸스</li><li>디프테리아 - 콜레라</li></ol>
+      <div class="answer"><b>정답: B. 황열 - 신종인플루엔자</b><br>원본 하단 답안 표시가 B입니다. <span class="page-ref">원본 74쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">21년도 총괄 4</span><span class="source-note">군의관 A형간염 보고</span></summary>
+      <p><b>4. 군의관이 A형 간염을 진단하여 부대장에게 보고하였다. 부대장은 보건소장에게 언제까지 신고해야하는가?</b></p>
+      <ol type="A"><li>24시간</li><li>7일</li><li>즉시</li><li>48시간</li></ol>
+      <div class="answer"><b>정답: A. 24시간</b><br>A형간염은 제2급감염병이므로 부대장은 24시간 이내 관할 보건소장에게 신고합니다. <span class="page-ref">원본 74쪽</span></div>
+    </details>
+
+    <h3>2020년도 총괄(최보율p)</h3>
+    <details class="q">
+      <summary><span class="source-label">20년도 총괄 1</span><span class="source-note">검역감염병 검역기간</span></summary>
+      <p><b>1. 검역감염병에 해당하는 질병의 검역 기간이 올바른 것은?</b></p>
+      <ol type="A"><li>황열-6 일</li><li>페스트-9 일</li><li>장티푸스-5 일</li><li>말라리아-3 일</li><li>콜레라-2 일</li></ol>
+      <div class="answer"><b>정답: A. 황열-6 일</b><br>원본 하단 답안 표시가 A입니다. <span class="page-ref">원본 74쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">20년도 총괄 2</span><span class="source-note">감염병관리위원회 위원장</span></summary>
+      <p><b>2. 감염병관리위원회 위원장은?</b></p>
+      <ol type="A"><li>질병관리본부장</li><li>보건복지부장관</li><li>보건복지부차관</li></ol>
+      <div class="answer"><b>정답: A. 질병관리본부장</b><br>구법 문항의 용어입니다. 현행 체계에서는 질병관리청에 감염병관리위원회를 둔다는 구조를 기억합니다. <span class="page-ref">원본 74쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">20년도 총괄 3</span><span class="source-note">같은 급 감염병</span></summary>
+      <p><b>3. 같은 급에 해당하는 감염병으로 짝지어진 것은?</b></p>
+      <ol type="A"><li>디프테리아-야토병</li><li>결핵-세균성이질</li></ol>
+      <div class="answer"><b>정답: A, B</b><br>원본 하단에는 “A, B”가 표시되어 있고, 슬라이드에도 “복수 정답에 관한 이의제기 진행중”이라고 적혀 있습니다. 현행 분류 기준으로 디프테리아·야토병은 제1급, 결핵·세균성이질은 제2급입니다. <span class="page-ref">원본 74쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">20년도 총괄 4</span><span class="source-note">AIDS 신고 시한</span></summary>
+      <p><b>4. 의사가 에이즈 환자를 검안한 후 보건소장한테 언제까지 보고해야 하는가?</b></p>
+      <ol type="A"><li>24 시간 이내</li><li>즉시</li><li>3 일 이내</li><li>일주일</li><li>2 주</li></ol>
+      <div class="answer"><b>정답: A. 24 시간 이내</b><br>후천성면역결핍증(AIDS)은 제3급감염병으로 24시간 이내 신고 기준과 연결됩니다. <span class="page-ref">원본 74쪽</span></div>
+    </details>
+
+    <h3>2019년도 2차(최보율p)</h3>
+    <details class="q">
+      <summary><span class="source-label">19년도 2차 2</span><span class="source-note">의료인의 권리와 의무</span></summary>
+      <p><b>2. 감염병에 대한 의료인의 의무와 권리로 옳은 것은?</b></p>
+      <ol type="A">
+        <li>감염병 환자의 진단 및 치료로 인해 병원이 받은 피해를 보상받을 수 없다.</li>
+        <li>의료인 및 의료기관의 장은 감염병 환자의 진료에 대한 정보를 제공받을 수 있다.</li>
+        <li>감염병 환자의 진단, 치료에 최선을 다해야 하나, 관리는 그럴 필요가 없다.</li>
+        <li>감염병의 발생 감시와 예방, 관리 및 역학조사 업무에 협조할 의무는 없다.</li>
+      </ol>
+      <div class="answer"><b>정답: B</b><br>의료인 및 의료기관의 장은 감염병 환자의 진료 정보를 제공받을 권리가 있습니다. 진단·관리·치료와 감시·예방·관리·역학조사 협조는 책무입니다. <span class="page-ref">원본 75쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">19년도 2차 3</span><span class="source-note">국가와 지자체 책무</span></summary>
+      <p><b>3. 감염병 예방 및 관리에 관한 법률 제4조에서 명시한 국가와 지방자치단체의 책무는? (박스형)</b></p>
+      <p>가. 감염병관리를 위한 전문인력 양성<br>나. 감염병 예방 및 방역대책<br>다. 감염병 조사와 연구<br>라. 감염병 환자의 치료와 재활</p>
+      <ol type="A"><li>가, 나, 다, 라</li><li>가, 나, 다</li></ol>
+      <div class="answer"><b>정답: B. 가, 나, 다</b><br>원본 하단 답안 표시가 B입니다. 현행 강의 본문에서는 국가·지자체 책무의 큰 방향을 전문인력, 예방·방역, 조사·연구 등으로 잡아두면 됩니다. <span class="page-ref">원본 75쪽</span></div>
+    </details>
+
+    <h3>2018년도 종합(최보율p): 답 없음으로 정리된 구법 문항</h3>
+    <details class="q">
+      <summary><span class="source-label">18년도 종합</span><span class="source-note">질병관리본부장 역학조사</span></summary>
+      <p><b>「감염병의 예방 및 관리에 관한 법률」에 따라 중 질병관리본부장이 역학조사를 하여야 하는 경우는 무엇인가?</b></p>
+      <ul>
+        <li>1개 시, 군, 구에서 감염병이 발생하여 유행할 우려가 있는 경우</li>
+        <li>1개 시, 군, 구에서 감염병이 발생하여 그 감염병이 해당 구역과 역학적 연관성이 있다고 의심되는 경우</li>
+        <li>1개 시, 도에서 감염병이 발생하여 그 감염병이 해당 구역과 역학적 연관성이 있다고 의심되는 경우</li>
+        <li>2개 시, 군, 구에서 역학조사가 동시에 필요한 경우</li>
+        <li>2개 시, 도에서 역학조사가 동시에 필요한 경우</li>
+      </ul>
+      <div class="answer"><b>정답: 원본에 답 없음. 조문 학습 기준: 2개 시·도에서 역학조사가 동시에 필요한 경우로 정리</b><br>구법의 질병관리본부장 직접 조사 기준을 묻는 문항입니다. 현행 강의 본문은 질병관리청장, 시·도지사, 시장·군수·구청장이 지체 없이 역학조사를 해야 한다는 큰 구조를 강조합니다. <span class="page-ref">원본 75쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">18년도 종합</span><span class="source-note">권리·책무·의무</span></summary>
+      <p><b>감염병의 예방 및 관리에 관한 법률에 따른 의료인, 국민, 국가 및 지방자치단체의 권리, 책무, 의무로 올바른 것을 고르시오.</b></p>
+      <ul>
+        <li>의료인은 감염병 환자의 진료에 관한 정보를 제공받을 권리가 있다.</li>
+        <li>감염병 환자는 진단과 치료에 수반되는 비용을 지불해야 한다.</li>
+        <li>국가와 지방자치단체는 환자의 취업을 제한하여 감염병의 전파를 예방하여야 한다.</li>
+        <li>국가와 지방자치단체는 감염병 환자의 진료에 관한 정보를 공개하지 않아야 한다.</li>
+        <li>국가와 지방자치단체는 감염병의 효율적 치료 및 확산방지를 위해 질병의 전파상황을 공유해선 안 된다.</li>
+      </ul>
+      <div class="answer"><b>정답: 의료인은 감염병 환자의 진료에 관한 정보를 제공받을 권리가 있다.</b><br>국민은 진단·치료를 받을 권리가 있고 국가·지방자치단체가 비용을 부담합니다. 감염병 발생 상황과 예방·관리 정보는 신속히 공개해야 합니다. <span class="page-ref">원본 75쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">18년도 종합</span><span class="source-note">제3군감염병 구법</span></summary>
+      <p><b>다음 중 제3군감염병에 해당하는 것을 고르시오.</b></p>
+      <ul><li>풍진</li><li>홍역</li><li>결핵</li><li>콜레라</li><li>황열</li></ul>
+      <div class="answer"><b>정답: 결핵</b><br>구법 분류 문항입니다. 현행 강의 본문에서는 결핵이 제2급감염병으로 분류되므로, 과거 문항임을 구분해야 합니다. <span class="page-ref">원본 75쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">18년도 종합</span><span class="source-note">간헐적 유행 가능성</span></summary>
+      <p><b>다음 중 간헐적으로 유행할 가능성이 있어 계속 그 발생을 감시하고 방역대책을 수립해야 하는 감염병은 무엇인가?</b></p>
+      <ul><li>신종인플루엔자</li><li>쯔쯔가무시</li><li>b형헤모필루스인플루엔자</li><li>A형간염</li><li>폐렴구균</li></ul>
+      <div class="answer"><b>정답: 쯔쯔가무시</b><br>구법의 제3군감염병 정의와 연결되는 문항입니다. 현행 본문에서 쯔쯔가무시증은 제3급감염병입니다. <span class="page-ref">원본 75쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">18년도 종합</span><span class="source-note">신고·보고 설명</span></summary>
+      <p><b>다음 중 감염병의 신고 및 보고에 관한 설명으로 적절하지 않은 것은?</b></p>
+      <ul>
+        <li>치과의사는 감염병환자를 발견시 보건복지부장관에게 보고하여야 한다.</li>
+        <li>육군, 해군 등에 복무하는 군의관은 감염병환자 발견시 소속 부대장을 통해 관할 보건소장에게 신고하여야 한다.</li>
+        <li>의료기관에 종사하는 의사는 감염병환자를 발견시 보건복지부장관에게 신고하여야 한다.</li>
+        <li>의사가 제3군감염병 환자를 발견한 경우 7일 이내에 보건복지부장관에게 신고하여야 한다.</li>
+      </ul>
+      <div class="answer"><b>정답: 보건복지부장관에게 직접 보고·신고한다는 보기와 7일 보기는 부적절</b><br>의료기관 소속 의사 등은 의료기관의 장에게 보고하고, 장이 질병관리청장 또는 관할 보건소장에게 신고합니다. 군의관은 소속 부대장에게 보고하고, 부대장이 관할 보건소장에게 신고합니다. 원본은 “답 없음”으로 표시되어 있어 복수 오답 문항으로 정리합니다. <span class="page-ref">원본 75쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">18년도 종합</span><span class="source-note">예방접종 후 이상반응 역학조사 책임</span></summary>
+      <p><b>예방접종 후 이상반응이 발견되었을 때 역학조사의 책임자는 누구인가?</b></p>
+      <ul><li>시군구청장</li><li>시도지사</li><li>보건복지부장관</li><li>질병관리본부장</li><li>식품의약품안전처장</li></ul>
+      <div class="answer"><b>정답: 구법 단일답 기준 질병관리본부장으로 정리</b><br>현행 강의 본문은 예방접종 후 이상반응 역학조사 주체로 질병관리청장, 시·도지사, 시장·군수·구청장을 함께 둡니다. 구법 용어가 섞인 문항이라는 점을 표시합니다. <span class="page-ref">원본 75쪽</span></div>
+    </details>
+
+    <h3>2017·2016·2015년도 메모형 문항</h3>
+    <details class="q">
+      <summary><span class="source-label">17년도</span><span class="source-note">제3군 감염병 짝</span></summary>
+      <p><b>1. 제3군 감염병으로 옳게 짝지어진 것은? (문제오류 추정하여 보기 창조함)</b></p>
+      <ol><li>콜레라-장티푸스-풍진</li><li>파라티푸스-B형간염-쯔쯔가무시병</li><li>풍진-수두-A형간염</li></ol>
+      <div class="answer"><b>정답: 원본에 답 없음</b><br>슬라이드 자체가 “문제오류 추정”이라고 적고 있습니다. 현행 기준으로는 쯔쯔가무시증은 제3급이지만, 제시된 묶음 전체가 현행 제3급으로만 구성되지는 않습니다. <span class="page-ref">원본 76쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">17년도</span><span class="source-note">표본감시</span></summary>
+      <p><b>2. 표본감시 하는 감염병은?</b></p>
+      <ol><li>인플루엔자 (답)</li><li>제2군 감염병</li><li>쯔쯔가무시 병</li></ol>
+      <div class="answer"><b>정답: ① 인플루엔자</b><br>현행 기준으로 인플루엔자는 제4급감염병이며 표본감시 대상입니다. <span class="page-ref">원본 76쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">16년도</span><span class="source-note">제4군 감염병</span></summary>
+      <p><b>16. 제4군 감염병</b></p>
+      <p>황열</p>
+      <div class="answer"><b>정답: 황열</b><br>2016년 구법 분류 메모입니다. 현행 강의 본문에서 황열은 제3급감염병이므로, 과거 분류 문제임을 구분해야 합니다. <span class="page-ref">원본 76쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">15년도 10</span><span class="source-note">제4군 설명 구법</span></summary>
+      <p><b>10. 제4군에 대한 설명으로 옳은 것은?</b></p>
+      <p>국가예방접종사업의 대상 / 간헐적 유행 가능성이 있음 / 국내에서 새로 발생 즉시 방역대책 수립이 필요</p>
+      <div class="answer"><b>정답: 국내에서 새로 발생 즉시 방역대책 수립이 필요</b><br>구법의 제4군감염병 설명과 연결됩니다. “간헐적 유행 가능성”은 과거 제3군 설명과 연결되는 표현입니다. <span class="page-ref">원본 76쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">15년도 11</span><span class="source-note">제3군 구법</span></summary>
+      <p><b>11. 다음 중 제3군에 속하는 것은?</b></p>
+      <p>파라티푸스 / 후천성면역결핍증 / 회충증</p>
+      <div class="answer"><b>정답: 후천성면역결핍증</b><br>구법·현행 모두 후천성면역결핍증(AIDS)은 감시가 중요한 감염병으로 다루며, 현행 강의 본문에서는 제3급감염병입니다. <span class="page-ref">원본 76쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">15년도 12</span><span class="source-note">이상반응자 신고</span></summary>
+      <p><b>12. 예방접종 후 이상 반응자를 발견했을 경우 소속 의료기관장은 어디에 신고해야 하는가?</b></p>
+      <p>관할 보건소장 / 경찰서장 / 시군구청장 / 시도지사</p>
+      <div class="answer"><b>정답: 관할 보건소장</b><br>의료기관에 소속된 의사는 먼저 의료기관의 장에게 보고하고, 의료기관의 장은 관할 보건소장 등 신고 경로로 보고합니다. <span class="page-ref">원본 76쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">15년도 13</span><span class="source-note">표본감시 대상</span></summary>
+      <p><b>13. 다음 중 표본감시의 대상이 되는 것은?</b></p>
+      <p>인플루엔자 / 지정감염병 / 제5군 감염병</p>
+      <div class="answer"><b>정답: 인플루엔자, 지정감염병, 제5군 감염병</b><br>구법 문항입니다. 현행 본문에서는 제4급감염병이 표본감시 대상이고, 인플루엔자가 대표 예시입니다. <span class="page-ref">원본 76쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">15년도 14</span><span class="source-note">학교 감염병 역학조사 지시</span></summary>
+      <p><b>14. 학교에서 감염병이 발병했을 때 시군구청장이 어디에 역학조사를 지시해야 하는가?</b></p>
+      <p>보건소장 / 질병관리본부장 / 학교 보건실</p>
+      <div class="answer"><b>정답: 보건소장</b><br>지역 단위 역학조사 실무 경로와 연결됩니다. 현행 본문에서는 질병관리청장, 시·도지사, 시장·군수·구청장이 역학조사 주체임을 우선 기억합니다. <span class="page-ref">원본 76쪽</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="source-label">15년도 15</span><span class="source-note">예방접종 기록</span></summary>
+      <p><b>15. 시군구청장이 아닌 의료인이 예방 접종을 실시하는 경우 이후 예방 접종 기록에 대한 설명으로 옳은 것은?</b></p>
+      <ul><li>기록을 시군구청장에게 제출하고 따로 보관하지 않는다.</li><li>기록을 시군구청장에게 제출하고 보관한다.</li><li>기록을 시군구청장에게 제출하지 않는다.</li><li>기록을 시군구청장에게 제출하지 않고 보관한다.</li></ul>
+      <div class="answer"><b>정답: 기록을 시군구청장에게 제출하고 따로 보관하지 않는다.</b><br>시행규칙상 시장·군수·구청장이 아닌 자가 예방접종을 실시하면 예방접종 실시 기록 및 보고서를 시장·군수·구청장 등에게 제출합니다. <span class="page-ref">원본 38, 76쪽</span></div>
+    </details>
+  </section>
+
+  <section id="checklist">
+    <h2>10. 누락 점검표</h2>
+    <table>
+      <thead><tr><th>원본 주요 요소</th><th>반영 위치</th></tr></thead>
+      <tbody>
+        <tr><td>학습 목표, 학습 내용, 역사, 목적</td><td>1장</td></tr>
+        <tr><td>감염병 정의, 제1급·제2급·제3급·제4급 목록</td><td>2장</td></tr>
+        <tr><td>환자·의사환자·보유자·의심자·감시·표본감시·역학조사·이상반응·고위험병원체 정의</td><td>2장</td></tr>
+        <tr><td>의료인·국민의 권리와 의무, 기본계획, 감염병전문병원, 내성균 대책, 긴급상황실, 위원회</td><td>3장</td></tr>
+        <tr><td>의사·의료기관장·군의관·기타 신고의무자, 보건소장 보고, 인수공통감염병 통보, 표본감시, 확인기관</td><td>4장</td></tr>
+        <tr><td>실태조사, 건강진단, 역학조사, 자료제출 요구, 해부명령, 시신 장사방법, 고위험병원체</td><td>5장</td></tr>
+        <tr><td>필수예방접종, 고시 개정, 위탁, 사전알림, 임시예방접종, 기록·보존·보고, 이상반응, 피해조사, 예방접종통합관리시스템</td><td>6장</td></tr>
+        <tr><td>위기관리대책, 강제처분, 입원·격리 통지, 업무 제한, 방역조치, 예방조치, 취약계층, 비대면 진료, 학교 휴업·휴교, 소독시설</td><td>7장</td></tr>
+        <tr><td>방역관, 역학조사관, 검역위원, 예방위원, 한국건강관리협회, 경비, 국가보상, 보칙, 벌칙</td><td>8장</td></tr>
+        <tr><td>25년도 형성·총괄, 예제 1-4, 23·22·21·20·19·18·17·16·15년도 과거 문항</td><td>본문 해당 위치와 9장</td></tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+<footer class="wrap foot">
+  <p>원본 강의록의 조문·목록·문항을 보존하면서 학습 흐름에 맞게 재구성했습니다. 구법 기출문항은 현행 법 체계와 차이가 있을 수 있어 해설에 별도로 표시했습니다.</p>
+</footer>
+<script>
+function toggleExamMode(){ document.body.classList.toggle('exam-mode'); }
+function toggleAllDetails(open){ document.querySelectorAll('details.q').forEach(d => d.open = open); }
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const max = h.scrollHeight - h.clientHeight;
+  const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+  document.getElementById('progress').style.width = pct + '%';
+});
+</script>
+</body>
+</html>

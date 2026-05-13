@@ -1,5 +1,5 @@
 window.PDS_SITE_DATA = {
-  "generatedAt": "2026-05-11T14:55:18.952Z",
+  "generatedAt": "2026-05-13T12:37:30.549Z",
   "config": {
     "siteTitle": "PDS 학습 위키",
     "subtitle": "본과 4학년 PDS HTML 학습자료",
@@ -70,6 +70,7 @@ window.PDS_SITE_DATA = {
       "0430_1_healthcare-resources-organization-management.html": "김민주",
       "0430_3_healthcare-utilization-quality.html": "김민주",
       "0430_5_health-policy-public-health-history.html": "신영전",
+      "0501_1_smoking-cessation-counseling.html": "박계영",
       "0501_2_public-doctor-paths-part1.html": "이어진",
       "0501_3_community-health.html": "김민주",
       "0504_1_alcohol-counseling.html": "박훈기",
@@ -81,6 +82,8 @@ window.PDS_SITE_DATA = {
       "0506_5_death.html": "김원규",
       "0506_6_forensic-postmortem-interval.html": "김원규",
       "0507_1_health-security.html": "신영전",
+      "0507_3_infectious-disease-control-act.html": "김민주",
+      "0507_4_quarantine-aids-prevention-act.html": "김민주",
       "0507_5_injury-death.html": "김원규"
     },
     "pageSpans": {
@@ -335,6 +338,20 @@ window.PDS_SITE_DATA = {
       "periodLabel": "5-6교시 13:00-14:50"
     },
     {
+      "file": "0501_1_smoking-cessation-counseling.html",
+      "title": "“금연을 해보세요!” 금연 상담 진료",
+      "professor": "박계영",
+      "tag": "박계영",
+      "dateKey": "2026-05-01",
+      "dateLabel": "05/01",
+      "weekday": "금요일",
+      "weekKey": "2026-04-27",
+      "period": 1,
+      "endPeriod": 1,
+      "span": 1,
+      "periodLabel": "1교시 08:00-08:50"
+    },
+    {
       "file": "0501_2_public-doctor-paths-part1.html",
       "title": "다양한 공직의사의 길 PART I",
       "professor": "이어진",
@@ -487,6 +504,34 @@ window.PDS_SITE_DATA = {
       "endPeriod": 2,
       "span": 2,
       "periodLabel": "1-2교시 08:00-09:50"
+    },
+    {
+      "file": "0507_3_infectious-disease-control-act.html",
+      "title": "감염병의 예방 및 관리에 관한 법률",
+      "professor": "김민주",
+      "tag": "김민주",
+      "dateKey": "2026-05-07",
+      "dateLabel": "05/07",
+      "weekday": "목요일",
+      "weekKey": "2026-05-04",
+      "period": 3,
+      "endPeriod": 3,
+      "span": 1,
+      "periodLabel": "3교시 10:00-10:50"
+    },
+    {
+      "file": "0507_4_quarantine-aids-prevention-act.html",
+      "title": "검역법 · 후천성면역결핍증 예방법",
+      "professor": "김민주",
+      "tag": "김민주",
+      "dateKey": "2026-05-07",
+      "dateLabel": "05/07",
+      "weekday": "목요일",
+      "weekKey": "2026-05-04",
+      "period": 4,
+      "endPeriod": 4,
+      "span": 1,
+      "periodLabel": "4교시 11:00-11:50"
     },
     {
       "file": "0507_5_injury-death.html",

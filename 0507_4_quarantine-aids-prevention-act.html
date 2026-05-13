@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>0507_4 검역법 · 후천성면역결핍증 예방법 학습자료</title>
+<style>
+  :root {
+    --text:#171717; --muted:#666; --line:#d8d8d8; --soft:#fafafa; --ink:#111;
+    --accent:#0f5f7a; --danger:#b42318; --mark:#fff38a;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    margin:0; color:var(--text); background:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;
+    line-height:1.75; word-break:keep-all;
+  }
+  #progress { position:fixed; top:0; left:0; height:4px; width:0; background:var(--accent); z-index:1000; }
+  .wrap { max-width:1120px; margin:0 auto; padding:0 22px; }
+  header { padding:56px 0 30px; border-bottom:1px solid var(--line); }
+  h1 { font-size:clamp(2rem,4.2vw,4rem); line-height:1.12; letter-spacing:-.045em; margin:0 0 12px; }
+  h2 { font-size:clamp(1.65rem,3vw,2.35rem); letter-spacing:-.04em; margin:74px 0 20px; padding-bottom:10px; border-bottom:2px solid var(--line); }
+  h3 { font-size:1.32rem; letter-spacing:-.03em; margin:34px 0 10px; }
+  h4 { font-size:1.08rem; margin:24px 0 8px; }
+  p { margin:10px 0; }
+  a { color:var(--accent); text-decoration-thickness:.08em; text-underline-offset:.18em; }
+  nav { position:sticky; top:4px; z-index:900; background:rgba(255,255,255,.95); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  nav .wrap { display:flex; gap:10px; align-items:center; overflow:auto; padding-top:10px; padding-bottom:10px; }
+  nav a, nav button { white-space:nowrap; color:var(--text); background:#fff; border:1px solid var(--line); border-radius:999px; padding:7px 12px; font:inherit; font-size:.95rem; cursor:pointer; text-decoration:none; }
+  nav a:hover, nav button:hover { border-color:#777; }
+  .meta { color:var(--muted); font-size:.98rem; }
+  .lead { font-size:1.16rem; max-width:920px; }
+  .grid { display:grid; gap:18px; }
+  .two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  @media (max-width:860px) { .two,.three { grid-template-columns:1fr; } }
+  .plain-card { border:1px solid var(--line); border-radius:18px; padding:18px; background:#fff; }
+  .plain-card h3, .plain-card h4 { margin-top:0; }
+  .tight li { margin:4px 0; }
+  mark, .hl { background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 .08em; }
+  .red { color:var(--danger); font-weight:800; }
+  .exam { font-weight:900; text-decoration:underline; text-decoration-thickness:.14em; text-underline-offset:.18em; text-decoration-color:#e8c100; }
+  .muted { color:var(--muted); }
+  .small { font-size:.92rem; }
+  table { width:100%; border-collapse:collapse; margin:14px 0 24px; }
+  th, td { border-bottom:1px solid var(--line); padding:10px 8px; vertical-align:top; text-align:left; }
+  th { font-weight:900; }
+  .nowrap { white-space:nowrap; }
+  details { border:1px solid var(--line); border-radius:16px; padding:12px 16px; background:#fff; margin:12px 0; }
+  summary { cursor:pointer; font-weight:900; }
+  details > summary::marker { color:#555; }
+  .quiz-wrap { margin:22px 0 36px; }
+  .quiz-block { margin:12px 0; }
+  .quiz-block > summary { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .quiz-block > summary::after { content:"문제 열기"; font-size:.84rem; color:var(--muted); font-weight:700; }
+  .quiz-block[open] > summary::after { content:"문제 닫기"; }
+  .mcq { padding-top:12px; }
+  .mcq .stem { font-weight:800; margin-bottom:10px; white-space:pre-line; }
+  .options { display:grid; gap:8px; margin:10px 0; }
+  .options button { text-align:left; border:1px solid var(--line); border-radius:12px; background:#fff; padding:9px 12px; cursor:pointer; font:inherit; }
+  .options button:hover { border-color:#888; }
+  .options button.correct { border-color:#111; outline:2px solid #111; outline-offset:1px; font-weight:800; }
+  .options button.wrong { text-decoration:line-through; color:#777; }
+  .feedback { min-height:1.4em; font-weight:800; margin-top:8px; }
+  .answer { margin-top:10px; }
+  .answer summary { font-size:.96rem; }
+  .note { color:var(--muted); font-size:.92rem; }
+  .toc { columns:2; column-gap:36px; }
+  .toc li { break-inside:avoid; margin:5px 0; }
+  @media (max-width:700px) { .toc { columns:1; } }
+  .tool { display:grid; grid-template-columns:1fr auto; gap:10px; align-items:end; margin:14px 0; }
+  .tool label { display:block; font-weight:900; }
+  .tool select { width:100%; border:1px solid var(--line); border-radius:12px; padding:10px; font:inherit; background:#fff; }
+  .tool button { border:1px solid var(--line); border-radius:12px; background:#fff; padding:10px 14px; font:inherit; cursor:pointer; }
+  @media (max-width:700px) { .tool { grid-template-columns:1fr; } }
+  .calc-out { font-weight:900; margin:10px 0; }
+  .exam-only { display:none; }
+  body.exam-mode .deep { display:none !important; }
+  body.exam-mode .exam-only { display:block; }
+  body.exam-mode h2 { margin-top:48px; }
+  .foot { border-top:1px solid var(--line); margin-top:70px; padding:26px 0 50px; color:var(--muted); }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<header>
+  <div class="wrap">
+    <p class="meta">2026 PSD4 · 한양대학교 의과대학 예방의학교실 · 김민주 교수님 강의록 재구성</p>
+    <h1>검역법 · 후천성면역결핍증 예방법</h1>
+    <p class="lead">두 법의 흐름을 <mark>정의 → 관리계획·조사 → 조치·기간 → 신고·검진·통보</mark> 순서로 다시 정리했다. 핵심 숫자는 <b class="red">5년</b>, <b class="red">검역감염병 최대 잠복기간</b>, <b class="red">24시간 신고</b>, <b class="red">6개월 정기검진</b>이다.</p>
+    <p class="meta">원본 범위: 1-48쪽. <span class="exam">밑줄·강조</span>는 형성평가·예제·빨간 글씨와 직접 연결되는 암기 포인트다.</p>
+  </div>
+</header>
+<nav aria-label="본문 이동">
+  <div class="wrap">
+    <a href="#overview">개요</a>
+    <a href="#quarantine-core">검역법</a>
+    <a href="#quarantine-actions">검역조치</a>
+    <a href="#quarantine-periods">잠복기간</a>
+    <a href="#hiv-core">AIDS 예방법</a>
+    <a href="#hiv-report">신고</a>
+    <a href="#hiv-testing">검진·통보</a>
+    <a href="#hiv-management">관리·비용</a>
+    <a href="#checklist">점검표</a>
+    <button type="button" onclick="toggleExamMode()">시험 직전 모드</button>
+    <button type="button" onclick="toggleAllQuestions()">문제 전체 열기/닫기</button>
+  </div>
+</nav>
+<main class="wrap">
+  <section id="overview">
+    <h2>1. 전체 학습 지도</h2>
+    <div class="grid two">
+      <div class="plain-card">
+        <h3>검역법 학습목표</h3>
+        <ul class="tight">
+          <li><b>검역감염병</b>의 정의를 이해한다.</li>
+          <li><b>검역 관련 조치</b>를 이해한다.</li>
+          <li>검역감염병의 <b>종류 및 격리기간</b>을 익힌다.</li>
+          <li>검역관리 관련 제도와 검역조사 관련 조치를 연결한다.</li>
+        </ul>
+      </div>
+      <div class="plain-card">
+        <h3>후천성면역결핍증 예방법 학습목표</h3>
+        <ul class="tight">
+          <li>감염인과 후천성면역결핍증환자를 구분한다.</li>
+          <li><b>신고와 관리</b> 사항을 이해한다.</li>
+          <li><b>검진 및 결과 통보</b> 규정을 숙지한다.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>시험 흐름</h3>
+    <p>25년도 김민주 교수님 문항은 5개로 정리되어 있고, 대부분은 빨간 글씨와 예제 문항에서 바로 이어진다. 23년도는 신영전 교수님, 15-22년도는 최보율 교수님 출제 범위로 표시되어 있다. 김민주 교수님 출제 경향은 1년치라 폭넓은 추정은 어렵지만, <b>검역관리 기본계획 5년</b>, <b>검역감염병 최대 잠복기간</b>, <b>HIV 신고 24시간</b>, <b>검진 통보와 비밀보호</b>가 반복 축이다.</p>
+
+    <details class="deep">
+      <summary>목차 한눈에 보기</summary>
+      <ol class="toc">
+        <li>검역의 어원과 역사</li>
+        <li>검역법 목적과 검역감염병 정의</li>
+        <li>검역관리 기본계획</li>
+        <li>검역조사 대상·통보·장소·시각</li>
+        <li>검역조사 항목과 검역조치</li>
+        <li>접촉자 감시·격리와 최대 잠복기간</li>
+        <li>후천성면역결핍증 예방법 제정과 목적</li>
+        <li>감염인과 후천성면역결핍증환자 정의</li>
+        <li>의사·의료기관 신고와 비밀누설금지</li>
+        <li>검진, 결과 통보, 정기검진</li>
+        <li>요양시설, 전파매개행위 금지, 비용 부담</li>
+        <li>형성평가·예제 문항</li>
+      </ol>
+    </details>
+  </section>
+
+  <section id="quarantine-core">
+    <h2>2. 검역법: 목적, 감염병, 기본계획</h2>
+    <p class="exam-only"><b>시험 직전:</b> 검역관리 기본계획은 <mark>5년마다</mark>. 검역감염병은 <mark>콜레라·페스트·황열·SARS·동물인플루엔자 인체감염증·신종인플루엔자·MERS·에볼라바이러스병·질병관리청장 고시 감염병</mark>.</p>
+
+    <h3>검역의 뜻과 역사</h3>
+    <p><b>검역(檢疫, quarantine)</b>은 어원상 <b>40일</b>과 연결된다. 중세 라틴어 <i>quarentena</i>, 이탈리아어 <i>quaranta</i>는 모두 40을 뜻한다. 1377년 Dubrovnik의 항만 검역, 선박·승무원·승객의 일정 기간 대기, 그리고 40일 격리 관행이 quarantine 개념의 역사적 배경을 이룬다.</p>
+    <table>
+      <thead><tr><th class="nowrap">연도</th><th>검역법 역사</th></tr></thead>
+      <tbody>
+        <tr><td>1886년</td><td><b>불허온역진항장정</b>: 국내 최초 항만 검역 규정. 콜레라 등 발생 지역에서 들어오는 선박 검역을 규정했다.</td></tr>
+        <tr><td>1895년</td><td><b>검역규칙</b>: 최초 검역법령.</td></tr>
+        <tr><td>1899년</td><td><b>검역정선규칙</b>: 검역 업무의 구체적 사항을 규정했다.</td></tr>
+        <tr><td>1947년</td><td><b>해공항검역규칙</b>: 미군정법령 제2호.</td></tr>
+        <tr><td>1954년</td><td><b>해공항검역법</b>.</td></tr>
+        <tr><td>1963년</td><td><b>검역법</b>으로 개정.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>검역법의 목적</h3>
+    <p class="muted small">법령 표기: 검역법 [시행 2024. 5. 21.] [법률 제20323호, 2024. 2. 20., 일부개정] · 질병관리청 검역정책과.</p>
+    <p>검역법은 우리나라에 들어오거나 외국으로 나가는 <b>사람, 운송수단, 화물</b>을 검역하는 절차와 감염병 예방 조치를 정한다. 목표는 <b>국내외로 감염병이 번지는 것을 방지</b>하고 국민 건강을 유지·보호하는 것이다.</p>
+
+    <h3>검역감염병</h3>
+    <p>검역감염병은 다음 감염병과 질병관리청장이 긴급 검역조치가 필요하다고 인정하여 고시하는 감염병을 포함한다.</p>
+    <table>
+      <thead><tr><th>분류</th><th>검역감염병</th></tr></thead>
+      <tbody>
+        <tr><td>가-아목</td><td>콜레라, 페스트, 황열, 중증 급성호흡기 증후군(SARS), 동물인플루엔자 인체감염증, 신종인플루엔자, 중동 호흡기 증후군(MERS), 에볼라바이러스병</td></tr>
+        <tr><td>자목</td><td>위 감염병 외에 외국에서 발생하여 국내로 들어올 우려가 있거나 우리나라에서 발생하여 외국으로 번질 우려가 있어 <b>질병관리청장이 긴급 검역조치가 필요하다고 인정하여 고시</b>하는 감염병</td></tr>
+      </tbody>
+    </table>
+
+    <h3>검역관리 기본계획</h3>
+    <p>질병관리청장은 감염병관리위원회에 설치한 <b>검역 분야 전문위원회</b>의 심의를 거쳐 <b class="red">검역관리 기본계획을 5년마다 수립·시행</b>한다.</p>
+    <p>기본계획에는 검역 기본목표와 추진방향, 검역 사업계획과 추진방법, 검역 통계 및 정보 관리 방안, 검역공무원의 교육과 역량강화 방안, 그 밖에 검역관리에 필요한 사항을 담는다.</p>
+
+    <div class="quiz-wrap">
+      <details class="quiz-block" id="q-basic-plan">
+  <summary><span>25Y 형성 · 검역관리 기본계획 주기</span></summary>
+  <div class="mcq" data-answer="5">
+    <p class="stem">검역 관리 기본계획은 몇 년에 한 번씩 수립 및 시행해야 하는가?</p>
+    <div class="options"><button type="button" data-choice="1">① 1년</button>
+<button type="button" data-choice="2">② 2년</button>
+<button type="button" data-choice="3">③ 3년</button>
+<button type="button" data-choice="4">④ 4년</button>
+<button type="button" data-choice="5">⑤ 5년</button></div>
+    <p class="feedback" aria-live="polite"></p>
+    <details class="answer"><summary>정답·해설 보기</summary>
+      <p><b>정답 ⑤ 5년.</b> 질병관리청장은 검역전문위원회 심의를 거쳐 <b>검역관리 기본계획을 5년마다</b> 수립·시행한다. 1-4년은 주기 규정과 맞지 않는다.</p>
+    </details>
+  </div>
+</details>
+    </div>
+  </section>
+
+  <section id="quarantine-survey">
+    <h2>3. 검역조사: 대상, 통보, 장소, 시각</h2>
+    <h3>검역조사 대상</h3>
+    <p>검역조사 대상은 검역법 제6조에 따른 <b>사람, 운송수단, 화물</b>이다. 화물에는 운송수단 내 컨테이너, 운송수단 내 비치용품, 소모용품, 개인 소지 물품이 포함된다.</p>
+    <table>
+      <thead><tr><th>항목</th><th>핵심 내용</th></tr></thead>
+      <tbody>
+        <tr><td>검역 통보</td><td>검역조사 대상 운송수단의 장은 검역 장소에 접근했을 때 관할 검역소장에게 <b>검역감염병 환자등의 유무</b>와 <b>위생 상태</b> 등 보건복지부령이 정하는 사항을 통보한다.</td></tr>
+        <tr><td>검역 장소</td><td>질병관리청장이 관계 중앙행정기관의 장과 협의하여 정한다.</td></tr>
+        <tr><td>검역 시각</td><td>검역소장은 검역조사 대상이 검역 장소에 도착하는 즉시 검역조사를 한다. 즉시 조사하지 못하는 부득이한 사유가 있으면 검역 장소 대기 또는 격리를 조건으로 승객·승무원·화물을 내리게 할 수 있다.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>검역조사 항목</h3>
+    <p>검역소장은 다음 사항을 조사한다. <b>자동차의 경우에는 제2호 외의 사항을 생략</b>할 수 있다.</p>
+    <ol>
+      <li>운송수단 및 화물의 보건·위생 상태에 대한 경과와 현황</li>
+      <li>출입국자의 검역감염병 감염·위험요인 여부 및 예방관리에 관한 사항</li>
+      <li>운송수단의 식품 보관 상태</li>
+      <li>감염병 매개체의 서식 유무와 번식 상태</li>
+    </ol>
+  </section>
+
+  <section id="quarantine-actions">
+    <h2>4. 검역조치와 접촉자 감시</h2>
+    <p class="exam-only"><b>시험 직전:</b> 검역조치는 사람·화물·장소·운송수단·매개체·검사·예방접종까지 넓게 묻는다. 환자는 감염력이 없어지면 즉시 격리 해제한다.</p>
+
+    <h3>검역조치</h3>
+    <p>질병관리청장은 검역감염병 유입과 전파를 차단하기 위하여 감염되었거나 감염된 것으로 의심되는 사람, 병원체에 오염되었거나 오염 의심 또는 매개체 서식이 의심되는 운송수단·화물에 다음 조치의 전부 또는 일부를 할 수 있다.</p>
+    <ol>
+      <li>검역감염병 환자등을 <b class="red">감시하거나 격리</b></li>
+      <li>검역감염병 <b class="red">접촉자</b> 또는 보건복지부령으로 정하는 검역감염병 <b class="red">위험요인에 노출된 사람</b>을 감시하거나 격리</li>
+      <li>오염되었거나 오염 의심 화물을 <b>소독 또는 폐기</b>하거나 옮기지 못하게 하는 것</li>
+      <li>오염되었거나 오염 의심 장소를 <b>소독</b>하거나 사용을 금지 또는 제한하는 것</li>
+      <li>오염 여부 확인이 필요한 운송수단 및 화물을 <b>검사</b>하는 것</li>
+      <li>감염병 매개체가 서식하거나 서식 의심 운송수단·화물을 소독하고 매개체를 없애도록 운송수단의 장이나 화물 소유자·관리자에게 명하는 것</li>
+      <li>감염 여부 확인이 필요한 사람을 <b>진찰하거나 검사</b>하는 것</li>
+      <li>예방이 필요한 사람에게 <b>예방접종</b>을 하는 것</li>
+    </ol>
+
+    <h3>검역감염병 접촉자에 대한 감시 등</h3>
+    <p>질병관리청장은 접촉자 또는 위험요인 노출자가 입국 후 거주하거나 체류하는 지역의 특별자치도지사·시장·군수·구청장에게 건강상태 감시 또는 격리를 요청할 수 있다. 감시 중 환자등으로 확인되면 지체 없이 격리 등 필요한 조치를 하고 즉시 질병관리청장에게 보고한다.</p>
+    <p><b class="exam">감시 또는 격리 기간은 해당 검역감염병의 최대 잠복기간을 초과할 수 없다.</b></p>
+
+    <h3>검역감염병 환자등의 격리 해제</h3>
+    <p>검역감염병 환자등의 격리 기간은 <b>감염력이 없어질 때까지</b>다. 격리기간이 지나면 <b class="red">즉시 해제</b>한다. 이 원칙 때문에 “감염력이 없어진 콜레라 환자” 문항의 정답은 격리 해제다.</p>
+
+    <div class="quiz-wrap">
+      <details class="quiz-block" id="q-cholera-release">
+  <summary><span>검역법-예제 2 · 콜레라 환자 격리 해제</span></summary>
+  <div class="mcq" data-answer="1">
+    <p class="stem">검역소 내 격리병동에 격리되어 있던 콜레라 환자 A의 감염력이 없어진 것이 확인되었다. A에 대한 조치는?</p>
+    <div class="options"><button type="button" data-choice="1">① 격리 해제</button>
+<button type="button" data-choice="2">② 1일 뒤에 다시 검사 후 격리해제 결정</button>
+<button type="button" data-choice="3">③ 1주 뒤에 다시 검사 후 격리해제 결정</button>
+<button type="button" data-choice="4">④ 거주지를 관할하는 보건소로 이동하여 격리</button>
+<button type="button" data-choice="5">⑤ 거주지를 관할하는 감염병 전문병원으로 이동하여 격리</button></div>
+    <p class="feedback" aria-live="polite"></p>
+    <details class="answer"><summary>정답·해설 보기</summary>
+      <p><b>정답 ① 격리 해제.</b> 검역감염병 환자등의 격리 기간은 <b>감염력이 없어질 때까지</b>이고, 격리기간이 지나면 <b>즉시 해제</b>한다. 추가 1일 또는 1주 재검사 대기는 원칙이 아니다.</p>
+    </details>
+  </div>
+</details>
+    </div>
+  </section>
+
+  <section id="quarantine-periods">
+    <h2>5. 검역감염병의 최대 잠복기간</h2>
+    <p class="exam-only"><b>시험 직전 숫자:</b> <mark>콜5 · 페6 · 황6 · SARS10 · AI10 · MERS14 · 에볼라21</mark>. 신종인플루엔자와 고시 감염병은 검역전문위원회에서 정한다.</p>
+    <p>시행규칙 제14조의3은 법 제17조제3항에 따른 검역감염병의 최대 잠복기간을 다음과 같이 정한다.</p>
+    <table>
+      <thead><tr><th>검역감염병</th><th class="nowrap">최대 잠복기간</th><th>오답 포인트</th></tr></thead>
+      <tbody>
+        <tr><td>콜레라</td><td><b class="red">5일</b></td><td>6일이 아니다.</td></tr>
+        <tr><td>페스트</td><td><b class="red">6일</b></td><td>2일 또는 5일이 아니다.</td></tr>
+        <tr><td>황열</td><td><b class="red">6일</b></td><td>아프리카 여행객 황열 의심 문항의 정답.</td></tr>
+        <tr><td>중증 급성호흡기 증후군(SARS)</td><td><b class="red">10일</b></td><td>5일이 아니다.</td></tr>
+        <tr><td>동물인플루엔자 인체감염증</td><td><b class="red">10일</b></td><td>반복 출제. 25Y 형성·예제 모두 연결.</td></tr>
+        <tr><td>중동 호흡기 증후군(MERS)</td><td><b class="red">14일</b></td><td>동물인플루엔자와 구분.</td></tr>
+        <tr><td>에볼라바이러스병</td><td><b class="red">21일</b></td><td>10일이 아니다.</td></tr>
+        <tr><td>신종인플루엔자 및 질병관리청장 고시 검역감염병</td><td>검역전문위원회에서 정하는 최대 잠복기간</td><td>고정 숫자로 외우지 않는다.</td></tr>
+      </tbody>
+    </table>
+
+    <details class="deep">
+      <summary>암기 도구: 최대 잠복기간 확인</summary>
+      <div class="tool">
+        <label for="diseaseSelect">검역감염병 선택
+          <select id="diseaseSelect">
+            <option value="콜레라:5일">콜레라</option>
+            <option value="페스트:6일">페스트</option>
+            <option value="황열:6일">황열</option>
+            <option value="중증 급성호흡기 증후군(SARS):10일">중증 급성호흡기 증후군(SARS)</option>
+            <option value="동물인플루엔자 인체감염증:10일">동물인플루엔자 인체감염증</option>
+            <option value="중동 호흡기 증후군(MERS):14일">중동 호흡기 증후군(MERS)</option>
+            <option value="에볼라바이러스병:21일">에볼라바이러스병</option>
+            <option value="신종인플루엔자·고시 감염병:검역전문위원회 결정">신종인플루엔자·고시 감염병</option>
+          </select>
+        </label>
+        <button type="button" onclick="showPeriod()">확인</button>
+      </div>
+      <p id="periodOut" class="calc-out">콜레라: 5일</p>
+    </details>
+
+    <div class="quiz-wrap">
+      <details class="quiz-block" id="q-quarantine-25-max">
+  <summary><span>25Y 형성 · 최대 격리 또는 감시기간</span></summary>
+  <div class="mcq" data-answer="4">
+    <p class="stem">검역감염병 의심자의 최대 격리 또는 감시기간이 맞게 짝지어진 것은? ☆</p>
+    <div class="options"><button type="button" data-choice="1">① 콜레라 - 6일</button>
+<button type="button" data-choice="2">② 페스트 - 5일</button>
+<button type="button" data-choice="3">③ 황열 - 5일</button>
+<button type="button" data-choice="4">④ 동물 인플루엔자 인체감염증 - 10일</button>
+<button type="button" data-choice="5">⑤ 에볼라바이러스 - 10일</button></div>
+    <p class="feedback" aria-live="polite"></p>
+    <details class="answer"><summary>정답·해설 보기</summary>
+      <p><b>정답 ④ 동물 인플루엔자 인체감염증 - 10일.</b> 콜레라는 5일, 페스트는 6일, 황열은 6일, 에볼라바이러스병은 21일이다. 숫자를 바꿔 묻는 대표 문항이다.</p>
+    </details>
+  </div>
+</details>
+      <details class="quiz-block" id="q-yellow-fever">
+  <summary><span>검역법-예제 1 · 황열 의심자</span></summary>
+  <div class="mcq" data-answer="2">
+    <p class="stem">오늘 오전 인천국제공항으로 입국한 아프리카 지역 여행객 중 황열에 걸렸을 것으로 의심되는 40대 남자를 발견하였다. 검역법에 따른 이 남자의 최대 감시 또는 격리기간은?</p>
+    <div class="options"><button type="button" data-choice="1">① 3일</button>
+<button type="button" data-choice="2">② 6일</button>
+<button type="button" data-choice="3">③ 병이 완치될 때까지</button>
+<button type="button" data-choice="4">④ 증상이 소실될 때까지</button>
+<button type="button" data-choice="5">⑤ 병원체를 배출하지 않을 때까지</button></div>
+    <p class="feedback" aria-live="polite"></p>
+    <details class="answer"><summary>정답·해설 보기</summary>
+      <p><b>정답 ② 6일.</b> 검역감염병 접촉자·위험요인 노출자에 대한 감시 또는 격리 기간은 해당 검역감염병의 <b>최대 잠복기간을 초과할 수 없다</b>. 황열의 최대 잠복기간은 6일이다. ③-⑤는 이 문항의 “최대 감시 또는 격리기간” 기준이 아니다.</p>
+    </details>
+  </div>
+</details>
+      <details class="quiz-block" id="q-quarantine-ex3">
+  <summary><span>검역법-예제 3 · 잠복기간 짝짓기</span></summary>
+  <div class="mcq" data-answer="5">
+    <p class="stem">검역감염병 의심자의 최대 격리 또는 감시기간이 맞게 짝지어진 것은?</p>
+    <div class="options"><button type="button" data-choice="1">① 중증 급성호흡기 증후군(SARS) - 5일</button>
+<button type="button" data-choice="2">② 콜레라 – 2일</button>
+<button type="button" data-choice="3">③ 페스트 – 2일</button>
+<button type="button" data-choice="4">④ 황열 – 10일</button>
+<button type="button" data-choice="5">⑤ 동물인플루엔자 인체감염증 - 10일</button></div>
+    <p class="feedback" aria-live="polite"></p>
+    <details class="answer"><summary>정답·해설 보기</summary>
+      <p><b>정답 ⑤ 동물인플루엔자 인체감염증 - 10일.</b> SARS도 10일이지만 ①은 5일로 틀렸고, 콜레라는 5일, 페스트 6일, 황열 6일이다.</p>
+    </details>
+  </div>
+</details>
+      <details class="quiz-block" id="q-ai-59">
+  <summary><span>검역법-예제 4 · 동물인플루엔자 인체감염증</span></summary>
+  <div class="mcq" data-answer="3">
+    <p class="stem">59세 남자 ‘A’가 동물인플루엔자 인체감염증이 의심되어 감염병관리기관으로 지정된 의료기관에 격리되었다. ‘A’의 최대 격리 기간은?</p>
+    <div class="options"><button type="button" data-choice="1">① 5일</button>
+<button type="button" data-choice="2">② 6일</button>
+<button type="button" data-choice="3">③ 10일</button>
+<button type="button" data-choice="4">④ 14일</button>
+<button type="button" data-choice="5">⑤ 21일</button></div>
+    <p class="feedback" aria-live="polite"></p>
+    <details class="answer"><summary>정답·해설 보기</summary>
+      <p><b>정답 ③ 10일.</b> 동물인플루엔자 인체감염증의 최대 잠복기간은 10일이다. 14일은 MERS, 21일은 에볼라바이러스병이다.</p>
+    </details>
+  </div>
+</details>
+    </div>
+  </section>
+
+  <section id="hiv-core">
+    <h2>6. 후천성면역결핍증 예방법: 제정, 목적, 정의</h2>
+    <p class="exam-only"><b>시험 직전:</b> 감염인은 <mark>HIV에 감염된 사람</mark>, 후천성면역결핍증환자는 감염인 중 <mark>대통령령으로 정하는 AIDS 특유 임상증상</mark>이 나타난 사람이다.</p>
+
+    <h3>제정과 제도 변화</h3>
+    <table>
+      <thead><tr><th class="nowrap">연도</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td>1981년</td><td>미국에서 첫 사례 발견.</td></tr>
+        <tr><td>1983년</td><td>HIV를 원인 바이러스로 발견.</td></tr>
+        <tr><td>1985년</td><td>국내 첫 사례 발견.</td></tr>
+        <tr><td>1987년</td><td>후천성면역결핍증예방법 제정.</td></tr>
+        <tr><td>1989년</td><td>HIV 무료 익명 검진제도 도입, HIV 감염인 무료 익명 검진제도 도입.</td></tr>
+        <tr><td>2005년</td><td>의료기관 감염인 상담사업, 예방·교육 상담소 운영.</td></tr>
+        <tr><td>2018년</td><td>치료제의 노출 전 예방 요법(pre-exposure prophylaxis, PrEP) 사용 허가.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>목적</h3>
+    <p class="muted small">법령 표기: 후천성면역결핍증 예방법(약칭: 에이즈예방법) [시행 2020. 9. 12.] [법률 제17472호, 2020. 8. 11., 타법개정] · 질병관리청 에이즈관리과.</p>
+    <p>후천성면역결핍증 예방법은 후천성면역결핍증의 <b>예방·관리</b>와 그 <b>감염인의 보호·지원</b>에 필요한 사항을 정해 국민건강 보호에 이바지한다.</p>
+
+    <h3>감염인과 후천성면역결핍증환자</h3>
+    <table>
+      <thead><tr><th>용어</th><th>정의</th></tr></thead>
+      <tbody>
+        <tr><td><b class="red">감염인</b></td><td>인체면역결핍바이러스(HIV)에 감염된 사람.</td></tr>
+        <tr><td><b class="red">후천성면역결핍증환자</b></td><td>감염인 중 대통령령으로 정하는 <b>후천성면역결핍증 특유의 임상증상</b>이 나타난 사람.</td></tr>
+        <tr><td>특유의 임상증상</td><td><b>세포면역기능에 결함</b>이 있고, 주폐포자충폐렴(住肺胞子蟲肺炎), 결핵 등의 <b>기회감염 또는 기회질환</b>이 있는 경우.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="hiv-report">
+    <h2>7. 의사 또는 의료기관 등의 신고와 비밀누설금지</h2>
+    <p class="exam-only"><b>시험 직전:</b> 감염인을 진단하거나 사체를 검안한 의사·의료기관은 <mark>24시간 이내 관할 보건소장</mark>에게 신고한다. 학술연구·혈액검사로 발견한 사람이나 기관의 장은 <mark>24시간 이내 질병관리청장</mark>에게 신고한다.</p>
+
+    <h3>24시간 이내 신고</h3>
+    <table>
+      <thead><tr><th>상황</th><th>신고 주체</th><th>신고 대상</th><th>기한</th></tr></thead>
+      <tbody>
+        <tr><td>감염인 진단 또는 감염인의 사체 검안</td><td>의사 또는 의료기관</td><td><b class="red">관할 보건소장</b></td><td><b class="red">24시간 이내</b></td></tr>
+        <tr><td>학술연구 또는 혈액·혈액제제 검사로 감염인 발견</td><td>발견한 사람 또는 해당 연구·검사 기관의 장</td><td><b>질병관리청장</b></td><td><b class="red">24시간 이내</b></td></tr>
+        <tr><td>감염인 사망</td><td>이를 처리한 의사 또는 의료기관</td><td><b class="red">관할 보건소장</b></td><td><b class="red">24시간 이내</b></td></tr>
+      </tbody>
+    </table>
+    <p>진단·검안한 의사 또는 의료기관은 신고와 함께 감염인, 감염인의 배우자(사실혼 관계 포함), 성 접촉자에게 <b>전파 방지에 필요한 사항</b>을 알리고 이를 준수하도록 지도한다. 이때 가능하면 감염인의 의사를 참고한다.</p>
+
+    <h3>비밀누설금지</h3>
+    <p>다음 사람은 법령상 근거 또는 본인의 동의가 있는 경우를 제외하고, 재직 중은 물론 퇴직 후에도 업무상 알게 된 감염인 관련 비밀을 누설해서는 안 된다.</p>
+    <ol>
+      <li>국가 또는 지방자치단체에서 후천성면역결핍증의 예방·관리와 감염인의 보호·지원 사무에 종사하는 사람</li>
+      <li>감염인의 진단·검안·진료 및 간호에 참여한 사람</li>
+      <li>감염인에 관한 기록을 유지·관리하는 사람</li>
+    </ol>
+    <p class="deep">의료법의 정보 누설 금지 원칙도 같은 방향으로 작동한다. 의료인이나 의료기관 종사자는 업무상 알게 된 다른 사람의 정보를 누설하거나 부당한 목적으로 사용하지 않아야 한다.</p>
+
+    <div class="quiz-wrap">
+      <details class="quiz-block" id="q-hiv-death">
+  <summary><span>후천성면역결핍증 예방법-예제 1 · 시체 검안 신고</span></summary>
+  <div class="mcq" data-answer="1">
+    <p class="stem">인체면역결핍바이러스에 감염된 ‘갑＇이 자택에서 사망하였다. ‘갑’의 보호자가 ‘갑＇에대한 시체검안서를 의사에게 요청하였다. 후천성면역결핍증 예방법상 ‘갑＇의 시체를 검안한 의사는 검안 사실을 누구에게 신고하여야 하는가?</p>
+    <div class="options"><button type="button" data-choice="1">① 관할 보건소장</button>
+<button type="button" data-choice="2">② 관할 시도지사</button>
+<button type="button" data-choice="3">③ 국립보건연구원장</button>
+<button type="button" data-choice="4">④ 식품의약품안전처장</button>
+<button type="button" data-choice="5">⑤ 관할 시장 군수 구청장</button></div>
+    <p class="feedback" aria-live="polite"></p>
+    <details class="answer"><summary>정답·해설 보기</summary>
+      <p><b>정답 ① 관할 보건소장.</b> 감염인을 진단하거나 감염인의 사체를 검안한 의사 또는 의료기관은 24시간 이내에 관할 보건소장에게 신고한다. 사망한 경우 이를 처리한 의사 또는 의료기관도 24시간 이내 관할 보건소장에게 신고한다.</p>
+    </details>
+  </div>
+</details>
+      <details class="quiz-block" id="q-hiv-25-doctor">
+  <summary><span>25Y 형성 · 감염인 진단 시 의사의 조치</span></summary>
+  <div class="mcq" data-answer="2">
+    <p class="stem">의사 ‘갑’은 유흥 업소에 종사하는 배우자가 있는 30세 남자를 후천성면역결핍증 감염인으로 진단하였다. 이때 의사 ‘갑’이 해야 할 일은?</p>
+    <div class="options"><button type="button" data-choice="1">① 해당 유흥업소 사업주에게 통보하고 해당 업소 종사자 검진 실시</button>
+<button type="button" data-choice="2">② 24시간 이내에 관할 보건소장에게 신고 후 전파방지에 필요한 사항을 교육</button>
+<button type="button" data-choice="3">③ 감염인의 배우자 및 성 접촉자에 대한 검진 실시</button>
+<button type="button" data-choice="4">④ 전파경로 파악을 위한 역학조사 실시</button>
+<button type="button" data-choice="5">⑤ 후천성면역결핍증 대책위원회에 즉시 신고</button></div>
+    <p class="feedback" aria-live="polite"></p>
+    <details class="answer"><summary>정답·해설 보기</summary>
+      <p><b>정답 ② 24시간 이내에 관할 보건소장에게 신고 후 전파방지에 필요한 사항을 교육.</b> 진단한 의사 또는 의료기관은 24시간 이내 관할 보건소장에게 신고하고, 감염인·배우자·성 접촉자에게 전파 방지에 필요한 사항을 알리고 준수하도록 지도한다. 사업주 통보는 비밀누설 위험이 있고, 검진·역학조사는 의사가 이 문항에서 직접 수행할 조치가 아니다.</p>
+    </details>
+  </div>
+</details>
+      <details class="quiz-block" id="q-hiv-doc33">
+  <summary><span>후천성면역결핍증 예방법-예제 2 · 진단 후 신고와 교육</span></summary>
+  <div class="mcq" data-answer="2">
+    <p class="stem">의사 ‘갑’은 유흥업소에 근무하는 배우자가 있는 33세의 남자를 후천성면역결핍증 감염인으로 진단하였다. 이때 의사 ‘갑’이 해야 할 일은?</p>
+    <div class="options"><button type="button" data-choice="1">① 해당 유흥업소 사업주에게 통보하고 해당 업소 종사자 검진 실시</button>
+<button type="button" data-choice="2">② 24시간 이내에 관할 보건소장에게 신고 후 전파방지에 필요한 사항을 교육</button>
+<button type="button" data-choice="3">③ 감염인의 배우자 및 성접촉자에 대한 검진 실시</button>
+<button type="button" data-choice="4">④ 전파경로 파악을 위한 역학조사 실시</button>
+<button type="button" data-choice="5">⑤ 5후천성면역결핍증 대책위원회에 즉시 신고</button></div>
+    <p class="feedback" aria-live="polite"></p>
+    <details class="answer"><summary>정답·해설 보기</summary>
+      <p><b>정답 ② 24시간 이내에 관할 보건소장에게 신고 후 전파방지에 필요한 사항을 교육.</b> 사업주에게 감염 사실을 알리는 것은 법의 비밀보호 원칙과 맞지 않는다. 배우자·성접촉자 검진과 역학조사는 관련 제도이지만, 진단 의사가 즉시 선택할 법정 조치로 묻는 핵심은 24시간 이내 신고와 전파방지 지도다.</p><p class="note">⑤의 “5후천성…” 표기는 원문 슬라이드 표기를 그대로 보존했다.</p>
+    </details>
+  </div>
+</details>
+    </div>
+  </section>
+
+  <section id="hiv-testing">
+    <h2>8. 검진과 검진결과 통보</h2>
+    <p class="exam-only"><b>시험 직전:</b> 감염인의 배우자 및 성 접촉자는 검진 대상. 장기체류 외국인은 입국 전 1개월 이내 음성확인서, 없으면 입국 후 <mark>72시간 이내</mark> 검진. 정기검진은 <mark>6개월 간격으로 1년에 2회</mark>.</p>
+
+    <h3>검진</h3>
+    <p>질병관리청장, 시·도지사, 시장·군수·구청장은 공중과 접촉이 많은 업소에 종사하는 사람으로서 검진 대상이 되는 사람에게 후천성면역결핍증 정기검진 또는 수시검진을 해야 한다.</p>
+    <p>감염되었다고 판단되는 충분한 사유가 있는 사람 또는 감염되기 쉬운 환경에 있는 사람 중 다음 사람은 검진 대상이 된다.</p>
+    <ol>
+      <li><b class="red">감염인의 배우자 및 성 접촉자</b></li>
+      <li>그 밖에 예방을 위하여 검진이 필요하다고 질병관리청장이 인정하는 사람</li>
+    </ol>
+    <p>해외에서 입국하는 외국인 중 대통령령으로 정하는 장기체류자는 입국 전 <b>1개월 이내</b>에 발급받은 후천성면역결핍증 음성확인서를 질병관리청장에게 보여주어야 한다. 제시하지 못하면 입국 후 <b class="red">72시간 이내</b> 검진을 받아야 한다.</p>
+
+    <h3>확인검사 의뢰</h3>
+    <p>검진을 목적으로 혈액검사를 실시하는 기관이 후천성면역결핍증 감염이 의심되는 가검물을 발견하면, 형성문항 기준으로 <b class="exam">보건환경연구원의 장</b>에게 검사를 의뢰하여 확인검사를 받는다.</p>
+
+    <h3>검진결과의 통보</h3>
+    <table>
+      <thead><tr><th>원칙·예외</th><th>통보 대상</th></tr></thead>
+      <tbody>
+        <tr><td>원칙</td><td>검진 대상자 <b class="red">본인 외의 사람에게 검진 결과를 통보할 수 없다.</b></td></tr>
+        <tr><td>군·교정시설 등 공동생활자</td><td>본인과 <b>해당 기관의 장</b>. 군인 문항에서는 소속 부대장이 해당한다.</td></tr>
+        <tr><td>미성년자·심신미약자·심신상실자</td><td>그 <b>법정대리인</b>에게 통보.</td></tr>
+        <tr><td>감염인 판정 통보</td><td>면접통보 등 <b>검진 결과의 비밀이 유지될 수 있는 방법</b>으로 통보.</td></tr>
+        <tr><td>사업주</td><td>근로자에게 후천성면역결핍증 검진결과서 제출을 요구할 수 없다.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>검진대상자와 정기검진 시행령</h3>
+    <p>대통령령으로 정하는 장기체류자는 출입국관리법 제16조에 따른 <b>재난상륙허가의 대상자</b>로서 질병관리청장이 후천성면역결핍증 예방을 위하여 필요하다고 인정하는 사람이다. 다만, 배우자를 동반하는 사람은 제외한다.</p>
+    <p><b class="exam">정기검진은 6개월 간격으로 1년에 2회 실시</b>한다.</p>
+
+    <details class="deep">
+      <summary>암기 도구: 통보 대상 빠른 판단</summary>
+      <div class="tool">
+        <label for="notifySelect">상황 선택
+          <select id="notifySelect">
+            <option value="원칙: 본인에게만 통보한다.">일반 검진 대상자</option>
+            <option value="공동생활자: 본인 및 해당 기관의 장에게 통보한다.">군·교정시설 등 공동생활자</option>
+            <option value="법정대리인: 본인 상황에 따라 법정대리인에게 통보한다.">미성년자·심신미약자·심신상실자</option>
+            <option value="사업주: 검진결과서 제출을 요구할 수 없다.">사업주 요구</option>
+          </select>
+        </label>
+        <button type="button" onclick="showNotify()">확인</button>
+      </div>
+      <p id="notifyOut" class="calc-out">원칙: 본인에게만 통보한다.</p>
+    </details>
+
+    <div class="quiz-wrap">
+      <details class="quiz-block" id="q-hiv-regular">
+  <summary><span>25Y 형성평가 · 배우자 정기검진 주기</span></summary>
+  <div class="mcq" data-answer="5">
+    <p class="stem">후천성면역결핍증 감염인의 배우자는 정기검진을 몇개월에 한 번 받아야 하는가? ☆</p>
+    <div class="options"><button type="button" data-choice="1">① 72시간</button>
+<button type="button" data-choice="2">② 2주</button>
+<button type="button" data-choice="3">③ 1개월</button>
+<button type="button" data-choice="4">④ 3개월</button>
+<button type="button" data-choice="5">⑤ 6개월</button></div>
+    <p class="feedback" aria-live="polite"></p>
+    <details class="answer"><summary>정답·해설 보기</summary>
+      <p><b>정답 ⑤ 6개월.</b> 시행령상 정기검진은 <b>6개월 간격으로 1년에 2회</b> 실시한다. 72시간은 장기체류 외국인이 음성확인서를 제시하지 못할 때 입국 후 검진을 받아야 하는 시간이다.</p>
+    </details>
+  </div>
+</details>
+      <details class="quiz-block" id="q-hiv-military">
+  <summary><span>후천성면역결핍증 예방법-예제 3 · 군 공동생활자 결과 통보</span></summary>
+  <div class="mcq" data-answer="3">
+    <p class="stem">22세 남성 ‘A’는 전방에 위치한 부대에서 공동생활 중인 군인이다. 최근 친구들과 함께 휴가를 다녀온 후 스스로 병원을 방문하여 후천성면역결핍증 검진을 받았다. 후천성면역결핍증 예방법에 따라 ‘A＇의 검진 결과를 통보할 대상을 옳은 것은?</p>
+    <div class="options"><button type="button" data-choice="1">① 본인만</button>
+<button type="button" data-choice="2">② 본인 및 직계가족</button>
+<button type="button" data-choice="3">③ 본인 및 소속 부대장</button>
+<button type="button" data-choice="4">④ 본인 및 함께 휴가를 다녀온 친구들</button>
+<button type="button" data-choice="5">⑤ 본인의 요청이 없으면 아무에게도 통보하지 않음</button></div>
+    <p class="feedback" aria-live="polite"></p>
+    <details class="answer"><summary>정답·해설 보기</summary>
+      <p><b>정답 ③ 본인 및 소속 부대장.</b> 검진 결과는 원칙적으로 본인 외의 사람에게 통보할 수 없다. 다만 검진 대상자가 군, 교정시설 등 공동생활자인 경우 해당 기관의 장에게도 통보한다. 직계가족이나 휴가를 함께 다녀온 친구는 통보 대상이 아니다.</p>
+    </details>
+  </div>
+</details>
+      <details class="quiz-block" id="q-hiv-confirm">
+  <summary><span>25Y 형성 · 애매한 문제 · 확인검사 의뢰</span></summary>
+  <div class="mcq" data-answer="1">
+    <p class="stem">검진을 목적으로 혈액검사를 실시하는 기관에서 검사 결과 후천성면역결핍증 감염이 의심되는 가검물을 발견하였다. 당해 검진기관은 누구에게 검사를 의뢰하여 확인검사를 받아야 하는가? ☆</p>
+    <div class="options"><button type="button" data-choice="1">① 보건환경연구원의 장</button>
+<button type="button" data-choice="2">② 보건복지부 감염관리위원회 위원장</button>
+<button type="button" data-choice="3">③ 보건복지부 후천성면역결핍증후군대책위원회 위원장</button>
+<button type="button" data-choice="4">④ 보건소장</button>
+<button type="button" data-choice="5">⑤ 국립검역소장</button></div>
+    <p class="feedback" aria-live="polite"></p>
+    <details class="answer"><summary>정답·해설 보기</summary>
+      <p><b>정답 ① 보건환경연구원의 장.</b> 슬라이드의 표시 정답은 보건환경연구원의 장이다. 이 문항은 “애매한 문제”로 따로 표시되어 있으므로, 시험 직전에는 문항 자체와 정답 연결을 그대로 기억한다.</p>
+    </details>
+  </div>
+</details>
+    </div>
+  </section>
+
+  <section id="hiv-management">
+    <h2>9. 요양시설, 전파매개행위 금지, 부양가족 보호, 비용 부담</h2>
+    <h3>요양시설과 쉼터</h3>
+    <p>질병관리청장 또는 시·도지사는 감염인의 요양 및 치료 등을 위한 <b>요양시설</b>과 감염인에 대한 정보 제공, 상담 및 자활 등을 위한 <b>쉼터</b>를 설치·운영할 수 있다.</p>
+
+    <h3>전파매개행위 금지</h3>
+    <p><b class="exam">감염인은 혈액 또는 체액을 통하여 다른 사람에게 전파매개행위를 해서는 안 된다.</b> 보건지도 문항의 정답은 이 조항과 직접 연결된다.</p>
+
+    <h3>부양가족 보호</h3>
+    <p>특별자치시장·특별자치도지사·시장·군수 또는 구청장은 감염인 중 부양가족의 생계유지가 곤란하다고 인정할 때, 대통령령이 정하는 바에 따라 그 부양가족의 생활보호에 필요한 조치를 해야 한다.</p>
+
+    <h3>비용 부담</h3>
+    <p>다음 비용은 대통령령으로 정하는 바에 따라 국가 또는 지방자치단체가 부담하거나 전부 또는 일부를 보조한다.</p>
+    <ol>
+      <li>검진 비용</li>
+      <li>역학조사 비용</li>
+      <li>전문진료기관 또는 연구기관의 설치·운영 비용</li>
+      <li>전문진료기관에서의 진료 비용</li>
+      <li>생활보호 비용</li>
+      <li>위탁받은 단체 또는 기관의 후천성면역결핍증 예방 교육·홍보 비용</li>
+      <li>위탁받은 단체 또는 기관의 요양시설 및 쉼터 설치·운영 비용</li>
+    </ol>
+
+    <div class="quiz-wrap">
+      <details class="quiz-block" id="q-hiv-guidance">
+  <summary><span>후천성면역결핍증 예방법-예제 4 · 보건지도</span></summary>
+  <div class="mcq" data-answer="5">
+    <p class="stem">인체면역결핍바이러스에 감염된 35세 남자를 진단할 의사가 전파 방지에 필요한 사항을 알리고 이를 준수하도록 지도하려고 한다. 의사가 할 보건지도의 내용으로 옳은 것은?</p>
+    <div class="options"><button type="button" data-choice="1">① “다음 달부터는 헌혈을 하셔도 됩니다.”</button>
+<button type="button" data-choice="2">② “환자분 아버님께 이 사실을 알릴 수 밖에 없습니다.”</button>
+<button type="button" data-choice="3">③ “치료를 시작하겠습니다. 거부하셔도 법에 따라 강제로 할 것입니다.”</button>
+<button type="button" data-choice="4">④ “환자분 직장의 보건관리자에게 이 사실을 알려서 전파 예방을 위한 조치를 취할 것입니다.“</button>
+<button type="button" data-choice="5">⑤ “전파 가능성이 이렇게 높은데도 다른 사람에게 전파를 매개하는 행위를 하면 형사처벌을 받을 수도 있습니다.”</button></div>
+    <p class="feedback" aria-live="polite"></p>
+    <details class="answer"><summary>정답·해설 보기</summary>
+      <p><b>정답 ⑤.</b> 감염인은 혈액 또는 체액을 통하여 다른 사람에게 전파매개행위를 해서는 안 된다. ① 헌혈 허용, ② 가족에게 일방 통보, ③ 강제치료, ④ 직장 보건관리자 통보는 이 문항의 보건지도와 비밀보호 원칙에 맞지 않는다.</p>
+    </details>
+  </div>
+</details>
+    </div>
+  </section>
+
+  <section id="checklist">
+    <h2>10. 최종 점검표</h2>
+    <table>
+      <thead><tr><th>구분</th><th>반드시 확인할 내용</th></tr></thead>
+      <tbody>
+        <tr><td>검역법 숫자</td><td>검역관리 기본계획 <b>5년</b>, 콜레라 <b>5일</b>, 페스트 <b>6일</b>, 황열 <b>6일</b>, SARS <b>10일</b>, 동물인플루엔자 인체감염증 <b>10일</b>, MERS <b>14일</b>, 에볼라바이러스병 <b>21일</b>.</td></tr>
+        <tr><td>검역조치</td><td>환자 감시·격리, 접촉자/위험요인 노출자 감시·격리, 화물 소독·폐기·이동금지, 장소 소독·사용금지/제한, 운송수단·화물 검사, 매개체 제거 명령, 사람 진찰·검사, 예방접종.</td></tr>
+        <tr><td>격리 해제</td><td>검역감염병 환자등은 <b>감염력이 없어질 때까지</b> 격리하고, 지나면 <b>즉시 해제</b>.</td></tr>
+        <tr><td>HIV 신고</td><td>진단 또는 사체 검안: <b>24시간 이내 관할 보건소장</b>. 학술연구·혈액검사 발견: <b>24시간 이내 질병관리청장</b>. 사망 처리: <b>24시간 이내 관할 보건소장</b>.</td></tr>
+        <tr><td>비밀보호</td><td>본인 동의 또는 법령상 근거 없이는 감염인 비밀을 누설하지 않는다. 사업주에게 검진결과서 제출을 요구할 수 없다.</td></tr>
+        <tr><td>검진·통보</td><td>감염인의 배우자 및 성 접촉자는 검진 대상. 정기검진은 <b>6개월 간격, 1년에 2회</b>. 통보는 원칙적으로 본인에게만, 군·교정시설 등 공동생활자는 기관장에게도, 미성년자 등은 법정대리인에게도.</td></tr>
+        <tr><td>애매한 문제</td><td>의심 가검물 확인검사 의뢰: <b>보건환경연구원의 장</b>으로 연결해 기억.</td></tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <p>이 학습자료는 업로드된 0507_4 PDF의 슬라이드 순서와 강조 내용을 재구성한 자료다. 법령 학습용으로 사용하고, 실제 법률 적용에는 최신 법령과 기관 지침을 별도로 확인한다.</p>
+    <p class="small">원본 마지막 슬라이드 연락처: agnus@hanyang.ac.kr</p>
+  </div>
+</footer>
+<script>
+function updateProgress() {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+  document.getElementById('progress').style.width = pct + '%';
+}
+window.addEventListener('scroll', updateProgress);
+updateProgress();
+
+document.querySelectorAll('.mcq').forEach(mcq => {
+  const answer = mcq.dataset.answer;
+  const feedback = mcq.querySelector('.feedback');
+  mcq.querySelectorAll('.options button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      mcq.querySelectorAll('.options button').forEach(b => b.classList.remove('correct','wrong'));
+      if (btn.dataset.choice === answer) {
+        btn.classList.add('correct');
+        feedback.textContent = '정답입니다.';
+      } else {
+        btn.classList.add('wrong');
+        const correct = mcq.querySelector('.options button[data-choice="' + answer + '"]');
+        if (correct) correct.classList.add('correct');
+        feedback.textContent = '오답입니다. 표시된 정답과 해설을 확인하세요.';
+      }
+    });
+  });
+});
+function showPeriod() {
+  const v = document.getElementById('diseaseSelect').value.split(':');
+  document.getElementById('periodOut').textContent = v[0] + ': ' + v[1];
+}
+function showNotify() {
+  document.getElementById('notifyOut').textContent = document.getElementById('notifySelect').value;
+}
+function toggleExamMode() {
+  document.body.classList.toggle('exam-mode');
+}
+let questionsOpen = false;
+function toggleAllQuestions() {
+  questionsOpen = !questionsOpen;
+  document.querySelectorAll('.quiz-block').forEach(d => d.open = questionsOpen);
+}
+</script>
+</body>
+</html>

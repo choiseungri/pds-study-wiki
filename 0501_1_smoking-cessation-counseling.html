@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>0501_1 금연 상담 진료 - 학습자료</title>
+<style>
+  :root { --text:#151515; --muted:#666; --line:#d8d8d8; --accent:#0f5f7a; --danger:#b42318; --mark:#fff38a; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:#fff; color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif; line-height:1.72; word-break:keep-all; }
+  #progress { position:fixed; top:0; left:0; height:4px; width:0; background:var(--accent); z-index:1000; }
+  .wrap { max-width:1120px; margin:0 auto; padding:0 22px; }
+  header { padding:58px 0 28px; border-bottom:1px solid var(--line); }
+  h1 { font-size:clamp(2rem,4vw,3.8rem); letter-spacing:-.04em; line-height:1.12; margin:0 0 12px; }
+  h2 { font-size:clamp(1.55rem,3vw,2.25rem); letter-spacing:-.04em; margin:70px 0 20px; padding-bottom:10px; border-bottom:2px solid var(--line); }
+  h3 { font-size:1.28rem; letter-spacing:-.03em; margin:34px 0 10px; }
+  h4 { font-size:1.06rem; margin:22px 0 8px; }
+  p { margin:10px 0; }
+  a { color:var(--accent); text-underline-offset:.18em; }
+  nav { position:sticky; top:4px; z-index:900; background:rgba(255,255,255,.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  nav .wrap { display:flex; gap:10px; align-items:center; overflow:auto; padding-top:10px; padding-bottom:10px; }
+  nav a, nav button { white-space:nowrap; font-size:.94rem; color:var(--text); border:1px solid var(--line); border-radius:999px; padding:6px 12px; background:#fff; cursor:pointer; text-decoration:none; }
+  nav a:hover, nav button:hover { border-color:#777; }
+  .meta { color:var(--muted); font-size:.96rem; }
+  .lead { font-size:1.13rem; max-width:920px; }
+  mark, .hl { background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 .08em; }
+  .exam { font-weight:800; text-decoration:underline; text-decoration-thickness:.14em; text-underline-offset:.18em; text-decoration-color:#e8c100; }
+  .red { color:var(--danger); font-weight:700; }
+  .muted { color:var(--muted); }
+  .small { font-size:.92rem; }
+  .star { font-weight:900; }
+  .grid { display:grid; gap:18px; }
+  .two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  @media (max-width:860px) { .two,.three { grid-template-columns:1fr; } }
+  .plain-card { border:1px solid var(--line); border-radius:18px; padding:18px; background:#fff; }
+  ul.tight li, ol.tight li { margin:4px 0; }
+  table { width:100%; border-collapse:collapse; margin:14px 0 22px; }
+  th, td { border-bottom:1px solid var(--line); padding:10px 8px; vertical-align:top; text-align:left; }
+  th { font-weight:800; }
+  details { border:1px solid var(--line); border-radius:16px; padding:12px 16px; background:#fff; margin:12px 0; }
+  summary { cursor:pointer; font-weight:800; }
+  .practice-toggle { margin:22px 0 34px; }
+  .practice-toggle summary { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:1.08rem; }
+  .practice-toggle summary::after { content:"열기"; font-size:.86rem; color:var(--muted); font-weight:700; }
+  .practice-toggle[open] summary::after { content:"닫기"; }
+  .q { border-top:1px solid var(--line); padding:16px 0; }
+  .q:first-of-type { border-top:0; }
+  .q .stem { font-weight:800; }
+  .answer { margin-top:10px; }
+  .answer summary { font-weight:800; }
+  .options { margin:8px 0 0 1.1em; }
+  .options li { margin:4px 0; }
+  .calc { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; align-items:end; margin:14px 0; }
+  .calc label { display:block; font-weight:800; font-size:.94rem; }
+  .calc select,.calc input { width:100%; border:1px solid var(--line); border-radius:12px; padding:9px 10px; font:inherit; background:#fff; }
+  .calc button,.copybtn { border:1px solid var(--line); border-radius:12px; background:#fff; padding:10px 14px; font:inherit; cursor:pointer; }
+  #ftndOut,#stageOut { font-weight:800; margin:10px 0; }
+  @media (max-width:800px) { .calc { grid-template-columns:1fr; } }
+  .exam-only { display:none; }
+  body.exam-mode .deep { display:none !important; }
+  body.exam-mode .exam-only { display:block; }
+  body.exam-mode h2 { margin-top:44px; }
+  .toc { columns:2; column-gap:36px; }
+  .toc li { break-inside:avoid; margin:5px 0; }
+  @media (max-width:700px) { .toc { columns:1; } }
+  .barrow { display:grid; grid-template-columns:160px 1fr 60px; gap:10px; align-items:center; margin:6px 0; }
+  .bar { height:10px; border:1px solid var(--line); border-radius:999px; overflow:hidden; }
+  .bar span { display:block; height:100%; background:#222; }
+  .foot { border-top:1px solid var(--line); margin-top:72px; padding:26px 0 52px; color:var(--muted); }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<header>
+  <div class="wrap">
+    <p class="meta">0501_1 · 금연 상담 진료 · 한양대병원 가정의학과 박계영 교수님 강의록 재구성</p>
+    <h1>“금연을 해보세요!”<br>금연 상담 진료</h1>
+    <p class="lead">흡연을 단순한 습관이 아니라 <mark>니코틴 중독</mark>으로 보고, 흡연 위험·금연 이득·의존도 평가·단계별 상담·약물치료까지 한 번에 연결하는 학습자료입니다. 별표 표시가 된 슬라이드는 본문에서 <span class="star">⭐ 핵심 페이지</span>로 따로 강조했습니다.</p>
+    <p class="meta">원본 범위: 1-86쪽. 문제는 제공된 기출·형성·총괄 문항을 가능한 한 원문 형태로 보존하고, 정답과 해설을 함께 넣었습니다.</p>
+  </div>
+</header>
+<nav aria-label="본문 이동">
+  <div class="wrap">
+    <a href="#overview">개요</a>
+    <a href="#starred">별표 페이지</a>
+    <a href="#risk">위험·성분</a>
+    <a href="#nicotine">니코틴</a>
+    <a href="#disease">질병</a>
+    <a href="#benefit">금연 효과</a>
+    <a href="#treatment">상담·약물</a>
+    <a href="#assessment">병력청취</a>
+    <a href="#stages">금연 단계</a>
+    <a href="#cases">증례</a>
+    <a href="#archive">기출</a>
+    <button type="button" onclick="toggleExamMode()">시험 직전 모드</button>
+  </div>
+</nav>
+<main class="wrap">
+  <section id="overview">
+    <h2>1. 전체 흐름</h2>
+    <p>흡연자는 평균적으로 비흡연자보다 수명이 짧고, 조기 사망하지 않더라도 각종 질환으로 삶의 질이 떨어진다. 그러나 대부분의 흡연자는 “나는 예외일 것”이라고 생각한다. 그래서 금연 상담은 <b>위험을 알리는 교육</b>과 <b>금연을 선택하도록 돕는 동기강화</b>가 동시에 필요하다.</p>
+    <div class="grid two">
+      <div class="plain-card">
+        <h3>강의의 핵심 질문</h3>
+        <ul class="tight">
+          <li>담배가 왜 해로운가?</li>
+          <li>조금만 피우면 괜찮은가?</li>
+          <li>담배가 스트레스 해소에 도움이 되는가?</li>
+          <li>금연하면 정말 살이 찌는가?</li>
+          <li>좀 쉽게 끊을 수 있는가?</li>
+        </ul>
+      </div>
+      <div class="plain-card">
+        <h3>상담의 기본 구조</h3>
+        <ol class="tight">
+          <li><b>흡연 상태</b>와 <b>금연 의지</b>를 평가한다.</li>
+          <li>금연 의지가 없으면 <b>동기유발 전략</b>으로 금연을 권유한다.</li>
+          <li>금연 의지가 있으면 <b>니코틴 의존도</b>를 평가하고 금연을 돕는다.</li>
+          <li>흡연은 예방 가능한 가장 중요한 사망 원인이며 <b>질병, 즉 니코틴 중독</b>으로 접근한다.</li>
+        </ol>
+      </div>
+    </div>
+    <h3>출제 경향</h3>
+    <p>표지 메모에는 2025년부터 박계영 교수님 출제, 2018-2023년에는 황환식 교수님 출제였다는 흐름이 적혀 있다. 2025년 첫 출제라 세부 “야마”는 확정하기 어렵지만, 자료 전체가 <span class="exam">케이스 적용형</span>으로 반복된다. 특히 <b>15세·40세·50세 증례</b>, <b>금연 효과</b>, <b>니코틴 의존도</b>, <b>단계별 상담</b>, <b>약물치료</b>가 반복된다.</p>
+    <details class="practice-toggle">
+      <summary><span>빠른 목차 보기</span></summary>
+      <ol class="toc">
+        <li>흡연자의 위험과 담배에 대한 오해</li>
+        <li>니코틴 중독, 금단증상, 의존도 설문</li>
+        <li>우리나라 흡연율과 담배연기의 구성성분</li>
+        <li>타르·일산화탄소·독성물질</li>
+        <li>흡연이 일으키는 질병과 간접흡연</li>
+        <li>금연의 효과, 보상, 오해 교정</li>
+        <li>상담과 약물 병합의 근거</li>
+        <li>니코틴 대체요법, 바레니클린, 부프로피온</li>
+        <li>병력청취와 금연 장애요인 평가</li>
+        <li>변화단계 이론과 단계별 중재</li>
+        <li>증례 1-3 적용</li>
+        <li>기출·형성·총괄 문항</li>
+      </ol>
+    </details>
+  </section>
+
+  <section id="starred">
+    <h2>2. <span class="star">⭐</span> 별표 표시 핵심 페이지</h2>
+    <p>별표가 표시된 페이지는 단순 암기보다 <b>증례 적용</b>으로 물릴 가능성이 높다. 이 페이지들은 HTML 전체에서 다시 반복해 설명한다.</p>
+    <table>
+      <thead><tr><th>원본 쪽</th><th>핵심 내용</th><th>시험식 연결</th></tr></thead>
+      <tbody>
+        <tr><td>5, 74쪽</td><td><b>15세 남학생</b>: 하루 2-3개비, 친구들과 흡연, 금연 필요성과 피해를 느끼지 못함.</td><td><mark>고려 전 단계</mark>. 흡연 위험 알리기, 적합한 동기부여, 반복적 권유가 맞다.</td></tr>
+        <tr><td>6, 76쪽</td><td><b>40세 남자</b>: 장기 흡연, 아침 첫 담배, 금연구역에서 참기 어려움, 스트레스 후 흡연량 증가, 과거 금단증상으로 실패.</td><td>니코틴 의존도가 높고 약물치료를 처음부터 고려한다. 25Y 문항은 고도 의존으로 처리한다.</td></tr>
+        <tr><td>7, 78쪽</td><td><b>50세 남자</b>: 하루 2갑 30년, 고혈압·고지혈증·당뇨병, 체중 증가 때문에 재흡연, 음주와 흡연 친구 많음.</td><td><mark>준비 단계</mark>. 체중 증가보다 금연 이득이 크며, 상담과 약물요법을 병행한다.</td></tr>
+        <tr><td>38쪽</td><td><b>금연의 효과</b>: 사망 위험, 폐암, COPD, 관상동맥질환, 뇌혈관질환의 시간 경과별 위험 감소.</td><td>25Y 단독 문항. “전체 사망위험 10-15년 후 비흡연자와 거의 동일”이 핵심.</td></tr>
+        <tr><td>80쪽</td><td><b>금연 단계별 중재 흐름도</b>: 금연 의도 유무와 시간축에 따라 중재가 달라짐.</td><td>고려 전/고려/준비/실행/유지 단계에 맞는 상담기법을 고르는 문제로 반복.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="risk">
+    <h2>3. 흡연자의 위험과 담배연기 성분</h2>
+    <h3>흡연자의 위험</h3>
+    <ul>
+      <li><b>흡연자 2명 중 1명</b>은 흡연으로 인한 질병으로 사망한다.</li>
+      <li>흡연자의 평균 수명은 비흡연자보다 약 <b>10년</b> 짧다.</li>
+      <li>조기에 사망하지 않더라도 흡연 관련 질병 때문에 삶의 질이 나쁘다.</li>
+      <li>흡연자는 대개 자신만은 그런 질병에 걸리지 않을 것이라고 생각한다.</li>
+    </ul>
+    <h3>담배는 스트레스 해소법이 아니다</h3>
+    <p>흡연자는 “담배는 인생의 유일한 낙”, “몸에는 나빠도 정신건강에는 좋다”, “정신 집중에 좋다”, “스트레스 해소에 좋다”, “짧고 굵게 살면 된다”라고 말한다. 그러나 이 강의의 메시지는 분명하다. <mark>담배는 스트레스 해소법이 아니라 스트레스의 원인</mark>이다.</p>
+    <h3>마약의 의존성에서 담배의 위치</h3>
+    <table>
+      <thead><tr><th>의존성 강도</th><th>약물</th></tr></thead>
+      <tbody>
+        <tr><td>상</td><td>헤로인, 모르핀/아편, <b>담배</b></td></tr>
+        <tr><td>중</td><td>발륨, 암페타민</td></tr>
+        <tr><td>하</td><td>마리화나, LSD</td></tr>
+      </tbody>
+    </table>
+    <h3>우리나라 흡연율과 정책 자료</h3>
+    <ul>
+      <li>성인 남성 흡연율은 2016년 40.7%로 OECD 국가 중 높은 수준이었고, 2022년 30.0%까지 감소했다가 2023년 32.4%로 증가했다. 슬라이드에는 특히 <b>50대 남성</b> 증가가 강조되어 있다.</li>
+      <li>성인 여성 흡연율은 2016년 6.4%, 2018년 7.5%, 2022년 5%, 2023년 6.3%로 제시된다. 슬라이드에는 <b>20대 여성</b> 증가가 표시되어 있다.</li>
+      <li>성인 여성 흡연은 과소 보고되어 실제 흡연율은 <b>2배 정도</b>일 수 있다고 본다.</li>
+      <li>담뱃값·세수·OECD 담뱃값 비교 자료는 2015, 2024, 2025년 기사 화면으로 제시되어 있으며, 금연정책이 개인 상담뿐 아니라 가격·세금 정책과도 연결됨을 보여준다.</li>
+    </ul>
+    <h3>담배연기의 구성 성분</h3>
+    <p>담배연기에는 <b>타르</b>, <b>일산화탄소</b>, <b>니코틴</b>, <b>발암물질</b>이 포함되며, 그밖에도 흡연 시 약 <b>4,000여 종</b>의 화학 성분이 생성되어 인체로 흡입된다.</p>
+    <div class="grid two">
+      <div>
+        <h4>타르</h4>
+        <ul class="tight">
+          <li>담배 연기 성분 중 제일 위험하다.</li>
+          <li><b>50여 종의 발암물질</b>을 함유한다.</li>
+          <li>암과 폐질환을 유발한다.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>일산화탄소</h4>
+        <ul class="tight">
+          <li>무색무취의 가스다.</li>
+          <li>산소 부족과 혈액순환장애를 유발한다.</li>
+          <li>동맥벽 손상과 좁아진 심장혈관의 발작 위험을 증가시킨다.</li>
+          <li>호기 중 일산화탄소를 측정할 수 있다.</li>
+        </ul>
+      </div>
+    </div>
+    <h3>담배에 들어 있는 독성물질의 예</h3>
+    <p>슬라이드는 “담배 속 물질”을 일상적 독성물질에 빗대어 보여준다. 예시는 나프타린, 디디티, 폴로늄 210, 우레탄, 부탄, 타르, 아세톤, 포름알데히드, 암모니아, 일산화탄소, 청산가스, 메타놀, 나프티라민, 벤젠, 비닐크롤라이드, 니켈, 크로뮴, 카드뮴, 비소, 벤조피렌, 디메칠니트로사민, 페놀, 니코틴 등이다. 별표가 붙은 성분은 사람에게 증명된 발암물질로 제시되어 있다.</p>
+  </section>
+
+  <section id="nicotine">
+    <h2>4. 니코틴 중독, 금단증상, 의존도 평가</h2>
+    <p>니코틴은 담배에 중독을 일으키는 물질이다. 흡연중독 과정은 헤로인·코카인 같은 마약 중독 과정과 유사하다. 뇌에서는 α4β2 nicotinic receptor와 도파민 경로가 강조된다.</p>
+    <h3>니코틴의 신경약리학적 효과</h3>
+    <table>
+      <thead><tr><th>신경전달물질/호르몬</th><th>효과</th></tr></thead>
+      <tbody>
+        <tr><td><b>도파민</b></td><td><b>즐거움, 각성</b></td></tr>
+        <tr><td>노르에피네프린</td><td>자극, 각성, 식욕감소</td></tr>
+        <tr><td>아세틸콜린</td><td>기억, 인지 기능 향상</td></tr>
+        <tr><td>글루타메이트</td><td>학습 및 기억력 향상</td></tr>
+        <tr><td>가바</td><td>이완, 불안 해소</td></tr>
+        <tr><td>바소프레신</td><td>혈압</td></tr>
+        <tr><td>엔도르핀</td><td>긴장 및 불안 감소</td></tr>
+        <tr><td>프롤락틴</td><td>유즙분비</td></tr>
+      </tbody>
+    </table>
+    <h3>금연 1주의 금단증상</h3>
+    <div class="grid two">
+      <div>
+        <div class="barrow"><span>불안</span><div class="bar"><span style="width:87%"></span></div><b>87%</b></div>
+        <div class="barrow"><span>수면장애</span><div class="bar"><span style="width:84%"></span></div><b>84%</b></div>
+        <div class="barrow"><span>화를 잘 냄</span><div class="bar"><span style="width:80%"></span></div><b>80%</b></div>
+        <div class="barrow"><span>조바심·초조</span><div class="bar"><span style="width:76%"></span></div><b>76%</b></div>
+        <div class="barrow"><span>집중 곤란</span><div class="bar"><span style="width:73%"></span></div><b>73%</b></div>
+      </div>
+      <div>
+        <div class="barrow"><span>싱숭생숭·들뜸</span><div class="bar"><span style="width:71%"></span></div><b>71%</b></div>
+        <div class="barrow"><span>담배 갈망</span><div class="bar"><span style="width:62%"></span></div><b>62%</b></div>
+        <div class="barrow"><span>공복감</span><div class="bar"><span style="width:53%"></span></div><b>53%</b></div>
+        <div class="barrow"><span>소화기관 문제</span><div class="bar"><span style="width:24%"></span></div><b>24%</b></div>
+        <div class="barrow"><span>졸림</span><div class="bar"><span style="width:22%"></span></div><b>22%</b></div>
+      </div>
+    </div>
+    <h3>니코틴 의존도 설문: Fagerström Test</h3>
+    <table>
+      <thead><tr><th>질문</th><th>답변과 점수</th></tr></thead>
+      <tbody>
+        <tr><td>1. 아침에 일어나서 얼마 만에 첫 담배를 피우십니까?</td><td>5분 이내 3점, 6-30분 2점, 31-60분 1점, 60분 이후 0점</td></tr>
+        <tr><td>2. 지하철, 버스, 병원, 영화관 등 금연구역에서 흡연욕구를 참는 것이 어렵습니까?</td><td>예 1점, 아니오 0점</td></tr>
+        <tr><td>3. 가장 포기하기 싫은 담배는?</td><td>아침 첫 담배 1점, 그 외 0점</td></tr>
+        <tr><td>4. 하루에 담배를 몇 개비 피우십니까?</td><td>10개비 이하 0점, 11-20개비 1점, 21-30개비 2점, 31개비 이상 3점</td></tr>
+        <tr><td>5. 깨어나서 처음 몇 시간 피우는 흡연량이 하루의 다른 때보다 많습니까?</td><td>예 1점, 아니오 0점</td></tr>
+        <tr><td>6. 아파서 거의 하루 종일 누워 있거나 감기·독감으로 호흡이 곤란할 때도 담배를 피우십니까?</td><td>예 1점, 아니오 0점</td></tr>
+      </tbody>
+    </table>
+    <p><b>0-3점</b> 낮은 의존도, <b>4-6점</b> 중간 의존도, <b>7-10점</b> 높은 의존도다. 7-10점이면 금단증상이 더 심하고, 금연이 더 어렵고, 더 고용량의 니코틴 보충이 필요하다.</p>
+    <details class="practice-toggle" open>
+      <summary><span>FTND 간이 계산기</span></summary>
+      <div class="calc">
+        <label>첫 담배 시간<select id="ftnd1"><option value="3">5분 이내</option><option value="2">6-30분</option><option value="1">31-60분</option><option value="0">60분 이후</option></select></label>
+        <label>금연구역 참기 어려움<select id="ftnd2"><option value="1">예</option><option value="0">아니오</option></select></label>
+        <label>가장 포기하기 싫은 담배<select id="ftnd3"><option value="1">아침 첫 담배</option><option value="0">그 외</option></select></label>
+        <label>하루 흡연량<select id="ftnd4"><option value="0">10개비 이하</option><option value="1">11-20개비</option><option value="2">21-30개비</option><option value="3">31개비 이상</option></select></label>
+        <label>처음 몇 시간 흡연량 많음<select id="ftnd5"><option value="1">예</option><option value="0">아니오</option></select></label>
+        <label>아플 때도 흡연<select id="ftnd6"><option value="1">예</option><option value="0">아니오</option></select></label>
+      </div>
+      <button class="copybtn" type="button" onclick="calcFtnd()">계산</button>
+      <p id="ftndOut">점수를 계산해 보세요.</p>
+    </details>
+
+    <details class="practice-toggle">
+      <summary><span>니코틴 단원 문제</span></summary>
+      <div class="q"><p class="stem">[23 형성] 4. 니코틴의 신경전달물질중 즐거움과 각성에 관여하는 물질은?</p><ul class="options"><li>아세틸콜린</li><li>가바</li><li>도파민</li><li>노르에피네프린</li></ul><details class="answer"><summary>정답과 해설</summary><p><b>정답: 3번 도파민.</b> 니코틴은 도파민을 통해 즐거움과 각성을 유발한다.</p></details></div>
+      <div class="q"><p class="stem">[22 형성] 2. 니코틴의 신경전달물질중 즐거움과 각성에 관여하는 물질은?</p><ul class="options"><li>아세틸콜린</li><li>가바</li><li>도파민</li><li>노르에피네프린</li></ul><details class="answer"><summary>정답과 해설</summary><p><b>정답: 3번 도파민.</b> 반복 출제 포인트다.</p></details></div>
+      <div class="q"><p class="stem">[18 형성] 29. 니코틴에 의해 분비되며, 즐거움과 각성에 관여하는 신경전달물질은?</p><ul class="options"><li>노르에피네프린</li><li>아세틸콜린</li><li>도파민</li><li>가바</li></ul><details class="answer"><summary>정답과 해설</summary><p><b>정답: 도파민.</b> 슬라이드 12에서 도파민은 즐거움·각성으로 연결된다.</p></details></div>
+    </details>
+  </section>
+
+  <section id="disease">
+    <h2>5. 흡연이 일으키는 질병과 간접흡연</h2>
+    <h3>흡연으로 사망할 확률</h3>
+    <table>
+      <thead><tr><th>사건</th><th>사망 확률</th></tr></thead>
+      <tbody><tr><td>비행기 사고</td><td>50만분의 1</td></tr><tr><td>익사</td><td>9만분의 1</td></tr><tr><td>교통사고</td><td>6천5백분의 1</td></tr><tr><td><b>흡연에 의한 질병</b></td><td><b>4분의 1</b></td></tr></tbody>
+    </table>
+    <h3>담배로 인해 초래되는 사망</h3>
+    <p>WHO Global Report 2012 표에서 한국은 담배로 인해 초래되는 사망이 남자 26%, 여자 15%, 전체 성인 21%로 제시된다. 전세계 평균은 남자 16%, 여자 7%, 전체 성인 12%다.</p>
+    <h3>흡연이 일으키는 질병</h3>
+    <ul>
+      <li><b>암</b>: 모든 암의 30%. 폐암, 후두암, 구강암, 식도암, 인두암, 신장암, 방광암, 췌장암, 위암, 자궁암, 백혈병 등.</li>
+      <li><b>심혈관·뇌혈관 질환</b>: 심장병, 중풍, 말초혈관질환.</li>
+      <li><b>호흡기 질환</b>: 만성 기관지염, 폐기종.</li>
+    </ul>
+    <h3>흡연자가 병에 걸려 사망할 위험</h3>
+    <table>
+      <thead><tr><th>질환</th><th>상대 위험</th></tr></thead>
+      <tbody><tr><td>폐암</td><td>17</td></tr><tr><td>기관지염</td><td>15</td></tr><tr><td>식도암</td><td>15</td></tr><tr><td>직장암</td><td>3.5</td></tr><tr><td>순환기질환</td><td>10</td></tr><tr><td>간경화</td><td>5</td></tr><tr><td>위궤양</td><td>3</td></tr></tbody>
+    </table>
+    <h3>폐암·폐기종 위험</h3>
+    <table>
+      <thead><tr><th>하루 담배 개비수</th><th>폐암 발생 위험</th></tr></thead>
+      <tbody><tr><td>비흡연자</td><td>1</td></tr><tr><td>1-10개비</td><td>5.5</td></tr><tr><td>11-19개비</td><td>11.2</td></tr><tr><td>20개비</td><td>14.2</td></tr><tr><td>21-31개비</td><td>20.4</td></tr><tr><td>31개비 초과</td><td>22</td></tr></tbody>
+    </table>
+    <table>
+      <thead><tr><th>흡연 시작연령</th><th>폐암 발생 위험</th></tr></thead>
+      <tbody><tr><td>비흡연자</td><td>1</td></tr><tr><td>15세 미만</td><td>18.7</td></tr><tr><td>15-19세</td><td>14.4</td></tr><tr><td>20-24세</td><td>9.5</td></tr><tr><td>25세 이상</td><td>5.2</td></tr></tbody>
+    </table>
+    <table>
+      <thead><tr><th>흡연량</th><th>폐기종 발생률</th></tr></thead>
+      <tbody><tr><td>0</td><td>1</td></tr><tr><td>1-9</td><td>5</td></tr><tr><td>10-19</td><td>14</td></tr><tr><td>20-39</td><td>17</td></tr><tr><td>40 이상</td><td>25</td></tr></tbody>
+    </table>
+    <h3>Smoker’s body 그림의 의미</h3>
+    <p>Smoker’s Body 도판은 흡연의 영향이 폐에만 머물지 않음을 보여준다. 제시 항목은 탈모, 백내장, 주름, 청력 손실, 피부암, 치아우식, 폐질환, 골다공증, 심장질환, 위궤양, 손가락 변색, 자궁경부암, 정자 변형, 건선, 버거씨병, 각종 암이다.</p>
+    <h3>간접흡연</h3>
+    <ul>
+      <li>어린이: 폐렴, 기관지염, 중이염, 천식이 많이 발생한다.</li>
+      <li>성인: 폐암 발생 위험이 30% 증가하고, 천식 증상 악화, 눈·코 자극, 협심증 악화, 허혈성 심장병 위험 증가가 생긴다.</li>
+      <li>간접흡연량 인포그래픽: 흡연 술집 2시간 체류는 약 4개비 흡연효과, 흡연 사무실 8시간은 약 5개비, 음식점 흡연석 2시간은 약 1개비, 하루 한갑 피우는 집 24시간은 약 3개비, 흡연 차량 1시간은 약 3개비 흡연효과로 제시된다.</li>
+    </ul>
+
+    <details class="practice-toggle">
+      <summary><span>흡연 피해 단원 문제</span></summary>
+      <div class="q"><p class="stem">[21 총괄] 1. 담배의 해악에 대한 설명 중 틀린 것은?</p><ol class="options" type="A"><li>허혈성 심질환, 중풍의 위험인자이다.</li><li>흡연자 평균수명은 비흡연자보다 7, 8년이 짧다.</li><li>간접흡연으로 폐암 발생 위험이 30% 증가한다.</li><li>4000여 종의 발암물질이 들어있다.</li><li>임산부 흡연 시 태아 체중감소를 유발할 수 있다.</li></ol><details class="answer"><summary>정답과 해설</summary><p><b>정답: D.</b> 담배연기에는 약 4,000여 종의 <b>화학 성분</b>이 들어 있고, 그중 발암물질이 포함된다. 4,000여 종 전체가 발암물질이라는 표현이 틀렸다.</p></details></div>
+      <div class="q"><p class="stem">[20 형성] 1. 다음 흡연에 대한 설명 중 옳지 않은 것은?</p><ol class="options" type="A"><li>연기가 닿는 부위에만 암을 유발한다</li><li>임산부 흡연 시 태아 체중 감소를 유발할 수 있다.</li><li>간접흡연의 결과 폐암 발생 확률이 30% 증가한다</li><li>흡연에 의해 관상동맥질환, 뇌졸중 발생이 증가한다.</li><li>흡연에 의해 폐기종 발생률이 증가한다.</li></ol><details class="answer"><summary>정답과 해설</summary><p><b>정답: A.</b> 흡연은 연기가 닿는 부위뿐 아니라 폐암, 췌장암, 방광암, 자궁암, 백혈병 등 전신적 암과 심혈관질환을 일으킨다.</p></details></div>
+    </details>
+  </section>
+
+  <section id="benefit">
+    <h2>6. <span class="star">⭐</span> 금연의 효과, 보상, 오해 교정</h2>
+    <h3>금연의 효과</h3>
+    <ul>
+      <li><b>전체적인 사망 위험도</b>는 <mark>10-15년 후 비흡연자와 거의 동일</mark>해진다.</li>
+      <li><b>폐암 위험성</b>은 10년 후 1/3 이하로 감소하고, 20년 후 비흡연자의 2배 수준으로 감소한다.</li>
+      <li><b>만성호흡기질환</b> 환자는 폐기능의 호전을 보인다.</li>
+      <li><b>관상동맥질환</b>은 1년 내 위험도가 급격히 감소하고, 5-10년 후 비흡연자와 같은 수준이 된다.</li>
+      <li><b>뇌혈관질환</b>은 2-5년 후 비흡연자와 같은 위험도를 갖는다.</li>
+    </ul>
+    <h3>금연의 보상</h3>
+    <p>금연은 건강, 미각, 후각, 냄새, 돈, 자신에 대한 느낌, 운동능력, 중독으로부터의 해방, 금연 걱정에서의 해방, 자녀에게 보이는 모범, 건강한 자녀, 타인을 간접흡연에 노출시킨다는 걱정에서 해방되는 효과를 준다.</p>
+    <h3>흡연욕구를 다스리는 4가지 방법</h3>
+    <ol>
+      <li><b>5분만 참아라.</b> 담배갑을 열거나 불을 붙이는 것을 5분만 늦추면 급한 흡연욕구가 사라진다.</li>
+      <li><b>물을 천천히 마셔라.</b> 물을 천천히 조금씩 오래 마시면 기분전환이 되어 담배 생각이 사라진다.</li>
+      <li><b>흡연 이외의 다른 일을 해라.</b> 책 읽기, 전화하기, 음악 듣기, 열쇠나 호두 등으로 손을 움직이기가 도움이 된다.</li>
+      <li><b>심호흡을 해라.</b> 천천히 심호흡하면 마음이 가라앉아 흡연 욕구에서 자유로워진다.</li>
+    </ol>
+    <h3>금연과 관련된 4가지 오해</h3>
+    <ol>
+      <li>순한 담배를 피우면 후에 천천히 끊어도 된다.</li>
+      <li>이미 오래 피웠기 때문에 끊어도 도움이 되지 않는다. 실제로는 아무리 오래 피웠어도 금연하면 즉시 효과가 나타나고, 심장병 환자도 수명이 길어지며, 80세 이후 금연해도 시력저하를 막아준다.</li>
+      <li>금연하면 체중이 증가하고 체중증가는 흡연처럼 해롭다. 실제로는 금연 후 체중이 증가할 수 있지만, 그 피해는 흡연 피해와 비교가 되지 않는다.</li>
+      <li>아무 도움 없이 어느 날 딱 끊는 방법이 가장 좋다. 실제로 혼자 하는 금연의 장기 성공률은 3-5%에 불과하고 대부분 첫 8일 이내 재발한다.</li>
+    </ol>
+
+    <details class="practice-toggle">
+      <summary><span>금연 효과 단원 문제</span></summary>
+      <div class="q"><p class="stem">[25Y] 금연의 효과에 대한 설명으로 옳은 것은?</p><ol class="options"><li>전체적인 사망 위험도가 10~15년 후 비흡연자와 거의 동일해진다.</li><li>폐암 위험성은 1년 이내에 위험도가 급격히 감소하여 10년 후에는 비흡연자와 같은 수준이 된다.</li><li>만성호흡기질환 환자는 폐 기능의 호전을 보이지 않는다.</li><li>뇌혈관질환은 40세 이하의 젊은 흡연자에게만 효과가 있다.</li><li>관상동맥질환은 10년 이후에 위험도가 감소하기 시작한다.</li></ol><details class="answer"><summary>정답과 해설</summary><p><b>정답: 1번.</b> 전체 사망 위험은 10-15년 후 비흡연자와 거의 같아진다. 폐암은 10년 후 1/3 이하, 20년 후 비흡연자의 2배 수준이다. 관상동맥질환은 1년 내 급격히 감소한다.</p></details></div>
+      <div class="q"><p class="stem">[25Y] 50세 남자가 하루 2갑을 30년간 피웠다. 10년 전부터 고혈압과 고지혈증으로 치료중이다. 한달 전 새롭게 당뇨병을 진단받은 뒤 금연을 결심하기로 했는데, 체중 증가 부작용이 두려워 고민하고 있다. 이 환자에게 해줄 말로 옳은 것은?</p><ol class="options"><li>금연은 심혈관계 위험을 감소시키지 않는다.</li><li>체중이 증가하면 심혈관계 질환의 위험이 증가할 수 있으므로, 우선 비약물적 요법으로 체중 감량을 한 후에 금연을 시작하도록 한다.</li><li>금연을 하면 체중이 증가할 수 있으므로, 니코틴 요법 대신 다른 치료방법을 선택한다.</li><li>금연은 건강의 즉각적인 효과가 있으므로 약물 요법을 병행하며 금연을 시작한다.</li><li>체중 감소를 위해 생활습관을 교정한 뒤 금연을 시작한다.</li></ol><details class="answer"><summary>정답과 해설</summary><p><b>정답: 4번.</b> 체중 증가 가능성은 설명하되 금연의 심혈관·당뇨 관련 이득이 훨씬 크다. 금연을 미루지 말고 상담과 약물요법을 병행한다.</p></details></div>
+    </details>
+  </section>
+
+  <section id="treatment">
+    <h2>7. 금연 상담과 약물치료</h2>
+    <h3>금연진료가 중요한 근거</h3>
+    <ul>
+      <li>혼자 하는 금연의 장기 성공률은 <b>3-5%</b>다.</li>
+      <li>대부분의 재발은 첫 <b>8일</b> 이내에 일어난다.</li>
+      <li>의료진이 3분 이내의 짧은 금연권고만 해도 금연성공률은 약 <b>1.7배</b> 증가하고, 절대 금연율은 <b>2.5%</b> 증가한다.</li>
+      <li>금연권고의 교차비는 짧은 권고 vs 무권고 1.66, 집중 상담 vs 최소 상담 1.37, 개별 상담 1.73, 집단 상담 2.04-2.17, 능동적 전화 상담 1.56, 자가 금연 자료 1.24로 제시된다.</li>
+    </ul>
+    <h3>약물과 상담 병합</h3>
+    <table><thead><tr><th>치료방법</th><th>대상 연구수</th><th>추정 교차비</th><th>추정 금연율</th></tr></thead><tbody><tr><td>약물치료 단독</td><td>8</td><td>1.0</td><td>21.7%</td></tr><tr><td>약물치료와 상담 병합</td><td>39</td><td>1.4 (1.2-1.6)</td><td>27.6% (25.0-30.3)</td></tr></tbody></table>
+    <h3>금연약물의 효과</h3>
+    <table><thead><tr><th>약물</th><th>위약 대비 오즈비</th><th>포인트</th></tr></thead><tbody><tr><td>위약</td><td>1</td><td>기준</td></tr><tr><td>니코틴 대체요법</td><td>1.84</td><td>패치·껌·정제</td></tr><tr><td>부프로피온</td><td>1.82</td><td>금연 2주 전 시작</td></tr><tr><td><b>바레니클린</b></td><td><b>2.88</b></td><td><b>가장 효과 좋음</b></td></tr></tbody></table>
+    <h3>약물치료 시작 시점</h3>
+    <ul>
+      <li><b>니코틴 대체요법</b>: 패치, 껌, 정제. 금연일부터 시작한다. 니코틴 패치는 3개월 이상 사용하지 않도록 한다.</li>
+      <li><b>바레니클린</b>: 금연 시작 1주 전부터 복용한다. 일반적으로 12주 복용하고, 금연 유지 위해 추가 복용 가능하다.</li>
+      <li><b>부프로피온</b>: 금연 시작 2주 전부터 복용한다. 2-3개월을 권유하며, 자료에는 6개월 이상 유지 권유도 적혀 있다.</li>
+    </ul>
+    <h3>니코틴 대체요법</h3>
+    <p>니코틴 의존 및 금단증상을 줄이기 위해 담배 대신 니코틴으로 이루어진 약제를 피부, 구강 또는 비점막 등을 통해 비교적 단기간, 약 2개월 공급하는 치료법이다. 종류는 껌, 패치, 로젠지/정제, 흡입기, 스프레이가 있다. 흡입기와 구강·비강 스프레이는 국내 시판되지 않는 것으로 표시되어 있다.</p>
+    <h4>니코틴 대체요법의 안전성</h4>
+    <ul>
+      <li>금기증: 심한 부정맥, 불안정성 협심증, 4주 이내 심근경색증 같은 심혈관계 질환, 활동성 소화성 궤양, 피부 알레르기나 피부 질환.</li>
+      <li>임신·수유모: 이득이 위험보다 크면 사용 가능하다고 정리되어 있다.</li>
+      <li>부작용: 오심과 현기증, 피부 자극 증상 50%, 불면증 23%.</li>
+    </ul>
+    <h3>바레니클린</h3>
+    <p>바레니클린은 뇌의 니코틴 수용체에 결합해 흡연 욕구를 떨어뜨려 금연을 돕는 약물이다. 2006년부터 시판되었고, nicotinic acetylcholine receptors에 대한 부분적 항진 및 억제 효과를 통해 금단증상과 흡연 갈망을 줄인다.</p>
+    <table><thead><tr><th>시점</th><th>용량</th></tr></thead><tbody><tr><td>금연 1주 전 1-3일</td><td>0.5 mg 하루 한 번</td></tr><tr><td>4-7일</td><td>0.5 mg 하루 두 번</td></tr><tr><td>8일째</td><td>금연 시작</td></tr><tr><td>2주차인 금연일부터</td><td>1.0 mg 하루 두 번</td></tr><tr><td>일반 기간</td><td>12주, 유지 위해 추가 가능</td></tr></tbody></table>
+    <p>부작용은 메스꺼움, 수면장애/생생한 꿈, 변비, 고창, 두통, 기분 및 행동변화, 자살생각이다. 메스꺼움은 식후 30분에 충분한 물과 함께 복용하면 줄일 수 있다. 신장을 통해 배설되므로 GFR &lt; 30 mL/min이거나 투석 중이면 용량을 줄인다.</p>
+    <h3>금연치료지원사업</h3>
+    <p>국민건강보험공단이 금연치료사업을 지원한다. 상담 비용은 공단 80%, 금연 참가자 20% 부담이고, 금연 프로그램을 모두 이수하면 본인부담금을 전액 환급한다.</p>
+
+    <details class="practice-toggle">
+      <summary><span>약물치료 단원 문제</span></summary>
+      <div class="q"><p class="stem">[23 형성] 3. 금연의 효과가 가장 좋은 약은?</p><ul class="options"><li>Varenicline</li><li>Alprazolam</li><li>Bupropion</li><li>니코틴 패치</li></ul><details class="answer"><summary>정답과 해설</summary><p><b>정답: Varenicline.</b> 위약 대비 오즈비가 2.88로 가장 높다.</p></details></div>
+      <div class="q"><p class="stem">[22 총괄] 1. 금연에 있어 효과가 가장 좋은 약은?</p><ul class="options"><li>Varenicline</li><li>Alprazolam</li><li>Bupropion</li><li>Catapress</li><li>Nicotine gum</li></ul><details class="answer"><summary>정답과 해설</summary><p><b>정답: Varenicline.</b> 반복 출제된다.</p></details></div>
+      <div class="q"><p class="stem">[21 총괄] 2. 다음 중 금연효과가 제일 좋은 약은?</p><ol class="options" type="A"><li>Alprazolam</li><li>Varenicline</li><li>Bupropion</li><li>Catapress</li><li>Nicotine gum</li></ol><details class="answer"><summary>정답과 해설</summary><p><b>정답: B.</b> 바레니클린이 가장 효과적이다.</p></details></div>
+      <div class="q"><p class="stem">[19 1차] 2. 금연의 효과가 가장 좋은 것은?</p><ol class="options" type="A"><li>Varenicline</li><li>Alprazolam</li><li>Bupropion</li><li>Catapress</li><li>Nicotine gum</li></ol><details class="answer"><summary>정답과 해설</summary><p><b>정답: A.</b> Varenicline.</p></details></div>
+    </details>
+  </section>
+
+  <section id="assessment">
+    <h2>8. 병력 청취와 장애요인 평가</h2>
+    <h3>금연 의도와 니코틴 의존도 평가</h3>
+    <ul>
+      <li>앞으로 1개월 이내에 금연하실 계획이 있나요?</li>
+      <li>담배를 얼마나 피우시나요?</li>
+      <li>몇 년간 피우셨습니까?</li>
+      <li>아침에 일어나서 첫 담배를 얼마 만에 피우십니까?</li>
+      <li>금연구역에서 담배를 참기 어렵습니까?</li>
+      <li>담배를 피우지 않으면 불안하고 초조하거나 긴장되고 짜증이 납니까?</li>
+    </ul>
+    <h3>흡연 피해와 금연 이익 인지 정도</h3>
+    <ul><li>담배를 피우면 건강에 어떤 위험을 주는지 알고 계십니까?</li><li>금연하면 어떤 점이 좋은지 아십니까?</li><li>금연을 결심하신 이유는 무엇인가요?</li></ul>
+    <h3>관련 건강위험도 및 병적 상태</h3>
+    <ul><li>기침이나 가래가 있습니까?</li><li>숨이 차나요?</li><li>현재 치료받고 있는 질환이 있나요?</li><li>술을 마십니까?</li></ul>
+    <h3>금연 장애요인</h3>
+    <ul><li>과거에 금연하신 적이 있나요?</li><li>주위에 금연을 도와줄 수 있는 사람이 있나요?</li></ul>
+    <p>장애요인은 금단증상, 스트레스, 실패에 대한 두려움, 동료나 주위의 압력, 체중 증가다. 스트레스에는 근육 이완과 심호흡을 이용한 이완법을 권하고, 실패는 금연 과정에서 평균 3-4회 금연시도와 재발을 반복한다는 점을 설명한다. 회식자리 음주는 흡연 욕구를 강하게 하므로 초기에는 술자리를 피하고, 담배 거절을 연습하며, 비흡연자와 시간을 보내고, 흡연 금지 지역에 머무는 것이 도움이 된다.</p>
+  </section>
+
+  <section id="stages">
+    <h2>9. <span class="star">⭐</span> 금연 단계와 단계별 상담</h2>
+    <p>금연 상담은 <b>변화단계 이론</b>으로 접근한다. 자료에는 “고려 전/고려”와 “계획 전/계획” 표기가 함께 나오지만, 의미는 각각 precontemplation/contemplation이다.</p>
+    <table>
+      <thead><tr><th>단계</th><th>정의</th><th>핵심 중재</th></tr></thead>
+      <tbody>
+        <tr><td><b>고려 전 단계</b><br>Precontemplation</td><td>향후 6개월 이내 금연을 심각하게 고려하지 않음. 흡연의 긍정적 면을 보려 하고 해로움을 알기를 원치 않을 수 있으며, 금연 권유에 예민하거나 불쾌해할 수 있다.</td><td>적합한 동기부여, 흡연 위험 알리기, 금연 이익 알리기, 금연 방해요인 알기, 반복적 권유</td></tr>
+        <tr><td><b>고려 단계</b><br>Contemplation</td><td>6개월 이내 금연을 고려함. 흡연에 양가감정이 있고 짧은 면담에도 반응할 수 있다.</td><td>동기 강화, 금연 계획하기, 흡연 위험 알리기, 금연 이익 알리기, 금연 방해요인 알기</td></tr>
+        <tr><td><b>준비 단계</b><br>Preparation</td><td>30일 이내 금연을 계획함. 즉시 금연하려는 마음의 준비가 되어 있으며 가까운 장래에 실제로 시도한다.</td><td>동기 강화, 금연 시작일 정하기, 금연 방해요인 알기, 금단증상 대처법, 보조 약물 선택</td></tr>
+        <tr><td><b>실행 단계</b><br>Action</td><td>금연한 지 6개월 이내. 다시 흡연할 위험이 75% 가까이 될 정도로 재발 위험이 높다.</td><td>주기적 상담, 금단증상 대처법, 보조약물 부작용, 스트레스 상담</td></tr>
+        <tr><td><b>유지 단계</b><br>Maintenance</td><td>6개월 이상 금연. 담배 없는 생활에 익숙해지고 흡연 위협이 줄어든다. 2년 이상 금연한 사람은 단지 4%만 다시 흡연한다.</td><td>주기적 상담, 금단증상 대처법, 보조약물 부작용, 스트레스 상담</td></tr>
+      </tbody>
+    </table>
+    <h3>단계 관련 중요한 문제</h3>
+    <ul>
+      <li><b>금연 단계에 따라 서로 다른 중재방법</b>이 필요하다.</li>
+      <li>환자 입장에서 비판적이지 않은 자세로 접근한다.</li>
+      <li>흡연자를 현재 단계에서 다음 단계로 이동시키는 것만으로도 성공으로 볼 수 있다.</li>
+      <li>흡연 재발은 금연 과정에서 흔한 일이다.</li>
+      <li>금연 성공자는 완전 금연 전 평균적으로 <b>3-4회</b> 금연시도를 한다.</li>
+    </ul>
+    <h3>환자 교육: 지시가 아니라 선택을 돕는 과정</h3>
+    <p>흡연의 위험성과 금연의 이득을 설명하고, 금연 시작일을 정하도록 권유하며, 금연 후 생길 수 있는 금단증상과 대처법을 설명한다. 보조제 치료가 도움이 된다는 점을 말하거나 처방을 권하고, 추적 방문이 필요함을 말한다. 동기 강화와 교육은 지시적이지 않고 비판단적이어야 한다.</p>
+    <details class="practice-toggle" open>
+      <summary><span>금연 단계 판정 도우미</span></summary>
+      <div class="calc">
+        <label>환자 상태<select id="stageSel"><option value="pre">6개월 이내 금연 생각 없음</option><option value="con">6개월 이내 금연 고려</option><option value="prep">1개월 이내 금연 계획</option><option value="action">금연 중, 6개월 이내</option><option value="maint">6개월 이상 금연 유지</option></select></label>
+        <button type="button" onclick="stageHelp()">판정</button>
+      </div>
+      <p id="stageOut">상태를 선택해 단계와 중재를 확인하세요.</p>
+    </details>
+  </section>
+
+  <section id="cases">
+    <h2>10. <span class="star">⭐</span> 증례 적용</h2>
+    <h3>증례 1: 15세 남학생</h3>
+    <p>최근 흡연으로 학교에서 적발되어 금연클리닉으로 의뢰되었다. 하루 2-3개비를 친구들과 함께 피우고, 금연 필요성과 흡연 피해를 느끼지 못한다. 이 환자는 <mark>고려 전 단계</mark>다. 즉시 금연하라고 지시하기보다 흡연 위험을 알리고, 적합한 동기부여와 반복적 권유로 다음 단계로 이동시킨다.</p>
+    <details class="practice-toggle"><summary><span>증례 1 관련 기출</span></summary>
+      <div class="q"><p class="stem">[25Y] 15세 남학생이 최근 흡연으로 학교에서 적발되어 금연클리닉으로 의뢰되었다. 하루 2-3개비를 친구들과 함께 피운다. 금연의 필요성과 흡연의 피해를 느끼지 못하고 있다. 이 환자의 금연 단계와 그에 알맞은 상담 기법을 옳게 짝지은 것은?</p><ol class="options"><li>고려 전 단계 - 흡연의 위험성을 알려준다.</li><li>고려 전 단계 - 주기적으로 상담한다.</li><li>고려 단계 - 금단증상의 대처법을 알려준다.</li><li>준비 단계 - 금연 시작일을 계획한다.</li><li>준비 단계 - 즉시 금연하라고 한다.</li></ol><details class="answer"><summary>정답과 해설</summary><p><b>정답: 1번.</b> 금연 의지가 없고 피해 인식이 낮으므로 고려 전 단계다. 흡연 위험 알리기가 적절하다.</p></details></div>
+      <div class="q"><p class="stem">[22 형성] 1. 15세 남성 환자가 친구들과 하루 2~3개비의 담배를 피운다. 금연의 필요성을 못느끼고 있고 금연 의지가 없다. 해줘야 할 일로 옳지 않은것은?</p><ul class="options"><li>금연 방해요인 알기</li><li>반복적 권유</li><li>적합한 동기부여</li><li>금연의 이익 알리기</li><li>금연 계획하기</li></ul><details class="answer"><summary>정답과 해설</summary><p><b>정답: 금연 계획하기.</b> 고려 전 단계에서는 계획 수립보다 동기부여·위험/이익 알리기·반복 권유가 우선이다.</p></details></div>
+      <div class="q"><p class="stem">[20 총괄] 2. 19세 남자가 최근 흡연으로 적발되어 금연 클리닉으로 의뢰되었다. 금연의 필요성과 흡연의 피해는 느끼지 못하고 있다. 다음 환자에게 적절한 상담기법은?</p><ol class="options" type="A"><li>반복적 권유</li><li>동기 강화</li><li>주기적 상담</li><li>스트레스 상담</li><li>금단증상 대처법</li></ol><details class="answer"><summary>정답과 해설</summary><p><b>정답: A.</b> 고려 전 단계이므로 반복적 권유가 적절하다.</p></details></div>
+      <div class="q"><p class="stem">[18 형성] 31. 15세 남학생이 최근 흡연으로 적발되어 금연클리닉으로 의뢰되었다. 매일 2~3개비를 친구들과 함께 피우며, 아직 금연의 필요성과 흡연의 피해를 느끼지 못하고 있다. 이 환자에게 사용할 수 있는 금연 전략은?</p><ul class="options"><li>반복적 권유</li><li>금연 계획하기</li><li>방해요인 알기</li><li>주기적 상담</li><li>스트레스 상담</li></ul><details class="answer"><summary>정답과 해설</summary><p><b>정답: 반복적 권유.</b> 고려 전 단계에 맞는 중재다.</p></details></div>
+    </details>
+
+    <h3>증례 2: 40세 남자</h3>
+    <p>하루 1-2갑을 23년간 피웠고 객담과 기침이 있다. 아침에 일어나자마자 담배를 피우며, 비행기 안에서 금연하기 힘들다. 회사 스트레스로 흡연량이 늘었고, 2년 전 금연 후 초조하고 안절부절 못해 다시 피웠다. 금연 생각은 있으나 담배 없이는 못 살 것 같다고 한다. 이 사례는 <b>의존도와 금단경험이 강한 흡연자</b>로, 상담만으로 두기보다 약물치료를 적극적으로 고려한다.</p>
+    <details class="practice-toggle"><summary><span>증례 2 관련 기출</span></summary>
+      <div class="q"><p class="stem">[25Y] 40세 남자가 하루 1.5갑을 20년간 피웠다. 아침에 일어나자마자 5분 이내에 첫 담배를 피웠으며, 금연 구역에서 흡연을 참기 힘들었다. 이에 대한 설명으로 옳은 것은?</p><ol class="options"><li>하루 흡연량과 흡연 기간을 고려하였을 때 고등도 의존 상태이나, 금연의 의지가 있다면 상담만으로 가능하다.</li><li>고등도 의존 상태이므로 처음부터 약물치료가 필요하다.</li><li>중등도 의존으로 판단하여 금단 증상 발생 후 약물치료를 고려한다.</li><li>흡연 습관을 고려하였을 때 중등도 의존 상태로, 처음에는 비약물적 치료로 시작한다.</li><li>낮은 니코틴 의존도로 비약물적 치료로 한다.</li></ol><details class="answer"><summary>정답과 해설</summary><p><b>정답: 2번.</b> 제공 자료는 이 문항을 고등도 의존으로 보아 초기부터 약물치료가 필요하다고 처리한다. 다만 FTND 점수만 엄격히 계산하면 5분 이내 3점, 금연구역 어려움 1점, 1.5갑을 21-30개비로 보면 2점이어서 6점 중등도로도 볼 수 있다. 자료의 빨간 해설은 “점수 경계값보다 실제 진료상 강한 의존 소견과 초기 약물 병행”을 강조한다.</p></details></div>
+    </details>
+
+    <h3>증례 3: 50세 남자</h3>
+    <p>하루 2갑을 30년간 피웠고, 10년 전부터 고혈압·고지혈증으로 치료 중이다. 두 차례 금연 시도 후 체중 증가로 재흡연했고, 한 달 전 당뇨병 진단 뒤 다시 금연을 결심했다. 직장에 흡연 친구가 많고, 혈압 130/88 mmHg, 맥박 82회/분, BMI 26이며, 일주일 2-3회 소주 2-3병을 마신다. 이 환자는 금연을 결심했으므로 <mark>준비 단계</mark>에 가깝다. 체중 증가에 대한 걱정을 인정하되, 금연 효과가 즉각적이고 심혈관 위험을 낮추므로 약물요법을 병행해 시작한다.</p>
+    <details class="practice-toggle"><summary><span>증례 3 관련 기출</span></summary>
+      <div class="q"><p class="stem">[23 형성] 1. 50세 남자가 하루 2갑씩 30년간 흡연했다. 10년 전부터 고혈압과 고지혈증으로 치료중이며 한달 전 당뇨병을 진단받은 후 금연을 결심하게 되었다. 다음 환자에게 적절한 상담기법은?</p><ul class="options"><li>금연 방해요인 알기</li><li>주기적 상담</li><li>스트레스 상담</li><li>반복적 권유</li><li>금연 계획하기</li></ul><details class="answer"><summary>정답과 해설</summary><p><b>정답: 금연 방해요인 알기.</b> 금연을 결심한 준비 단계에서는 방해요인을 확인하고 금연 시작일·대처법·약물을 함께 계획한다.</p></details></div>
+      <div class="q"><p class="stem">[20 총괄] 1. 50세 남자가 하루 2갑씩 30년간 흡연했다. 10년 전부터 고혈압과 고지혈증으로 치료중이며 한달 전 당뇨병을 진단받은 후 금연을 결심하게 되었다. 다음 환자에게 적절한 상담기법은?</p><ol class="options" type="A"><li>금연 방해요인 알기</li><li>주기적 상담</li><li>스트레스 상담</li><li>반복적 권유</li><li>금연 계획하기</li></ol><details class="answer"><summary>정답과 해설</summary><p><b>정답: A.</b> 금연을 결심했으나 체중 증가와 음주·동료 흡연 등 방해요인이 많다.</p></details></div>
+      <div class="q"><p class="stem">[18 형성] 30. 10년 전부터 고혈압과 고지혈증으로 치료를 받고 있는 50세 남자가 내원하였다. 2차례 금연을 시도한 적이 있으나 체중이 증가하여 다시 피우게 되었으며, 한 달 전 당뇨병을 진단받은 이후 다시 금연을 결심하였다. 이 환자에게 사용할 수 있는 금연 전략은?</p><ul class="options"><li>반복적 권유</li><li>금연 계획하기</li><li>방해요인 알기</li><li>주기적 상담</li><li>스트레스 상담</li></ul><details class="answer"><summary>정답과 해설</summary><p><b>정답: 금연 계획하기.</b> 1개월 내 금연을 준비하는 단계에서는 구체적인 금연 계획을 세운다.</p></details></div>
+    </details>
+  </section>
+
+  <section id="archive">
+    <h2>11. 기출·형성·총괄 문항 아카이브</h2>
+    <p>아래 문항은 앞 단원에 이미 배치된 문제까지 포함해 제공된 문제 화면을 연도별로 다시 모은 것이다. 중복되는 문항은 반복 출제 포인트로 보아야 한다.</p>
+
+    <details class="practice-toggle"><summary><span>25Y 모아보기</span></summary>
+      <p>정답: 금연 효과 1번, 40세 의존도 2번, 50세 체중 증가 4번, 15세 단계 1번.</p>
+    </details>
+
+    <details class="practice-toggle"><summary><span>23 형성 · 4문제</span></summary>
+      <div class="q"><p class="stem">1. 50세 남자가 하루 2갑씩 30년간 흡연했다. 10년 전부터 고혈압과 고지혈증으로 치료중이며 한달 전 당뇨병을 진단받은 후 금연을 결심하게 되었다. 다음 환자에게 적절한 상담기법은?</p><ul class="options"><li>금연 방해요인 알기</li><li>주기적 상담</li><li>스트레스 상담</li><li>반복적 권유</li><li>금연 계획하기</li></ul><details class="answer"><summary>정답과 해설</summary><p>정답: 1번째 선지, 금연 방해요인 알기.</p></details></div>
+      <div class="q"><p class="stem">2. 한국인에서 담배를 피는 가장 큰 이유는?</p><ul class="options"><li>심심해서</li><li>체중감소를 위해서</li><li>중독이 되어서</li><li>스트레스</li><li>남들이 피워서</li></ul><details class="answer"><summary>정답과 해설</summary><p>정답: 3번째 선지, 중독이 되어서. 담배는 니코틴 중독으로 접근한다.</p></details></div>
+      <div class="q"><p class="stem">3. 금연의 효과가 가장 좋은 약은?</p><ul class="options"><li>Varenicline</li><li>Alprazolam</li><li>Bupropion</li><li>니코틴 패치</li></ul><details class="answer"><summary>정답과 해설</summary><p>정답: 1번째 선지, Varenicline.</p></details></div>
+      <div class="q"><p class="stem">4. 니코틴의 신경전달물질중 즐거움과 각성에 관여하는 물질은?</p><ul class="options"><li>아세틸콜린</li><li>가바</li><li>도파민</li><li>노르에피네프린</li></ul><details class="answer"><summary>정답과 해설</summary><p>정답: 3번째 선지, 도파민.</p></details></div>
+    </details>
+
+    <details class="practice-toggle"><summary><span>22 형성 · 2문제</span></summary>
+      <div class="q"><p class="stem">1. 15세 남성 환자가 친구들과 하루 2~3개비의 담배를 피운다. 금연의 필요성을 못느끼고 있고 금연 의지가 없다. 해줘야 할 일로 옳지 않은것은?</p><ul class="options"><li>금연 방해요인 알기</li><li>반복적 권유</li><li>적합한 동기부여</li><li>금연의 이익 알리기</li><li>금연 계획하기</li></ul><details class="answer"><summary>정답과 해설</summary><p>정답: 5번째 선지, 금연 계획하기. 고려 전 단계에 아직 맞지 않는다.</p></details></div>
+      <div class="q"><p class="stem">2. 니코틴의 신경전달물질중 즐거움과 각성에 관여하는 물질은?</p><ul class="options"><li>아세틸콜린</li><li>가바</li><li>도파민</li><li>노르에피네프린</li></ul><details class="answer"><summary>정답과 해설</summary><p>정답: 3번째 선지, 도파민.</p></details></div>
+    </details>
+
+    <details class="practice-toggle"><summary><span>22 총괄 · 2문제</span></summary>
+      <div class="q"><p class="stem">1. 금연에 있어 효과가 가장 좋은 약은?</p><ul class="options"><li>Varenicline</li><li>Alprazolam</li><li>Bupropion</li><li>Catapress</li><li>Nicotine gum</li></ul><details class="answer"><summary>정답과 해설</summary><p>정답: 1번째 선지, Varenicline.</p></details></div>
+      <div class="q"><p class="stem">2. 10년째 흡연을 하던 환자가 금연을 결심하고 금연 2달째이다. 이 때에 환자와 상담할 때 진행해야 하는 내용은?</p><ul class="options"><li>금단증상 대처법</li><li>금연방해요인 알기</li><li>금연시작일 정하기</li><li>동기강화</li><li>흡연 위험 알리기</li></ul><details class="answer"><summary>정답과 해설</summary><p>정답: 1번째 선지, 금단증상 대처법. 금연 중 6개월 이내는 실행 단계이며 재발 방지와 금단 대처가 중요하다.</p></details></div>
+    </details>
+
+    <details class="practice-toggle"><summary><span>21 형성 · 2문제</span></summary>
+      <div class="q"><p class="stem">1. 한국인에서 담배를 피는 가장 큰 이유는?</p><ol class="options" type="A"><li>심심해서</li><li>체중감소를 위해서</li><li>중독이 되어서</li><li>스트레스</li><li>남들이 피워서</li></ol><details class="answer"><summary>정답과 해설</summary><p>정답: C, 중독이 되어서.</p></details></div>
+      <div class="q"><p class="stem">2. 55세 남자가 고지혈증을 치료하기 위해 아내와 함께 내원하였다. 환자는 하루에 1갑씩 40년간 담배를 피웠다고 한다. 보호자인 아내가 담배를 끊으라고 했으나, 환자는 금연 생각이 없다. 적절한 대응은?</p><ol class="options" type="A"><li>동기 강화</li><li>금연 계획하기</li><li>반복적 권유</li><li>스트레스 상담</li><li>주기적 상담</li></ol><details class="answer"><summary>정답과 해설</summary><p>정답: C, 반복적 권유. 금연 생각이 없으므로 고려 전 단계다.</p></details></div>
+    </details>
+
+    <details class="practice-toggle"><summary><span>21 총괄 · 2문제</span></summary>
+      <div class="q"><p class="stem">1. 담배의 해악에 대한 설명 중 틀린 것은?</p><ol class="options" type="A"><li>허혈성 심질환, 중풍의 위험인자이다.</li><li>흡연자 평균수명은 비흡연자보다 7, 8년이 짧다.</li><li>간접흡연으로 폐암 발생 위험이 30% 증가한다.</li><li>4000여 종의 발암물질이 들어있다.</li><li>임산부 흡연 시 태아 체중감소를 유발할 수 있다.</li></ol><details class="answer"><summary>정답과 해설</summary><p>정답: D.</p></details></div>
+      <div class="q"><p class="stem">2. 다음 중 금연효과가 제일 좋은 약은?</p><ol class="options" type="A"><li>Alprazolam</li><li>Varenicline</li><li>Bupropion</li><li>Catapress</li><li>Nicotine gum</li></ol><details class="answer"><summary>정답과 해설</summary><p>정답: B, Varenicline.</p></details></div>
+    </details>
+
+    <details class="practice-toggle"><summary><span>20 형성 · 1문제</span></summary>
+      <div class="q"><p class="stem">1. 다음 흡연에 대한 설명 중 옳지 않은 것은?</p><ol class="options" type="A"><li>연기가 닿는 부위에만 암을 유발한다</li><li>임산부 흡연 시 태아 체중 감소를 유발할 수 있다.</li><li>간접흡연의 결과 폐암 발생 확률이 30% 증가한다</li><li>흡연에 의해 관상동맥질환, 뇌졸중 발생이 증가한다.</li><li>흡연에 의해 폐기종 발생률이 증가한다.</li></ol><details class="answer"><summary>정답과 해설</summary><p>정답: A.</p></details></div>
+    </details>
+
+    <details class="practice-toggle"><summary><span>20 총괄 · 2문제</span></summary>
+      <div class="q"><p class="stem">1. 50세 남자가 하루 2갑씩 30년간 흡연했다. 10년 전부터 고혈압과 고지혈증으로 치료중이며 한달 전 당뇨병을 진단받은 후 금연을 결심하게 되었다. 다음 환자에게 적절한 상담기법은?</p><ol class="options" type="A"><li>금연 방해요인 알기</li><li>주기적 상담</li><li>스트레스 상담</li><li>반복적 권유</li><li>금연 계획하기</li></ol><details class="answer"><summary>정답과 해설</summary><p>정답: A.</p></details></div>
+      <div class="q"><p class="stem">2. 19세 남자가 최근 흡연으로 적발되어 금연 클리닉으로 의뢰되었다. 금연의 필요성과 흡연의 피해는 느끼지 못하고 있다. 다음 환자에게 적절한 상담기법은?</p><ol class="options" type="A"><li>반복적 권유</li><li>동기 강화</li><li>주기적 상담</li><li>스트레스 상담</li><li>금단증상 대처법</li></ol><details class="answer"><summary>정답과 해설</summary><p>정답: A.</p></details></div>
+    </details>
+
+    <details class="practice-toggle"><summary><span>19 1차 · 3문제</span></summary>
+      <div class="q"><p class="stem">1. 한국인에서 담배를 피는 가장 큰 이유는?</p><ol class="options" type="A"><li>심심해서</li><li>체중 감소를 위해서</li><li>중독이 되어서</li><li>스트레스</li><li>남들이 피워서</li></ol><details class="answer"><summary>정답과 해설</summary><p>정답: C.</p></details></div>
+      <div class="q"><p class="stem">2. 금연의 효과가 가장 좋은 것은?</p><ol class="options" type="A"><li>Varenicline</li><li>Alprazolam</li><li>Bupropion</li><li>Catapress</li><li>Nicotine gum</li></ol><details class="answer"><summary>정답과 해설</summary><p>정답: A.</p></details></div>
+      <div class="q"><p class="stem">3. 60세 남자가 고지혈증을 치료하기 위해 아내와 함께 내원하였다. 환자는 하루에 1갑씩 40년간 담배를 피웠다고 한다. 보호자인 아내가 담배를 끊으라고 했으나, 환자는 금연 생각이 없다. 적절한 대응은?</p><ol class="options" type="A"><li>동기 강화</li><li>금연 계획하기</li><li>반복적 권유</li><li>스트레스 상담</li><li>주기적 상담</li></ol><details class="answer"><summary>정답과 해설</summary><p>정답: C, 반복적 권유.</p></details></div>
+    </details>
+
+    <details class="practice-toggle"><summary><span>18 형성 · 3문제</span></summary>
+      <div class="q"><p class="stem">29. 니코틴에 의해 분비되며, 즐거움과 각성에 관여하는 신경전달물질은?</p><ul class="options"><li>노르에피네프린</li><li>아세틸콜린</li><li>도파민</li><li>가바</li></ul><details class="answer"><summary>정답과 해설</summary><p>정답: 도파민.</p></details></div>
+      <div class="q"><p class="stem">30. 10년 전부터 고혈압과 고지혈증으로 치료를 받고 있는 50세 남자가 내원하였다. 2차례 금연을 시도한 적이 있으나 체중이 증가하여 다시 피우게 되었으며, 한 달 전 당뇨병을 진단받은 이후 다시 금연을 결심하였다. 이 환자에게 사용할 수 있는 금연 전략은?</p><ul class="options"><li>반복적 권유</li><li>금연 계획하기</li><li>방해요인 알기</li><li>주기적 상담</li><li>스트레스 상담</li></ul><details class="answer"><summary>정답과 해설</summary><p>정답: 금연 계획하기.</p></details></div>
+      <div class="q"><p class="stem">31. 15세 남학생이 최근 흡연으로 적발되어 금연클리닉으로 의뢰되었다. 매일 2~3개비를 친구들과 함께 피우며, 아직 금연의 필요성과 흡연의 피해를 느끼지 못하고 있다. 이 환자에게 사용할 수 있는 금연 전략은?</p><ul class="options"><li>반복적 권유</li><li>금연 계획하기</li><li>방해요인 알기</li><li>주기적 상담</li><li>스트레스 상담</li></ul><details class="answer"><summary>정답과 해설</summary><p>정답: 반복적 권유.</p></details></div>
+    </details>
+
+    <details class="practice-toggle"><summary><span>교수 미상 · 2016/2015 주관식</span></summary>
+      <div class="q"><p class="stem">[16] 65. 금연프린트 첫번째 금연 고려전단계인 케이스 보고 무엇을 해 주는게 적절하지 않은가</p><details class="answer"><summary>정답과 해설</summary><p><b>답: 금연 계획하기.</b> 고려 전 단계에서는 금연 계획 수립보다 반복 권유와 위험·이익 설명이 우선이다.</p></details></div>
+      <div class="q"><p class="stem">[16] 66. 니코틴이 작용하는 신경전달물질</p><details class="answer"><summary>정답과 해설</summary><p><b>답: 도파민.</b></p></details></div>
+      <div class="q"><p class="stem">[15] 6. 금연 단계 5가지를 쓰시오.</p><details class="answer"><summary>정답과 해설</summary><p><b>답: 계획 전 단계, 계획 단계, 준비 단계, 실행 단계, 유지 단계.</b> 본문 표기에서는 고려 전 단계, 고려 단계, 준비 단계, 실행 단계, 유지 단계로 정리한다.</p></details></div>
+      <div class="q"><p class="stem">[15] 7. 1개월 내 금연을 고려하고 있는 환자에게 필요한 과정은?</p><p>적합한 동기부여 · 금연 방해요인 알기 · 반복적 권유 · 스트레스 상담 · 주기적 상담</p><details class="answer"><summary>정답과 해설</summary><p><b>답: 금연 방해요인 알기.</b></p></details></div>
+      <div class="q"><p class="stem">[15] 8. 아직 금연을 고려하고 있지 않는 환자에게 필요한 과정은?</p><p>반복적 권유 · 동기 강화 · 금연 계획하기 · 보조약물 부작용</p><details class="answer"><summary>정답과 해설</summary><p><b>답: 반복적 권유.</b></p></details></div>
+      <div class="q"><p class="stem">[15] 18. 금연 기법 중 5R's에 해당하는 것은 관련성, 위험성, ( ), 장애물, 반복이다.</p><details class="answer"><summary>정답과 해설</summary><p><b>답: 보상.</b> 5R은 관련성(Relevance), 위험성(Risks), 보상/이득(Rewards), 장애물(Roadblocks), 반복(Repetition)이다.</p></details></div>
+    </details>
+  </section>
+
+  <section id="checklist">
+    <h2>12. 누락 점검표</h2>
+    <table>
+      <thead><tr><th>범주</th><th>반영 내용</th></tr></thead>
+      <tbody>
+        <tr><td>주요 개념</td><td>흡연 위험, 니코틴 중독, 금단증상, FTND, 담배 성분, 질병, 간접흡연, 금연 효과, 상담 근거, 약물치료, 변화단계 이론.</td></tr>
+        <tr><td>표와 수치</td><td>마약 의존성 표, 금단증상 %, FTND 점수, 흡연율, 사망 확률, WHO 사망 %, 폐암·폐기종 위험, 약물 오즈비, 병합치료 금연율.</td></tr>
+        <tr><td>중요 이미지 의미</td><td>니코틴 뇌 반응, 폐암·폐기종 사진, 성대/폐질환 사진, Smoker’s body, 간접흡연량 인포그래픽은 텍스트와 표로 재구성.</td></tr>
+        <tr><td>별표 페이지</td><td>5, 6, 7, 38, 74, 76, 78, 80쪽을 핵심 페이지로 표시하고 증례·문항에 연결.</td></tr>
+        <tr><td>문제</td><td>25Y, 23/22/21/20/19/18 형성·총괄·1차, 16/15 교수 미상 문항을 토글형으로 삽입.</td></tr>
+        <tr><td>오답 포인트</td><td>담배 4,000여 종은 화학성분이지 모두 발암물질은 아님, 고려 전 단계에서 금연 계획하기는 부적절, FTND 25Y 경계값 논란, 체중 증가 때문에 금연을 미루지 않음.</td></tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+<footer class="wrap foot">
+  <p>원본 슬라이드의 흐름을 학습 순서에 맞게 재구성했습니다. 토글은 기본적으로 닫힌 상태로 두어 문제 풀이 후 정답과 해설을 확인할 수 있게 했습니다.</p>
+</footer>
+<script>
+function toggleExamMode(){ document.body.classList.toggle('exam-mode'); }
+window.addEventListener('scroll', function(){ const h=document.documentElement; const sc=h.scrollTop; const max=h.scrollHeight-h.clientHeight; document.getElementById('progress').style.width=(max?sc/max*100:0)+'%'; });
+function calcFtnd(){ let ids=['ftnd1','ftnd2','ftnd3','ftnd4','ftnd5','ftnd6']; let score=ids.reduce((s,id)=>s+Number(document.getElementById(id).value),0); let label=score<=3?'의존도 낮은 상태':(score<=6?'의존도 중간 상태':'의존도 높은 상태'); let extra=score>=7?' 금단증상이 심하고 약물치료와 고용량 니코틴 보충을 더 적극적으로 고려합니다.':(score>=4?' 금단증상과 실패 경험을 확인하고 상담과 약물치료를 함께 고려합니다.':' 동기와 방해요인을 확인하며 상담을 진행합니다.'); document.getElementById('ftndOut').textContent='총 '+score+'점: '+label+'.'+extra; }
+function stageHelp(){ const v=document.getElementById('stageSel').value; const map={pre:['고려 전 단계','적합한 동기부여, 흡연 위험 알리기, 금연 이익 알리기, 금연 방해요인 알기, 반복적 권유'],con:['고려 단계','동기 강화, 금연 계획하기, 흡연 위험/이익 알리기, 방해요인 확인'],prep:['준비 단계','금연 시작일 정하기, 금연 방해요인 알기, 금단증상 대처법, 보조약물 선택'],action:['실행 단계','주기적 상담, 금단증상 대처법, 보조약물 부작용 확인, 스트레스 상담'],maint:['유지 단계','주기적 상담, 금단증상 대처법, 보조약물 부작용 확인, 스트레스 상담']}; const m=map[v]; document.getElementById('stageOut').textContent=m[0]+' → '+m[1]; }
+</script>
+</body>
+</html>
