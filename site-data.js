@@ -1,5 +1,5 @@
 window.PDS_SITE_DATA = {
-  "generatedAt": "2026-05-13T12:37:30.549Z",
+  "generatedAt": "2026-05-13T13:51:30.314Z",
   "config": {
     "siteTitle": "PDS 학습 위키",
     "subtitle": "본과 4학년 PDS HTML 학습자료",
@@ -76,6 +76,7 @@ window.PDS_SITE_DATA = {
       "0504_1_alcohol-counseling.html": "박훈기",
       "0504_2_medical-dispute-mediation-doctor-role.html": "송은섭",
       "0504_3_public-doctor-paths-part2.html": "이어진",
+      "0504_4_stress-counseling.html": "박계영",
       "0506_1_health-management-health-behaviors.html": "신영전",
       "0506_3_narcotics-control-act.html": "김민주",
       "0506_4_health-promotion-regional-health-act.html": "김민주",
@@ -420,6 +421,20 @@ window.PDS_SITE_DATA = {
       "endPeriod": 3,
       "span": 1,
       "periodLabel": "3교시 10:00-10:50"
+    },
+    {
+      "file": "0504_4_stress-counseling.html",
+      "title": "스트레스 진료",
+      "professor": "박계영",
+      "tag": "박계영",
+      "dateKey": "2026-05-04",
+      "dateLabel": "05/04",
+      "weekday": "월요일",
+      "weekKey": "2026-05-04",
+      "period": 4,
+      "endPeriod": 4,
+      "span": 1,
+      "periodLabel": "4교시 11:00-11:50"
     },
     {
       "file": "0506_1_health-management-health-behaviors.html",
