@@ -22,7 +22,8 @@ def main() -> None:
         for question in questions:
             found = inspect_question(question)
             if found:
-                issues.append((question.get("id"), found, question.get("stem", "")[:120]))
+                stem_sample = re.sub(r"\s+", " ", str(question.get("stem", ""))).strip()[:120].rstrip()
+                issues.append((question.get("id"), found, stem_sample))
 
         answered = sum(1 for question in questions if question.get("answers"))
         provisional = sum(1 for question in questions if question.get("provisional"))
@@ -58,6 +59,7 @@ def main() -> None:
         "- `options>7`: 복수선택/순서배열 문항이거나 보기 병합 오류 가능성이 있는 문항입니다.",
         "- `very_long_option`: 보기 하나에 다른 문항 또는 긴 설명이 섞였을 가능성이 있습니다.",
         "- `short_stem`: 문항 본문이 너무 짧아 앞 문장 누락 가능성이 있습니다.",
+        "- `answer_placeholder`: 원문상 정답/보기가 복원되지 않아 화면 표시용 임시 후보만 들어간 문항입니다.",
         "",
         "## Flagged Samples",
         "",
@@ -89,7 +91,7 @@ def inspect_question(question: dict) -> list[str]:
     issues = []
     stem = str(question.get("stem", ""))
     options = question.get("options", [])
-    if len(options) < 2:
+    if len(options) < 2 and not is_short_answer_like(question):
         issues.append("options<2")
     if len(options) > 7:
         issues.append("options>7")
@@ -99,9 +101,21 @@ def inspect_question(question: dict) -> list[str]:
         issues.append("no_answer")
     if any(len(str(option)) > 180 for option in options):
         issues.append("very_long_option")
+    if any(str(option).strip() == "정답 원문 확인 필요" for option in options):
+        issues.append("answer_placeholder")
     if has_section_noise(stem) or any(has_section_noise(str(option)) for option in options):
         issues.append("section_noise")
     return issues
+
+
+def is_short_answer_like(question: dict) -> bool:
+    stem = str(question.get("stem", ""))
+    options = [str(option).strip() for option in question.get("options", [])]
+    if len(options) != 1 or not question.get("answers"):
+        return False
+    if options[0] == "정답 원문 확인 필요":
+        return "주관식" in stem or "[그림]" in stem or "[지문]" in stem
+    return True
 
 
 def has_section_noise(value: str) -> bool:

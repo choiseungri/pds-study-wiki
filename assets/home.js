@@ -5,22 +5,22 @@ const examArchive = [
   {
     year: "2025",
     items: [
-      { label: "형성평가", href: "Y/2025-pds4-formative-quiz.html", questions: 197, note: "임시정답 2 · 검토표시 6" },
+      { label: "형성평가", href: "Y/2025-pds4-formative-quiz.html", questions: 197, note: "임시정답 2" },
       { label: "총괄평가", href: "Y/2025-pds4-summative-quiz.html", questions: 24 }
     ]
   },
   {
     year: "2023",
     items: [
-      { label: "형성평가", href: "Y/2023-pds4-formative-quiz.html", questions: 65, note: "임시정답 2 · 검토표시 1" },
-      { label: "총괄평가", href: "Y/2023-pds4-summative-quiz.html", questions: 109, note: "검토표시 2" }
+      { label: "형성평가", href: "Y/2023-pds4-formative-quiz.html", questions: 65, note: "임시정답 2" },
+      { label: "총괄평가", href: "Y/2023-pds4-summative-quiz.html", questions: 109, note: "검토표시 1" }
     ]
   },
   {
     year: "2022",
     items: [
       { label: "형성평가", href: "Y/2022-pds4-formative-quiz.html", questions: 49, note: "검토표시 1" },
-      { label: "총괄평가", href: "Y/2022-pds4-summative-quiz.html", questions: 166, note: "임시정답 4 · 검토표시 5" }
+      { label: "총괄평가", href: "Y/2022-pds4-summative-quiz.html", questions: 166, note: "임시정답 4 · 검토표시 2" }
     ]
   },
   {
@@ -34,40 +34,40 @@ const examArchive = [
     year: "2020",
     items: [
       { label: "형성평가", href: "Y/2020-pds4-formative-quiz.html", questions: 50, note: "임시정답 1 · 검토표시 1" },
-      { label: "총괄평가", href: "Y/2020-pds4-summative-quiz.html", questions: 124, note: "임시정답 1 · 검토표시 6" }
+      { label: "총괄평가", href: "Y/2020-pds4-summative-quiz.html", questions: 124, note: "임시정답 1 · 검토표시 1" }
     ]
   },
   {
     year: "2019",
     items: [
       { label: "1차시험", href: "Y/2019-pds4-1st-quiz.html", questions: 60, note: "임시정답 10 · 검토표시 1" },
-      { label: "2차시험", href: "Y/2019-pds4-2nd-quiz.html", questions: 115, note: "임시정답 8 · 검토표시 3" }
+      { label: "2차시험", href: "Y/2019-pds4-2nd-quiz.html", questions: 115, note: "임시정답 8 · 검토표시 1" }
     ]
   },
   {
     year: "2018",
     items: [
-      { label: "형성평가", href: "Y/2018-pds4-formative-quiz.html", questions: 30, note: "임시정답 29 · 검토표시 9" },
+      { label: "형성평가", href: "Y/2018-pds4-formative-quiz.html", questions: 88, note: "임시정답 88 · 검토표시 9" },
       { label: "총괄평가", href: "Y/2018-pds4-summative-quiz.html", questions: 50, note: "임시정답 50 · 검토표시 3" }
     ]
   },
   {
     year: "2017",
     items: [
-      { label: "복원", href: "Y/2017-pds4-restored-quiz.html", questions: 96, note: "임시정답 81 · 검토표시 40" }
+      { label: "복원", href: "Y/2017-pds4-restored-quiz.html", questions: 135, note: "임시정답 125 · 검토표시 40" }
     ]
   },
   {
     year: "2016",
     items: [
       { label: "형성평가", href: "Y/2016-pds4-formative-quiz.html", questions: 27, note: "임시정답 27" },
-      { label: "복원", href: "Y/2016-pds4-restored-quiz.html", questions: 42, note: "임시정답 24 · 검토표시 5" }
+      { label: "복원", href: "Y/2016-pds4-restored-quiz.html", questions: 112, note: "임시정답 96 · 검토표시 75" }
     ]
   },
   {
     year: "2015",
     items: [
-      { label: "복원", href: "Y/2015-pds4-restored-quiz.html", questions: 95, note: "임시정답 93 · 검토표시 3" }
+      { label: "복원", href: "Y/2015-pds4-restored-quiz.html", questions: 210, note: "임시정답 208 · 검토표시 28" }
     ]
   }
 ];

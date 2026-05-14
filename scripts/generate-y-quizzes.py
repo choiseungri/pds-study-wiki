@@ -4,10 +4,12 @@ import html
 import json
 import re
 import struct
+import zipfile
 import zlib
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable
+from xml.etree import ElementTree
 
 import fitz
 import olefile
@@ -131,6 +133,28 @@ def by_exact(name: str) -> Callable[[list[Path]], Path]:
 
 
 def parse_document(source_path: Path, answer_path: Path) -> list[Question]:
+    if source_path.name == "2018 PDS4 형성평가.pdf":
+        return parse_legacy_numbered_lines(
+            extract_hwp_legacy_lines(Y_DIR / "2018 PDS4 형성평가 복원.hwp"),
+            "2018 형성평가",
+        )
+    if source_path.name == "2017 PDS4 복원.pdf":
+        return parse_legacy_numbered_lines(
+            extract_pdf_legacy_lines(source_path),
+            "2017 복원",
+            allow_unnumbered=True,
+        )
+    if source_path.name == "2016 PDS4 복원.docx":
+        return parse_legacy_numbered_lines(
+            extract_docx_legacy_lines(source_path),
+            "2016 복원",
+        )
+    if source_path.name == "2015 PDS4 복원.pdf":
+        return parse_legacy_numbered_lines(
+            extract_pdf_legacy_lines(source_path, skip_pages=2),
+            "2015 복원",
+        )
+
     parse_path = answer_path if answer_path.exists() else source_path
     if parse_path.suffix.lower() == ".hwp":
         lines = [Line(text) for text in extract_hwp_text(parse_path).splitlines()]
@@ -235,6 +259,481 @@ def clean_hwp_text(text: str) -> str:
     text = text.replace("\r", "\n")
     text = re.sub(r"[ \t]+", " ", text)
     return text
+
+
+def extract_hwp_legacy_lines(path: Path) -> list[str]:
+    return [line for line in (clean_legacy_line(raw) for raw in extract_hwp_text(path).splitlines()) if line]
+
+
+def extract_docx_legacy_lines(path: Path) -> list[str]:
+    namespace = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+    lines: list[str] = []
+    with zipfile.ZipFile(path) as archive:
+        root = ElementTree.fromstring(archive.read("word/document.xml"))
+    for paragraph in root.iter(namespace + "p"):
+        text = "".join(node.text or "" for node in paragraph.iter(namespace + "t"))
+        cleaned = clean_legacy_line(html.unescape(text))
+        if cleaned:
+            lines.append(cleaned)
+    return lines
+
+
+def extract_pdf_legacy_lines(path: Path, skip_pages: int = 0) -> list[str]:
+    doc = fitz.open(str(path))
+    lines: list[str] = []
+    for page in doc[skip_pages:]:
+        for block in page.get_text("dict").get("blocks", []):
+            if block.get("type") != 0:
+                continue
+            for raw_line in block.get("lines", []):
+                text = "".join(span.get("text", "") for span in raw_line.get("spans", []))
+                cleaned = clean_legacy_line(text)
+                if cleaned:
+                    lines.append(cleaned)
+    return lines
+
+
+def clean_legacy_line(value: str) -> str:
+    value = html.unescape(str(value or ""))
+    value = value.replace("\r", "\n").replace("\u00a0", " ")
+    value = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", "", value)
+    value = re.sub(r"[֐ڰϬะࢀ௰ྠĀ]+", " ", value)
+    value = value.replace("漠杳", "[그림]").replace("氠瑢", "[지문]")
+    value = re.sub(r"^[A-Za-z捤獥汤捯湰灧桤]+(?=2018 PDS)", "", value)
+    value = re.sub(r"[\t\n]+", " ", value).strip()
+    value = re.sub(r"\s+([?.!,])", r"\1", value)
+    return value
+
+
+def parse_legacy_numbered_lines(raw_lines: list[str], default_source: str, allow_unnumbered: bool = False) -> list[Question]:
+    questions: list[Question] = []
+    major_source = default_source
+    sub_source = ""
+    professor = ""
+    current: list[str] = []
+    current_source = default_source
+    current_professor = ""
+
+    def source_label() -> str:
+        return f"{major_source} · {sub_source}" if sub_source else major_source
+
+    def flush() -> None:
+        nonlocal current
+        question = build_legacy_question(current, current_source, current_professor)
+        if question:
+            questions.append(question)
+        current = []
+
+    for line in raw_lines:
+        if is_legacy_noise(line):
+            continue
+
+        start = parse_legacy_question_start(line)
+        if start:
+            flush()
+            current_source = source_label()
+            current_professor = professor
+            current = [start]
+            continue
+
+        section = parse_legacy_section(line, allow_loose=not bool(current))
+        if section:
+            flush()
+            kind, title, name = section
+            if kind == "major":
+                major_source = title
+                sub_source = ""
+            else:
+                sub_source = title
+            if name:
+                professor = name
+            continue
+
+        if allow_unnumbered and current and looks_like_legacy_unnumbered_question(line):
+            flush()
+            current_source = source_label()
+            current_professor = professor
+            current = [line]
+            continue
+
+        if current:
+            current.append(line)
+        elif looks_like_legacy_heading(line):
+            major_source = normalize_source(line)
+            sub_source = ""
+            professor = parse_professor(line)
+
+    flush()
+    return questions
+
+
+def parse_legacy_question_start(line: str) -> str | None:
+    match = re.match(r"^\s*(?:<)?(\d{1,3}(?:\s*[-~]\s*\d{1,3})?)(?:\.\s*(?:\d{1,3}\.)?|,)\s*(.+?)(?:>)?$", line)
+    if not match:
+        return None
+    text = normalize_text(match.group(2).strip())
+    if not text or is_legacy_noise(text):
+        return None
+    return cleanup_question_start(text)
+
+
+def parse_legacy_section(line: str, allow_loose: bool = True) -> tuple[str, str, str] | None:
+    if len(line) > 140:
+        return None
+    bracket = re.match(r"^\[([^\]]+)\]\s*(.*)$", line)
+    if bracket:
+        if bracket.group(1).strip() in {"그림", "지문"}:
+            return None
+        return "major", normalize_source(bracket.group(1)), parse_professor(bracket.group(2))
+    angle = re.match(r"^<([^>]+)>\s*(.*)$", line)
+    if angle and not re.search(r"\d", angle.group(1)):
+        return "major", normalize_source(angle.group(1)), parse_professor(angle.group(2))
+    if line.startswith("■"):
+        title = normalize_source(line.lstrip("■ ").strip())
+        return ("sub", title, parse_professor(title)) if title else None
+    if (allow_loose or looks_like_strong_legacy_heading(line)) and looks_like_legacy_heading(line):
+        return "major", normalize_source(line), parse_professor(line)
+    return None
+
+
+def looks_like_legacy_heading(line: str) -> bool:
+    if len(line) > 70:
+        return False
+    if parse_legacy_question_start(line):
+        return False
+    if re.search(r"\?|답\s*[:은]|보기|^\d+장$", line):
+        return False
+    heading_words = (
+        "법의학", "의료법규", "보건관리", "의료와 법", "의료와법", "병원경영",
+        "의사소통", "의료윤리", "통합의학", "보건의료기본법", "의료법",
+        "응급의료법", "마약류", "건보법", "감염병", "가정의학", "상담",
+        "두부손상", "손상사", "자연의학", "동종요법", "건강기능식품",
+        "에너지 의학", "기능 의학", "음악치료", "임상미술치료",
+        "바이오피드백", "아로마테라피",
+    )
+    return any(word in line for word in heading_words) and not line.startswith(("보기", "답"))
+
+
+def looks_like_strong_legacy_heading(line: str) -> bool:
+    if len(line) > 60 or parse_legacy_question_start(line):
+        return False
+    if "교수" in line or re.search(r"\([가-힣]{2,4}P?\)", line):
+        return True
+    return line in {
+        "보건의료기본법", "의료법", "응급의료법", "마약류", "건보법",
+        "감염병, 에이즈, 검역", "두부손상", "손상사", "법의학",
+        "의료윤리", "의사소통", "통합의학", "보건관리", "병원경영",
+    }
+
+
+def looks_like_legacy_unnumbered_question(line: str) -> bool:
+    if len(line) > 100 or is_legacy_option_start(line):
+        return False
+    if re.match(r"^[가나다라마]\.", line) or is_legacy_combo_choice(line):
+        return False
+    return bool("?" in line and re.search(r"야마|아닌|틀린|옳|무엇|어느|해당|설명|원칙|검체|분야|속성|용도|임상|process|치료", line))
+
+
+def is_legacy_noise(line: str) -> bool:
+    if not line:
+        return True
+    if re.fullmatch(r"-?\s*\d+\s*-?", line):
+        return True
+    if re.fullmatch(r"-\s*\d+\s*-", line):
+        return True
+    if line in {":: 목 차 ::", "목 차", "나왔습니다!", "보기 기억안남.."}:
+        return True
+    if re.search(r"^(PDS4|16년도 PDS4|213문제|총 \d+문제|2018 PDS 4 형성평가)", line):
+        return True
+    if "문항복원" in line or "문항 중" in line or "문항중" in line:
+        return True
+    if re.match(r"^0\d\s+", line):
+        return True
+    if re.match(r"^\d+장$", line):
+        return True
+    return False
+
+
+def build_legacy_question(lines: list[str], source: str, professor: str) -> Question | None:
+    body = [line.strip() for line in lines if line.strip()]
+    if not body:
+        return None
+
+    answers_text: list[str] = []
+    note_parts: list[str] = []
+    filtered: list[str] = []
+    for line in body:
+        answer = extract_legacy_answer_text(line)
+        if answer:
+            answers_text.append(answer)
+            note_parts.append(line)
+            continue
+        filtered.append(line)
+
+    if not filtered:
+        filtered = body[:1]
+
+    short_answer = any("주관식" in line for line in filtered)
+    stem_lines: list[str] = []
+    option_lines: list[str] = []
+    stem_complete = False
+
+    for line in filtered:
+        if line in {"( )", "[그림]", "[지문]"}:
+            stem_lines.append(line)
+            continue
+        if short_answer:
+            stem_lines.append(line)
+            continue
+        if not stem_complete:
+            stem_lines.append(line)
+            if legacy_stem_complete(stem_lines):
+                stem_complete = True
+            continue
+        if should_extend_legacy_stem(line, stem_lines, option_lines):
+            stem_lines.append(line)
+        else:
+            option_lines.append(line)
+
+    if short_answer:
+        option_lines = []
+
+    stem = normalize_stem(stem_lines)
+    options, correct = parse_legacy_options(option_lines)
+    stem, options = refine_legacy_question_parts(stem, options)
+    correct = [index + 1 for index, option in enumerate(options) if option.correct]
+
+    for answer in answers_text:
+        matched = False
+        for index, option in enumerate(options):
+            if normalize(answer) and (normalize(answer) in normalize(option.text) or normalize(option.text) in normalize(answer)):
+                option.correct = True
+                correct.append(index + 1)
+                matched = True
+                break
+        if not matched and answer:
+            options.append(Option(text=answer, correct=True))
+            correct.append(len(options))
+
+    if not options:
+        if "(O/X)" in stem or "(o/x)" in stem or "O/X" in stem:
+            options = [Option("O"), Option("X")]
+        elif answers_text:
+            options = [Option(answers_text[0], correct=True)]
+            correct = [1]
+        else:
+            options = [Option("정답 원문 확인 필요")]
+
+    deduped_correct = sorted(set(index for index in correct if 1 <= index <= len(options)))
+    return Question(
+        source=source or "출처 미분류",
+        professor=professor,
+        stem=stem,
+        options=options,
+        answers=deduped_correct,
+        uncertain=not bool(deduped_correct),
+        note=" / ".join(dict.fromkeys(note_parts)),
+    )
+
+
+def legacy_stem_complete(stem_lines: list[str]) -> bool:
+    text = " ".join(stem_lines)
+    return has_question_cue(text) or "(O/X)" in text or "(o/x)" in text or "O/X" in text
+
+
+def should_extend_legacy_stem(line: str, stem_lines: list[str], option_lines: list[str]) -> bool:
+    if option_lines:
+        return False
+    if re.fullmatch(r"(?:된\s*)?(?:조합|것|항목|내용)?[은는]\?", line) or line in {"조합은?", "된 조합은?", "은?", "는?"}:
+        return True
+    if line in {"[그림]", "[지문]", "(A)", "(B)", "(C)", "( )"}:
+        return True
+    if "Health is a state" in line:
+        return True
+    if len(line) > 70 and not is_legacy_option_start(line):
+        return True
+    return False
+
+
+def extract_legacy_answer_text(line: str) -> str:
+    patterns = (
+        r"^답\s*[:：;]\s*(.+)$",
+        r"^답은\s*(.+)$",
+        r"^답\s*;\s*(.+)$",
+    )
+    for pattern in patterns:
+        match = re.match(pattern, line)
+        if match:
+            return clean_legacy_answer(match.group(1))
+    return ""
+
+
+def clean_legacy_answer(value: str) -> str:
+    value = re.sub(r"^[;:\s]+", "", value)
+    return normalize_text(value)
+
+
+def parse_legacy_options(lines: list[str]) -> tuple[list[Option], list[int]]:
+    options: list[Option] = []
+    correct: list[int] = []
+    last_marked_mode = ""
+    pending_bullet = False
+
+    def add(text: str, is_correct: bool = False, mode: str = "") -> None:
+        nonlocal last_marked_mode, pending_bullet
+        text = normalize_text(text)
+        if not text or text in {"[그림]", "[지문]", "( )"}:
+            return
+        is_correct = is_correct or "★" in text or bool(re.search(r"\(?\s*답\s*\)?", text))
+        text = re.sub(r"[★☆]", "", text)
+        text = re.sub(r"\(?\s*답\s*\)?", "", text)
+        text = re.sub(r"^\s*-\s*", "", text)
+        text = normalize_text(text)
+        if not text:
+            return
+        options.append(Option(text=text, correct=is_correct))
+        if is_correct:
+            correct.append(len(options))
+        last_marked_mode = mode
+        pending_bullet = False
+
+    def append_to_last(text: str) -> None:
+        if not options:
+            add(text)
+            return
+        options[-1].text = normalize_text(f"{options[-1].text} {text}")
+
+    for raw in lines:
+        line = raw.strip()
+        if not line:
+            continue
+        if line in {"Ÿ", "•", "●"}:
+            pending_bullet = True
+            continue
+
+        split = split_marked_legacy_options(line)
+        if split:
+            for text, is_correct, mode in split:
+                add(text, is_correct, mode)
+            continue
+
+        plain_parts = split_plain_legacy_options(line)
+        if pending_bullet:
+            add(line, mode="bullet")
+        elif last_marked_mode in {"circled", "numbered", "bullet"} and options:
+            append_to_last(line)
+        elif len(plain_parts) > 1:
+            for part in plain_parts:
+                add(part, mode="plain")
+        else:
+            add(line, mode="plain")
+
+    return options, correct
+
+
+def refine_legacy_question_parts(stem: str, options: list[Option]) -> tuple[str, list[Option]]:
+    options = merge_wrapped_legacy_options(options)
+    combo_index = next((index for index, option in enumerate(options) if is_legacy_combo_choice(option.text)), -1)
+    if combo_index > 0 and any(is_legacy_statement_label(option.text) for option in options[:combo_index]):
+        statements = [option.text for option in options[:combo_index]]
+        stem = normalize_text(stem + "\n" + "\n".join(statements))
+        options = options[combo_index:]
+    return stem, options
+
+
+def merge_wrapped_legacy_options(options: list[Option]) -> list[Option]:
+    merged: list[Option] = []
+    for option in options:
+        text = normalize_text(option.text)
+        if not text:
+            continue
+        if should_start_new_legacy_option(text, merged):
+            merged.append(Option(text=text, correct=option.correct))
+        else:
+            merged[-1].text = normalize_text(f"{merged[-1].text} {text}")
+            merged[-1].correct = merged[-1].correct or option.correct
+    return merged
+
+
+def should_start_new_legacy_option(text: str, merged: list[Option]) -> bool:
+    if not merged:
+        return True
+    previous = merged[-1].text
+    if text == "MODE":
+        return True
+    if previous == "MODE":
+        return False
+    if is_legacy_combo_choice(text) or is_legacy_statement_label(text):
+        return True
+    if is_legacy_combo_choice(previous) or is_legacy_statement_label(previous):
+        return False
+    return True
+
+
+def is_legacy_statement_label(text: str) -> bool:
+    return bool(re.match(r"^[가나다라마]\.", text))
+
+
+def is_legacy_combo_choice(text: str) -> bool:
+    return bool(re.fullmatch(r"[가나다라마](?:,[가나다라마]){0,4}|모두\s*(?:옳다|아니다)\.?", normalize_text(text)))
+
+
+def is_legacy_option_start(line: str) -> bool:
+    return bool(split_marked_legacy_options(line)) or bool(re.match(r"^(보기\)|[Ÿ•●])", line))
+
+
+def split_marked_legacy_options(line: str) -> list[tuple[str, bool, str]]:
+    line = line.strip()
+    if not line:
+        return []
+    if line.startswith("보기)"):
+        return [(part, "★" in part or "(답)" in part, "plain") for part in split_plain_legacy_options(line[3:].strip())]
+    if re.search(f"[{re.escape(CIRCLED)}]", line):
+        parts = re.split(f"(?=[{re.escape(CIRCLED)}])", line)
+        out = []
+        for part in parts:
+            part = part.strip()
+            if part and part[0] in CIRCLED:
+                out.append((part[1:].strip(), "★" in part or "(답)" in part, "circled"))
+        if out:
+            return out
+    if re.match(r"^[1-9]\s*[\)]", line):
+        parts = re.split(r"(?=\b[1-9]\s*\))", line)
+        out = []
+        for part in parts:
+            match = re.match(r"^([1-9])\s*\)\s*(.+)$", part.strip())
+            if match:
+                out.append((match.group(2).strip(), "★" in part or "(답)" in part, "numbered"))
+        if out:
+            return out
+    if line.startswith(("Ÿ", "•", "●")):
+        return [(line.lstrip("Ÿ•● ").strip(), "★" in line or "(답)" in line, "bullet")]
+    if line.startswith("-"):
+        parts = [part.strip() for part in re.split(r"\s+-\s*", line) if part.strip("- ").strip()]
+        if len(parts) == 1:
+            parts = [line.lstrip("- ").strip()]
+        return [(part, "★" in part or "(답)" in part, "hyphen") for part in parts]
+    return []
+
+
+def split_plain_legacy_options(line: str) -> list[str]:
+    line = line.strip()
+    if not line:
+        return []
+    if "   " in line or "  " in line:
+        return [normalize_text(part) for part in re.split(r"\s{2,}", line) if part.strip()]
+    if re.match(r"^(?:[가나다라마]\.\s*[^가나다라마]+?\s*){2,}", line):
+        return [normalize_text(part) for part in re.split(r"(?=[가나다라마]\.)", line) if part.strip()]
+    combo_pattern = r"(?:[가나다라마](?:,[가나다라마]){0,4}|모두\s*옳다|모두\s*아니다)"
+    combo_matches = re.findall(combo_pattern, line)
+    combo_residue = re.sub(combo_pattern, "", line)
+    combo_residue = re.sub(r"[\s,./()]+", "", combo_residue)
+    if len(combo_matches) >= 3 and not combo_residue:
+        return [normalize_text(part) for part in combo_matches]
+    tokens = line.split()
+    if 3 <= len(tokens) <= 6 and all(re.fullmatch(r"[A-Za-z0-9]+", token) for token in tokens):
+        return tokens
+    return [line]
 
 
 def parse_lines(raw_lines: list[Line]) -> list[Question]:
@@ -506,6 +1005,8 @@ def parse_professor(rest: str) -> str:
 def normalize_source(value: str) -> str:
     value = value.replace("–", "-").replace("—", "-")
     value = re.sub(r"\s+", " ", value).strip(" -")
+    value = re.sub(r"^[\u4e00-\u9fff]+(?=[가-힣A-Za-z0-9])", "", value)
+    value = re.sub(r"^[^가-힣A-Za-z0-9]+", "", value)
     return value or "출처 미분류"
 
 

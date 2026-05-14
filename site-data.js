@@ -1,5 +1,5 @@
 window.PDS_SITE_DATA = {
-  "generatedAt": "2026-05-13T13:51:30.314Z",
+  "generatedAt": "2026-05-14T03:35:30.899Z",
   "config": {
     "siteTitle": "PDS 학습 위키",
     "subtitle": "본과 4학년 PDS HTML 학습자료",
@@ -63,6 +63,7 @@ window.PDS_SITE_DATA = {
       "0428_2_integrative-medicine-philosophy-science.html": "김대호",
       "0428_3_domestic-violence-counseling.html": "박훈기",
       "0428_4_sexual-violence-counseling.html": "박훈기",
+      "0428_6_healthcare-framework-act.html": "신영전",
       "0429_1_health-functional-foods.html": "박훈기",
       "0429_2_patient-centered-care.html": "박계영",
       "0429_4_inpatient-attending-role.html": "손정식",
@@ -239,6 +240,20 @@ window.PDS_SITE_DATA = {
       "endPeriod": 4,
       "span": 1,
       "periodLabel": "4교시 11:00-11:50"
+    },
+    {
+      "file": "0428_6_healthcare-framework-act.html",
+      "title": "보건의료기본법 출제 법령 분석 & 기출문제 풀이",
+      "professor": "신영전",
+      "tag": "신영전",
+      "dateKey": "2026-04-28",
+      "dateLabel": "04/28",
+      "weekday": "화요일",
+      "weekKey": "2026-04-27",
+      "period": 6,
+      "endPeriod": 6,
+      "span": 1,
+      "periodLabel": "6교시 14:00-14:50"
     },
     {
       "file": "0429_1_health-functional-foods.html",
