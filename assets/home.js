@@ -54,14 +54,14 @@ const examArchive = [
   {
     year: "2017",
     items: [
-      { label: "복원", href: "Y/2017-pds4-restored-quiz.html", questions: 135, note: "임시정답 125 · 검토표시 40" }
+      { label: "복원", href: "Y/2017-pds4-restored-quiz.html", questions: 148, note: "임시정답 107 · 검토표시 8" }
     ]
   },
   {
     year: "2016",
     items: [
       { label: "형성평가", href: "Y/2016-pds4-formative-quiz.html", questions: 27, note: "임시정답 27" },
-      { label: "복원", href: "Y/2016-pds4-restored-quiz.html", questions: 112, note: "임시정답 96 · 검토표시 75" }
+      { label: "복원", href: "Y/2016-pds4-restored-quiz.html", questions: 122, note: "임시정답 100 · 검토표시 77" }
     ]
   },
   {
@@ -84,6 +84,8 @@ const els = {
   searchInput: document.querySelector("#search-input"),
   tagFilters: document.querySelector("#tag-filters"),
   examArchive: document.querySelector("#exam-archive"),
+  examArchivePanel: document.querySelector("#exam-archive-panel"),
+  examArchiveToggle: document.querySelector("#exam-archive-toggle"),
   examArchiveCount: document.querySelector("#exam-archive-count"),
   scheduleView: document.querySelector("#schedule-view"),
   lectureList: document.querySelector("#lecture-list")
@@ -110,6 +112,15 @@ function bindEvents() {
     state.query = event.target.value.trim();
     render();
   });
+
+  if (els.examArchiveToggle && els.examArchivePanel) {
+    els.examArchiveToggle.addEventListener("click", () => {
+      const shouldOpen = els.examArchivePanel.hidden;
+      els.examArchivePanel.hidden = !shouldOpen;
+      els.examArchiveToggle.setAttribute("aria-expanded", String(shouldOpen));
+      els.examArchiveToggle.textContent = shouldOpen ? "닫기" : "열기";
+    });
+  }
 }
 
 function renderTagFilters() {

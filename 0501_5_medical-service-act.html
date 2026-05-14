@@ -1,0 +1,1198 @@
+<!doctype html>
+<html lang='ko'>
+<head>
+<meta charset='utf-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<title>의료법 출제 법령 분석 · 기출문제 풀이</title>
+<style>
+  :root { --text:#171717; --muted:#626262; --line:#d7d7d7; --ink:#111; --accent:#0f5f7a; --danger:#b42318; --mark:#fff38a; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; color:var(--text); background:#fff; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif; line-height:1.72; word-break:keep-all; }
+  #progress { position:fixed; top:0; left:0; height:4px; background:var(--accent); width:0; z-index:1000; }
+  .wrap { max-width:1120px; margin:0 auto; padding:0 22px; }
+  header { padding:56px 0 30px; border-bottom:1px solid var(--line); }
+  h1 { font-size:clamp(2rem,4.2vw,3.7rem); letter-spacing:-.04em; margin:0 0 12px; line-height:1.13; }
+  h2 { font-size:clamp(1.55rem,3vw,2.25rem); letter-spacing:-.04em; margin:70px 0 20px; padding-bottom:10px; border-bottom:2px solid var(--line); }
+  h3 { font-size:1.28rem; letter-spacing:-.03em; margin:32px 0 10px; }
+  h4 { font-size:1.08rem; margin:24px 0 8px; }
+  p { margin:10px 0; }
+  a { color:var(--accent); text-decoration-thickness:.08em; text-underline-offset:.18em; }
+  nav { position:sticky; top:4px; z-index:900; background:rgba(255,255,255,.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  nav .wrap { display:flex; gap:10px; align-items:center; overflow:auto; padding-top:10px; padding-bottom:10px; }
+  nav a, nav button { white-space:nowrap; font-size:.94rem; color:var(--text); border:1px solid var(--line); border-radius:999px; padding:6px 12px; background:#fff; cursor:pointer; text-decoration:none; }
+  nav a:hover, nav button:hover { border-color:#777; }
+  .meta { color:var(--muted); font-size:.96rem; }
+  .lead { font-size:1.15rem; max-width:920px; }
+  .lead2 { font-size:1.06rem; max-width:940px; }
+  mark, .hl { background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 .08em; }
+  .u { text-decoration:underline; text-decoration-thickness:.14em; text-underline-offset:.16em; text-decoration-color:#dd4a4a; }
+  .exam { font-weight:800; text-decoration:underline; text-decoration-thickness:.14em; text-underline-offset:.18em; text-decoration-color:#e8c100; }
+  .red { color:var(--danger); font-weight:700; }
+  .muted { color:var(--muted); }
+  .small { font-size:.92rem; }
+  .grid { display:grid; gap:18px; }
+  .two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  @media (max-width:860px) { .two,.three { grid-template-columns:1fr; } }
+  .plain-card { border:1px solid var(--line); border-radius:18px; padding:18px; background:#fff; }
+  table { width:100%; border-collapse:collapse; margin:14px 0 22px; }
+  th, td { border-bottom:1px solid var(--line); padding:10px 8px; vertical-align:top; text-align:left; }
+  th { font-weight:800; }
+  .lawtext { white-space:pre-wrap; font-family:"Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif; border-left:4px solid #222; padding:12px 0 12px 16px; margin:14px 0 20px; line-height:1.72; background:#fff; }
+  details { border:1px solid var(--line); border-radius:16px; padding:12px 16px; background:#fff; margin:14px 0; }
+  summary { cursor:pointer; font-weight:800; }
+  .quizset summary { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:1.08rem; }
+  .quizset summary::after { content:"열기"; font-size:.86rem; color:var(--muted); font-weight:700; }
+  .quizset[open] summary::after { content:"닫기"; }
+  .mcq { border-top:1px solid var(--line); padding:18px 0; }
+  .mcq:first-child { border-top:0; }
+  .mcq .stem { font-weight:800; margin-bottom:8px; }
+  .source-line { margin:0 0 6px; font-size:.9rem; }
+  .source-label { font-weight:900; color:var(--accent); text-decoration:underline; text-decoration-thickness:.12em; text-underline-offset:.18em; }
+  .options { display:grid; gap:8px; margin:10px 0; }
+  .options button { text-align:left; border:1px solid var(--line); border-radius:12px; background:#fff; padding:9px 12px; cursor:pointer; font:inherit; }
+  .options button:hover { border-color:#888; }
+  .options button[aria-pressed="true"] { border-color:var(--ink); outline:2px solid #111; outline-offset:1px; }
+  .options button.correct { border-color:#111; font-weight:800; }
+  .options button.wrong { border-style:dashed; }
+  .optlabel { font-weight:800; margin-right:.3em; }
+  .qtools { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0; }
+  .qtools button, .control button { border:1px solid var(--line); border-radius:12px; background:#fff; padding:8px 12px; font:inherit; cursor:pointer; }
+  .qtools button:hover, .control button:hover { border-color:#777; }
+  .feedback { min-height:1.4em; font-weight:800; margin-top:8px; }
+  .feedback.ok { color:#005f46; }
+  .feedback.bad { color:var(--danger); }
+  .answer-detail { margin-top:10px; border-radius:12px; }
+  .toc { columns:2; column-gap:36px; }
+  .toc li { break-inside:avoid; margin:5px 0; }
+  @media (max-width:700px) { .toc { columns:1; } }
+  .control { display:flex; gap:8px; flex-wrap:wrap; margin:18px 0 24px; }
+  .exam-only { display:none; }
+  body.exam-mode .deep { display:none !important; }
+  body.exam-mode .exam-only { display:block; }
+  body.exam-mode .lawtext { max-height:180px; overflow:auto; }
+  .foot { border-top:1px solid var(--line); margin-top:70px; padding:26px 0 50px; color:var(--muted); }
+</style>
+</head>
+<body>
+<div id='progress'></div>
+<header>
+  <div class='wrap'>
+    <p class='meta'>의사법규 · 의료법 · 출제 법령 중심 재구성</p>
+    <h1>의료법<br>출제 법령 분석 & 기출문제 풀이</h1>
+    <p class='lead'>이번 자료는 강의록 전체 요약이 아니라, <mark>문제가 실제로 출제된 의료법 조문</mark>을 중심으로 정리했다. 원문을 먼저 확인하고, 바로 아래에서 기출문제를 풀면서 조문이 선지로 어떻게 바뀌는지 확인한다.</p>
+    <p class='meta'>법령 원문 기준: 업로드 PDF의 법제처 3단비교표와 기출 캡처. 일부 과거 기출은 현행 조문과 달라지는 부분이 있어, <b>과거 기출 답</b>과 <b>현행법 주의점</b>을 분리해 표시했다.</p>
+  </div>
+</header>
+<nav aria-label='본문 이동'>
+  <div class='wrap'>
+    <a href='#map'>출제지도</a>
+    <a href='#exam'>국가시험 응시제한·결격사유·면허조건</a><a href='#license'>면허정지와 면허취소 구별</a><a href='#hospital'>병원 구분·진료과목·전문병원·전문의 과목</a><a href='#record'>태아 성 감별·진료정보 침해사고·진료기록 보존</a><a href='#cert'>의료기관 인증·의료법인·신고·보수교육</a><a href='#facilities'>의료인 정원·중환자실·당직의료인·의료유사업자</a><a href='#misc'>범위 밖·개정 주의 문항</a>
+    <a href='#checklist'>누락점검</a>
+    <button type='button' onclick='toggleExamMode()'>시험 직전 모드</button>
+  </div>
+</nav>
+<main class='wrap'>
+<section id='map'>
+  <h2>1. 출제 법령 지도</h2>
+  <p>PDF의 문제 캡처는 반복이 많지만, 실제 출제 축은 아래 조문으로 모인다. 먼저 이 표를 잡고, 각 단원에서 원문과 문제를 연결한다.</p>
+  <table>
+    <thead><tr><th>출제 축</th><th>핵심 조문</th><th>한 줄 정답</th><th>주의할 오답</th></tr></thead>
+    <tbody>
+      <tr><td>국가시험 부정행위</td><td>제10조, 시행령 별표</td><td><b>3회의 범위</b>, 전자장비 유형은 기출상 2회</td><td>3년, 2년처럼 기간으로 바꾸는 선지</td></tr>
+      <tr><td>면허정지/취소</td><td>제65조, 제66조</td><td>개설 불가자에게 고용 = <b>정지</b><br>정지 중 의료행위·3회 이상 정지 = <b>취소</b></td><td>결격사유, 면허조건 불이행, 면허대여를 정지로 고르는 경우</td></tr>
+      <tr><td>250병상 종합병원</td><td>제3조의3</td><td>필수 4개 중 3개 + 영상 + 마취 + 진검/병리 + 7개 이상</td><td>재활의학과·응급의학과·정신과로 필수 과목 대체</td></tr>
+      <tr><td>진료정보 침해사고</td><td>제23조의3</td><td><b>보건복지부장관</b>에게 즉시 통지</td><td>과기정통부장관, 질병관리청장, 경찰서장</td></tr>
+      <tr><td>진료기록 보존</td><td>제22조, 시행규칙 제15조</td><td>환자명부 5년, 처방전 2년, 진료기록부 10년</td><td>처방전 3년, 방사선소견서 7년, 진단서 5년</td></tr>
+      <tr><td>의료기관 인증</td><td>제58조의3, 제58조의5</td><td>기준 5개, 조건부인증 1년, 이의신청 30일</td><td>병상회전율, 경영성과</td></tr>
+      <tr><td>의료인 신고/보수교육</td><td>제25조, 시행규칙 제20조</td><td>실태·취업상황 신고 3년마다, 보수교육 8시간</td><td>2년, 12시간, 24시간</td></tr>
+      <tr><td>시설·인력 계산</td><td>시행규칙 별표 4·5, 제39조의18</td><td>중환자실 5%, 외래 3명=입원 1명, 당직 200명 기준</td><td>입원환자만 계산하거나 외래환자 환산 누락</td></tr>
+    </tbody>
+  </table>
+  <div class='control'><button type='button' onclick='openAllQuizzes()'>문제 모두 열기</button><button type='button' onclick='closeAllQuizzes()'>문제 모두 닫기</button></div>
+  <p class='exam-only'><b>시험 직전:</b> 3회, 보건복지부장관, 환자명부 5년, 처방전 2년, 250병상 필수 조합, 인증기준 5개, 조건부인증 1년, 보수교육 8시간을 먼저 본다. 태아 성별 고지 32주는 과거 기출 답이며 현행 조문은 삭제 주의.</p>
+</section>
+
+
+<section id='exam'>
+  <h2>2. 국가시험 응시제한·결격사유·면허조건</h2>
+  <p class='lead2'>부정행위 문항은 반복해서 <b>3회의 범위</b>를 묻는다. 결격사유는 최신 조문과 과거 기출의 열거법 문제가 달라졌으므로, 현행 제8조의 구조를 먼저 잡고 오래된 문제는 별도 표시한다.</p>
+  <h3>법령 원문</h3><pre class='lawtext'>의료법 제8조(결격사유 등)
+다음 각 호의 어느 하나에 해당하는 자는 의료인이 될 수 없다. 다만, 간호사에 대하여는 「간호법」에서 정하는 바에 따른다.
+1. 「정신건강증진 및 정신질환자 복지서비스 지원에 관한 법률」 제3조제1호에 따른 정신질환자. 다만, 전문의가 의료인으로서 적합하다고 인정하는 사람은 그러하지 아니하다.
+2. 마약ㆍ대마ㆍ향정신성의약품 중독자
+3. 피성년후견인ㆍ피한정후견인
+4. 금고 이상의 실형을 선고받고 그 집행이 끝나거나 그 집행을 받지 아니하기로 확정된 후 5년이 지나지 아니한 자
+5. 금고 이상의 형의 집행유예를 선고받고 그 유예기간이 끝난 날부터 2년이 지나지 아니한 자
+6. 금고 이상의 형의 선고유예를 받고 그 유예기간 중에 있는 자
+
+의료법 제10조(응시자격 제한 등)
+① 제8조 각 호의 어느 하나에 해당하는 자는 국가시험등에 응시할 수 없다.
+② 부정한 방법으로 국가시험등에 응시한 자나 국가시험등에 관하여 부정행위를 한 자는 그 수험을 정지시키거나 합격을 무효로 한다.
+③ 보건복지부장관은 제2항에 따라 수험이 정지되거나 합격이 무효가 된 사람에 대하여 처분의 사유와 위반 정도 등을 고려하여 대통령령으로 정하는 바에 따라 그 다음에 치러지는 이 법에 따른 국가시험등의 응시를 3회의 범위에서 제한할 수 있다.
+
+의료법 제11조(면허 조건과 등록)
+① 보건복지부장관은 보건의료 시책에 필요하다고 인정하면 면허를 내줄 때 3년 이내의 기간을 정하여 특정 지역이나 특정 업무에 종사할 것을 면허의 조건으로 붙일 수 있다.</pre>
+  <h3>해설</h3>
+  <p>시험에서는 “부정행위 = 3년”처럼 보이게 선지를 섞지만, 원문은 <mark>3회의 범위</mark>다. 결격사유는 정신질환자·중독자·후견인·금고 이상 형사처분 기간으로 묶어 기억한다. 과거 기출의 특정 법률명 나열 문제는 현행 조문과 충돌할 수 있으므로, 문제 해설에 과거 답과 현행법 주의점을 분리했다.</p>
+  <h3>기출문제</h3>
+  <details class='quizset'><summary><span>국가시험 응시제한·결격사유·면허조건 문제</span></summary><div class='quiz-inner'>
+      <div class='mcq' data-answer='③' data-answer-label='③. 3회'>
+        <p class='source-line'><span class='source-label'>[25Y 형성] p.149 Q1</span></p>
+        <p class='stem'>의료인 국가시험에서 부정행위를 한 경우, 응시 자격 몇 회 또는 몇 년의 범위에서 금지할 수 있는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 1회</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 2회</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 3회</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 2년</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 3년</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ③. 3회</p><p>의료법 제10조 제3항은 부정응시 또는 부정행위로 수험정지·합격무효가 된 사람에게 다음 국가시험등 응시를 <b>3회의 범위</b>에서 제한할 수 있다고 정한다. ‘몇 년’이 아니라 <b>몇 회</b>인지가 출제 포인트다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='③' data-answer-label='③. 3회'>
+        <p class='source-line'><span class='source-label'>[23Y 총괄] p.151 Q7</span></p>
+        <p class='stem'>국가고시 시험에 부정한 방법으로 응시하였을 때 몇 회 범위에서 국가고시 응시가 제한되는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 1회</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 2회</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 3회</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 2년</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ③. 3회</p><p>의료법 제10조 제3항은 부정응시 또는 부정행위로 수험정지·합격무효가 된 사람에게 다음 국가시험등 응시를 <b>3회의 범위</b>에서 제한할 수 있다고 정한다. ‘몇 년’이 아니라 <b>몇 회</b>인지가 출제 포인트다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='②' data-answer-label='②. 3회'>
+        <p class='source-line'><span class='source-label'>[22Y 형성] p.152 Q3</span></p>
+        <p class='stem'>부정행위에 대한 의사국가시험 응시 제한은 몇 년 또는 몇 회의 범위에서 가능한가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 2회</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 3회</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 1년</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 2년</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 3년</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ②. 3회</p><p>의료법 제10조 제3항은 부정응시 또는 부정행위로 수험정지·합격무효가 된 사람에게 다음 국가시험등 응시를 <b>3회의 범위</b>에서 제한할 수 있다고 정한다. ‘몇 년’이 아니라 <b>몇 회</b>인지가 출제 포인트다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='①' data-answer-label='①. 문제와 정답을 사전에 알고 시험을 본 경우'>
+        <p class='source-line'><span class='source-label'>[22Y 총괄] p.153 Q3</span></p>
+        <p class='stem'>다음중 3 회의 의사국가고시 응시 제한에 해당하는 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 문제와 정답을 사전에 알고 시험을 본 경우</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 시험 중에 다른 사람의 답안지를 엿본 경우</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 시험중에 전자장비를 사용한 경우</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 제7조 제1항에 따른 응시원서를 허위로 작성하여 제출하는 행위</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ①. 문제와 정답을 사전에 알고 시험을 본 경우</p><p>의료법 제10조는 최대 3회까지 제한할 수 있다고 정하고, 시행령 별표는 행위 유형별 제한 횟수를 나눈다. 이 문항의 슬라이드 답은 문제와 정답을 사전에 알고 시험을 본 경우다. 전자장비 사용 문항은 별도로 2회 제한으로 출제되었다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='B' data-answer-label='B. 2회'>
+        <p class='source-line'><span class='source-label'>[21Y 총괄] p.155 Q7</span></p>
+        <p class='stem'>국가시험 중에 허용되지 아니한 전자장비, 통신기기 또는 전자계산기 등을 사용하여 시험답안을 전송하거나 작성하면, 그 다음에 치러지는 국가시험 응시가 얼마나 제한되는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='A' aria-pressed='false'><span class='optlabel'>A.</span> 1회</button>
+<button type='button' class='opt' data-label='B' aria-pressed='false'><span class='optlabel'>B.</span> 2회</button>
+<button type='button' class='opt' data-label='C' aria-pressed='false'><span class='optlabel'>C.</span> 3회</button>
+<button type='button' class='opt' data-label='D' aria-pressed='false'><span class='optlabel'>D.</span> 1년</button>
+<button type='button' class='opt' data-label='E' aria-pressed='false'><span class='optlabel'>E.</span> 2년</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> B. 2회</p><p>의료법 제10조는 전체 상한을 3회로 정하고, 시행령 별표의 유형별 기준에서 전자장비·통신기기 등을 사용해 답안을 전송하거나 작성한 경우는 기출상 <b>2회</b>로 정리한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='C' data-answer-label='C. 3회'>
+        <p class='source-line'><span class='source-label'>[20Y 형성] p.156 Q9</span></p>
+        <p class='stem'>국가고시 시험에 부정한 방법으로 응시하였을 때 몇 회 범위에서 국가고시 응시가 제한되는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='A' aria-pressed='false'><span class='optlabel'>A.</span> 1회</button>
+<button type='button' class='opt' data-label='B' aria-pressed='false'><span class='optlabel'>B.</span> 2회</button>
+<button type='button' class='opt' data-label='C' aria-pressed='false'><span class='optlabel'>C.</span> 3회</button>
+<button type='button' class='opt' data-label='D' aria-pressed='false'><span class='optlabel'>D.</span> 2년</button>
+<button type='button' class='opt' data-label='E' aria-pressed='false'><span class='optlabel'>E.</span> 3년</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> C. 3회</p><p>의료법 제10조 제3항은 부정응시 또는 부정행위로 수험정지·합격무효가 된 사람에게 다음 국가시험등 응시를 <b>3회의 범위</b>에서 제한할 수 있다고 정한다. ‘몇 년’이 아니라 <b>몇 회</b>인지가 출제 포인트다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='③' data-answer-label='③. 3회'>
+        <p class='source-line'><span class='source-label'>[18Y 형성] p.157 Q55</span></p>
+        <p class='stem'>보건복지부장관은 의사국가고시에서 부정행위를 저지른 자에 대해 몇 회 범위 내에서 시험을 제한할 수 있는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 1회</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 2회</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 3회</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 4회</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 5회</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ③. 3회</p><p>의료법 제10조 제3항은 부정응시 또는 부정행위로 수험정지·합격무효가 된 사람에게 다음 국가시험등 응시를 <b>3회의 범위</b>에서 제한할 수 있다고 정한다. ‘몇 년’이 아니라 <b>몇 회</b>인지가 출제 포인트다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='③' data-answer-label='③. 3회'>
+        <p class='source-line'><span class='source-label'>[18Y 종합] p.157</span></p>
+        <p class='stem'>다음 중 의료법에서 부정한 방법으로 국가시험 등에 응시한 자나 국가시험 등에 관하여 부정행위를 한 자의 응시제한은 몇 회 이내에서 이루어지는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 1회</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 2회</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 3회</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 4회</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 5회</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ③. 3회</p><p>의료법 제10조 제3항은 부정응시 또는 부정행위로 수험정지·합격무효가 된 사람에게 다음 국가시험등 응시를 <b>3회의 범위</b>에서 제한할 수 있다고 정한다. ‘몇 년’이 아니라 <b>몇 회</b>인지가 출제 포인트다.</p></details>
+      </div>
+    </div></details>
+</section>
+
+<section id='license'>
+  <h2>3. 면허정지와 면허취소 구별</h2>
+  <p class='lead2'>반복 출제의 핵심은 <b>제66조 자격정지</b>와 <b>제65조 면허취소</b>를 선지에서 구별하는 것이다.</p>
+  <h3>법령 원문</h3><pre class='lawtext'>의료법 제65조(면허 취소와 재교부)
+① 보건복지부장관은 의료인이 다음 각 호의 어느 하나에 해당할 경우에는 그 면허를 취소할 수 있다. 다만, 제1호ㆍ제8호의 경우에는 면허를 취소하여야 한다.
+1. 제8조 각 호의 어느 하나에 해당하게 된 경우
+2. 제66조에 따른 자격 정지 처분 기간 중에 의료행위를 하거나 3회 이상 자격 정지 처분을 받은 경우
+2의2. 면허를 재교부받은 사람이 제66조제1항 각 호의 어느 하나에 해당하는 경우
+3. 제11조제1항에 따른 면허 조건을 이행하지 아니한 경우
+4. 제4조의3제1항을 위반하여 면허를 대여한 경우
+6. 사람의 생명 또는 신체에 중대한 위해를 발생하게 할 우려가 있는 수술, 수혈, 전신마취 중 의식이 없는 환자에 대하여 일회용 의료기기를 재사용한 경우
+7. 무면허자에게 수술, 수혈, 전신마취 등 의료행위를 지시하여 중대한 위해를 발생하게 할 우려가 있는 경우
+8. 거짓이나 그 밖의 부정한 방법으로 의료인 면허의 발급요건을 취득하거나 국가시험등에 합격한 경우
+
+의료법 제66조(자격정지 등)
+① 보건복지부장관은 의료인이 다음 각 호의 어느 하나에 해당하면 1년의 범위에서 면허자격을 정지시킬 수 있다.
+1. 의료인의 품위를 심하게 손상시키는 행위를 한 때
+2. 의료기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 한 때
+3. 진단서ㆍ검안서ㆍ증명서를 거짓으로 작성하거나 진료기록부등을 거짓으로 작성 또는 고의로 사실과 다르게 추가기재ㆍ수정한 때
+4. 제20조를 위반한 경우
+6. 의료기사가 아닌 자에게 의료기사의 업무를 하게 하거나 의료기사에게 면허 범위 밖의 업무를 하게 한 경우
+7. 관련 서류를 위조ㆍ변조하거나 속임수 등 부정한 방법으로 진료비를 거짓 청구한 때
+9. 약사ㆍ한약제조업자ㆍ의약품도매상 등으로부터 부당한 경제적 이익등을 받은 때
+10. 그 밖에 이 법 또는 이 법에 따른 명령을 위반한 때
+
+의료법 시행령 제32조(의료인의 품위 손상 행위의 범위)
+학문적으로 인정되지 아니하는 진료행위, 비도덕적 진료행위, 거짓 또는 과대광고행위, 지나친 진료행위나 부당한 진료비 요구, 환자 유인, 특정 약국과의 담합 등은 품위 손상 행위에 포함된다.</pre>
+  <h3>해설</h3>
+  <p><mark>정지</mark>는 의료행위 방식·품위·거짓작성·부당청구처럼 “행위 위반”에 가깝다. <mark>취소</mark>는 결격사유, 정지 중 의료행위, 정지 3회 이상, 면허조건 불이행, 면허대여처럼 면허 보유 자체를 흔드는 사유다. 기출은 거의 항상 “의료기관 개설자가 될 수 없는 자에게 고용”을 정답으로 내고, 나머지를 취소 사유로 섞는다.</p>
+  <h3>기출문제</h3>
+  <details class='quizset'><summary><span>면허정지와 면허취소 구별 문제</span></summary><div class='quiz-inner'>
+      <div class='mcq' data-answer='②' data-answer-label='②. 의료기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 할 때'>
+        <p class='source-line'><span class='source-label'>[25Y 형성] p.149 Q2</span></p>
+        <p class='stem'>다음 중 의사 면허 정지 사유인 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 의료인 결격 사유에 해당할 때</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 의료기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 할 때</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 의료법 제66조에 따라 3회 이상 자격 정지를 받은 때</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 의료법 제11조 제1항에 따라 면허 조건을 이행하지 아니한 경우</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 면허를 타인에게 대여한 경우</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ②. 의료기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 할 때</p><p>의료법 제66조 제1항 제2호의 <b>의료기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 한 때</b>는 면허자격정지 사유다. 반면 결격사유 해당, 3회 이상 자격정지, 면허조건 불이행, 면허대여는 제65조의 면허취소 쪽으로 분류한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='①' data-answer-label='①. 자격정지 처분 기간 중 의료행위를 한 자'>
+        <p class='source-line'><span class='source-label'>[25Y 형성] p.149 Q5</span></p>
+        <p class='stem'>다음 중 면허 취소 사유인 것은? ☆</p>
+        <p class='muted small'>원문 캡처의 “제32조” 표기는 태아 성감별 조문인 제20조와 혼동된 복기 표기로 보인다.</p>
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 자격정지 처분 기간 중 의료행위를 한 자</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 의료법 제32조 위반에 해당되는 태아 성 감별을 한 경우</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 의료법 제66조 위반에 해당되는 거짓 진단서를 작성한 경우</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 의료기사가 아닌 자에게 의료기사의 업무를 지시한 경우</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 의약품 공급자로부터 경제적 이익을 취득한 경우?</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ①. 자격정지 처분 기간 중 의료행위를 한 자</p><p>의료법 제65조 제1항 제2호는 <b>자격정지 처분 기간 중 의료행위</b> 또는 <b>3회 이상 자격정지 처분</b>을 면허취소 사유로 둔다. 비도덕적 진료행위, 거짓 진단서 작성, 의료기사 업무 지시, 부당한 경제적 이익 수수는 원칙적으로 제66조의 자격정지 축에서 먼저 정리한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='②' data-answer-label='②. 의료기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 한 때'>
+        <p class='source-line'><span class='source-label'>[23Y 형성] p.150 Q2</span></p>
+        <p class='stem'>다음 중 의사 면허 정지 사유인 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 의료인 결격사유에 해당될 때</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 의료기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 한 때</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 의료법 제66조에 따라 3회 이상 자격 정지를 받은 경우</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 의료법 제11조 제1항에 따라 면허 조건을 이행하지 아니한 경우</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 면허를 타인에게 대여한 경우</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ②. 의료기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 한 때</p><p>의료법 제66조 제1항 제2호의 <b>의료기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 한 때</b>는 면허자격정지 사유다. 반면 결격사유 해당, 3회 이상 자격정지, 면허조건 불이행, 면허대여는 제65조의 면허취소 쪽으로 분류한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='①' data-answer-label='①. 의료기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 한 때'>
+        <p class='source-line'><span class='source-label'>[22Y 형성] p.152 Q5</span></p>
+        <p class='stem'>다음 주 의사 면허 정지 사유인 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 의료기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 한 때</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 의료인 결격사유에 해당될 때</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 의료법 제66조에 따라 3회 이상 자격정지를 받은 경우</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 의료법 제11조 제1항에 따라 면허 조건을 이행하지 아니한 경우</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 면허를 타인에게 대여한 경우</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ①. 의료기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 한 때</p><p>의료법 제66조 제1항 제2호의 <b>의료기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 한 때</b>는 면허자격정지 사유다. 반면 결격사유 해당, 3회 이상 자격정지, 면허조건 불이행, 면허대여는 제65조의 면허취소 쪽으로 분류한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='NA' data-answer-label='제공자료상 답안 확인 불가'>
+        <p class='source-line'><span class='source-label'>[22Y 총괄] p.153 Q2</span></p>
+        <p class='stem'>다음 중 의료인이 될 수 없도록 하는 결격사유에 속하지 않는 것은??</p>
+        
+        
+        <p class='muted small'>선지가 완전하지 않아 채점 버튼을 두지 않았습니다. 아래 해설로 확인합니다.</p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> 제공자료상 답안 확인 불가</p><p>슬라이드에 “보기가 기억이 안남….”이라고 되어 있어 정답을 확정할 수 없다. 현행 제8조의 결격사유는 정신질환자(전문의 적합 인정 예외), 마약·대마·향정신성의약품 중독자, 피성년후견인·피한정후견인, 금고 이상 실형 종료 후 5년 미경과, 집행유예 종료 후 2년 미경과, 선고유예 기간 중인 자다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='①' data-answer-label='①. 의료법, 보건범죄 단속에 관한 특별조치법, 혈액관리법'>
+        <p class='source-line'><span class='source-label'>[22Y 총괄] p.153 Q8</span></p>
+        <p class='stem'>의료법에 따르면, ( )법을 위반하여 금고 이상의 형을 선고받고 그 형의 집행이 종료되지 아니하였거나 집행을 받지 아니하기로 확정되지 아니한 자는 결격사유에 해당한다. ( )에 들어갈 법으로 알맞게 짝지어진 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 의료법, 보건범죄 단속에 관한 특별조치법, 혈액관리법</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 의료법, 응급의료에 관한 법률, 형법 제230조(공문서등의 부정행사)</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 형법 제230조(공문서등의 부정행사), 응급의료에 관한 법률, 모자보건법</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 약사법, 형법 제230조(공문서등의 부정행사), 혈액관리법</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 모자보건법, 형법 제238조(공인등의 위조, 부정사용), 농어촌 등 보건의료를 위한 특별조치법</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ①. 의료법, 보건범죄 단속에 관한 특별조치법, 혈액관리법</p><p>이 문항은 과거 의료법 제8조가 결격사유와 관련해 특정 법령을 열거하던 시기의 기출이다. 현행 제8조는 ‘금고 이상의 실형·집행유예·선고유예’ 등 일반화된 문구로 바뀌어, 오래된 선지의 열거법 암기 문제는 현행법 기준으로 재검토해야 한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='①' data-answer-label='①. 제66조에 따른 자격 정지 처분 기간 중에 의료행위를 한 경우'>
+        <p class='source-line'><span class='source-label'>[22Y 총괄] p.153 Q9</span></p>
+        <p class='stem'>다음중 면허 정지에 해당하지 않는 경우는?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 제66조에 따른 자격 정지 처분 기간 중에 의료행위를 한 경우</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 의료기사가 아닌 자에게 의료기사의 업무를 하게 한 경우</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 의료인의 품위를 손상시킨 경우</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ①. 제66조에 따른 자격 정지 처분 기간 중에 의료행위를 한 경우</p><p>자격정지 처분 기간 중 의료행위는 제65조의 면허취소 사유다. 의료기사 업무 지시나 품위손상은 제66조의 자격정지 쪽에서 정리한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='A' data-answer-label='A. 의료 기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 한 때'>
+        <p class='source-line'><span class='source-label'>[21Y 형성] p.154 Q1</span></p>
+        <p class='stem'>다음 중 의사 면허 정지 사유인 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='A' aria-pressed='false'><span class='optlabel'>A.</span> 의료 기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 한 때</button>
+<button type='button' class='opt' data-label='B' aria-pressed='false'><span class='optlabel'>B.</span> 의료인 결격사유에 해당될 때</button>
+<button type='button' class='opt' data-label='C' aria-pressed='false'><span class='optlabel'>C.</span> 의료법 제66조에 따라 3회 이상 자격 정지 처분을 받은 경우</button>
+<button type='button' class='opt' data-label='D' aria-pressed='false'><span class='optlabel'>D.</span> 의료법 제11조 제1항에 따른 면허 조건을 이행하지 아니한 경우</button>
+<button type='button' class='opt' data-label='E' aria-pressed='false'><span class='optlabel'>E.</span> 면허를 대여한 경우</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> A. 의료 기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 한 때</p><p>의료법 제66조 제1항 제2호의 <b>의료기관 개설자가 될 수 없는 자에게 고용되어 의료행위를 한 때</b>는 면허자격정지 사유다. 반면 결격사유 해당, 3회 이상 자격정지, 면허조건 불이행, 면허대여는 제65조의 면허취소 쪽으로 분류한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='E' data-answer-label='E. 약사법, 모자보건법, 혈액관리법'>
+        <p class='source-line'><span class='source-label'>[21Y 총괄] p.155 Q6</span></p>
+        <p class='stem'>의료법에 따르면, ( )법을 위반하여 금고 이상의 형을 선고받고 그 형의 집행이 종료되지 아니하였거나 집행을 받지 아니하기로 확정되지 아니한 자는 결격사유에 해당한다. ( )에 들어갈 법으로 알맞게 짝지어진 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='A' aria-pressed='false'><span class='optlabel'>A.</span> 농어촌 등 보건의료를 위한 특별조치법, 응급의료에 관한 법률, 형법 제238조(공인등의 위조, 부정사용)</button>
+<button type='button' class='opt' data-label='B' aria-pressed='false'><span class='optlabel'>B.</span> 후천성면역결핍증 예방법, 혈액관리법, 형법 제238조(공인등의 위조, 부정사용)</button>
+<button type='button' class='opt' data-label='C' aria-pressed='false'><span class='optlabel'>C.</span> 의료법, 응급의료에 관한 법률, 형법 제230조(공문서등의 부정행사)</button>
+<button type='button' class='opt' data-label='D' aria-pressed='false'><span class='optlabel'>D.</span> 의료법, 약사법, 형법 제230조(공문서등의 부정행사)</button>
+<button type='button' class='opt' data-label='E' aria-pressed='false'><span class='optlabel'>E.</span> 약사법, 모자보건법, 혈액관리법</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> E. 약사법, 모자보건법, 혈액관리법</p><p>이 문항은 과거 의료법 제8조가 결격사유와 관련해 특정 법령을 열거하던 시기의 기출이다. 현행 제8조는 ‘금고 이상의 실형·집행유예·선고유예’ 등 일반화된 문구로 바뀌어, 오래된 선지의 열거법 암기 문제는 현행법 기준으로 재검토해야 한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='③' data-answer-label='③. 3년'>
+        <p class='source-line'><span class='source-label'>[18Y 형성] p.157 Q53</span></p>
+        <p class='stem'>형법 제347조(허위로 진료비를 청구하여 환자나 진료비를 지급하는 기관이나 단체를 속인 경우)만을 위반하여 면허취소를 당한 자는 얼마가 지난 후 면허를 재교부 받을 수 있는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 1년</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 2년</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 3년</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 4년</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 5년</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ③. 3년</p><p>슬라이드 답안은 3년이다. 현행 제65조 제2항은 취소 사유별로 재교부 제한기간을 다르게 둔다. 거짓·부정한 방법의 진료비 청구는 자격정지 사유와 연결되며, 면허취소 후 재교부 기간은 해당 취소 근거를 확인해 적용한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='OLD' data-answer-label='응급의료에 관한 법률 - 모자보건법 - 보건범죄단속에 관한 특별조치법'>
+        <p class='source-line'><span class='source-label'>[15Y] p.158 Q2</span></p>
+        <p class='stem'>다음 중 법령을 위반하여 면허취소 대상이 되는 항목으로 바르게 짝지어진 것은?</p>
+        
+        
+        <p class='muted small'>선지가 완전하지 않아 채점 버튼을 두지 않았습니다. 아래 해설로 확인합니다.</p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> 응급의료에 관한 법률 - 모자보건법 - 보건범죄단속에 관한 특별조치법</p><p>슬라이드의 빨간 답은 “응급의료에 관한 법률-모자보건법-보건범죄단속에 관한 특별조치법”이다. 아래 주석에 따르면 각종 형법조항이 포함되어 있었으나 제233·234·269·270·317·347에 해당하지 않았다고 되어 있다. 이 역시 과거 결격사유 열거법 문제로, 현행 제8조 기준과 다르다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='③' data-answer-label='③. 비도덕적 진료 행위'>
+        <p class='source-line'><span class='source-label'>[15Y] p.158 Q6</span></p>
+        <p class='stem'>다음 중 면허 취소의 대상에 해당하지 않는 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 자격 정지 중 의료행위</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 3회 이상 자격 정지</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 비도덕적 진료 행위</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 면허증의 대여 행위</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ③. 비도덕적 진료 행위</p><p>비도덕적 진료행위는 시행령상 품위손상행위로 자격정지 사유에 해당한다. 자격정지 중 의료행위, 3회 이상 자격정지, 면허대여는 면허취소 사유로 정리한다.</p></details>
+      </div>
+    </div></details>
+</section>
+
+<section id='hospital'>
+  <h2>4. 병원 구분·진료과목·전문병원·전문의 과목</h2>
+  <p class='lead2'>250병상 종합병원 문제, 상급종합병원 20개 진료과목, 전문병원 3년 재지정, 전문과목명 문제가 반복된다.</p>
+  <h3>법령 원문</h3><pre class='lawtext'>의료법 제3조의3(종합병원)
+① 종합병원은 다음 각 호의 요건을 갖추어야 한다.
+1. 100개 이상의 병상을 갖출 것
+2. 100병상 이상 300병상 이하인 경우에는 내과ㆍ외과ㆍ소아청소년과ㆍ산부인과 중 3개 진료과목, 영상의학과, 마취통증의학과와 진단검사의학과 또는 병리과를 포함한 7개 이상의 진료과목을 갖추고 각 진료과목마다 전속하는 전문의를 둘 것
+3. 300병상을 초과하는 경우에는 내과, 외과, 소아청소년과, 산부인과, 영상의학과, 마취통증의학과, 진단검사의학과 또는 병리과, 정신건강의학과 및 치과를 포함한 9개 이상의 진료과목을 갖추고 각 진료과목마다 전속하는 전문의를 둘 것
+
+의료법 제3조의4(상급종합병원 지정)
+① 보건복지부장관은 보건복지부령으로 정하는 20개 이상의 진료과목을 갖추고 각 진료과목마다 전속 전문의를 두는 등 요건을 갖춘 종합병원 중에서 상급종합병원을 지정할 수 있다.
+③ 보건복지부장관은 상급종합병원으로 지정받은 종합병원에 대하여 3년마다 평가를 실시하여 재지정하거나 지정을 취소할 수 있다.
+
+의료법 제3조의5(전문병원 지정)
+보건복지부장관은 병원급 의료기관 중 특정 진료과목 또는 특정 질환 등에 대하여 난이도가 높은 의료행위를 하는 병원을 전문병원으로 지정할 수 있고, 전문병원 지정 의료기관에 대하여 3년마다 평가하여 재지정할 수 있다.
+
+의료법 시행규칙 제41조(진료과목의 표시)
+병원ㆍ정신병원이나 의원이 표시할 수 있는 진료과목에는 내과, 신경과, 정신건강의학과, 외과, 정형외과, 신경외과, 심장혈관흉부외과, 성형외과, 마취통증의학과, 산부인과, 소아청소년과, 안과, 이비인후과, 피부과, 비뇨의학과, 영상의학과, 방사선종양학과, 병리과, 진단검사의학과, 재활의학과, 결핵과, 예방의학과, 가정의학과, 핵의학과, 직업환경의학과 및 응급의학과가 포함된다.</pre>
+  <h3>해설</h3>
+  <p>250병상은 100~300병상 구간이다. 필수 4개 중 <b>3개</b>와 영상의학과·마취통증의학과·진단검사의학과 또는 병리과가 들어가야 하므로, <span class="u">재활의학과·응급의학과·정신과는 필수 조합을 대신하지 못한다</span>. “소아과”는 과거 표현으로, 현행 명칭은 소아청소년과다.</p><p>전문의 과목 문제는 세부 분과명에 속지 않는다. 순환기내과·호흡기내과·신장내과·소화기내과·대장항문외과는 선지에서 오답으로 자주 쓰이고, 심장혈관흉부외과와 방사선종양학과는 정식 과목명이다.</p>
+  <h3>기출문제</h3>
+  <details class='quizset'><summary><span>병원 구분·진료과목·전문병원·전문의 과목 문제</span></summary><div class='quiz-inner'>
+      <div class='mcq' data-answer='②' data-answer-label='②. B 병원'>
+        <p class='source-line'><span class='source-label'>[25Y 형성] p.149 Q3</span></p>
+        <p class='stem'>250병상을 가진 종합병원에서 전문 과목의 구성으로서 적법한 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> A 병원: 내과, 외과, 산부인과, 소아청소년과, 영상의학과, 마취통증의학과, 재활의학과</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> B 병원: 내과, 외과, 소아청소년과, 이비인후과, 영상의학과, 마취통증의학과, 병리과</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> C 병원: 내과, 외과, 소아청소년과, 이비인후과, 영상의학과, 병리과, 진단검사의학과</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> D 병원: 내과, 외과, 산부인과, 소아청소년과, 영상의학과, 마취통증의학과</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> E 병원: 내과, 외과, 산부인과, 이비인후과, 영상의학과, 정신과, 진단검사의학과</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ②. B 병원</p><p>250병상은 <b>100병상 이상 300병상 이하</b> 구간이다. 따라서 내과·외과·소아청소년과·산부인과 중 3개, 영상의학과, 마취통증의학과, 진단검사의학과 또는 병리과를 포함해 <b>7개 이상</b>이어야 한다. 선지에 재활의학과·응급의학과·정신과가 있어도 필수 조합을 대체하지 못한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='②' data-answer-label='②. 내과, 외과, 소아과, 이비인후과, 영상의학과, 마취통증의학과, 병리과'>
+        <p class='source-line'><span class='source-label'>[23Y 형성] p.150 Q1</span></p>
+        <p class='stem'>250 병상을 가진 종합병원, 전문과목의 구성으로서 적합한 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 내과, 외과, 산부인과, 소아과, 영상의학과, 마취통증의학과, 재활의학과</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 내과, 외과, 소아과, 이비인후과, 영상의학과, 마취통증의학과, 병리과</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 내과, 외과, 소아과, 영상의학과, 병리과, 진단검사의학과, 이비인후과</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 내과, 외과, 산부인과, 소아과, 영상의학과, 마취통증의학과</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ②. 내과, 외과, 소아과, 이비인후과, 영상의학과, 마취통증의학과, 병리과</p><p>250병상은 <b>100병상 이상 300병상 이하</b> 구간이다. 따라서 내과·외과·소아청소년과·산부인과 중 3개, 영상의학과, 마취통증의학과, 진단검사의학과 또는 병리과를 포함해 <b>7개 이상</b>이어야 한다. 선지에 재활의학과·응급의학과·정신과가 있어도 필수 조합을 대체하지 못한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='④' data-answer-label='④. 20'>
+        <p class='source-line'><span class='source-label'>[23Y 형성] p.150 Q5</span></p>
+        <p class='stem'>상급종합병원 지정 시 갖춰야 할 진료과목 수는?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 5</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 10</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 15</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 20</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 25</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ④. 20</p><p>의료법 제3조의4는 상급종합병원 지정 요건으로 보건복지부령으로 정하는 <b>20개 이상의 진료과목</b>과 각 과목 전속 전문의를 요구한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='④' data-answer-label='④. 심장혈관흉부 외과'>
+        <p class='source-line'><span class='source-label'>[23Y 총괄] p.151 Q6</span></p>
+        <p class='stem'>다음 중 전문의의 전문과목에 속하는 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 순환기 내과</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 호흡기 내과</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 신장 내과</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 심장혈관흉부 외과</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 대장항문 외과</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ④. 심장혈관흉부 외과</p><p>전문의 전문과목은 법령상 정해진 과목명으로 판단한다. 세부 분과명인 순환기내과·호흡기내과·신장내과·대장항문외과는 전문과목명이 아니고, <b>심장혈관흉부외과</b>와 <b>방사선종양학과</b>는 전문과목·표시 가능한 진료과목명이다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='②' data-answer-label='②. 내과, 외과, 소아과, 이비인후과, 영상의학과, 마취통증의학과, 병리과'>
+        <p class='source-line'><span class='source-label'>[22Y 형성] p.152 Q2</span></p>
+        <p class='stem'>250 병상을 가진 종합병원, 전문과목의 구성으로서 적합한 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 내과, 외과, 산부인과, 소아과, 영상의학과, 마취통증의학과, 재활의학과</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 내과, 외과, 소아과, 이비인후과, 영상의학과, 마취통증의학과, 병리과</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 내과, 외과, 소아과, 영상의학과, 병리과, 진단검사의학과, 이비인후과</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 내과, 외과, 산부인과, 소아과, 영상의학과, 마취통증의학과, 이비인후과</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ②. 내과, 외과, 소아과, 이비인후과, 영상의학과, 마취통증의학과, 병리과</p><p>250병상은 <b>100병상 이상 300병상 이하</b> 구간이다. 따라서 내과·외과·소아청소년과·산부인과 중 3개, 영상의학과, 마취통증의학과, 진단검사의학과 또는 병리과를 포함해 <b>7개 이상</b>이어야 한다. 선지에 재활의학과·응급의학과·정신과가 있어도 필수 조합을 대체하지 못한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='⑤' data-answer-label='⑤. 방사선종양학과'>
+        <p class='source-line'><span class='source-label'>[22Y 총괄] p.153 Q1</span></p>
+        <p class='stem'>다음중 전문의의 전문과목에 속하는 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 소화기 내과</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 호흡기 내과</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 대장항문 외과</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 영상진단학과</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 방사선종양학과</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ⑤. 방사선종양학과</p><p>전문의 전문과목은 법령상 정해진 과목명으로 판단한다. 세부 분과명인 순환기내과·호흡기내과·신장내과·대장항문외과는 전문과목명이 아니고, <b>심장혈관흉부외과</b>와 <b>방사선종양학과</b>는 전문과목·표시 가능한 진료과목명이다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='C' data-answer-label='C. 3년'>
+        <p class='source-line'><span class='source-label'>[21Y 형성] p.154 Q2</span></p>
+        <p class='stem'>전문병원은 몇 년마다 재지정 받아야 하는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='A' aria-pressed='false'><span class='optlabel'>A.</span> 1년</button>
+<button type='button' class='opt' data-label='B' aria-pressed='false'><span class='optlabel'>B.</span> 2년</button>
+<button type='button' class='opt' data-label='C' aria-pressed='false'><span class='optlabel'>C.</span> 3년</button>
+<button type='button' class='opt' data-label='D' aria-pressed='false'><span class='optlabel'>D.</span> 4년</button>
+<button type='button' class='opt' data-label='E' aria-pressed='false'><span class='optlabel'>E.</span> 5년</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> C. 3년</p><p>의료법 제3조의5는 전문병원 지정을 받은 의료기관에 대해 <b>3년마다 평가</b>하여 재지정할 수 있다고 정한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='D' data-answer-label='D. 내과, 외과, 산부인과, 이비인후과, 영상의학과, 마취통증의학과, 병리과'>
+        <p class='source-line'><span class='source-label'>[21Y 형성] p.154 Q3</span></p>
+        <p class='stem'>다음 중 250병상일 때 있어야 하는 과는?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='A' aria-pressed='false'><span class='optlabel'>A.</span> 내과, 외과, 산부인과, 소아과, 영상의학과, 마취통증의학과, 재활의학과</button>
+<button type='button' class='opt' data-label='B' aria-pressed='false'><span class='optlabel'>B.</span> 내과, 외과, 산부인과, 소아과, 영상의학과, 응급의학과, 재활의학과</button>
+<button type='button' class='opt' data-label='C' aria-pressed='false'><span class='optlabel'>C.</span> 내과, 외과, 산부인과, 소아과, 영상의학과, 응급의학과, 정신과</button>
+<button type='button' class='opt' data-label='D' aria-pressed='false'><span class='optlabel'>D.</span> 내과, 외과, 산부인과, 이비인후과, 영상의학과, 마취통증의학과, 병리과</button>
+<button type='button' class='opt' data-label='E' aria-pressed='false'><span class='optlabel'>E.</span> 내과, 외과, 산부인과, 이비인후과, 영상의학과, 응급의학과, 병리과</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> D. 내과, 외과, 산부인과, 이비인후과, 영상의학과, 마취통증의학과, 병리과</p><p>250병상은 <b>100병상 이상 300병상 이하</b> 구간이다. 따라서 내과·외과·소아청소년과·산부인과 중 3개, 영상의학과, 마취통증의학과, 진단검사의학과 또는 병리과를 포함해 <b>7개 이상</b>이어야 한다. 선지에 재활의학과·응급의학과·정신과가 있어도 필수 조합을 대체하지 못한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='A' data-answer-label='A. 내과, 산부인과, 외과, 이비인후과, 영상의학과, 마취통증의학과, 병리과'>
+        <p class='source-line'><span class='source-label'>[20Y 형성] p.156 Q7</span></p>
+        <p class='stem'>250 병상일 때 있어야 하는 과</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='A' aria-pressed='false'><span class='optlabel'>A.</span> 내과, 산부인과, 외과, 이비인후과, 영상의학과, 마취통증의학과, 병리과</button>
+<button type='button' class='opt' data-label='B' aria-pressed='false'><span class='optlabel'>B.</span> 내과, 산부인과, 외과, 소아과, 마취통증의학과, 영상의학과, 응급의학과</button>
+<button type='button' class='opt' data-label='C' aria-pressed='false'><span class='optlabel'>C.</span> 내과, 산부인과, 외과, 소아과, 영상의학과, 재활의학과, 병리과</button>
+<button type='button' class='opt' data-label='D' aria-pressed='false'><span class='optlabel'>D.</span> 내과, 외과, 산부인과, 소아과, 마취통증의학과, 영상의학과, 정신과</button>
+<button type='button' class='opt' data-label='E' aria-pressed='false'><span class='optlabel'>E.</span> 내과, 외과, 산부인과, 소아과, 재활의학과, 마취통증의학과, 영상의학과</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> A. 내과, 산부인과, 외과, 이비인후과, 영상의학과, 마취통증의학과, 병리과</p><p>250병상은 <b>100병상 이상 300병상 이하</b> 구간이다. 따라서 내과·외과·소아청소년과·산부인과 중 3개, 영상의학과, 마취통증의학과, 진단검사의학과 또는 병리과를 포함해 <b>7개 이상</b>이어야 한다. 선지에 재활의학과·응급의학과·정신과가 있어도 필수 조합을 대체하지 못한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='④' data-answer-label='④. 방사선종양학과'>
+        <p class='source-line'><span class='source-label'>[18Y 형성] p.157 Q57</span></p>
+        <p class='stem'>병원명 표시시 쓸 수 있는 형태는?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 대장항문외과</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 미용성형외과</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 예방의학과</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 방사선종양학과</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ④. 방사선종양학과</p><p>기출 슬라이드의 답안은 <b>방사선종양학과</b>로 표시되어 있다. 현행 시행규칙 제41조의 표시 가능한 진료과목에는 예방의학과와 방사선종양학과가 모두 포함되므로, ‘병원명 표시’인지 ‘전문과목명’인지, 당시 법령·복기 문항의 정확한 표현을 확인해야 한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='①' data-answer-label='①. 방사선종양학과'>
+        <p class='source-line'><span class='source-label'>[16Y] p.158 Q10</span></p>
+        <p class='stem'>병원명 표시시 쓸 수 있는 형태는</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 방사선종양학과</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 대장항문외과</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 미용성형외과</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 예방의학과</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ①. 방사선종양학과</p><p>기출 슬라이드의 답안은 <b>방사선종양학과</b>로 표시되어 있다. 현행 시행규칙 제41조의 표시 가능한 진료과목에는 예방의학과와 방사선종양학과가 모두 포함되므로, ‘병원명 표시’인지 ‘전문과목명’인지, 당시 법령·복기 문항의 정확한 표현을 확인해야 한다.</p></details>
+      </div>
+    </div></details>
+</section>
+
+<section id='record'>
+  <h2>5. 태아 성 감별·진료정보 침해사고·진료기록 보존</h2>
+  <p class='lead2'>이 부분은 현행법과 과거 기출이 가장 크게 갈린다. <b>보건복지부장관 통지</b>, <b>환자명부 5년</b>, <b>처방전 2년</b>은 그대로 외우고, 태아 성별 고지 32주는 과거 기출로만 표시한다.</p>
+  <h3>법령 원문</h3><pre class='lawtext'>의료법 제20조(태아 성 감별 행위 등 금지)
+① 의료인은 태아 성 감별을 목적으로 임부를 진찰하거나 검사하여서는 아니 되며, 같은 목적을 위한 다른 사람의 행위를 도와서도 아니 된다.
+② 삭제 &lt;2024.12.20&gt;
+
+의료법 제22조(진료기록부 등)
+① 의료인은 진료기록부, 조산기록부, 간호기록부, 그 밖의 진료에 관한 기록을 갖추어 두고 환자의 주된 증상, 진단 및 치료 내용 등 의료행위에 관한 사항과 의견을 상세히 기록하고 서명하여야 한다.
+② 의료인이나 의료기관 개설자는 진료기록부등을 보건복지부령으로 정하는 바에 따라 보존하여야 한다.
+③ 의료인은 진료기록부등을 거짓으로 작성하거나 고의로 사실과 다르게 추가기재ㆍ수정하여서는 아니 된다.
+
+의료법 시행규칙 제15조(진료기록부 등의 보존)
+1. 환자 명부: 5년
+2. 진료기록부: 10년
+3. 처방전: 2년
+4. 수술기록: 10년
+5. 검사내용 및 검사소견기록: 5년
+6. 방사선 사진(영상물을 포함한다) 및 그 소견서: 5년
+7. 간호기록부: 5년
+8. 조산기록부: 5년
+9. 진단서 등의 부본: 3년
+
+의료법 제23조의3(진료정보 침해사고의 통지)
+① 의료인 또는 의료기관 개설자는 전자의무기록에 대한 전자적 침해행위로 진료정보가 유출되거나 의료기관의 업무가 교란ㆍ마비되는 등 대통령령으로 정하는 사고가 발생한 때에는 보건복지부장관에게 즉시 그 사실을 통지하여야 한다.</pre>
+  <h3>해설</h3>
+  <p>진료정보 침해사고는 “정보 유출”이라는 말 때문에 과학기술정보통신부장관을 고르게 만들지만, 의료법상 통지 상대는 <mark>보건복지부장관</mark>이다. 기록 보존기간은 표로 외우되, 기출 빈도는 환자명부 5년과 처방전 2년이 높다.</p><p class="red">태아 성별 고지 주수 문제는 과거 답안이 32주였지만 현행 제20조 제2항은 삭제되었다. 현행법 문제라면 “몇 주 이전 고지 금지”로 답하지 않는다.</p>
+  <h3>기출문제</h3>
+  <details class='quizset'><summary><span>태아 성 감별·진료정보 침해사고·진료기록 보존 문제</span></summary><div class='quiz-inner'>
+      <div class='mcq' data-answer='③' data-answer-label='③. 보건복지부 장관'>
+        <p class='source-line'><span class='source-label'>[25Y 형성] p.149 Q4</span></p>
+        <p class='stem'>의료 정보 유출 사고 발생 시 누구에게 통보해야 하는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 시도지사</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 과학기술정보통신부 장관</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 보건복지부 장관</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 국민건강보험공단 이사장</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 질병관리청장</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ③. 보건복지부 장관</p><p>의료법 제23조의3은 전자의무기록에 대한 침해행위로 진료정보가 유출되거나 업무가 교란·마비되는 등 진료정보 침해사고가 발생하면 <b>보건복지부장관에게 즉시 통지</b>하도록 한다. 경찰서장·과학기술정보통신부장관·질병관리청장은 이 조문상 통지 대상이 아니다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='③' data-answer-label='③. 보건복지부 장관'>
+        <p class='source-line'><span class='source-label'>[23Y 형성] p.150 Q3</span></p>
+        <p class='stem'>정보 유출 사고 발생 시 누구에게 통보해야 하는가</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 관할 경찰서장</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 과학기술정보통신부 장관</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 보건복지부 장관</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 기획재정부 장관</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 질병관리청장</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ③. 보건복지부 장관</p><p>의료법 제23조의3은 전자의무기록에 대한 침해행위로 진료정보가 유출되거나 업무가 교란·마비되는 등 진료정보 침해사고가 발생하면 <b>보건복지부장관에게 즉시 통지</b>하도록 한다. 경찰서장·과학기술정보통신부장관·질병관리청장은 이 조문상 통지 대상이 아니다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='⑤' data-answer-label='⑤. 5년'>
+        <p class='source-line'><span class='source-label'>[23Y 총괄] p.151 Q3</span></p>
+        <p class='stem'>환자 명부를 몇 년 동안 보존해야 하는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 1년</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 2년</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 3년</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 4년</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 5년</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ⑤. 5년</p><p>의료법 시행규칙 제15조의 보존기간에서 환자 명부는 <b>5년</b>이다. 진료기록부·수술기록은 10년, 처방전은 2년, 진단서 등 부본은 3년이다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='②' data-answer-label='②. 환자명부-5년'>
+        <p class='source-line'><span class='source-label'>[23Y 총괄] p.151 Q4</span></p>
+        <p class='stem'>다음 중 진료기록의 보존기간으로 옳은 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 처방전-3년</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 환자명부-5년</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 방사선소견서-7년</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 진단서-5년</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ②. 환자명부-5년</p><p>시행규칙 제15조 기준: 환자명부 5년, 진료기록부 10년, 처방전 2년, 수술기록 10년, 검사내용 및 검사소견기록 5년, 방사선 사진·영상물 및 소견서 5년, 간호기록부 5년, 조산기록부 5년, 진단서 등 부본 3년이다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='④' data-answer-label='④. 32주(과거 기출)'>
+        <p class='source-line'><span class='source-label'>[23Y 총괄] p.151 Q8</span></p>
+        <p class='stem'>의료인은 몇 주 이전의 태아의 성 감별을 하면 안되는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 14주</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 15주</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 21주</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 32주</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 40주</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ④. 32주(과거 기출)</p><p><b>과거 기출 답은 32주</b>다. 다만 현행 의료법 제20조 제2항은 2024.12.20 삭제되어 ‘몇 주 이전 성별 고지 금지’라는 형태의 답은 더 이상 현행 조문 기준 답안이 아니다. 현재 남아 있는 제20조 제1항은 <b>태아 성 감별을 목적으로 임부를 진찰·검사하는 행위 자체</b>를 금지한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='③' data-answer-label='③. 보건복지부 장관'>
+        <p class='source-line'><span class='source-label'>[22Y 형성] p.152 Q4</span></p>
+        <p class='stem'>정보 유출 사고 발생 시 누구에게 통보해야 하는가</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 관할 경찰서장</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 과학기술정보통신부 장관</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 보건복지부 장관</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 기획재정부 장관</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 질병관리청장</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ③. 보건복지부 장관</p><p>의료법 제23조의3은 전자의무기록에 대한 침해행위로 진료정보가 유출되거나 업무가 교란·마비되는 등 진료정보 침해사고가 발생하면 <b>보건복지부장관에게 즉시 통지</b>하도록 한다. 경찰서장·과학기술정보통신부장관·질병관리청장은 이 조문상 통지 대상이 아니다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='③' data-answer-label='③. 32주(과거 기출)'>
+        <p class='source-line'><span class='source-label'>[22Y 총괄] p.153 Q4</span></p>
+        <p class='stem'>태아 성 감별을 몇주 이내에 하면 처벌받는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 28주</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 30주</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 32주</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 34주</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 36주</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ③. 32주(과거 기출)</p><p><b>과거 기출 답은 32주</b>다. 다만 현행 의료법 제20조 제2항은 2024.12.20 삭제되어 ‘몇 주 이전 성별 고지 금지’라는 형태의 답은 더 이상 현행 조문 기준 답안이 아니다. 현재 남아 있는 제20조 제1항은 <b>태아 성 감별을 목적으로 임부를 진찰·검사하는 행위 자체</b>를 금지한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='①' data-answer-label='①. 5년'>
+        <p class='source-line'><span class='source-label'>[22Y 총괄] p.153 Q5</span></p>
+        <p class='stem'>환자 명부를 몇 년동안 보존해야 하는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 5년</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 1년</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 10년</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 3년</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 2년</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ①. 5년</p><p>의료법 시행규칙 제15조의 보존기간에서 환자 명부는 <b>5년</b>이다. 진료기록부·수술기록은 10년, 처방전은 2년, 진단서 등 부본은 3년이다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='D' data-answer-label='D. 32주(과거 기출)'>
+        <p class='source-line'><span class='source-label'>[21Y 총괄] p.155 Q2</span></p>
+        <p class='stem'>의료인은 몇 주 이전의 태아의 성 감별을 하면 안되는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='A' aria-pressed='false'><span class='optlabel'>A.</span> 14주</button>
+<button type='button' class='opt' data-label='B' aria-pressed='false'><span class='optlabel'>B.</span> 15주</button>
+<button type='button' class='opt' data-label='C' aria-pressed='false'><span class='optlabel'>C.</span> 21주</button>
+<button type='button' class='opt' data-label='D' aria-pressed='false'><span class='optlabel'>D.</span> 32주</button>
+<button type='button' class='opt' data-label='E' aria-pressed='false'><span class='optlabel'>E.</span> 40주</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> D. 32주(과거 기출)</p><p><b>과거 기출 답은 32주</b>다. 다만 현행 의료법 제20조 제2항은 2024.12.20 삭제되어 ‘몇 주 이전 성별 고지 금지’라는 형태의 답은 더 이상 현행 조문 기준 답안이 아니다. 현재 남아 있는 제20조 제1항은 <b>태아 성 감별을 목적으로 임부를 진찰·검사하는 행위 자체</b>를 금지한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='B' data-answer-label='B. 2년'>
+        <p class='source-line'><span class='source-label'>[21Y 총괄] p.155 Q3</span></p>
+        <p class='stem'>의료법 시행규칙에 따르면, 처방전은 몇 년간 보존하여야 하는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='A' aria-pressed='false'><span class='optlabel'>A.</span> 1년</button>
+<button type='button' class='opt' data-label='B' aria-pressed='false'><span class='optlabel'>B.</span> 2년</button>
+<button type='button' class='opt' data-label='C' aria-pressed='false'><span class='optlabel'>C.</span> 3년</button>
+<button type='button' class='opt' data-label='D' aria-pressed='false'><span class='optlabel'>D.</span> 5년</button>
+<button type='button' class='opt' data-label='E' aria-pressed='false'><span class='optlabel'>E.</span> 10년</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> B. 2년</p><p>의료법 시행규칙 제15조에서 처방전 보존기간은 <b>2년</b>이다. 환자명부·방사선소견서·간호기록부는 5년, 진료기록부·수술기록은 10년이다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='OLD' data-answer-label='32주(과거 기출)'>
+        <p class='source-line'><span class='source-label'>[16Y] p.158 Q9</span></p>
+        <p class='stem'>태아를 몇 주 이전에 성감별 목적으로 진찰하거나 하는 것이 금지되어 있는가</p>
+        
+        
+        <p class='muted small'>선지가 완전하지 않아 채점 버튼을 두지 않았습니다. 아래 해설로 확인합니다.</p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> 32주(과거 기출)</p><p><b>과거 기출 답은 32주</b>다. 다만 현행 의료법 제20조 제2항은 2024.12.20 삭제되어 ‘몇 주 이전 성별 고지 금지’라는 형태의 답은 더 이상 현행 조문 기준 답안이 아니다. 현재 남아 있는 제20조 제1항은 <b>태아 성 감별을 목적으로 임부를 진찰·검사하는 행위 자체</b>를 금지한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='②' data-answer-label='②. 환자명부-5년'>
+        <p class='source-line'><span class='source-label'>[15Y] p.158 Q7</span></p>
+        <p class='stem'>다음 중 진료기록의 보존기간으로 옳은 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 처방전-3년</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 환자명부-5년</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 방사선소견서-7년</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 진단서-5년</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ②. 환자명부-5년</p><p>시행규칙 제15조 기준: 환자명부 5년, 진료기록부 10년, 처방전 2년, 수술기록 10년, 검사내용 및 검사소견기록 5년, 방사선 사진·영상물 및 소견서 5년, 간호기록부 5년, 조산기록부 5년, 진단서 등 부본 3년이다.</p></details>
+      </div>
+    </div></details>
+</section>
+
+<section id='cert'>
+  <h2>6. 의료기관 인증·의료법인·신고·보수교육</h2>
+  <p class='lead2'>인증기준 5개, 조건부인증 1년, 이의신청 30일, 실태·취업상황 신고 3년, 보수교육 8시간, 의료법인 2년 미개설이 출제되었다.</p>
+  <h3>법령 원문</h3><pre class='lawtext'>의료법 제25조(신고)
+① 의사ㆍ치과의사ㆍ한의사 및 조산사는 대통령령으로 정하는 바에 따라 최초로 면허를 받은 후부터 3년마다 그 실태와 취업상황 등을 보건복지부장관에게 신고하여야 한다.
+
+의료법 제30조 및 의료법 시행규칙 제20조(보수교육)
+중앙회는 보수교육을 매년 실시해야 하며, 의사ㆍ치과의사ㆍ한의사 또는 조산사는 보수교육을 연간 8시간 이상 이수해야 한다.
+
+의료법 제51조(설립 허가 취소)
+보건복지부장관 또는 시ㆍ도지사는 의료법인이 다음 각 호의 어느 하나에 해당하면 그 설립허가를 취소할 수 있다.
+1. 정관으로 정하지 아니한 사업을 한 때
+2. 설립된 날부터 2년 안에 의료기관을 개설하지 아니한 때
+3. 의료법인이 개설한 의료기관이 제64조에 따라 개설허가를 취소당한 때
+4. 감독명령을 위반한 때
+5. 제49조제1항에 따른 부대사업 외의 사업을 한 때
+
+의료법 제58조의3(의료기관 인증기준 및 방법 등)
+① 의료기관 인증기준은 다음 각 호의 사항을 포함하여야 한다.
+1. 환자의 권리와 안전
+2. 의료기관의 의료서비스 질 향상 활동
+3. 의료서비스의 제공과정 및 성과
+4. 의료기관의 조직ㆍ인력관리 및 운영
+5. 환자 만족도
+② 인증등급은 인증, 조건부인증 및 불인증으로 구분한다.
+③ 인증의 유효기간은 4년으로 한다. 다만, 조건부인증의 경우에는 유효기간을 1년으로 한다.
+
+의료법 제58조의5(이의신청)
+의료기관 인증을 신청한 의료기관의 장은 평가결과 또는 인증등급에 관하여 보건복지부장관에게 이의신청을 할 수 있고, 이의신청은 통보받은 날부터 30일 이내에 하여야 한다.</pre>
+  <h3>해설</h3>
+  <p>인증기준 선지는 병상회전율과 경영성과가 반복 오답이다. 제58조의3 원문에는 환자 권리·안전, 질 향상 활동, 제공과정·성과, 조직·인력관리·운영, 환자 만족도만 들어간다. 조건부인증은 1년, 이의신청은 보건복지부장관에게 30일 이내다.</p>
+  <h3>기출문제</h3>
+  <details class='quizset'><summary><span>의료기관 인증·의료법인·신고·보수교육 문제</span></summary><div class='quiz-inner'>
+      <div class='mcq' data-answer='②' data-answer-label='②. 환자의 권리와 안전, 환자의 만족도'>
+        <p class='source-line'><span class='source-label'>[23Y 형성] p.150 Q4</span></p>
+        <p class='stem'>다음 중, 의료법 제58조의3에 따른 의료기관 인증 기준으로만 짝지어진 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 의료기관의 제공과정 및 성과, 병상회전을</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 환자의 권리와 안전, 환자의 만족도</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 의료기관의 조직·인력관리 및 운영, 의료기관의 경영성과</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 의료기관의 의료서비스 질 향상 활동, 병상회전을</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 환자의 만족도, 의료기관의 경영성과</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ②. 환자의 권리와 안전, 환자의 만족도</p><p>의료기관 인증기준은 환자의 권리와 안전, 의료서비스 질 향상 활동, 의료서비스 제공과정 및 성과, 조직·인력관리 및 운영, 환자 만족도다. <b>병상회전율</b>과 <b>경영성과</b>는 기출에서 반복되는 오답이다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='①' data-answer-label='①. 8시간'>
+        <p class='source-line'><span class='source-label'>[23Y 형성] p.150 Q6</span></p>
+        <p class='stem'>문보건복지부령에 따라 중앙회에서 실시하는 보수교육을 매년 이수해야 하는 시간은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 8</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 12</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 18</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 24</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 72</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ①. 8시간</p><p>의료법 시행규칙 제20조는 의사·치과의사·한의사·조산사가 중앙회 보수교육을 <b>연간 8시간 이상</b> 이수해야 한다고 정한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='①' data-answer-label='①. 환자의 권리와 안전, 환자 만족도'>
+        <p class='source-line'><span class='source-label'>[22Y 총괄] p.153 Q6</span></p>
+        <p class='stem'>의료기관의 인증 기준에 포함되는 것은?</p>
+        <p class='muted small'>슬라이드에 다른 선지는 기재되어 있지 않다.</p>
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 환자의 권리와 안전, 환자 만족도</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ①. 환자의 권리와 안전, 환자 만족도</p><p>의료기관 인증기준은 환자의 권리와 안전, 의료서비스 질 향상 활동, 의료서비스 제공과정 및 성과, 조직·인력관리 및 운영, 환자 만족도다. <b>병상회전율</b>과 <b>경영성과</b>는 기출에서 반복되는 오답이다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='②' data-answer-label='②. 건강보험 심사 평가원'>
+        <p class='source-line'><span class='source-label'>[22Y 총괄] p.153 Q7</span></p>
+        <p class='stem'>요양기관의 시설, 장비 및 인력등에 대한 현황을 누구에게 신고해야 하는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 보건복지부 장관</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 건강보험 심사 평가원</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 국민 건강보험 공단</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ②. 건강보험 심사 평가원</p><p>이 문항은 의료법 단독 조문보다 요양기관 현황신고 실무와 연결된 문제다. 슬라이드 답안은 건강보험심사평가원이다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='B' data-answer-label='B. 환자의 권리와 안전, 환자의 만족도'>
+        <p class='source-line'><span class='source-label'>[21Y 총괄] p.155 Q5</span></p>
+        <p class='stem'>다음 중, 의료법 제58조의3에 따른 의료기관 인증 기준으로만 짝지어진 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='A' aria-pressed='false'><span class='optlabel'>A.</span> 의료기관의 제공과정 및 성과, 병상회전을</button>
+<button type='button' class='opt' data-label='B' aria-pressed='false'><span class='optlabel'>B.</span> 환자의 권리와 안전, 환자의 만족도</button>
+<button type='button' class='opt' data-label='C' aria-pressed='false'><span class='optlabel'>C.</span> 의료기관의 조직·인력관리 및 운영, 의료기관의 경영성과</button>
+<button type='button' class='opt' data-label='D' aria-pressed='false'><span class='optlabel'>D.</span> 의료기관의 의료서비스 질 향상 활동, 병상회전을</button>
+<button type='button' class='opt' data-label='E' aria-pressed='false'><span class='optlabel'>E.</span> 환자의 만족도, 의료기관의 경영성과</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> B. 환자의 권리와 안전, 환자의 만족도</p><p>의료기관 인증기준은 환자의 권리와 안전, 의료서비스 질 향상 활동, 의료서비스 제공과정 및 성과, 조직·인력관리 및 운영, 환자 만족도다. <b>병상회전율</b>과 <b>경영성과</b>는 기출에서 반복되는 오답이다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='B' data-answer-label='B. 2년'>
+        <p class='source-line'><span class='source-label'>[20Y 형성] p.156 Q2</span></p>
+        <p class='stem'>의료법인설립 허가 취소 사유 중 몇 년 안에 의료기관을 개설하지 아니하면 취소되는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='A' aria-pressed='false'><span class='optlabel'>A.</span> 1년</button>
+<button type='button' class='opt' data-label='B' aria-pressed='false'><span class='optlabel'>B.</span> 2년</button>
+<button type='button' class='opt' data-label='C' aria-pressed='false'><span class='optlabel'>C.</span> 3년</button>
+<button type='button' class='opt' data-label='D' aria-pressed='false'><span class='optlabel'>D.</span> 4년</button>
+<button type='button' class='opt' data-label='E' aria-pressed='false'><span class='optlabel'>E.</span> 5년</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> B. 2년</p><p>의료법 제51조 제2호는 의료법인이 <b>설립된 날부터 2년 안에 의료기관을 개설하지 아니한 때</b> 설립허가를 취소할 수 있다고 정한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='A' data-answer-label='A. 환자만족도-환자의 권리와 안전'>
+        <p class='source-line'><span class='source-label'>[20Y 형성] p.156 Q5</span></p>
+        <p class='stem'>의료인증평가의 기준으로 옳게 짝지어진 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='A' aria-pressed='false'><span class='optlabel'>A.</span> 환자만족도-환자의 권리와 안전</button>
+<button type='button' class='opt' data-label='B' aria-pressed='false'><span class='optlabel'>B.</span> 의료기관의 의료서비스 질 향상 활동-병상회전을</button>
+<button type='button' class='opt' data-label='C' aria-pressed='false'><span class='optlabel'>C.</span> 의료기관의 조직 인력 관리 및 운영 - 병상회전을</button>
+<button type='button' class='opt' data-label='D' aria-pressed='false'><span class='optlabel'>D.</span> 의료기관의 경영성과 - 환자의 권리와 안전</button>
+<button type='button' class='opt' data-label='E' aria-pressed='false'><span class='optlabel'>E.</span> 의료기관의 경영성과 - 환자만족도</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> A. 환자만족도-환자의 권리와 안전</p><p>의료기관 인증기준은 환자의 권리와 안전, 의료서비스 질 향상 활동, 의료서비스 제공과정 및 성과, 조직·인력관리 및 운영, 환자 만족도다. <b>병상회전율</b>과 <b>경영성과</b>는 기출에서 반복되는 오답이다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='C' data-answer-label='C. 3년'>
+        <p class='source-line'><span class='source-label'>[20Y 형성] p.156 Q6</span></p>
+        <p class='stem'>의료인은 최초로 면허를 받은 후부터 몇년마다 그 실태와 취업상황 등을 보건복지부 장관에게 신고하여야 하는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='A' aria-pressed='false'><span class='optlabel'>A.</span> 1년</button>
+<button type='button' class='opt' data-label='B' aria-pressed='false'><span class='optlabel'>B.</span> 2년</button>
+<button type='button' class='opt' data-label='C' aria-pressed='false'><span class='optlabel'>C.</span> 3년</button>
+<button type='button' class='opt' data-label='D' aria-pressed='false'><span class='optlabel'>D.</span> 4년</button>
+<button type='button' class='opt' data-label='E' aria-pressed='false'><span class='optlabel'>E.</span> 5년</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> C. 3년</p><p>의료법 제25조는 의사·치과의사·한의사·조산사가 최초 면허 후부터 <b>3년마다</b> 실태와 취업상황을 보건복지부장관에게 신고해야 한다고 정한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='②' data-answer-label='②. 보건복지부장관, 30일'>
+        <p class='source-line'><span class='source-label'>[18Y 형성] p.157 Q56</span></p>
+        <p class='stem'>의료기관의 장은 의료기관인증 결과에 대한 이의신청을 누구에게 며칠 이내로 해야 하는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 보건복지부장관, 15일</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 보건복지부장관, 30일</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 보건복지부장관, 90일</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 질병관리본부장, 30일</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 질병관리본부장, 90일</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ②. 보건복지부장관, 30일</p><p>의료법 제58조의5는 평가결과 또는 인증등급에 관해 <b>보건복지부장관에게</b> 이의신청할 수 있고, 이의신청은 통보받은 날부터 <b>30일 이내</b>에 해야 한다고 정한다. 시행규칙상 접수·처리는 인증원이 담당하지만, 법 조문상 이의신청 상대는 보건복지부장관이다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='①' data-answer-label='①. 보건복지부장관 - 30일'>
+        <p class='source-line'><span class='source-label'>[17Y] p.157 Q7</span></p>
+        <p class='stem'>의료기관 인증에서 이의신청은 누구에게 며칠 이내?</p>
+        <p class='muted small'>슬라이드에는 “17년도 답 복기 안됨”이라고 되어 있으나, 법령 원문 기준 정답은 보건복지부장관-30일이다.</p>
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 보건복지부장관 - 30일</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 보건복지부장관 - 90일</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 보건복지부장관 - 10일</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 질병관리본부장 - 30일</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 질병관리본부장 - 90일</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ①. 보건복지부장관 - 30일</p><p>의료법 제58조의5는 평가결과 또는 인증등급에 관해 <b>보건복지부장관에게</b> 이의신청할 수 있고, 이의신청은 통보받은 날부터 <b>30일 이내</b>에 해야 한다고 정한다. 시행규칙상 접수·처리는 인증원이 담당하지만, 법 조문상 이의신청 상대는 보건복지부장관이다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='OLD' data-answer-label='8시간'>
+        <p class='source-line'><span class='source-label'>[15Y] p.158 Q3</span></p>
+        <p class='stem'>보건복지부령에 따라 중앙회에서 실시하는 보수교육을 매년 이수해야 하는 시간?</p>
+        
+        
+        <p class='muted small'>선지가 완전하지 않아 채점 버튼을 두지 않았습니다. 아래 해설로 확인합니다.</p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> 8시간</p><p>의료법 시행규칙 제20조 기준 정답은 <b>8시간</b>이다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='①' data-answer-label='①. 1년'>
+        <p class='source-line'><span class='source-label'>[15Y] p.158 Q5</span></p>
+        <p class='stem'>의료기관의 조건부인증의 경우 유효기간은 얼마인가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 1년</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 2년</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 3년</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 4년</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 5년</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ①. 1년</p><p>의료법 제58조의3은 인증 유효기간을 4년으로 하되, <b>조건부인증은 1년</b>으로 정한다.</p></details>
+      </div>
+    </div></details>
+</section>
+
+<section id='facilities'>
+  <h2>7. 의료인 정원·중환자실·당직의료인·의료유사업자</h2>
+  <p class='lead2'>시설·인력 계산 문제는 숫자만 외우기보다 산식이 중요하다. 의료유사업자는 접골사·침사·구사 세 글자 조합으로 정리한다.</p>
+  <h3>법령 원문</h3><pre class='lawtext'>의료법 시행규칙 제38조 및 별표 5(의료기관에 두는 의료인의 정원)
+종합병원과 병원의 의사 정원은 연평균 1일 입원환자를 20명으로 나눈 수로 하며, 소수점은 올림한다. 외래환자 3명은 입원환자 1명으로 환산한다.
+
+의료법 시행규칙 별표 4(의료기관의 시설규격)
+병상이 300개 이상인 종합병원은 입원실 병상 수의 100분의 5 이상을 중환자실 병상으로 만들어야 한다.
+
+의료법 제41조 및 시행규칙 제39조의18(당직의료인)
+각종 병원에는 응급환자와 입원환자의 진료 등에 필요한 당직의료인을 두어야 한다. 각종 병원에 두어야 하는 당직의료인의 수는 입원환자 200명까지는 의사ㆍ치과의사 또는 한의사 1명, 간호사 2명을 두되, 입원환자 200명을 초과하는 200명마다 의사ㆍ치과의사 또는 한의사 1명, 간호사 2명을 추가한 인원 수로 한다.
+
+의료법 제81조(의료유사업자)
+이 법이 시행되기 전의 규정에 따라 자격을 받은 접골사, 침사, 구사는 의료유사업자로서 각 해당 시술소에서 시술을 업으로 할 수 있다.
+
+의료법 제82조(안마사)
+안마사는 「장애인복지법」에 따른 시각장애인 중 법정 요건을 충족하여 시ㆍ도지사에게 자격인정을 받은 자로서 안마업무를 할 수 있다.</pre>
+  <h3>해설</h3>
+  <p>중환자실은 300병상 이상 종합병원에서 <mark>5%</mark>를 잡는다. 의료인 정원 계산은 외래 3명을 입원 1명으로 환산한다. 의료유사업자는 접골사·침사·구사이고, 안마사는 제82조 별도 규정이므로 의료유사업자 묶음에서는 오답이다.</p>
+  <h3>기출문제</h3>
+  <details class='quizset'><summary><span>의료인 정원·중환자실·당직의료인·의료유사업자 문제</span></summary><div class='quiz-inner'>
+      <div class='mcq' data-answer='④' data-answer-label='④. 50개'>
+        <p class='source-line'><span class='source-label'>[22Y 총괄] p.153 Q10</span></p>
+        <p class='stem'>병상이 1000 개인 종합병원은 몇 개의 중환자실 병상을 두어야 하는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 5개</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 10개</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 20개</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 50개</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 100개</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ④. 50개</p><p>의료법 시행규칙 별표 4는 병상이 300개 이상인 종합병원은 입원실 병상 수의 <b>100분의 5 이상</b>을 중환자실 병상으로 만들도록 한다. 500병상은 25개, 1000병상은 50개가 된다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='D' data-answer-label='D. 25개'>
+        <p class='source-line'><span class='source-label'>[21Y 총괄] p.155 Q1</span></p>
+        <p class='stem'>입원 병상 수가 500개인 병원은 몇 개 이상의 중환자실 병상을 두어야 하는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='A' aria-pressed='false'><span class='optlabel'>A.</span> 5개</button>
+<button type='button' class='opt' data-label='B' aria-pressed='false'><span class='optlabel'>B.</span> 10개</button>
+<button type='button' class='opt' data-label='C' aria-pressed='false'><span class='optlabel'>C.</span> 20개</button>
+<button type='button' class='opt' data-label='D' aria-pressed='false'><span class='optlabel'>D.</span> 25개</button>
+<button type='button' class='opt' data-label='E' aria-pressed='false'><span class='optlabel'>E.</span> 50개</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> D. 25개</p><p>의료법 시행규칙 별표 4는 병상이 300개 이상인 종합병원은 입원실 병상 수의 <b>100분의 5 이상</b>을 중환자실 병상으로 만들도록 한다. 500병상은 25개, 1000병상은 50개가 된다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='C' data-answer-label='C. 20명'>
+        <p class='source-line'><span class='source-label'>[21Y 총괄] p.155 Q4</span></p>
+        <p class='stem'>연평균 1일 입원환자가 200명, 외래환자가 600명인 병원은 몇 명의 의사를 두어야 하는가?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='A' aria-pressed='false'><span class='optlabel'>A.</span> 5명</button>
+<button type='button' class='opt' data-label='B' aria-pressed='false'><span class='optlabel'>B.</span> 10명</button>
+<button type='button' class='opt' data-label='C' aria-pressed='false'><span class='optlabel'>C.</span> 20명</button>
+<button type='button' class='opt' data-label='D' aria-pressed='false'><span class='optlabel'>D.</span> 25명</button>
+<button type='button' class='opt' data-label='E' aria-pressed='false'><span class='optlabel'>E.</span> 50명</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> C. 20명</p><p>의료법 시행규칙 별표 5에서 병원·종합병원의 의사 정원은 연평균 1일 입원환자를 20명으로 나눈 수이며, <b>외래환자 3명은 입원환자 1명</b>으로 환산한다. 200명 + 600명/3 = 400명, 400/20 = 20명이므로 정답은 20명이다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='②' data-answer-label='②. 2명/4명'>
+        <p class='source-line'><span class='source-label'>[15Y] p.158 Q4</span></p>
+        <p class='stem'>병원에 입원 환자가 599명인 경우 병원에 두어야 하는 최소 당직 의사/간호사의 수는?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 1명/2명</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 2명/4명</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 3명/6명</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 4명/8명</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 5명/10명</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ②. 2명/4명</p><p>의료법 시행규칙 제39조의18은 각종 병원에서 입원환자 200명까지 의사 등 1명·간호사 2명, 200명 초과 200명마다 의사 등 1명·간호사 2명을 추가하도록 정한다. 599명은 200명까지 1/2에, 초과 399명은 ‘200명마다’ 1/2를 추가하므로 기출 슬라이드 답은 <b>2명/4명</b>으로 정리되어 있다. 다만 실제 산정에서 ‘초과하는 200명마다’의 올림 적용 여부는 행정해석·문항 기준을 확인해야 한다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='⑤' data-answer-label='⑤. 침사-구사'>
+        <p class='source-line'><span class='source-label'>[23Y 총괄] p.151 Q5</span></p>
+        <p class='stem'>의료법 상 의료유사업자로 옳게 묶인 것은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 침사-안마사</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 안마사-접골사</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 접골사-스포츠마사지사</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 스포츠마사지사-구사</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 침사-구사</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> ⑤. 침사-구사</p><p>의료법 제81조의 의료유사업자는 <b>접골사·침사·구사</b>다. 안마사는 제82조에서 별도로 규정하므로 의료유사업자 묶음에 넣으면 오답이다. 스포츠마사지사는 이 조문의 의료유사업자가 아니다.</p></details>
+      </div>
+    
+
+      <div class='mcq' data-answer='OLD' data-answer-label='접골사-침사-구사'>
+        <p class='source-line'><span class='source-label'>[17Y] p.157 Q10</span></p>
+        <p class='stem'>의료유사업자로 옳게 묶인 것은?</p>
+        
+        
+        <p class='muted small'>선지가 완전하지 않아 채점 버튼을 두지 않았습니다. 아래 해설로 확인합니다.</p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> 접골사-침사-구사</p><p>의료법 제81조의 의료유사업자는 <b>접골사·침사·구사</b>다. 안마사는 제82조에서 별도로 규정하므로 의료유사업자 묶음에 넣으면 오답이다. 스포츠마사지사는 이 조문의 의료유사업자가 아니다.</p></details>
+      </div>
+    </div></details>
+</section>
+
+<section id='misc'>
+  <h2>8. 범위 밖·개정 주의 문항</h2>
+  <p class='lead2'>PDF 끝부분에는 의료법이 아닌 보건의료기본법 문항, 또는 복기 답안이 불완전한 문항이 섞여 있다. 의료법 학습자료에서는 별도로 표시해 혼동을 줄인다.</p>
+  
+  <h3>해설</h3>
+  <p>아래 문항은 “출제되었지만 의료법 본문만으로 풀기 어렵거나, 다른 법령/과거 법령과 연결되는 문항”이다. 시험 직전에는 현행법과 과거 기출답을 분리해 본다.</p>
+  <h3>기출문제</h3>
+  <details class='quizset'><summary><span>범위 밖·개정 주의 문항 문제</span></summary><div class='quiz-inner'>
+      <div class='mcq' data-answer='NA' data-answer-label='정답없음'>
+        <p class='source-line'><span class='source-label'>[18Y 형성] p.157 Q54</span></p>
+        <p class='stem'>보건의료정책심의위원의 구성으로 알맞은 사람은?</p>
+        
+        <div class='options'><button type='button' class='opt' data-label='①' aria-pressed='false'><span class='optlabel'>①.</span> 국가보훈처장</button>
+<button type='button' class='opt' data-label='②' aria-pressed='false'><span class='optlabel'>②.</span> 국방부장관</button>
+<button type='button' class='opt' data-label='③' aria-pressed='false'><span class='optlabel'>③.</span> 기획재정부장관</button>
+<button type='button' class='opt' data-label='④' aria-pressed='false'><span class='optlabel'>④.</span> 과학기술정보통신부장관</button>
+<button type='button' class='opt' data-label='⑤' aria-pressed='false'><span class='optlabel'>⑤.</span> 교육부장관</button></div>
+        <div class='qtools'><button type='button' class='checkbtn'>채점</button><button type='button' class='resetbtn'>초기화</button></div><p class='feedback' aria-live='polite'></p>
+        <details class='answer-detail'><summary>정답과 해설 보기</summary><p><b>정답:</b> 정답없음</p><p>슬라이드 답안도 “정답없음”으로 표시되어 있다. 이 문항은 의료법이 아니라 보건의료기본법의 보건의료정책심의위원회 구성 문제이며, 현행/당시 시행령 구성원과 장관·차관 표기 차이를 확인해야 한다.</p></details>
+      </div>
+    </div></details>
+</section>
+
+
+<section id='checklist'>
+  <h2>9. 누락 점검표</h2>
+  <p>제공된 문제 캡처 기준으로 반영 여부를 확인했다. 일부 복기 문항은 선지가 빠져 있거나 현재 법령과 달라지는 경우가 있어 해당 위치에 별도 표시했다.</p>
+  <table><thead><tr><th>캡처 위치</th><th>반영</th><th>주요 내용</th></tr></thead><tbody><tr><td>25 형성 p.149</td><td>5문항</td><td>응시제한, 면허정지/취소, 250병상 종합병원, 진료정보 침해사고</td></tr><tr><td>23 형성 p.150</td><td>6문항</td><td>250병상, 면허정지, 침해사고, 인증기준, 상급종합병원 20개, 보수교육 8시간</td></tr><tr><td>23 총괄 p.151</td><td>6문항</td><td>기록 보존, 의료유사업자, 전문과목, 응시제한, 태아 성감별</td></tr><tr><td>22 형성 p.152</td><td>4문항</td><td>250병상, 응시제한, 침해사고, 면허정지</td></tr><tr><td>22 총괄 p.153</td><td>10문항</td><td>전문과목, 결격사유, 응시제한 유형, 태아 성감별, 기록보존, 인증, HIRA 현황신고, 중환자실</td></tr><tr><td>21 형성 p.154</td><td>3문항</td><td>면허정지, 전문병원 재지정, 250병상</td></tr><tr><td>21 총괄 p.155</td><td>7문항</td><td>중환자실, 태아 성감별, 처방전, 의사 정원, 인증기준, 결격사유, 전자장비 부정행위</td></tr><tr><td>20 형성 p.156</td><td>5문항</td><td>의료법인 2년 미개설, 인증기준, 3년 신고, 250병상, 응시제한</td></tr><tr><td>18/17 p.157</td><td>8문항</td><td>재교부, 보건의료기본법 혼입, 응시제한, 인증 이의신청, 병원명 표시, 의료유사업자</td></tr><tr><td>16/15 p.158</td><td>8문항</td><td>태아 성감별, 병원명 표시, 면허취소, 보수교육, 당직의료인, 조건부인증, 기록보존</td></tr></tbody></table>
+  <h3>현행법 기준으로 특히 조심할 부분</h3>
+  <p><b>태아 성별 고지 주수:</b> 과거 기출 답은 32주지만, 현행 의료법 제20조 제2항은 삭제되었다. 현재는 성 감별 목적의 진찰·검사 금지가 남아 있다.</p>
+  <p><b>결격사유의 열거 법률:</b> 오래된 문제는 응급의료법·모자보건법·보건범죄단속법 등 특정 법률명을 묻지만, 현행 제8조는 금고 이상의 형사처분을 중심으로 일반화되어 있다.</p>
+  <p><b>병원명 표시 문제:</b> 복기 답은 방사선종양학과로 되어 있으나, 현행 표시 가능한 진료과목에는 예방의학과도 포함된다. 문항 표현과 당시 법령을 함께 확인한다.</p>
+</section>
+
+<section class='foot'>
+  <p>자료 구성: 업로드 PDF의 의료법 3단비교표와 p.149~158 기출 캡처를 출제 법령 중심으로 재배열했다. 국가법령정보센터 현행 조문과 충돌할 수 있는 과거 기출은 각 해설에서 표시했다.</p>
+  <p>주요 공식 원문 확인: 의료법 제3조의3, 제20조, 제23조의3, 제58조의3, 제65조, 제66조, 의료법 시행규칙 제15조·제20조·제39조의18·별표 4·별표 5.</p>
+</section>
+</main>
+<script>
+function selectedLabels(mcq) {
+  return Array.from(mcq.querySelectorAll('.opt[aria-pressed="true"]')).map(b => b.dataset.label).sort();
+}
+function answerLabels(mcq) {
+  const raw = mcq.dataset.answer || '';
+  return raw.split(',').map(s => s.trim()).filter(Boolean).sort();
+}
+function clearMarks(mcq) {
+  mcq.querySelectorAll('.opt').forEach(b => { b.classList.remove('correct','wrong'); });
+}
+document.querySelectorAll('.options .opt').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const pressed = btn.getAttribute('aria-pressed') === 'true';
+    btn.setAttribute('aria-pressed', pressed ? 'false' : 'true');
+    clearMarks(btn.closest('.mcq'));
+    const fb = btn.closest('.mcq').querySelector('.feedback');
+    if (fb) { fb.textContent = ''; fb.className = 'feedback'; }
+  });
+});
+document.querySelectorAll('.checkbtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const mcq = btn.closest('.mcq');
+    const fb = mcq.querySelector('.feedback');
+    clearMarks(mcq);
+    const ans = answerLabels(mcq);
+    if (!ans.length || ans[0] === 'NA' || ans[0] === 'OLD') {
+      fb.textContent = '자료상 답안은 해설에서 확인하세요.';
+      fb.className = 'feedback bad';
+      return;
+    }
+    const sel = selectedLabels(mcq);
+    mcq.querySelectorAll('.opt').forEach(opt => {
+      if (ans.includes(opt.dataset.label)) opt.classList.add('correct');
+      if (sel.includes(opt.dataset.label) && !ans.includes(opt.dataset.label)) opt.classList.add('wrong');
+    });
+    const ok = ans.length === sel.length && ans.every((x,i) => x === sel[i]);
+    fb.textContent = ok ? '정답입니다.' : '다시 확인하세요. 정답: ' + mcq.dataset.answerLabel;
+    fb.className = 'feedback ' + (ok ? 'ok' : 'bad');
+  });
+});
+document.querySelectorAll('.resetbtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const mcq = btn.closest('.mcq');
+    mcq.querySelectorAll('.opt').forEach(opt => { opt.setAttribute('aria-pressed','false'); opt.classList.remove('correct','wrong'); });
+    const fb = mcq.querySelector('.feedback');
+    if (fb) { fb.textContent = ''; fb.className = 'feedback'; }
+  });
+});
+function openAllQuizzes() { document.querySelectorAll('details.quizset').forEach(d => d.open = true); }
+function closeAllQuizzes() { document.querySelectorAll('details.quizset').forEach(d => d.open = false); }
+function toggleExamMode() { document.body.classList.toggle('exam-mode'); }
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+  document.getElementById('progress').style.width = pct + '%';
+});
+</script>
+</body>
+</html>

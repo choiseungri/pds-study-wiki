@@ -1,5 +1,5 @@
 window.PDS_SITE_DATA = {
-  "generatedAt": "2026-05-14T03:35:30.899Z",
+  "generatedAt": "2026-05-14T04:06:03.663Z",
   "config": {
     "siteTitle": "PDS 학습 위키",
     "subtitle": "본과 4학년 PDS HTML 학습자료",
@@ -74,6 +74,7 @@ window.PDS_SITE_DATA = {
       "0501_1_smoking-cessation-counseling.html": "박계영",
       "0501_2_public-doctor-paths-part1.html": "이어진",
       "0501_3_community-health.html": "김민주",
+      "0501_5_medical-service-act.html": "신영전",
       "0504_1_alcohol-counseling.html": "박훈기",
       "0504_2_medical-dispute-mediation-doctor-role.html": "송은섭",
       "0504_3_public-doctor-paths-part2.html": "이어진",
@@ -394,6 +395,20 @@ window.PDS_SITE_DATA = {
       "endPeriod": 4,
       "span": 2,
       "periodLabel": "3-4교시 10:00-11:50"
+    },
+    {
+      "file": "0501_5_medical-service-act.html",
+      "title": "의료법 출제 법령 분석 & 기출문제 풀이",
+      "professor": "신영전",
+      "tag": "신영전",
+      "dateKey": "2026-05-01",
+      "dateLabel": "05/01",
+      "weekday": "금요일",
+      "weekKey": "2026-04-27",
+      "period": 5,
+      "endPeriod": 5,
+      "span": 1,
+      "periodLabel": "5교시 13:00-13:50"
     },
     {
       "file": "0504_1_alcohol-counseling.html",

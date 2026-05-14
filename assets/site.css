@@ -214,6 +214,37 @@ h2 {
   font-size: 0.92rem;
 }
 
+.section-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.section-toggle {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid rgba(36, 54, 75, 0.18);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--navy);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 850;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.section-toggle:hover,
+.section-toggle:focus-visible {
+  border-color: rgba(18, 87, 117, 0.45);
+  background: #ffffff;
+  box-shadow: 0 8px 18px rgba(32, 35, 31, 0.1);
+  outline: 2px solid rgba(18, 87, 117, 0.18);
+  outline-offset: 2px;
+}
+
 .exam-archive-section {
   padding-top: 30px;
 }
@@ -700,6 +731,10 @@ code {
   .section-heading {
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .section-actions {
+    justify-content: flex-start;
   }
 
   .status-panel {

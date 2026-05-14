@@ -39,9 +39,16 @@
           <p class="eyebrow">Past Exams</p>
           <h2 id="exam-archive-title">연도별 기출문항</h2>
         </div>
-        <p id="exam-archive-count" class="section-meta">시험지 준비 중</p>
+        <div class="section-actions">
+          <p id="exam-archive-count" class="section-meta">시험지 준비 중</p>
+          <button id="exam-archive-toggle" class="section-toggle" type="button" aria-expanded="false" aria-controls="exam-archive-panel">
+            열기
+          </button>
+        </div>
       </div>
-      <div id="exam-archive" class="exam-archive" aria-label="연도별 기출문항"></div>
+      <div id="exam-archive-panel" hidden>
+        <div id="exam-archive" class="exam-archive" aria-label="연도별 기출문항"></div>
+      </div>
     </section>
 
     <section class="shell section-block" aria-labelledby="schedule-title">
