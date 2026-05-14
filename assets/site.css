@@ -214,6 +214,130 @@ h2 {
   font-size: 0.92rem;
 }
 
+.exam-archive-section {
+  padding-top: 30px;
+}
+
+.exam-archive {
+  overflow: hidden;
+  border: 1px solid rgba(36, 54, 75, 0.15);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.exam-year {
+  display: grid;
+  grid-template-columns: 122px minmax(0, 1fr);
+  border-top: 1px solid var(--line);
+}
+
+.exam-year:first-child {
+  border-top: 0;
+}
+
+.exam-year-heading {
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: 18px;
+  border-right: 1px solid var(--line);
+  background: #f8f9f4;
+}
+
+.exam-year-heading h3 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.exam-year-heading span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.exam-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: stretch;
+  padding: 14px;
+}
+
+.exam-link {
+  --exam-color: var(--navy);
+  display: grid;
+  flex: 1 1 210px;
+  min-width: 190px;
+  gap: 8px;
+  padding: 13px 14px;
+  border: 1px solid rgba(32, 35, 31, 0.1);
+  border-left: 5px solid var(--exam-color);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.exam-link:hover,
+.exam-link:focus-visible {
+  border-color: rgba(32, 35, 31, 0.18);
+  border-left-color: var(--exam-color);
+  box-shadow: 0 12px 24px rgba(32, 35, 31, 0.12);
+  outline: 2px solid color-mix(in srgb, var(--exam-color), white 70%);
+  outline-offset: 2px;
+  transform: translateY(-2px);
+}
+
+.exam-link-top {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.exam-link-top strong {
+  font-size: 0.98rem;
+  line-height: 1.2;
+}
+
+.exam-link-top span {
+  min-height: 24px;
+  padding: 2px 7px;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--exam-color), white 88%);
+  color: color-mix(in srgb, var(--exam-color), #111111 24%);
+  font-size: 0.77rem;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.exam-note {
+  color: var(--amber);
+  font-size: 0.8rem;
+  font-weight: 750;
+  line-height: 1.32;
+}
+
+.exam-note-ok {
+  color: var(--accent);
+}
+
+.exam-link-formative {
+  --exam-color: var(--accent);
+}
+
+.exam-link-summative {
+  --exam-color: var(--blue);
+}
+
+.exam-link-restored {
+  --exam-color: var(--amber);
+}
+
 .schedule-view {
   display: grid;
   gap: 22px;
@@ -590,6 +714,19 @@ code {
 
   .toolbar-band {
     position: static;
+  }
+
+  .exam-year {
+    grid-template-columns: 1fr;
+  }
+
+  .exam-year-heading {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .exam-link {
+    min-width: 100%;
   }
 
   .schedule-grid {

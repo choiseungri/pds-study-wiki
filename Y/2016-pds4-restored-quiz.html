@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2016 PDS4 복원 퀴즈</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f5f8;
+      --panel: #ffffff;
+      --ink: #182230;
+      --muted: #667085;
+      --line: #d6dce6;
+      --blue: #2563eb;
+      --blue-soft: #eaf1ff;
+      --green: #07875f;
+      --green-soft: #e8f7f0;
+      --red: #c23b3b;
+      --red-soft: #fff0f0;
+      --amber: #9a6700;
+      --amber-soft: #fff7dd;
+      --navy: #111827;
+      --shadow: 0 18px 45px rgba(17, 24, 39, 0.08);
+      --soft-shadow: 0 8px 22px rgba(17, 24, 39, 0.06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 20% -10%, rgba(37, 99, 235, 0.12), transparent 34%), linear-gradient(180deg, #f8fafc 0%, var(--bg) 260px);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+      line-height: 1.55;
+    }
+    button, select, input { font: inherit; }
+    .shell { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+    header { padding: 38px 0 24px; background: rgba(255,255,255,.78); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px); }
+    .eyebrow { margin: 0 0 6px; color: var(--blue); font-weight: 800; font-size: .86rem; }
+    h1 { margin: 0; color: var(--navy); font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; letter-spacing: 0; }
+    .summary { max-width: 780px; margin: 12px 0 0; color: var(--muted); }
+    .status { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 24px; }
+    .metric { min-height: 92px; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.88); box-shadow: var(--soft-shadow); }
+    .metric span { display: block; color: var(--muted); font-size: .84rem; }
+    .metric strong { display: block; margin-top: 6px; color: var(--navy); font-size: 1.65rem; line-height: 1.1; }
+    .toolbar-band { position: sticky; top: 0; z-index: 10; padding: 10px 0; background: rgba(243,245,248,.92); border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); }
+    .toolbar { display: grid; grid-template-columns: minmax(220px, 1.3fr) minmax(180px, .8fr) auto auto auto; gap: 8px; align-items: center; padding: 8px; border: 1px solid rgba(214,220,230,.9); border-radius: 8px; background: rgba(255,255,255,.86); box-shadow: var(--soft-shadow); }
+    .control { display: grid; gap: 5px; }
+    .control span { color: var(--muted); font-size: .78rem; font-weight: 800; }
+    input[type="search"], select { width: 100%; min-height: 42px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: var(--ink); padding: 0 12px; outline: none; }
+    input[type="search"]:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.14); }
+    .tool-button { min-height: 42px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: var(--ink); padding: 0 14px; cursor: pointer; white-space: nowrap; }
+    .tool-button.primary { border-color: var(--blue); background: var(--blue); color: #fff; font-weight: 800; }
+    main.shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 18px; align-items: start; padding: 24px 0 48px; }
+    .source-board { position: sticky; top: 92px; display: grid; gap: 8px; max-height: calc(100vh - 112px); overflow: auto; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.9); padding: 10px; box-shadow: var(--soft-shadow); }
+    .source-chip { border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 12px; cursor: pointer; text-align: left; transition: border-color .15s ease, background .15s ease, transform .15s ease; }
+    .source-chip:hover { border-color: rgba(37,99,235,.55); transform: translateY(-1px); }
+    .source-chip[aria-pressed="true"] { border-color: var(--blue); background: var(--blue-soft); box-shadow: inset 3px 0 0 var(--blue); }
+    .source-chip strong { display: block; font-size: .92rem; line-height: 1.35; }
+    .source-chip span { display: block; margin-top: 5px; color: var(--muted); font-size: .8rem; }
+    .quiz-list { display: grid; gap: 14px; }
+    .question-card { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); box-shadow: var(--shadow); overflow: hidden; }
+    .question-card.correct { border-color: rgba(7,135,95,.55); }
+    .question-card.incorrect { border-color: rgba(194,59,59,.55); }
+    .question-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; padding: 13px 16px; background: linear-gradient(180deg, #fff, #f8fafc); border-bottom: 1px solid var(--line); }
+    .q-number { display: inline-grid; place-items: center; min-width: 42px; height: 30px; border-radius: 999px; background: var(--navy); color: #fff; font-weight: 800; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    .badge { display: inline-flex; align-items: center; min-height: 26px; border-radius: 999px; padding: 0 9px; background: #eef2f7; color: #34435a; font-size: .78rem; font-weight: 800; }
+    .badge.source { background: var(--blue-soft); color: #174ea6; }
+    .badge.warning { background: var(--amber-soft); color: var(--amber); }
+    .question-body { padding: 18px; }
+    .stem { margin: 0 0 16px; white-space: pre-line; font-weight: 650; color: #202b3c; }
+    .options { display: grid; gap: 9px; }
+    .option { display: grid; grid-template-columns: 30px 1fr; gap: 11px; align-items: start; width: 100%; min-height: 50px; border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 11px 13px; color: var(--ink); text-align: left; cursor: pointer; transition: border-color .15s ease, background .15s ease, transform .15s ease; }
+    .option:hover { border-color: var(--blue); background: #fbfdff; transform: translateY(-1px); }
+    .option.selected { border-color: var(--blue); background: var(--blue-soft); }
+    .option.answer { border-color: var(--green); background: var(--green-soft); }
+    .option.wrong { border-color: var(--red); background: var(--red-soft); }
+    .mark { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 999px; background: #eef2f7; font-weight: 800; color: #364152; }
+    .feedback { display: none; margin-top: 14px; border-radius: 8px; padding: 12px; font-size: .92rem; }
+    .feedback.visible { display: block; }
+    .feedback.correct { background: var(--green-soft); color: var(--green); }
+    .feedback.incorrect { background: var(--red-soft); color: var(--red); }
+    .feedback.pending { background: var(--amber-soft); color: var(--amber); }
+    .empty { padding: 28px; border: 1px dashed var(--line); border-radius: 8px; background: #fff; color: var(--muted); text-align: center; }
+    footer { padding: 24px 0 36px; color: var(--muted); border-top: 1px solid var(--line); background: #fff; font-size: .9rem; }
+    @media (max-width: 980px) { main.shell { grid-template-columns: 1fr; } .source-board { position: static; max-height: none; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); } }
+    @media (max-width: 900px) { .status { grid-template-columns: repeat(2, minmax(0, 1fr)); } .toolbar { grid-template-columns: 1fr 1fr; } .toolbar .tool-button { width: 100%; } }
+    @media (max-width: 620px) { .shell { width: min(100% - 20px, 1160px); } .status, .toolbar { grid-template-columns: 1fr; } .question-head { align-items: flex-start; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell">
+      <p class="eyebrow">PDS4 CBT 복기</p>
+      <h1>2016 PDS4 복원</h1>
+      <p class="summary">문항마다 추출된 출처 강의를 붙였습니다. 강의 필터를 고르면 해당 범위 문제만 풀 수 있고, 선택 즉시 정답 여부가 표시됩니다.</p>
+      <div class="status" aria-live="polite">
+        <div class="metric"><span>전체 문항</span><strong id="total-count">0</strong></div>
+        <div class="metric"><span>현재 범위</span><strong id="visible-count">0</strong></div>
+        <div class="metric"><span>푼 문항</span><strong id="answered-count">0</strong></div>
+        <div class="metric"><span>정답률</span><strong id="score-rate">0%</strong></div>
+      </div>
+    </div>
+  </header>
+  <section class="toolbar-band">
+    <div class="shell toolbar">
+      <label class="control"><span>검색</span><input id="search-input" type="search" placeholder="문항, 보기, 강의명 검색" autocomplete="off" /></label>
+      <label class="control"><span>출처 강의</span><select id="source-select"></select></label>
+      <button id="toggle-unanswered" class="tool-button" type="button" aria-pressed="false">미풀이만</button>
+      <button id="show-answers" class="tool-button" type="button">정답 표시</button>
+      <button id="reset" class="tool-button primary" type="button">초기화</button>
+    </div>
+  </section>
+  <main class="shell">
+    <section class="source-board" id="source-board" aria-label="출처 강의별 필터"></section>
+    <section class="quiz-list" id="quiz-list" aria-label="퀴즈 문항"></section>
+  </main>
+  <footer>
+    <div class="shell">원본: 2016 PDS4 복원.docx / DOCX 복원본이라 정답 표시가 없으면 검토 필요로 표시합니다.</div>
+  </footer>
+  <script>
+    const examData = {"title": "2016 PDS4 복원", "kind": "복원", "sourceFile": "2016 PDS4 복원.docx", "answerFile": "2016 PDS4 복원.docx", "notes": "DOCX 복원본이라 정답 표시가 없으면 검토 필요로 표시합니다.", "questions": [{"id": 1, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "자유시장체계가되기위해서는", "options": ["공급자와소비자의정보균형, 2) 사고파는물건들의질과내용이동", "질적…"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 2, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "3. 국가별의료시스템이동일한나라끼리묶인경우 / 국가의료시", "options": ["스템이복지형인것으것묶인것은", "비슷한두문제나왔습니다.은하나는일본, 이집트하나는독일", "브라질"], "answers": [2], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 3, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "보건의료의시장실패관련해서하나나온듯", "options": ["2장", "3장", "4장", "5장"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 4, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "건강행태이론모형에서개인수준으로맞는것은", "options": ["확산", "6장건강증진"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 5, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "비만한사람에서위험도가가장많이증가하는것은", "options": ["7장", "8장", "수면무호흡증"], "answers": [3], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 6, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "위양성낮은검사해야하는것은", "options": ["10장", "보건의료기본법", "위험한수술을해야하는경우"], "answers": [3], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 7, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "보건의료정책심의위원회의구성원으로옳은것은", "options": ["농림식품수산부차관, 질병관리본부장, 국방부차관, 여성부차관, 국", "가보훈처장", "의료법"], "answers": [2], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 8, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "태아를몇주이전에성감별목적으로진찰하거나하는것이금지", "options": ["되어있는가", "32주"], "answers": [2], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 9, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "병원명표기시쓸수있는형태는", "options": ["방사선종양학과, 대장항문외과, 미용성형외과, 예방의학과, ?", "방사선종양학과", "응급의료법"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 10, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "마약류취급의료업자가몇이상되면마약류관리자를둬야하나", "options": ["4명", "건보법"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 11, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "다음중직장가입자인사람은", "options": ["수감자, 현역병, 현역장교예정자(?), 사립학교직원, 주60시간미만노", "동자"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 12, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "보험료체납몇회하면급여못받나", "options": ["6회", "감염병, 에이즈, 검역"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 13, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "다음중에이즈검사를지시할수있는사람은", "options": ["모든입국자, 감염자와성접촉한자…", "16. 제4군감염병", "황열", "기타: 지역보건, 혈액관리, …"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 14, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "월 7일 6월 17일…", "options": ["의료부문현안중제도적인것", "수가제", "현대병원의특징 (야마)", "가나다", "생산자주도의시장개편", "나다. 표준화가어렵고응급한의사결정이많다. 원하는서비스만할", "수없다.", "중소병원의특징 (야마)", "가나다정의가명확하지않다.등", "병원의진료내용에따른분류 (야마)", "일반병원-특수병원", "<24. 25.>조직의특성으로아닌것 2번나옴 (15)", "은둘다조직은 3명으로구성 (>>2명)"], "answers": [13], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 15, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "경영관리와리더십의최근동향", "options": ["없다고맨날야마에있는문제) 직원에게자율성부여, 더빠른정", "보이용한의사결정.."], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 16, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "기업비전수립의원칙으로맞는것은", "options": ["획득가능하고진취적인 (피야마?)", "오엑스퀴즈형태. 특별히별설명없이문제만써있는것들은그냥", "오엑스였음. 나머지는단형야마일부."], "answers": [3], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 17, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "이해상충이란전문직의일차적이해관심사에관한전문가적판", "options": ["단이이차적이해관심사에의해서부당하게영향받는상태혹은그", "집합(?) (O,X)"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 18, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "의사제약산업체관계윤리지침 3개의기본원칙과 8개의관계지", "options": ["침이다. 이중기본원칙은환자이익우선의법칙, 이해상충관리의법", "칙그리고 …이다. (틀린내용써있었음) (O/x)"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 19, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "인센티브는 ( )원칙을위반한것", "options": ["해악금지의원칙"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 20, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "의사간호사관계에서역할이불확실하면환자가누구에게설명", "options": ["을듣고싶어하는지를생각하라는내용 (whom the pts want to be", "with)"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 21, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "공중보건의료정책결정시가장첫윤리적검토사항은정책의목", "options": ["적이무엇인지이다.", "(박훈기)"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 22, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "의료분쟁중재위원회에서내놓은조정을만족하지않을경우다", "options": ["음은?", "소송"], "answers": [2], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 23, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "금연프린트첫번째금연고려전단계인케이스보고무엇을해주", "options": ["는게적절하지않은가", "금연계획하기"], "answers": [2], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 24, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "니코틴이작용하는신경전달물질", "options": ["도파민"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 25, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "상담태도로옳은것은", "options": ["틀린보기: 다른의사바로소개시켜준다. 해결책을직접적으로제시", "한다, 등..", "69. 강간의다른말", "성폭행"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 26, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "내인사, 외인사, 불명설명주고", "options": ["내인사는사인이될수없다. 자살은내인사이다, …", "손상사"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 27, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "76. 비슷한문제두개", "options": ["; 75. 두피에손상이있는경우삭발후검사해야한다 – 틀림"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 28, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "손목을여러번그은것등죽음에이르지못한손상", "options": ["두부손상", "미수손상"], "answers": [2], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 29, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "교상정맥파탄이원인인경우 (야마)", "options": ["급성경막하출혈"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 30, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "두개골사진보여주고, 넘어져서죽은사람손상부위는?", "options": ["왼쪽측두, 후두, 오른쪽두정,…", "질식사"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 31, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "교사에서나타날수있는특징아닌것(야마)", "options": ["경동맥의횡주소열창", "다른보기: 갑상연골하방에삭흔.., 삭간출혈발생, 등등"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 32, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "온도저하로사람이체온조절기능정지되는수준 (야마)", "options": ["30도", "통합대체의학", "90. 뉴로패씩패인", "91. 증식치료옳은것", "Pharmacological, active", "Tendon, lig에는안한다", "Inflammation 없게한다"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 33, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "지능검사도가능한것", "options": ["DAP", "94. 바이오피드백특징", "환자가책임진다"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 34, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "동종요법제조시알코올농도?....;;", "options": ["40% 20%...", "98. 동종요법적악화", "수일내완화된다", "다른보기: 전체환자의몇(한자리수) 퍼센트만경험한다. 전신상태가", "악화된다. .."], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 35, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "건강기능식품의특징인것", "options": ["나머지네개는생약특징제시 (약물이다, 안전성검증하여한다. 이", "런거)", "생약은증거있는거중에돌아내시는듯"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 36, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "승마 : 갱년기장애개선", "options": ["101. 고혈압환자생약", "조효소 Q10"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 37, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "니시의학에서몸좌우로흔드는운동", "options": ["배복운동", "104. MMUS인것", "다외우면좋겠지만대충봐도원인이없을것같은보기고르면됬던", "듯", "105. 주관식"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 38, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "기능의학검사에서스트레스단계파악에쓰는것", "options": ["나머지는중금속및미네랄검사, 체액성분검사, 아미노산검사, 내", "독소검사이런거", "타액호르몬검사"], "answers": [3], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 39, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "-111. 에너지의학은그냥짤야마", "options": ["오금희, 차크라, 동종요법(주관식),이없는것이이다", "아로마테라피도야마"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 40, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "달이하아기에게반용량으로쓴다", "options": ["116. 5장아닌것", "; 뇌"], "answers": [2], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 41, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "대체의학잘오는유형", "options": ["여성, 고연령, 도시, …", "심신의학"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 42, "source": "의료관리학 (예방의학과신영전)", "professor": "", "stem": "심신요법중하나설명주고고르기..", "options": ["120. 암에잘걸리는성격", "타입 C", "카이로프랙틱, 마사지"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "DOCX 복원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}]};
+    const questions = examData.questions || [];
+    questions.forEach(question => {
+      question.shuffledOptions = shuffleOptions(question.options.map((text, index) => ({
+        text,
+        originalNumber: index + 1,
+        correct: question.answers.includes(index + 1)
+      })));
+    });
+    const state = { source: "전체", query: "", onlyUnanswered: false, selections: new Map(), showAnswers: false };
+    const els = {
+      totalCount: document.querySelector("#total-count"),
+      visibleCount: document.querySelector("#visible-count"),
+      answeredCount: document.querySelector("#answered-count"),
+      scoreRate: document.querySelector("#score-rate"),
+      searchInput: document.querySelector("#search-input"),
+      sourceSelect: document.querySelector("#source-select"),
+      sourceBoard: document.querySelector("#source-board"),
+      quizList: document.querySelector("#quiz-list"),
+      toggleUnanswered: document.querySelector("#toggle-unanswered"),
+      showAnswers: document.querySelector("#show-answers"),
+      reset: document.querySelector("#reset")
+    };
+    const numberMarks = ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"];
+    function init() { els.totalCount.textContent = String(questions.length); renderSourceControls(); bindEvents(); render(); }
+    function bindEvents() {
+      els.searchInput.addEventListener("input", event => { state.query = event.target.value.trim(); render(); });
+      els.sourceSelect.addEventListener("change", event => { state.source = event.target.value; render(); });
+      els.toggleUnanswered.addEventListener("click", () => { state.onlyUnanswered = !state.onlyUnanswered; els.toggleUnanswered.setAttribute("aria-pressed", String(state.onlyUnanswered)); els.toggleUnanswered.textContent = state.onlyUnanswered ? "전체 보기" : "미풀이만"; render(); });
+      els.showAnswers.addEventListener("click", () => { state.showAnswers = !state.showAnswers; els.showAnswers.textContent = state.showAnswers ? "정답 숨김" : "정답 표시"; render(); });
+      els.reset.addEventListener("click", () => { state.selections.clear(); state.showAnswers = false; els.showAnswers.textContent = "정답 표시"; render(); });
+    }
+    function renderSourceControls() {
+      const sources = ["전체", ...Array.from(new Set(questions.map(item => item.source || "출처 미분류")))];
+      els.sourceSelect.replaceChildren(...sources.map(source => { const option = document.createElement("option"); option.value = source; option.textContent = source === "전체" ? "전체 강의" : source; return option; }));
+    }
+    function render() { const visible = getVisibleQuestions(); els.visibleCount.textContent = String(visible.length); renderStats(); renderSourceBoard(); renderQuestions(visible); }
+    function renderStats() { const answered = questions.filter(question => state.selections.has(question.id)); const scored = answered.filter(question => !question.uncertain); const correct = scored.filter(question => isCorrect(question, state.selections.get(question.id))).length; els.answeredCount.textContent = String(answered.length); els.scoreRate.textContent = scored.length ? `${Math.round((correct / scored.length) * 100)}%` : "0%"; }
+    function getVisibleQuestions() {
+      const normalizedQuery = normalize(state.query);
+      return questions.filter(question => {
+        const source = question.source || "출처 미분류";
+        const sourceOk = state.source === "전체" || source === state.source;
+        const unansweredOk = !state.onlyUnanswered || !state.selections.has(question.id);
+        const queryOk = !normalizedQuery || normalize([question.stem, source, question.professor, question.options.join(" ")].join(" ")).includes(normalizedQuery);
+        return sourceOk && unansweredOk && queryOk;
+      });
+    }
+    function renderSourceBoard() {
+      const grouped = questions.reduce((map, question) => { const source = question.source || "출처 미분류"; map.set(source, (map.get(source) || 0) + 1); return map; }, new Map());
+      els.sourceBoard.replaceChildren(createSourceButton("전체", questions.length), ...Array.from(grouped, ([source, count]) => createSourceButton(source, count)));
+    }
+    function createSourceButton(source, count) {
+      const button = document.createElement("button"); button.type = "button"; button.className = "source-chip"; button.setAttribute("aria-pressed", String(state.source === source));
+      button.innerHTML = `<strong>${escapeHtml(source === "전체" ? "전체 강의" : source)}</strong><span>${count}문항</span>`;
+      button.addEventListener("click", () => { state.source = source; els.sourceSelect.value = source; render(); });
+      return button;
+    }
+    function renderQuestions(items) {
+      if (!items.length) { els.quizList.innerHTML = `<div class="empty">현재 조건에 맞는 문항이 없습니다.</div>`; return; }
+      els.quizList.replaceChildren(...items.map(createQuestionCard));
+    }
+    function createQuestionCard(question) {
+      const selected = state.selections.get(question.id); const answered = Number.isInteger(selected); const correct = answered && isCorrect(question, selected); const reveal = state.showAnswers || answered;
+      const card = document.createElement("article"); card.className = "question-card"; if (answered) card.classList.add(correct ? "correct" : "incorrect");
+      const badges = [`<span class="badge source">${escapeHtml(question.source || "출처 미분류")}</span>`]; if (question.professor) badges.push(`<span class="badge">${escapeHtml(question.professor)}</span>`); if (question.provisional) badges.push(`<span class="badge warning">임시 정답</span>`); if (question.uncertain) badges.push(`<span class="badge warning">검토 필요</span>`);
+      card.innerHTML = `<div class="question-head"><span class="q-number">Q${question.id}</span><div class="badges">${badges.join("")}</div></div><div class="question-body"><p class="stem">${escapeHtml(question.stem)}</p><div class="options"></div><div class="feedback"></div></div>`;
+      const optionWrap = card.querySelector(".options");
+      optionWrap.replaceChildren(...question.shuffledOptions.map((option, index) => {
+        const isSelected = selected === option.originalNumber; const isAnswer = option.correct; const button = document.createElement("button"); button.type = "button"; button.className = "option";
+        if (isSelected) button.classList.add("selected"); if (reveal && isAnswer) button.classList.add("answer"); if (answered && isSelected && !isAnswer) button.classList.add("wrong");
+        button.innerHTML = `<span class="mark">${numberMarks[index] || String(index + 1)}</span><span>${escapeHtml(option.text)}</span>`;
+        button.addEventListener("click", () => { state.selections.set(question.id, option.originalNumber); render(); document.querySelector(`[data-question-id="${question.id}"]`)?.scrollIntoView({ block: "nearest" }); });
+        return button;
+      }));
+      card.dataset.questionId = String(question.id);
+      const feedback = card.querySelector(".feedback");
+      if (reveal) {
+        const answerText = question.shuffledOptions.map((option, index) => ({ option, index })).filter(item => item.option.correct).map(item => `${numberMarks[item.index] || String(item.index + 1)} ${item.option.text}`).join(" / ");
+        const stateLabel = question.uncertain ? (answered ? (correct ? "임시 후보와 일치" : "임시 후보와 다름") : "임시 정답 후보") : (answered ? (correct ? "정답" : "오답") : "정답");
+        const feedbackClass = question.uncertain ? "pending" : (answered ? (correct ? "correct" : "incorrect") : "pending");
+        feedback.className = `feedback visible ${feedbackClass}`;
+        feedback.innerHTML = `<strong>${stateLabel}</strong><div>${answerText ? `정답 후보: ${escapeHtml(answerText)}` : "정답 표시를 자동으로 확인하지 못했습니다."}</div>${question.note ? `<div>${escapeHtml(question.note)}</div>` : ""}`;
+      }
+      return card;
+    }
+    function isCorrect(question, selected) { return question.answers.includes(selected); }
+    function shuffleOptions(options) { const items = [...options]; for (let index = items.length - 1; index > 0; index -= 1) { const swapIndex = Math.floor(Math.random() * (index + 1)); [items[index], items[swapIndex]] = [items[swapIndex], items[index]]; } return items; }
+    function normalize(value) { return String(value || "").toLowerCase().replace(/\s+/g, " ").trim(); }
+    function escapeHtml(value) { return String(value || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"); }
+    init();
+  </script>
+</body>
+</html>

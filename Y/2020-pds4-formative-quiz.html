@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2020학년도 PDS4 형성평가 퀴즈</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f5f8;
+      --panel: #ffffff;
+      --ink: #182230;
+      --muted: #667085;
+      --line: #d6dce6;
+      --blue: #2563eb;
+      --blue-soft: #eaf1ff;
+      --green: #07875f;
+      --green-soft: #e8f7f0;
+      --red: #c23b3b;
+      --red-soft: #fff0f0;
+      --amber: #9a6700;
+      --amber-soft: #fff7dd;
+      --navy: #111827;
+      --shadow: 0 18px 45px rgba(17, 24, 39, 0.08);
+      --soft-shadow: 0 8px 22px rgba(17, 24, 39, 0.06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 20% -10%, rgba(37, 99, 235, 0.12), transparent 34%), linear-gradient(180deg, #f8fafc 0%, var(--bg) 260px);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+      line-height: 1.55;
+    }
+    button, select, input { font: inherit; }
+    .shell { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+    header { padding: 38px 0 24px; background: rgba(255,255,255,.78); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px); }
+    .eyebrow { margin: 0 0 6px; color: var(--blue); font-weight: 800; font-size: .86rem; }
+    h1 { margin: 0; color: var(--navy); font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; letter-spacing: 0; }
+    .summary { max-width: 780px; margin: 12px 0 0; color: var(--muted); }
+    .status { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 24px; }
+    .metric { min-height: 92px; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.88); box-shadow: var(--soft-shadow); }
+    .metric span { display: block; color: var(--muted); font-size: .84rem; }
+    .metric strong { display: block; margin-top: 6px; color: var(--navy); font-size: 1.65rem; line-height: 1.1; }
+    .toolbar-band { position: sticky; top: 0; z-index: 10; padding: 10px 0; background: rgba(243,245,248,.92); border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); }
+    .toolbar { display: grid; grid-template-columns: minmax(220px, 1.3fr) minmax(180px, .8fr) auto auto auto; gap: 8px; align-items: center; padding: 8px; border: 1px solid rgba(214,220,230,.9); border-radius: 8px; background: rgba(255,255,255,.86); box-shadow: var(--soft-shadow); }
+    .control { display: grid; gap: 5px; }
+    .control span { color: var(--muted); font-size: .78rem; font-weight: 800; }
+    input[type="search"], select { width: 100%; min-height: 42px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: var(--ink); padding: 0 12px; outline: none; }
+    input[type="search"]:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.14); }
+    .tool-button { min-height: 42px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: var(--ink); padding: 0 14px; cursor: pointer; white-space: nowrap; }
+    .tool-button.primary { border-color: var(--blue); background: var(--blue); color: #fff; font-weight: 800; }
+    main.shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 18px; align-items: start; padding: 24px 0 48px; }
+    .source-board { position: sticky; top: 92px; display: grid; gap: 8px; max-height: calc(100vh - 112px); overflow: auto; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.9); padding: 10px; box-shadow: var(--soft-shadow); }
+    .source-chip { border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 12px; cursor: pointer; text-align: left; transition: border-color .15s ease, background .15s ease, transform .15s ease; }
+    .source-chip:hover { border-color: rgba(37,99,235,.55); transform: translateY(-1px); }
+    .source-chip[aria-pressed="true"] { border-color: var(--blue); background: var(--blue-soft); box-shadow: inset 3px 0 0 var(--blue); }
+    .source-chip strong { display: block; font-size: .92rem; line-height: 1.35; }
+    .source-chip span { display: block; margin-top: 5px; color: var(--muted); font-size: .8rem; }
+    .quiz-list { display: grid; gap: 14px; }
+    .question-card { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); box-shadow: var(--shadow); overflow: hidden; }
+    .question-card.correct { border-color: rgba(7,135,95,.55); }
+    .question-card.incorrect { border-color: rgba(194,59,59,.55); }
+    .question-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; padding: 13px 16px; background: linear-gradient(180deg, #fff, #f8fafc); border-bottom: 1px solid var(--line); }
+    .q-number { display: inline-grid; place-items: center; min-width: 42px; height: 30px; border-radius: 999px; background: var(--navy); color: #fff; font-weight: 800; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    .badge { display: inline-flex; align-items: center; min-height: 26px; border-radius: 999px; padding: 0 9px; background: #eef2f7; color: #34435a; font-size: .78rem; font-weight: 800; }
+    .badge.source { background: var(--blue-soft); color: #174ea6; }
+    .badge.warning { background: var(--amber-soft); color: var(--amber); }
+    .question-body { padding: 18px; }
+    .stem { margin: 0 0 16px; white-space: pre-line; font-weight: 650; color: #202b3c; }
+    .options { display: grid; gap: 9px; }
+    .option { display: grid; grid-template-columns: 30px 1fr; gap: 11px; align-items: start; width: 100%; min-height: 50px; border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 11px 13px; color: var(--ink); text-align: left; cursor: pointer; transition: border-color .15s ease, background .15s ease, transform .15s ease; }
+    .option:hover { border-color: var(--blue); background: #fbfdff; transform: translateY(-1px); }
+    .option.selected { border-color: var(--blue); background: var(--blue-soft); }
+    .option.answer { border-color: var(--green); background: var(--green-soft); }
+    .option.wrong { border-color: var(--red); background: var(--red-soft); }
+    .mark { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 999px; background: #eef2f7; font-weight: 800; color: #364152; }
+    .feedback { display: none; margin-top: 14px; border-radius: 8px; padding: 12px; font-size: .92rem; }
+    .feedback.visible { display: block; }
+    .feedback.correct { background: var(--green-soft); color: var(--green); }
+    .feedback.incorrect { background: var(--red-soft); color: var(--red); }
+    .feedback.pending { background: var(--amber-soft); color: var(--amber); }
+    .empty { padding: 28px; border: 1px dashed var(--line); border-radius: 8px; background: #fff; color: var(--muted); text-align: center; }
+    footer { padding: 24px 0 36px; color: var(--muted); border-top: 1px solid var(--line); background: #fff; font-size: .9rem; }
+    @media (max-width: 980px) { main.shell { grid-template-columns: 1fr; } .source-board { position: static; max-height: none; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); } }
+    @media (max-width: 900px) { .status { grid-template-columns: repeat(2, minmax(0, 1fr)); } .toolbar { grid-template-columns: 1fr 1fr; } .toolbar .tool-button { width: 100%; } }
+    @media (max-width: 620px) { .shell { width: min(100% - 20px, 1160px); } .status, .toolbar { grid-template-columns: 1fr; } .question-head { align-items: flex-start; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell">
+      <p class="eyebrow">PDS4 CBT 복기</p>
+      <h1>2020학년도 PDS4 형성평가</h1>
+      <p class="summary">문항마다 추출된 출처 강의를 붙였습니다. 강의 필터를 고르면 해당 범위 문제만 풀 수 있고, 선택 즉시 정답 여부가 표시됩니다.</p>
+      <div class="status" aria-live="polite">
+        <div class="metric"><span>전체 문항</span><strong id="total-count">0</strong></div>
+        <div class="metric"><span>현재 범위</span><strong id="visible-count">0</strong></div>
+        <div class="metric"><span>푼 문항</span><strong id="answered-count">0</strong></div>
+        <div class="metric"><span>정답률</span><strong id="score-rate">0%</strong></div>
+      </div>
+    </div>
+  </header>
+  <section class="toolbar-band">
+    <div class="shell toolbar">
+      <label class="control"><span>검색</span><input id="search-input" type="search" placeholder="문항, 보기, 강의명 검색" autocomplete="off" /></label>
+      <label class="control"><span>출처 강의</span><select id="source-select"></select></label>
+      <button id="toggle-unanswered" class="tool-button" type="button" aria-pressed="false">미풀이만</button>
+      <button id="show-answers" class="tool-button" type="button">정답 표시</button>
+      <button id="reset" class="tool-button primary" type="button">초기화</button>
+    </div>
+  </section>
+  <main class="shell">
+    <section class="source-board" id="source-board" aria-label="출처 강의별 필터"></section>
+    <section class="quiz-list" id="quiz-list" aria-label="퀴즈 문항"></section>
+  </main>
+  <footer>
+    <div class="shell">원본: 2020학년도_PDS4_형성평가_200703(완)(문제지).pdf / 정답 표시 파일: 2020학년도_PDS4_형성평가_200703(완)(답지).pdf</div>
+  </footer>
+  <script>
+    const examData = {"title": "2020학년도 PDS4 형성평가", "kind": "형성평가", "sourceFile": "2020학년도_PDS4_형성평가_200703(완)(문제지).pdf", "answerFile": "2020학년도_PDS4_형성평가_200703(완)(답지).pdf", "notes": "", "questions": [{"id": 1, "source": "의료와 법 - 정규원", "professor": "", "stem": "다음 판례에 대한 설명 중 옳지 않은 것은?", "options": ["병원에서는 인턴의 수가 부족하여 수혈의 경우 두 번째 이후의 혈액 봉지는 인턴 대신 간호사가 교체하였어도 혈액 봉지가 바뀔 위험이 없으므로 의료과실이 아니다.", "엔테로박테리아에 이미페넴이 감수성이 있다고 확인된 경우 별도의 추가적인 감수성 검사 없이 메로페넴을 투여하였을 때 의사에게 요구되는 주의의무를 위반하였다고 할 수 없다", "과실의 유뮤를 판단할 때에는 같은 업무와 직종에 종사하는 일반적 보통인의 주의의무를 정도로 하고, 사고 당시의 일반적 의학의 수준과 의료환경 및 조건, 의료행위의 특수성 등을 고려해야 한다.", "피해자 측의 요인이 체질적 소인 또는 질병의 위험도와 같이 피해자 측의 귀책사유와 무관한 것이라고 할지라도, 그 질환의 태양, 정도 등에 비추어 가해자에게 손해의 전부를 배상하게 하는 것이 공평의 이념에 반하는 경우에는 법원은 손해배상액을 정하면서 과실상 계의 법리를 유추, 적용하여 그 손해의 발생 또는 확대에 기여한 피해자 측의 요인을 참작할 수 있다.", "과실의 유뮤를 판단할 때에는 같은 업무와 직종에 종사하는 일반적 보통인의 주의의무를 정도로 하고, 사고 당시의 일반적 의학의 수준과 의료환경 및 조건, 의료행위의 특수성 등을 고려해야 한다. (3 번 보기와 같은 내용을 더 길게 설명함)"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 2, "source": "의료와 법 - 정규원", "professor": "", "stem": "다음 중 옳지 않은 설명은?", "options": ["형사책임이 있을 때 민사책임이 없는 경우는 없다", "민사소송과 형사소송은 다른 법적절차이다.", "우리나라 의료 과오 소송은 지속적으로 증가하고 있다."], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 3, "source": "의료와 법 - 정규원", "professor": "", "stem": "다음 중 Informed consent 의 조건이 아닌 것은?", "options": ["충분한 지식", "충분한 설명", "동의능력", "합리적 판단 능력", "자유로운 상황에서의 동의"], "answers": [4], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 4, "source": "의료와 법 - 정규원", "professor": "", "stem": "다음 중 옳지 않은 설명은?", "options": ["의료과실에서 인과관계는 객관적인 것이므로 인과관계를 판단할 때 민사소송과 형사소송에서 같은 기준으로 판단한다.", "민사적 책임일 경우에는 손해배상을 한다.", "의료과오소송은 의료과실 뿐만 아니라 의사의 고의성을 판단할 때도 있다", "의료분쟁에 대한 대응책으로는 의사-환자 관계의 재정립이 있다,", "의료과실이 의심되는 상황에서 환자는 형사소송과 민사소송을 동시에 진행할 수 있다."], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 5, "source": "의료와 법 - 정규원", "professor": "", "stem": "다음 중 옳지 않은 설명은?", "options": ["의료인은 의료 분쟁이 발생했을 때 최우선적으로 민사, 형사 소송을 활용해야 된다", "의료과오 소송이란 환자에게 원치 않는 결과가 발생한 경우 의료인의 잘못을 주장하면서 법적 절차에서 다투는 경우를 의미한다.", "민사소송 결과 의료인이 패소하면 손해배상 및 채무 불이행의 대상이 된다", "형사소송 결과 의료인이 유죄로 판단되면 형벌의 대상이 된다."], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 6, "source": "의료와 법 - 정규원", "professor": "", "stem": "다음 의료 법에 대한 설명으로 옳지 않은 것은?", "options": ["의료행위는 사회 내에서 일어나는 행위이므로 법적 규율의 대상이고 법률적 판단시에는 법관의 가치관을 따르면 된다", "전문가의 자율적 규율이 사회적으로 받아들여지기 위해서는 전문가 집단이 사회적 신뢰를 받고 있어야 할뿐만 아니라 스스로 규율할 수 있는 가이드라인이 필요하다.", "의료법에 있어 온정적 간섭주의란 의료원칙에 입각하여 의료행위를 시행함을 의미하고 자율성 존중 원칙은 환자의 자기결정권을 존중해야 함을 의미한다.", "의료행위를 바라보는 두가지 이념으로 온정적 간섭주의와 자율성 존중 원칙이 있다.", "모든 의료행위가 법률의 대상이 되는 것에 대한 반론이 있다."], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 7, "source": "의료와 법 - 정규원", "professor": "", "stem": "다음 의료법에 대한 설명 중 옳지 않은 것은?", "options": ["우리나라 의료법은 일본과 같으므로 일본 판례를 따르면 된다", "의료법이 좁은 의미로는 의료법만을 의미할 때도 있다.", "의료법은 의생명과학 연구와 관련된 사항을 포함하여 생명의료법이라고도 한다.", "학문적으로 의료법은 의료와 관련된 모든 법을 지칭하는 용어로 쓰인다.", "의료법은 넓은 의미로 행정법, 형법, 세법, 형법, 헌법을 포함한다."], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 8, "source": "의료와 법 - 정규원", "professor": "", "stem": "다음 중 옳지 않은 설명은?", "options": ["조산사가 본인이 일하는 산부인과에서 진찰하고 환부소독, 처방전 발행을 한 것은 무면허 의료행위가 아니다.", "약사가 증상을 바탕으로 약을 제조하는 것은 무면허 의료행위이다.", "무면허 의료행위는 의료인이 아닌 자의 의료행위와 의료인의 면허 외 의료행위를 의미한다."], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 9, "source": "의료와 법 - 정규원", "professor": "", "stem": "다음 중 옳지 않은 설명은?", "options": ["환자 동의가 없을 때. 살인죄, 상해죄, 강요죄에 해당한다.", "동의가 없어도 의사가 잘 소명하면 법적 책임이 없다.", "동의를 받을 때 구두로 설명하면서 글로 기록도 해야 한다.", "원칙적으로 진료를 행하는 의료인이 동의를 받아야 한다."], "answers": [2], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 10, "source": "의료와 법 - 정규원", "professor": "", "stem": "다음 중 옳지 않은 설명은?", "options": ["보호자의 동의가 환자의 동의를 대체할 수 있다", "응급상황이 아닌 이상 일정 기간을 두고 미리 동의를 받아야 한다."], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 11, "source": "의료와 법 - 정규원", "professor": "", "stem": "사회문제가 형성되는 순서가 맞게 나열된 것을 고르시오.", "options": ["사회적이슈 -> 사회문제 -> 공공의제-> 정부의제", "사회 문제-->사회적 이슈-- >공공의제-->정부의제 c.공공의제-->사회 문제-->사회적 이슈-->정부의제"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 12, "source": "의료와 법 - 정규원", "professor": "", "stem": "바람직한 보건의료를 제공하기 위해서는 대기시간을 단축하고 제공자와 이용자 모두에게 불필요한 보건의료 제공의 지연을 감소시켜야 한다. 이는 무엇에 대한 설명인가? .", "options": ["적시성", "효율성", "안정성", "형평성", "접근성"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 13, "source": "의료와 법 - 정규원", "professor": "", "stem": "다음 중 후기시체 반응에 해당하는 것은?", "options": ["미이라화", "자가융해", "사후경직", "혈액침하"], "answers": [2], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 14, "source": "의료와 법 - 정규원", "professor": "", "stem": "사인을 결정하는 것으로 가장 타당한 방법은?", "options": ["사인을 규명할 수 없을 때는 불명이다", "다수의 치명적 장애가 있는 경우 반드시 모두 나열한다.", "현장조사보다 부검이 중요하다.", "부검 없이도 사인을 결정할 수 있다."], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 15, "source": "의료와 법 - 정규원", "professor": "", "stem": "항상 타살인 것은?", "options": ["액사", "기도폐색성 질식사", "자교사", "산소결핍성 질식사"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 16, "source": "의료와 법 - 정규원", "professor": "", "stem": "다음 중 자살의 소견으로 보기 어려운 것?", "options": ["치명상이 여러 개이다.", "할창의 경우 대부분 타살이다.", "의복의 손상이 없다.", "미수손상이 관찰된다.", "한 부위에 평행한 외상이 여러 개 관찰된다."], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 17, "source": "의료와 법 - 정규원", "professor": "", "stem": "자살을 시도한 사람의 손목에서 치명상 외에 손목, 목 등에서 관찰할 수 있는 다양한 형태의 손상을 무엇이라고 하는가?", "options": ["미수손상", "방어손상", "저항손상", "억압손상"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 18, "source": "의료와 법 - 정규원", "professor": "", "stem": "익사로 보기 어려운 것은?", "options": ["배측 암적색 시반", "추체유돌기 출혈", "폐팽대", "선홍색 시반", "이물장악"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 19, "source": "의료와 법 - 정규원", "professor": "", "stem": "익사에서만 볼 수 있는 소견은?", "options": ["포말괴", "표모피", "선홍색 시반", "폐 내 플랑크톤"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 20, "source": "의료와 법 - 정규원", "professor": "", "stem": "6 세 이하 남아. 전신에 광범위한 자상이 있다. 피부색은 창백하였고 부검에서 실질 장기의 울혈을 비롯한 다른 이상은 발견되지 않았다. 사인은?", "options": ["속발성 쇼크", "원발성 쇼크", "공기색전증", "지방색전증"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 21, "source": "의료와 법 - 정규원", "professor": "", "stem": "저체온사에서 체온 조절 기능이 정지되는 온도는 몇 도인가?", "options": ["30 도 이하", "31 도 이하", "34 도 이하", "33 도 이하"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 22, "source": "의료와 법 - 정규원", "professor": "", "stem": "국소적 생활반응인 것은?", "options": ["위장관 내 익수", "심장자창으로 인한 전신적 빈혈", "속발적 염증", "신장의 플랑크톤 검출", "양수색전증"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 23, "source": "의료와 법 - 정규원", "professor": "", "stem": "사망 추정 시간이 가장 최근인 경우는?", "options": ["악관절 강직", "손가락 강직", "부패수포", "구더기", "물 위로 떠오른 시체"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 24, "source": "의료와 법 - 정규원", "professor": "", "stem": "의사의 주된 사망기전은?", "options": ["경부 혈관 협착", "기도 협착", "경추 탈구", "심장 정지", "경추 골절"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 25, "source": "의료와 법 - 정규원", "professor": "", "stem": "다음 중 향정신성의약품인것은?", "options": ["디메톡시브로모암페타민", "아세트모르핀", "코독심", "벤질모르핀"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 26, "source": "의료와 법 - 정규원", "professor": "", "stem": "의료법인설립 허가 취소 사유 중 몇 년 안에 의료기관을 개설하지 아니면 취소되는가?", "options": ["1 년", "2 년", "3 년", "4 년", "5 년"], "answers": [2], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 27, "source": "의료와 법 - 정규원", "professor": "", "stem": "기후환경평가는 누가 몇년마다 시행하는가?", "options": ["보건복지부 장관 - 5 년", "보건소장 - 5 년", "질병관리본부장 - 5 년", "보건복지부 장관 - 3 년", "보건소장 - 2 년"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 28, "source": "의료와 법 - 정규원", "professor": "", "stem": "마약법에서 무기 혹은 5 년 이상의 징역에 처하는 경우는?", "options": ["마약 제조를 목적으로 원료를 수출입함", "마약 제조를 목적으로 마약 원료가 되는 식물을 재배", "미성년자에게 대마 제공", "마약 제조 목적으로 마약 성분을 함유하는 종묘를 소유", "한외마약의 제조"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 29, "source": "의료와 법 - 정규원", "professor": "", "stem": "의료인증평가의 기준으로 옳게 짝지어진 것은?", "options": ["환자만족도-환자의 권리와 안전", "의료기관의 의료서비스 질 향상 활동-병상회전율", "의료기관의 조직 인력 관리 및 운영 - 병상회전율", "의료기관의 경영성과 - 환자의 권리와 안전", "의료기관의 경영성과 - 환자만족도"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 30, "source": "의료와 법 - 정규원", "professor": "", "stem": "의료인은 최초로 면허를 받은 후부터 몇년마다 그 실태와 취업상황 등을 보건복지부 장관에게 신고하여야 하는가?", "options": ["1 년", "2 년", "3 년", "4 년", "5 년"], "answers": [3], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 31, "source": "의료와 법 - 정규원", "professor": "", "stem": "250 병상일 때 있어야 하는 과", "options": ["내과, 산부인과, 외과, 이비인후과, 영상의학과, 마취통증의학과, 병리과", "내과, 산부인과, 외과, 소아과, 마취통증의학과, 영상의학과, 응급의학과", "내과, 산부인과, 외과, 소아과, 영상의학과, 재활의학과, 병리과", "내과, 외과, 산부인과, 소아과, 마취통증의학과, 영상의학과, 정신과", "내과, 외과, 산부인과, 소아과, 재활의학과, 마취통증의학과, 영상의학과"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 32, "source": "의료와 법 - 정규원", "professor": "", "stem": "담배자동판매기는 몇 세 미만의 출입이 금지된 구역에 설치해야 하는가?", "options": ["19 세", "18 세", "17 세", "16 세", "15 세"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 33, "source": "의료와 법 - 정규원", "professor": "", "stem": "국가고시 시험에 부정한 방법으로 응시하였을 때 몇 회 범위에서 국가고시 응시가 제한되는가?", "options": ["1 회", "2 회", "3 회", "2 년", "3 년"], "answers": [3], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 34, "source": "통합의학; 보완통합의학의 개요 - 김미정", "professor": "", "stem": "다음 중 보완의학과 대체의학을 제대로 구분한 것은?", "options": ["고혈압에서 약물치료와 함께 요가와 명상을 병행하는 것은 보완요법이다.", "암 환자가 치료를 받지 않고 식이요법을 하는 것은 보완요법이다.", "수술 후 통증에 대해 아로마 테라피를 진행하는 것은 대체요법이다.", "만성통증에 대해 NSAID 와 더불어 ~~약을 쓰는 것은 대체요법이다"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 35, "source": "통합의학; 보완통합의학의 개요 - 김미정", "professor": "", "stem": "통합의학에 대해 가장 올바른 설명은?", "options": ["기존 치료와 병행하는 것은 대체요법이다.", "가장 효과가 증명된 분야는 한약이다.", "암 환자가 치료를 받지 않고 식이요법을 하는 것은 보완요법이다.", "안정성과 효과성이 입증이 된 과학이다."], "answers": [4], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 36, "source": "통합의학; IMS와 증식치료 - 김미정", "professor": "", "stem": "prolotherapy 에 대해 옳은 설명은?", "options": ["tendon 및 ligament 에 대해 사용한다.", "pharmocologic, active 약제를 사용한다.", "염증 반응이 일어나지 않는다.", "근골격 통증보다 신경인성 통증에 사용한다."], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 37, "source": "의사소통; 금연 상담 진료 - 황환식", "professor": "", "stem": "다음 흡연에 대한 설명 중 옳지 않은 것은?", "options": ["연기가 닿는 부위에만 암을 유발한다", "임산부 흡연 시 태아 체중 감소를 유발할 수 있다.", "간접흡연의 결과 폐암 발생 확률이 30% 증가한다", "흡연에 의해 관상동맥질환, 뇌졸중 발생이 증가한다.", "흡연에 의해 폐기종 발생률이 증가한다."], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 38, "source": "의사소통; 스트레스 상담 진료 - 황환식", "professor": "", "stem": "다음 직장인이 겪는 과로에 대한 설명에 해당되는 것은? [자신을 남에게 인정받으려고 지나치게 노력하면서 자신 스스로의 요구는 부정하거나 무시할 떄, 위의 증세에도 불구하고 점점 더 열심히 일하려고 노력함, 완벽주의자 , 성취와 자신의 가치를 동일시 하는 사람/ 거절을 못하는 사람/감정을 감추고 사는 사람/일이 과도하고 서로 경쟁적이며 보상보다는 벌이 많은 직장]", "options": ["burn out", "직업 만족", "에너지결핍", "돌연사", "신체질환"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 39, "source": "의료윤리; 의료윤리 사례 분석1 - 유상호", "professor": "", "stem": "다음 에센셜 오일 중 우울증상에 효과가 없는 것은?", "options": ["제라늄", "라벤더", "로즈마리", "쟈스민", "네놀리"], "answers": [3], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 40, "source": "의료윤리; 의료윤리 사례 분석1 - 유상호", "professor": "", "stem": "아로마테라피의 마사지에 대한 설명으로 옳지 않은 것은?", "options": ["100 방울의 CO 에 3 방울의 AEO 를 떨어뜨려 사용한다", "3 개월 미만의 어린이의 경우 라벤더, 프랑킨센스 등 안전한 오일만 사용한다.", "만7 세-16 세의 경우 어른의 ½ 용량만 사용한다", "유아 및 노약자는 1% 미만으로 희석시킨다"], "answers": [2], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 41, "source": "통합의학; 동종요법 - 한승훈", "professor": "", "stem": "동종요법 약제를 선택할 때 Modality 에 해당하는 것은?", "options": ["외모", "정신적특성", "직업", "생활 습관", "음악"], "answers": [5], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 42, "source": "통합의학; 동종요법 - 한승훈", "professor": "", "stem": "Arnica D6 랑 같은 것?", "options": ["Arnica C3", "Arnica C4", "Arnica C5", "Arnica C2", "Arnica C10"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 43, "source": "통합의학; 기능의학 - 한승훈", "professor": "", "stem": "기능의학에서 말하는 7 가지 핵심적 임상 불균형이 아닌 것은?", "options": ["에너지 불균형", "구조적 불균형", "자율신경계 불균형", "면역의 불균형", "호르몬과 신경전달물질의 불균형"], "answers": [3], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 44, "source": "통합의학; 기능의학 - 한승훈", "professor": "", "stem": "기능의학의 7 가지 기본원리가 아닌 것은?", "options": ["생화학적 대사기능의 개별성", "환자중심 치료", "내부 및 외부 요소의 역동적인 균형", "과학을 이용한 전문적 접근", "질병 없이 건강"], "answers": [5], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 45, "source": "통합의학; 자연의학 - 박시복", "professor": "", "stem": "다음의 자연의학 중 일반인이 가장 적용하기 어려운 것은?", "options": ["거슨요법", "아유르베다", "유나니", "니시의학", "침술요법"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 46, "source": "통합의학; 자연의학 - 박시복", "professor": "", "stem": "유나니에서 차고 건조한 습성은?", "options": ["우울질", "다혈질", "점액질", "지방질"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 47, "source": "의사소통; 가정폭력 상담 - 박훈기", "professor": "", "stem": "배우자 학대가 학동기 전 아동에게 유발하는 증상으로 가장 흔한 것은?", "options": ["손톱 물어뜯기", "고함 지르기", "잠 잘못잠", "울고 보챔", "남 탓을 자주한다."], "answers": [2], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 48, "source": "의사소통; 가정폭력 상담 - 박훈기", "professor": "", "stem": "배우자 폭력 상담 시 의사의 태도로 적절한 것은?", "options": ["폭력의 부당성을 강조한다", "폭로나 이혼 강요", "배우자에게 의논", "환자에게 학대의 이유를 묻는다."], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 49, "source": "의사소통; 성폭력 상담 - 박훈기", "professor": "", "stem": "2016 년 성폭력 실태조사에서 강간이 가장 많이 일어난 장소 -", "options": ["직장", "교통수단", "집", "도로", "주차장"], "answers": [3], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 50, "source": "의사소통; 성폭력 상담 - 박훈기", "professor": "", "stem": "미성년자의 성폭력에 대해 질문할 때 옳지 않은 것은?", "options": ["네가 원하지 않았는데 성기를 만졌니?", "네가 원하지 않았는데 자기 성기를 만지게 했니?", "네가 원하지 않았는데 유방을 만졌니?", "네가 원하지 않았는데 항문에 손가락을 넣었니?", "네가 원하지 않았는데 성적 모욕감을 느꼈니?"], "answers": [5], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}]};
+    const questions = examData.questions || [];
+    questions.forEach(question => {
+      question.shuffledOptions = shuffleOptions(question.options.map((text, index) => ({
+        text,
+        originalNumber: index + 1,
+        correct: question.answers.includes(index + 1)
+      })));
+    });
+    const state = { source: "전체", query: "", onlyUnanswered: false, selections: new Map(), showAnswers: false };
+    const els = {
+      totalCount: document.querySelector("#total-count"),
+      visibleCount: document.querySelector("#visible-count"),
+      answeredCount: document.querySelector("#answered-count"),
+      scoreRate: document.querySelector("#score-rate"),
+      searchInput: document.querySelector("#search-input"),
+      sourceSelect: document.querySelector("#source-select"),
+      sourceBoard: document.querySelector("#source-board"),
+      quizList: document.querySelector("#quiz-list"),
+      toggleUnanswered: document.querySelector("#toggle-unanswered"),
+      showAnswers: document.querySelector("#show-answers"),
+      reset: document.querySelector("#reset")
+    };
+    const numberMarks = ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"];
+    function init() { els.totalCount.textContent = String(questions.length); renderSourceControls(); bindEvents(); render(); }
+    function bindEvents() {
+      els.searchInput.addEventListener("input", event => { state.query = event.target.value.trim(); render(); });
+      els.sourceSelect.addEventListener("change", event => { state.source = event.target.value; render(); });
+      els.toggleUnanswered.addEventListener("click", () => { state.onlyUnanswered = !state.onlyUnanswered; els.toggleUnanswered.setAttribute("aria-pressed", String(state.onlyUnanswered)); els.toggleUnanswered.textContent = state.onlyUnanswered ? "전체 보기" : "미풀이만"; render(); });
+      els.showAnswers.addEventListener("click", () => { state.showAnswers = !state.showAnswers; els.showAnswers.textContent = state.showAnswers ? "정답 숨김" : "정답 표시"; render(); });
+      els.reset.addEventListener("click", () => { state.selections.clear(); state.showAnswers = false; els.showAnswers.textContent = "정답 표시"; render(); });
+    }
+    function renderSourceControls() {
+      const sources = ["전체", ...Array.from(new Set(questions.map(item => item.source || "출처 미분류")))];
+      els.sourceSelect.replaceChildren(...sources.map(source => { const option = document.createElement("option"); option.value = source; option.textContent = source === "전체" ? "전체 강의" : source; return option; }));
+    }
+    function render() { const visible = getVisibleQuestions(); els.visibleCount.textContent = String(visible.length); renderStats(); renderSourceBoard(); renderQuestions(visible); }
+    function renderStats() { const answered = questions.filter(question => state.selections.has(question.id)); const scored = answered.filter(question => !question.uncertain); const correct = scored.filter(question => isCorrect(question, state.selections.get(question.id))).length; els.answeredCount.textContent = String(answered.length); els.scoreRate.textContent = scored.length ? `${Math.round((correct / scored.length) * 100)}%` : "0%"; }
+    function getVisibleQuestions() {
+      const normalizedQuery = normalize(state.query);
+      return questions.filter(question => {
+        const source = question.source || "출처 미분류";
+        const sourceOk = state.source === "전체" || source === state.source;
+        const unansweredOk = !state.onlyUnanswered || !state.selections.has(question.id);
+        const queryOk = !normalizedQuery || normalize([question.stem, source, question.professor, question.options.join(" ")].join(" ")).includes(normalizedQuery);
+        return sourceOk && unansweredOk && queryOk;
+      });
+    }
+    function renderSourceBoard() {
+      const grouped = questions.reduce((map, question) => { const source = question.source || "출처 미분류"; map.set(source, (map.get(source) || 0) + 1); return map; }, new Map());
+      els.sourceBoard.replaceChildren(createSourceButton("전체", questions.length), ...Array.from(grouped, ([source, count]) => createSourceButton(source, count)));
+    }
+    function createSourceButton(source, count) {
+      const button = document.createElement("button"); button.type = "button"; button.className = "source-chip"; button.setAttribute("aria-pressed", String(state.source === source));
+      button.innerHTML = `<strong>${escapeHtml(source === "전체" ? "전체 강의" : source)}</strong><span>${count}문항</span>`;
+      button.addEventListener("click", () => { state.source = source; els.sourceSelect.value = source; render(); });
+      return button;
+    }
+    function renderQuestions(items) {
+      if (!items.length) { els.quizList.innerHTML = `<div class="empty">현재 조건에 맞는 문항이 없습니다.</div>`; return; }
+      els.quizList.replaceChildren(...items.map(createQuestionCard));
+    }
+    function createQuestionCard(question) {
+      const selected = state.selections.get(question.id); const answered = Number.isInteger(selected); const correct = answered && isCorrect(question, selected); const reveal = state.showAnswers || answered;
+      const card = document.createElement("article"); card.className = "question-card"; if (answered) card.classList.add(correct ? "correct" : "incorrect");
+      const badges = [`<span class="badge source">${escapeHtml(question.source || "출처 미분류")}</span>`]; if (question.professor) badges.push(`<span class="badge">${escapeHtml(question.professor)}</span>`); if (question.provisional) badges.push(`<span class="badge warning">임시 정답</span>`); if (question.uncertain) badges.push(`<span class="badge warning">검토 필요</span>`);
+      card.innerHTML = `<div class="question-head"><span class="q-number">Q${question.id}</span><div class="badges">${badges.join("")}</div></div><div class="question-body"><p class="stem">${escapeHtml(question.stem)}</p><div class="options"></div><div class="feedback"></div></div>`;
+      const optionWrap = card.querySelector(".options");
+      optionWrap.replaceChildren(...question.shuffledOptions.map((option, index) => {
+        const isSelected = selected === option.originalNumber; const isAnswer = option.correct; const button = document.createElement("button"); button.type = "button"; button.className = "option";
+        if (isSelected) button.classList.add("selected"); if (reveal && isAnswer) button.classList.add("answer"); if (answered && isSelected && !isAnswer) button.classList.add("wrong");
+        button.innerHTML = `<span class="mark">${numberMarks[index] || String(index + 1)}</span><span>${escapeHtml(option.text)}</span>`;
+        button.addEventListener("click", () => { state.selections.set(question.id, option.originalNumber); render(); document.querySelector(`[data-question-id="${question.id}"]`)?.scrollIntoView({ block: "nearest" }); });
+        return button;
+      }));
+      card.dataset.questionId = String(question.id);
+      const feedback = card.querySelector(".feedback");
+      if (reveal) {
+        const answerText = question.shuffledOptions.map((option, index) => ({ option, index })).filter(item => item.option.correct).map(item => `${numberMarks[item.index] || String(item.index + 1)} ${item.option.text}`).join(" / ");
+        const stateLabel = question.uncertain ? (answered ? (correct ? "임시 후보와 일치" : "임시 후보와 다름") : "임시 정답 후보") : (answered ? (correct ? "정답" : "오답") : "정답");
+        const feedbackClass = question.uncertain ? "pending" : (answered ? (correct ? "correct" : "incorrect") : "pending");
+        feedback.className = `feedback visible ${feedbackClass}`;
+        feedback.innerHTML = `<strong>${stateLabel}</strong><div>${answerText ? `정답 후보: ${escapeHtml(answerText)}` : "정답 표시를 자동으로 확인하지 못했습니다."}</div>${question.note ? `<div>${escapeHtml(question.note)}</div>` : ""}`;
+      }
+      return card;
+    }
+    function isCorrect(question, selected) { return question.answers.includes(selected); }
+    function shuffleOptions(options) { const items = [...options]; for (let index = items.length - 1; index > 0; index -= 1) { const swapIndex = Math.floor(Math.random() * (index + 1)); [items[index], items[swapIndex]] = [items[swapIndex], items[index]]; } return items; }
+    function normalize(value) { return String(value || "").toLowerCase().replace(/\s+/g, " ").trim(); }
+    function escapeHtml(value) { return String(value || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"); }
+    init();
+  </script>
+</body>
+</html>

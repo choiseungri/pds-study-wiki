@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2018 PDS4 종합시험 복원 퀴즈</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f5f8;
+      --panel: #ffffff;
+      --ink: #182230;
+      --muted: #667085;
+      --line: #d6dce6;
+      --blue: #2563eb;
+      --blue-soft: #eaf1ff;
+      --green: #07875f;
+      --green-soft: #e8f7f0;
+      --red: #c23b3b;
+      --red-soft: #fff0f0;
+      --amber: #9a6700;
+      --amber-soft: #fff7dd;
+      --navy: #111827;
+      --shadow: 0 18px 45px rgba(17, 24, 39, 0.08);
+      --soft-shadow: 0 8px 22px rgba(17, 24, 39, 0.06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 20% -10%, rgba(37, 99, 235, 0.12), transparent 34%), linear-gradient(180deg, #f8fafc 0%, var(--bg) 260px);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+      line-height: 1.55;
+    }
+    button, select, input { font: inherit; }
+    .shell { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+    header { padding: 38px 0 24px; background: rgba(255,255,255,.78); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px); }
+    .eyebrow { margin: 0 0 6px; color: var(--blue); font-weight: 800; font-size: .86rem; }
+    h1 { margin: 0; color: var(--navy); font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; letter-spacing: 0; }
+    .summary { max-width: 780px; margin: 12px 0 0; color: var(--muted); }
+    .status { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 24px; }
+    .metric { min-height: 92px; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.88); box-shadow: var(--soft-shadow); }
+    .metric span { display: block; color: var(--muted); font-size: .84rem; }
+    .metric strong { display: block; margin-top: 6px; color: var(--navy); font-size: 1.65rem; line-height: 1.1; }
+    .toolbar-band { position: sticky; top: 0; z-index: 10; padding: 10px 0; background: rgba(243,245,248,.92); border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); }
+    .toolbar { display: grid; grid-template-columns: minmax(220px, 1.3fr) minmax(180px, .8fr) auto auto auto; gap: 8px; align-items: center; padding: 8px; border: 1px solid rgba(214,220,230,.9); border-radius: 8px; background: rgba(255,255,255,.86); box-shadow: var(--soft-shadow); }
+    .control { display: grid; gap: 5px; }
+    .control span { color: var(--muted); font-size: .78rem; font-weight: 800; }
+    input[type="search"], select { width: 100%; min-height: 42px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: var(--ink); padding: 0 12px; outline: none; }
+    input[type="search"]:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.14); }
+    .tool-button { min-height: 42px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: var(--ink); padding: 0 14px; cursor: pointer; white-space: nowrap; }
+    .tool-button.primary { border-color: var(--blue); background: var(--blue); color: #fff; font-weight: 800; }
+    main.shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 18px; align-items: start; padding: 24px 0 48px; }
+    .source-board { position: sticky; top: 92px; display: grid; gap: 8px; max-height: calc(100vh - 112px); overflow: auto; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.9); padding: 10px; box-shadow: var(--soft-shadow); }
+    .source-chip { border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 12px; cursor: pointer; text-align: left; transition: border-color .15s ease, background .15s ease, transform .15s ease; }
+    .source-chip:hover { border-color: rgba(37,99,235,.55); transform: translateY(-1px); }
+    .source-chip[aria-pressed="true"] { border-color: var(--blue); background: var(--blue-soft); box-shadow: inset 3px 0 0 var(--blue); }
+    .source-chip strong { display: block; font-size: .92rem; line-height: 1.35; }
+    .source-chip span { display: block; margin-top: 5px; color: var(--muted); font-size: .8rem; }
+    .quiz-list { display: grid; gap: 14px; }
+    .question-card { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); box-shadow: var(--shadow); overflow: hidden; }
+    .question-card.correct { border-color: rgba(7,135,95,.55); }
+    .question-card.incorrect { border-color: rgba(194,59,59,.55); }
+    .question-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; padding: 13px 16px; background: linear-gradient(180deg, #fff, #f8fafc); border-bottom: 1px solid var(--line); }
+    .q-number { display: inline-grid; place-items: center; min-width: 42px; height: 30px; border-radius: 999px; background: var(--navy); color: #fff; font-weight: 800; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    .badge { display: inline-flex; align-items: center; min-height: 26px; border-radius: 999px; padding: 0 9px; background: #eef2f7; color: #34435a; font-size: .78rem; font-weight: 800; }
+    .badge.source { background: var(--blue-soft); color: #174ea6; }
+    .badge.warning { background: var(--amber-soft); color: var(--amber); }
+    .question-body { padding: 18px; }
+    .stem { margin: 0 0 16px; white-space: pre-line; font-weight: 650; color: #202b3c; }
+    .options { display: grid; gap: 9px; }
+    .option { display: grid; grid-template-columns: 30px 1fr; gap: 11px; align-items: start; width: 100%; min-height: 50px; border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 11px 13px; color: var(--ink); text-align: left; cursor: pointer; transition: border-color .15s ease, background .15s ease, transform .15s ease; }
+    .option:hover { border-color: var(--blue); background: #fbfdff; transform: translateY(-1px); }
+    .option.selected { border-color: var(--blue); background: var(--blue-soft); }
+    .option.answer { border-color: var(--green); background: var(--green-soft); }
+    .option.wrong { border-color: var(--red); background: var(--red-soft); }
+    .mark { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 999px; background: #eef2f7; font-weight: 800; color: #364152; }
+    .feedback { display: none; margin-top: 14px; border-radius: 8px; padding: 12px; font-size: .92rem; }
+    .feedback.visible { display: block; }
+    .feedback.correct { background: var(--green-soft); color: var(--green); }
+    .feedback.incorrect { background: var(--red-soft); color: var(--red); }
+    .feedback.pending { background: var(--amber-soft); color: var(--amber); }
+    .empty { padding: 28px; border: 1px dashed var(--line); border-radius: 8px; background: #fff; color: var(--muted); text-align: center; }
+    footer { padding: 24px 0 36px; color: var(--muted); border-top: 1px solid var(--line); background: #fff; font-size: .9rem; }
+    @media (max-width: 980px) { main.shell { grid-template-columns: 1fr; } .source-board { position: static; max-height: none; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); } }
+    @media (max-width: 900px) { .status { grid-template-columns: repeat(2, minmax(0, 1fr)); } .toolbar { grid-template-columns: 1fr 1fr; } .toolbar .tool-button { width: 100%; } }
+    @media (max-width: 620px) { .shell { width: min(100% - 20px, 1160px); } .status, .toolbar { grid-template-columns: 1fr; } .question-head { align-items: flex-start; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell">
+      <p class="eyebrow">PDS4 CBT 복기</p>
+      <h1>2018 PDS4 종합시험 복원</h1>
+      <p class="summary">문항마다 추출된 출처 강의를 붙였습니다. 강의 필터를 고르면 해당 범위 문제만 풀 수 있고, 선택 즉시 정답 여부가 표시됩니다.</p>
+      <div class="status" aria-live="polite">
+        <div class="metric"><span>전체 문항</span><strong id="total-count">0</strong></div>
+        <div class="metric"><span>현재 범위</span><strong id="visible-count">0</strong></div>
+        <div class="metric"><span>푼 문항</span><strong id="answered-count">0</strong></div>
+        <div class="metric"><span>정답률</span><strong id="score-rate">0%</strong></div>
+      </div>
+    </div>
+  </header>
+  <section class="toolbar-band">
+    <div class="shell toolbar">
+      <label class="control"><span>검색</span><input id="search-input" type="search" placeholder="문항, 보기, 강의명 검색" autocomplete="off" /></label>
+      <label class="control"><span>출처 강의</span><select id="source-select"></select></label>
+      <button id="toggle-unanswered" class="tool-button" type="button" aria-pressed="false">미풀이만</button>
+      <button id="show-answers" class="tool-button" type="button">정답 표시</button>
+      <button id="reset" class="tool-button primary" type="button">초기화</button>
+    </div>
+  </section>
+  <main class="shell">
+    <section class="source-board" id="source-board" aria-label="출처 강의별 필터"></section>
+    <section class="quiz-list" id="quiz-list" aria-label="퀴즈 문항"></section>
+  </main>
+  <footer>
+    <div class="shell">원본: 2018 PDS4 종합시험 복원.hwp / HWP 복원본이라 정답 표시가 없으면 검토 필요로 표시합니다.</div>
+  </footer>
+  <script>
+    const examData = {"title": "2018 PDS4 종합시험 복원", "kind": "종합시험", "sourceFile": "2018 PDS4 종합시험 복원.hwp", "answerFile": "2018 PDS4 종합시험 복원.hwp", "notes": "HWP 복원본이라 정답 표시가 없으면 검토 필요로 표시합니다.", "questions": [{"id": 1, "source": "질식사", "professor": "김원규", "stem": "일혈점이 보이지 않는 것은?", "options": ["비구폐색성 질식사", "익사", "불완전 의사", "교사", "액사"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 2, "source": "질식사", "professor": "김원규", "stem": "손으로 압박하여 사망하는 경우는 무엇인가?", "options": ["액사", "교사", "의사", "기도폐색성 질식사", "압창성 질식사"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 3, "source": "질식사", "professor": "김원규", "stem": "다음중 비구폐색성 질식사에 관한 설명으로 옳지 않은 것은?", "options": ["부드러운 물체를 사용한다", "대부분 타살이다", "어린이 혹은 의식 저하자에게서 많다", "설첨돌출이 특징적으로 관찰된다"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 4, "source": "익사", "professor": "김원규", "stem": "익사체의 가장 강력한 증거가 될 만한 소견은?", "options": ["기도내 포말괴", "기도내 이물", "흉강내 혈성액", "표모피", "폐 내 플랑크톤"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 5, "source": "중독사", "professor": "김원규", "stem": "CoHb 1%에서 사망에 이를 수 있는 노출 시간은 얼마인가?", "options": ["10~20분", "20~30분", "30분~1시간", "1시간~2시간"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 6, "source": "중독사", "professor": "김원규", "stem": "한 남자가 야유회에 갔다가 사망하였다. 혈중 알코올 농도 0.43%에 폐기관지에서 음식물이 발견되었다. 평소 관상동맥 질환을 가지고 있었을 때 이 환자의 사인은 무엇인가?", "options": ["급성 주정중독", "기관이물폐색", "급성심장사"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 7, "source": "온도 이상", "professor": "김원규", "stem": "저체온사에서 체온조절기능이 정지되는 온도는 몇 도인가?", "options": ["26‘", "28’", "30‘", "32’", "34‘"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 8, "source": "화재사", "professor": "김원규", "stem": "화재사에서 사망전에 일어난 소견은?", "options": ["기도내 매부착", "피부균열", "투사형 자세", "복강내 장기의 탈장"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 9, "source": "내인성 급사", "professor": "김원규", "stem": "다음 중 내인성 급사인 것은?", "options": ["화농성 수막염 어린이의 저체온사", "죽음이 예상된 관상동맥경화증", "비외상성 지주막하 출혈", "지방간이 있던 환자의 의사"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 10, "source": "내인성 급사", "professor": "김원규", "stem": "심근경색증으로 사망한 것으로 생각되는 남성에서 내인성 급사의 유인이 아닌 것은?", "options": ["음주운전", "등산", "빚독촉", "과음", "스트레스 의사소통 3h 9문제 <자살기도 면담> - 김대호"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 11, "source": "내인성 급사", "professor": "김원규", "stem": "자살의 위험 요인", "options": ["40대 초반", "여자", "도움을 거절", "정신과 외래 이용"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 12, "source": "내인성 급사", "professor": "김원규", "stem": "자살의 방어요인아닌 것은?", "options": ["종교없음", "가족", "죽음에 대하 두려움", "건강한 생활 습관"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 13, "source": "내인성 급사", "professor": "김원규", "stem": "자살면담할 때", "options": ["자살실패후 계획", "빈도", "의도", "구체적 계획", "자살 충동 조절 여부"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 14, "source": "내인성 급사", "professor": "김원규", "stem": "<가정폭력 상담> - 김대호 가정폭력당한 사람의 심리 양상아닌 것은?", "options": ["우울", "알코올 사용 장애", "불면증", "외상후 스트레스 장애", "식이장애"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 15, "source": "내인성 급사", "professor": "김원규", "stem": "가정폭력당한 사람의 안전교육에 대한 설명으로 옳지 않은 것은?", "options": ["무기가 될 만한 물건들을 버린다", "응급도주 경로와 방법 계획", "경찰에 신고해줄 수 있는 사람 알아놓기", "도움을 받을 기관의 연락처 숙지"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 16, "source": "내인성 급사", "professor": "김원규", "stem": "가정폭력을 당한 사람에게 확인해야 할 것이 아닌 것은?", "options": ["성폭력", "신체폭력", "언어폭력", "심리적 폭력", "방임"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 17, "source": "내인성 급사", "professor": "김원규", "stem": "<성폭력 상담> - 김대호 성폭행 당한 사람에게 확인해야 될 증거는?", "options": ["체모", "체액", "부상당한 사진", "정액", "모두 옳다"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 18, "source": "내인성 급사", "professor": "김원규", "stem": "성폭행 당한 사람의 감정중 다음의 설명에 해당하는 감정은? 생리적 반응이며 조절할수 없다는 것 설명 생존자를 탓하는 경향이 있는데 항상 가해자이 잘못임을 설명하라 강간당할 이유가 없으며, 책임도 없고, 행동, 옷 차림새에 의한 것이 아님을 확신시켜라 도덕적 판단을 하지 마라", "options": ["수치심과 자책감", "통제력상심감 과 조절감", "분노와 화", "취약감"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 19, "source": "내인성 급사", "professor": "김원규", "stem": "성폭행 당한 사람에게 물어봐야 할 것이 아닌 것은?", "options": ["성폭행 과거력", "마지막 생리일", "폭행방법", "성행위 방법 병원경영 5h 21문제 병원조직의 특성으로 틀린 것은? 업무의 대치성 이질성 다양성 권위의 이원화 노조와의 관계의 유지에 대한 인력관리 체계? 확보 개발 보상 유지 병원인력 관리의 비-효율성의 원인 인력의 중복 업무의 분리 및 의사결정시스템의 단순성 부서장 중심의 운영시스템 및 비핵심 업무의 위임 및 도급 정도 타 기관 보고 및 평가에 따른 인력의 과잉배치 부서이기주의에 따른 인력배정 병원인력 관리의 효율성 증대 표준화된 진료프로세스와 진료지원 정례화된 행정프로세스에 따라 인력 재배치 외래 예약과 절차의 간소화 검사예약 및 검사결과 통보 등의 시스템도 운영 효율적인 병원조직 관리란? 이론적 경영 실행 수직적으로 변경 효과적인 체제로 비효율적인 조직은 통-폐합 모두 맞다 새 경영 패러다임은? 생산 기대초과 충족 원가절감 서비스의 표준화 규격화가 어려운 것은? 이질성 무형성 동시성 소멸성 과잉생산에 의한 손실을 뜻하는 의료서비스의 특징은? 소멸성 이질성 무형성 동시성 유형의 제품이 아니라 무형의 서비스를 대상으로 하는 마케팅을 말하는 것은? 서비스 마케팅 산업재 마케팅 소비재 마케팅 4P가 속한 마케팅 관리과정은? 1단계 2단계 3단계 4단계 서비스 마케팅의 특징으로 옳지 않은 것은? 원가 결정이 쉽다 고객이 참여 종업원도 상품의 일부 생산, 유통, 소비 지점의 통합 의료서비스 마케팅의 필요성은? 소비자 욕구의 다양화 경영 완화 경쟁 완화 질병 중심 의료 보건의료서비스의 사회경제적 특징은? 외부효과 노동집약적 특성 소비자의 생산과정 참여 서비스 무형성 접근 용이성 등 성공적 변화관리의 핵심요소는? 최고경영자의 혁신 참여 어쩌구 ‘고객만족 추구’는 어디에 해당하는가? 미션 비전 추진전략 핵심가치 희망을 판매하는 기업, 즐거움의 제공, 21세기를 향한 가치창조 등은 무엇인가? 미션 비젼 추진전략 핵심가치 측정 및 정량화가 가능해야 하는 것은? 미션 비젼 추진전략 핵심가치 서비스 내용을 정하는 단계는? 의료기관의 주 고객 선택 서비스 개념의 정의?? 운영 전략 수립 서비스 전달체계 최고 경영자가 범하기 쉬운 품질에 관한 오류는? 성명성 구호에 크게 의존 ??? 오류 하나 더 정상 보기 두 개 구성원들이 부여받은 업무를 자발적으로 수행하도록 그들에게 의욕을 불어넣어 주고 영향력을 행사하는 기능은? 조직화 계획수립 통제 지휘 요원화"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 20, "source": "내인성 급사", "professor": "김원규", "stem": "최적자본구조를 따지는 것은? 자본조달결정 투자결정 유동성 관리 분배 의사결정 의료윤리 2h 7문제 OO과 전문의로서 의원을 경영하는 개원의 ㄱ는 최근 도입한 검사 기기로 증상이 애매한 환자들에 대하여 더 확실한 진단이 가능하게 되었으나, 기기의 리스 비용 부담으로 의원 경영이 어려워진 상황에 처해있다. 이러한 상황에서 가장 먼저 고려해야 할 윤리적 원칙은?", "options": ["검사의 위험성", "의원 경영 문제", "환자의 복지", "법 위반 여부"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 21, "source": "내인성 급사", "professor": "김원규", "stem": "종합병원 OO과의 의국장인 ㄱ는 최근한 제약회사로부터 자사의 항생제를 사용하는 대가로 매달 특정금액을 의국비 보조금 명목으로 기부하겠다는 제안을 받았다. 그는 이 제안에 대하여, 어차피 필요에 따라 처방하는 항생제이고 또 개인을 위해서가 아니라 전체 의국을 위해서 사용하는 것이므로 별 문제가 없을 것이라고 생각하고 수락할 생각을 하고 있다. 이러한 상황에서 가장 먼저 고려해야 할 윤리적 원칙은?", "options": ["사회신뢰", "의국 운영", "법적인 처벌", "의약품 품질"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 22, "source": "내인성 급사", "professor": "김원규", "stem": "歭扯- 자원의 효율적 활용 폐암 환자 ㄱ씨는 5차 항암제 치료를 받기 위해 입원하였다. 항암제 치료는 이틀에 완료되며, 3주를 한 회기(cycle)로 반복되는 방식으로 투약되고 있었다. 1-3차 치료까지는 문제가 없었으나, 4차 치료 후 구토와 발열 등의 심한 부작용이 발생하여 ㄱ씨는 어려움을 많이 겪었다. 그 이유로 환자 ㄱ씨는 5차 항암제 투여가 끝났음에도 불구하고 오심과 식욕감퇴를 호소하며 다음 치료 때까지 계속 입원하겠다며 퇴원을 하지 않고 있다. 원무과에서는 해당 환자가 퇴원하지 않기 때문에 급한 다른 환자들이 입원을 하지 못하고 있다며, 담당의사에게 해당 환자를 1차 또는 2차 의료기관으로 전원할 것을 종용하고 있다. 이러한 상황에서 적용 가능한 실질적 원칙은?", "options": ["기회의 평등", "의학적 필요", "사회경제적 필요", "의학적 결과", "결과의 평등"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 23, "source": "내인성 급사", "professor": "김원규", "stem": "에볼라 출혈열의 원인인 에볼라 바이러스는 감염된 환자 혹은 동물과의 직접 접촉을 통해서만 전파가 이루어진다고 알려져 있다. 즉 에볼라 바이러스의 전파는 쉽게 일어나지 않는 반면, 질병이 발생한 경우에는 매우 높은 치사율을 보였다. 정부는 에볼라 출혈열 발생 국가에 거주하는 사람의 입국을 허가하지 않는 정책을 시행하고자 한다. 위 정책의 윤리적 검토 과정에서 가장 먼저 파악해야 할 것은?", "options": ["정책의 목적", "목적을 효과적으로 달성할지 여부", "정책의 부담 또는 위해", "손해를 최소화할 수 있는 방법", "이득과 손해가 균등하게 적용되는지 여부"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 24, "source": "내인성 급사", "professor": "김원규", "stem": "OO과 전문의 ㄱ는 평소 ‘동료 의료인을 멸시하는 듯 한다’, ‘모르는 것에 대해 물어보면 ‘그런 게 있어요’하며 무시하듯 대답한다’하여 방사선기사들 사이에서 평판이 좋지 않다. 어느 날 방사선실에서 사소한 이유로 ㄱ와 방사선기사 사이에 다툼이 벌어졌고, 그 과정에서 방사선기사가 ㄱ의 가슴을 때렸다. 이러한 상황에서 가장 필요한 윤리적 원칙은?", "options": ["자율성 존중", "협동", "예절과 정중함", "환자 안전과 복지", "상호 신뢰"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 25, "source": "내인성 급사", "professor": "김원규", "stem": "개원한지 5개월 째로 아직 환자 수도 많지 않고 경영에 어려움이 많은 ㄱ원장에게 의사회장으로부터 전화가 걸려왔다. 불합리한 수가문제, 총액계약제, 성분명 처방 문제 등 심각한 의료현안의 타계를 위해 의사협회가 점진적인 파업 로드맵을 시행 중이라는 것이다. 우선 다가오는 토요일부터 3주간 토요 휴무에 동참하기로 한 의사협회의 지시에 따라 달라는 부탁을 함께 하면서, 개인의 이익을 위한 것이 아니라 의사사회 전체, 더 나아가서는 왜곡된 우리사회 의료제도 전체를 위한 물러설 수 없는 투쟁이라는 말을 덧붙였다. 위의 상황에서 제안에 반대하는 근거가 되는 것은?", "options": ["의료전문직업성", "이미 예약된 환자들", "구조의 의무 통합의학 8h 24문제 > Manual medicine & Massage(이규훈)"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 26, "source": "내인성 급사", "professor": "김원규", "stem": "고혈압 보건관리 12h 9문제 보건의료체계의 하부구조로 올바르게 짝지어진것?", "options": ["의료자원-자원의조직화-의료서비스제공-경제적지원-관리", "의료자원-자원의조직화-의료서비스질관리-경제적지원-관리", "의료자원-자원의조직화-의료서비스제공-경제적지원-건강수요", "?"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 27, "source": "내인성 급사", "professor": "김원규", "stem": "우리나라 사회보장의 종류로 옳게 연결된 것을 고르시오. 사회보험-산업재해보험 사회보험-의료급여 사회보험-기초생활보장 사회부조-복지연금 민간보험과 사회보험 설명 중 옳은 것은?", "options": ["사회보험-법률에 의한 강제 징수", "사회보험-임의, 영리적", "민간보험-사회부양성", "민간보험-평균 위험률 보험제도"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 28, "source": "내인성 급사", "professor": "김원규", "stem": "지불단위가 가장 큰 것은?", "options": ["총액예산제", "포괄수가제", "인두제", "행위별 수가제"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 29, "source": "내인성 급사", "professor": "김원규", "stem": "질 관리의 접근방법으로 옳은 것은?", "options": ["Structure-임상진료지침", "Process-의료감사", "Process-의료기관 신임제도", "Outcome-면허와 자격부여"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 30, "source": "내인성 급사", "professor": "김원규", "stem": "다음 중 미용을 위해 자의로 성형한 경우 어디에 포함되는가? 漠杳 절주 전략 중 ‘너는 괜찮은 사람이다’ 자기 자신에 대한 자신감을 높이는 것은 어디에 해다하는 항목인가?", "options": ["위험경고", "자기효능감", "공감대형성", "절주권고"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 31, "source": "내인성 급사", "professor": "김원규", "stem": "다음의 모형은 어떤 것을 설명하는 것인가? 건강행동의 실천에 있어서 행동에 대한 intention이 가장 중요한 예측 요인이며 행동에 대한 태도, 주관적 규범 및 인지된 행동 통제능력이 의도와 행동에 직간접적 영향을 준다", "options": ["건강믿음모형", "범이론적모형", "계획된 행동이론", "사회인지이론"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 32, "source": "내인성 급사", "professor": "김원규", "stem": "일차보건의료의 특징으로 옳은 것은?", "options": ["부문간 협조", "관계는 제공자와 소비자 관계", "대상은 환자", "질병중심치료이다 의료법규 6h 18문제"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 33, "source": "검역법", "professor": "", "stem": "다음 중 검역법에 따른 검역감염병에 해당하는 질병과 그 격리기간을 바르게 짝지은 것은?", "options": ["콜레라, 2일", "페스트, 9일", "황열, 6일", "장티푸스, 5일", "말라리아, 3일"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 34, "source": "감염병의 예방 및 관리에 관한 법률", "professor": "", "stem": "다음 중 질병관리본부장이 역학조사를 하여야 하는 경우는 무엇인가?", "options": ["1개 시, 군, 구에서 감염병이 발생하여 유행할 우려가 있는 경우", "1개 시, 군, 구에서 감염병이 발생하여 그 감염병이 해당 구역과 역학적 연관성이 있다고 의심되는 경우", "1개 시, 도에서 감염병이 발생하여 그 감염병이 해당 구역과 역학적 연관성이 있다고 의심되는 경우", "2개 시, 군, 구에서 역학조사가 동시에 필요한 경우", "2개 시, 도에서 역학조사가 동시에 필요한 경우"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 35, "source": "감염병의 예방 및 관리에 관한 법률", "professor": "", "stem": "감염병의 예방 및 관리에 관한 법률에 따른 의료인, 국민, 국가 및 지방자치단체의 권리, 책무, 의무로 올바른 것을 고르시오.", "options": ["의료인은 감염병 환자의 진료에 관한 정보를 제공받을 권리가 있다.", "감염병 환자는 진단과 치료에 수반되는 비용을 지불해야 한다.", "국가와 지방자치단체는 환자의 취업을 제한하여 감염병의 전파를 예방하여야 한다.", "국가와 지방자치단체는 감염병 환자의 진료에 관한 정보를 공개하지 않아야 한다.", "국가와 지방자치단체는 감염병의 효율적 치료 및 확산방지를 위해 질병의 전파상황을 공유해선 안 된다."], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 36, "source": "감염병의 예방 및 관리에 관한 법률", "professor": "", "stem": "다음 중 제3군감염병에 해당하는 것을 고르시오.", "options": ["풍진", "홍역", "결핵", "콜레라", "황열"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 37, "source": "감염병의 예방 및 관리에 관한 법률", "professor": "", "stem": "다음 중 간헐적으로 유행할 가능성이 있어 계속 그 발생을 감시하고 방역대책을 수립해야 하는 감염병은 무엇인가?", "options": ["신종인플루엔자", "쯔쯔가무시", "b형헤모필루스인플루엔자", "A형간염", "폐렴구균"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 38, "source": "감염병의 예방 및 관리에 관한 법률", "professor": "", "stem": "다음 중 감염병의 신고 및 보고에 관한 설명으로 적절하지 않은 것은?", "options": ["치과의사는 감염병환자를 발견시 보건복지부장관에게 보고하여야 한다.", "육군, 해군 등에 복무하는 군의관은 감염병환자 발견시 소속 부대장을 통해 관할 보건소장에게 신고하여야 한다.", "의료기관에 종사하는 의사는 감염병환자를 발견시 보건복지부장관에게 신고하여야 한다.", "의사가 제3군감염병 환자를 발견한 경우 7일 이내에 보건복지부장관에게 신고하여야 한다."], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 39, "source": "감염병의 예방 및 관리에 관한 법률", "professor": "", "stem": "예방접종 후 이상반응이 발견되었을 때 역학조사의 책임자는 누구인가?", "options": ["시군구청장", "시도지사", "보건복지부장관", "질병관리본부장", "식품의약품안전처장"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 40, "source": "혈액관리법", "professor": "", "stem": "다음 중 혈액원에서 별도의 이상이 없는 경우 수혈을 해도 좋은 사람은 누구인가?", "options": ["체중 50kg의 남자", "체온 38도인 자", "맥박이 110회인 자", "이완기혈압이 110인 자"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 41, "source": "마약류 관리에 관한 법률", "professor": "", "stem": "다음 중 마약류 관리에 관한 법률에서 마약으로 분류한 약물을 짝지은 것은?", "options": ["아세토르핀 – 아세틸메타돌", "디에틸트립타민 – 메스암페타민", "덱스암페타민 – 메틸데소르핀", "벤질모르핀 – 메틸페니데이트"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 42, "source": "마약류 관리에 관한 법률", "professor": "", "stem": "마약류 관리에 관한 법률에서 마약류관리자는 의료기관에 마약류취급의료업자가 몇 명 이상일 때 종사하여야 하는가?", "options": ["1명", "2명", "3명", "4명", "5명"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 43, "source": "후천성면역결핍증 예방법", "professor": "", "stem": "다음 중 후천성면역결핍증 예방법의 목적으로 올바른 것을 고르시오.", "options": ["후천성면역결핍증의 예방, 치료와 그 감염인의 보호, 지원", "후천성면역결핍증의 예방, 관리와 그 감염인의 보호, 지원", "후천성면역결핍증의 예방, 관리와 그 감염인의 통제, 격리", "후천성면역결핍증의 예방, 치료와 그 감염인의 통제, 격리"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 44, "source": "후천성면역결핍증 예방법", "professor": "", "stem": "후천성면역결핍증 예방법에 따르면, 수입을 목적으로 한 연예, 운동경기, 그 밖의 흥행업을 하려는 사람이 정기검진 또는 수시검진을 받기 위한 국내 체류기간은 며칠인가?", "options": ["30일", "70일", "90일", "91일 95일"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 45, "source": "국민건강보험법", "professor": "", "stem": "다음 중 국민건강보험 가입자의 자격상실 시기로 올바른 것을 고르시오.", "options": ["사망한 날", "수급권자가 된 다음날", "직장가입자의 피부양자가 된 날", "국내에 체류하지 않게 된 날"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 46, "source": "국민건강보험법", "professor": "", "stem": "국민건강보험법에 따르면 직장가입자의 보험료율은 얼마 이내에서 정해지는가?", "options": ["1000분의 100", "1000분의 80", "1000분의 60", "1000분의 40", "1000분의 20"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 47, "source": "응급의료에 관한 법률", "professor": "", "stem": "다음 중 응급실에 두 명 이상의 환자가 있을 때 먼저 처치해야 하는 환자는 누구인가?", "options": ["신생아", "처치경과가 좋을 것으로 예상되는 자", "증상이 위중한 자", "노약자", "임산부"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 48, "source": "지역보건법", "professor": "", "stem": "다음 중 지역보건법에 따른 지역사회건강실태조사는 얼마의 기간을 주기로 실시하는가?", "options": ["매년", "1년", "2년", "3년", "5년"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 49, "source": "의료법", "professor": "", "stem": "다음 중 의료법에서 부정한 방법으로 국가시험 등에 응시한 자나 국가시험 등에 관하여 부정행위를 한 자의 응시제한은 몇 회 이내에서 이루어지는가?", "options": ["1회", "2회", "3회", "4회", "5회"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 50, "source": "보건의료기본법", "professor": "", "stem": "다음 중 보건의료정책심의위원회에 포함되는 사람으로 올바른 것은?", "options": ["기획재정부장관", "교육부장관", "고용노동부장관", "국방부차관", "식품의약품안전처장 의료와 법 3h 9문제 (주) 의사-간호사 관계에 관해 대법원은 어떻게 판단하고 있는가? (주) 의료관행에 대해 법원은 어떻게 판단하는가? (주) 의사와 무면허의료행위의 종류 2가지를 기술하시오. (주) 피해자의 승낙(동의서)의 유효요건 판단 기준 3가지를 기술하시오. (주) 의료과실과 의료분쟁의 정의를 기술하시오. (주) 의료소송의 논점 2가지를 기술하시오. (주) 의료과실(주의의무)의 판단기준 3가지를 기술하시오. (주) 의료과실이 인정될 경우 민사소송과 형사소송에서 발생하는 결과를 기술하시오. (주) 의료과실의 책임을 판별하는 구조의 요건 3가지를 기술하시오. 汤捯"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}]};
+    const questions = examData.questions || [];
+    questions.forEach(question => {
+      question.shuffledOptions = shuffleOptions(question.options.map((text, index) => ({
+        text,
+        originalNumber: index + 1,
+        correct: question.answers.includes(index + 1)
+      })));
+    });
+    const state = { source: "전체", query: "", onlyUnanswered: false, selections: new Map(), showAnswers: false };
+    const els = {
+      totalCount: document.querySelector("#total-count"),
+      visibleCount: document.querySelector("#visible-count"),
+      answeredCount: document.querySelector("#answered-count"),
+      scoreRate: document.querySelector("#score-rate"),
+      searchInput: document.querySelector("#search-input"),
+      sourceSelect: document.querySelector("#source-select"),
+      sourceBoard: document.querySelector("#source-board"),
+      quizList: document.querySelector("#quiz-list"),
+      toggleUnanswered: document.querySelector("#toggle-unanswered"),
+      showAnswers: document.querySelector("#show-answers"),
+      reset: document.querySelector("#reset")
+    };
+    const numberMarks = ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"];
+    function init() { els.totalCount.textContent = String(questions.length); renderSourceControls(); bindEvents(); render(); }
+    function bindEvents() {
+      els.searchInput.addEventListener("input", event => { state.query = event.target.value.trim(); render(); });
+      els.sourceSelect.addEventListener("change", event => { state.source = event.target.value; render(); });
+      els.toggleUnanswered.addEventListener("click", () => { state.onlyUnanswered = !state.onlyUnanswered; els.toggleUnanswered.setAttribute("aria-pressed", String(state.onlyUnanswered)); els.toggleUnanswered.textContent = state.onlyUnanswered ? "전체 보기" : "미풀이만"; render(); });
+      els.showAnswers.addEventListener("click", () => { state.showAnswers = !state.showAnswers; els.showAnswers.textContent = state.showAnswers ? "정답 숨김" : "정답 표시"; render(); });
+      els.reset.addEventListener("click", () => { state.selections.clear(); state.showAnswers = false; els.showAnswers.textContent = "정답 표시"; render(); });
+    }
+    function renderSourceControls() {
+      const sources = ["전체", ...Array.from(new Set(questions.map(item => item.source || "출처 미분류")))];
+      els.sourceSelect.replaceChildren(...sources.map(source => { const option = document.createElement("option"); option.value = source; option.textContent = source === "전체" ? "전체 강의" : source; return option; }));
+    }
+    function render() { const visible = getVisibleQuestions(); els.visibleCount.textContent = String(visible.length); renderStats(); renderSourceBoard(); renderQuestions(visible); }
+    function renderStats() { const answered = questions.filter(question => state.selections.has(question.id)); const scored = answered.filter(question => !question.uncertain); const correct = scored.filter(question => isCorrect(question, state.selections.get(question.id))).length; els.answeredCount.textContent = String(answered.length); els.scoreRate.textContent = scored.length ? `${Math.round((correct / scored.length) * 100)}%` : "0%"; }
+    function getVisibleQuestions() {
+      const normalizedQuery = normalize(state.query);
+      return questions.filter(question => {
+        const source = question.source || "출처 미분류";
+        const sourceOk = state.source === "전체" || source === state.source;
+        const unansweredOk = !state.onlyUnanswered || !state.selections.has(question.id);
+        const queryOk = !normalizedQuery || normalize([question.stem, source, question.professor, question.options.join(" ")].join(" ")).includes(normalizedQuery);
+        return sourceOk && unansweredOk && queryOk;
+      });
+    }
+    function renderSourceBoard() {
+      const grouped = questions.reduce((map, question) => { const source = question.source || "출처 미분류"; map.set(source, (map.get(source) || 0) + 1); return map; }, new Map());
+      els.sourceBoard.replaceChildren(createSourceButton("전체", questions.length), ...Array.from(grouped, ([source, count]) => createSourceButton(source, count)));
+    }
+    function createSourceButton(source, count) {
+      const button = document.createElement("button"); button.type = "button"; button.className = "source-chip"; button.setAttribute("aria-pressed", String(state.source === source));
+      button.innerHTML = `<strong>${escapeHtml(source === "전체" ? "전체 강의" : source)}</strong><span>${count}문항</span>`;
+      button.addEventListener("click", () => { state.source = source; els.sourceSelect.value = source; render(); });
+      return button;
+    }
+    function renderQuestions(items) {
+      if (!items.length) { els.quizList.innerHTML = `<div class="empty">현재 조건에 맞는 문항이 없습니다.</div>`; return; }
+      els.quizList.replaceChildren(...items.map(createQuestionCard));
+    }
+    function createQuestionCard(question) {
+      const selected = state.selections.get(question.id); const answered = Number.isInteger(selected); const correct = answered && isCorrect(question, selected); const reveal = state.showAnswers || answered;
+      const card = document.createElement("article"); card.className = "question-card"; if (answered) card.classList.add(correct ? "correct" : "incorrect");
+      const badges = [`<span class="badge source">${escapeHtml(question.source || "출처 미분류")}</span>`]; if (question.professor) badges.push(`<span class="badge">${escapeHtml(question.professor)}</span>`); if (question.provisional) badges.push(`<span class="badge warning">임시 정답</span>`); if (question.uncertain) badges.push(`<span class="badge warning">검토 필요</span>`);
+      card.innerHTML = `<div class="question-head"><span class="q-number">Q${question.id}</span><div class="badges">${badges.join("")}</div></div><div class="question-body"><p class="stem">${escapeHtml(question.stem)}</p><div class="options"></div><div class="feedback"></div></div>`;
+      const optionWrap = card.querySelector(".options");
+      optionWrap.replaceChildren(...question.shuffledOptions.map((option, index) => {
+        const isSelected = selected === option.originalNumber; const isAnswer = option.correct; const button = document.createElement("button"); button.type = "button"; button.className = "option";
+        if (isSelected) button.classList.add("selected"); if (reveal && isAnswer) button.classList.add("answer"); if (answered && isSelected && !isAnswer) button.classList.add("wrong");
+        button.innerHTML = `<span class="mark">${numberMarks[index] || String(index + 1)}</span><span>${escapeHtml(option.text)}</span>`;
+        button.addEventListener("click", () => { state.selections.set(question.id, option.originalNumber); render(); document.querySelector(`[data-question-id="${question.id}"]`)?.scrollIntoView({ block: "nearest" }); });
+        return button;
+      }));
+      card.dataset.questionId = String(question.id);
+      const feedback = card.querySelector(".feedback");
+      if (reveal) {
+        const answerText = question.shuffledOptions.map((option, index) => ({ option, index })).filter(item => item.option.correct).map(item => `${numberMarks[item.index] || String(item.index + 1)} ${item.option.text}`).join(" / ");
+        const stateLabel = question.uncertain ? (answered ? (correct ? "임시 후보와 일치" : "임시 후보와 다름") : "임시 정답 후보") : (answered ? (correct ? "정답" : "오답") : "정답");
+        const feedbackClass = question.uncertain ? "pending" : (answered ? (correct ? "correct" : "incorrect") : "pending");
+        feedback.className = `feedback visible ${feedbackClass}`;
+        feedback.innerHTML = `<strong>${stateLabel}</strong><div>${answerText ? `정답 후보: ${escapeHtml(answerText)}` : "정답 표시를 자동으로 확인하지 못했습니다."}</div>${question.note ? `<div>${escapeHtml(question.note)}</div>` : ""}`;
+      }
+      return card;
+    }
+    function isCorrect(question, selected) { return question.answers.includes(selected); }
+    function shuffleOptions(options) { const items = [...options]; for (let index = items.length - 1; index > 0; index -= 1) { const swapIndex = Math.floor(Math.random() * (index + 1)); [items[index], items[swapIndex]] = [items[swapIndex], items[index]]; } return items; }
+    function normalize(value) { return String(value || "").toLowerCase().replace(/\s+/g, " ").trim(); }
+    function escapeHtml(value) { return String(value || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"); }
+    init();
+  </script>
+</body>
+</html>

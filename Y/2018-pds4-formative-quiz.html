@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2018 PDS4 형성평가 퀴즈</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f5f8;
+      --panel: #ffffff;
+      --ink: #182230;
+      --muted: #667085;
+      --line: #d6dce6;
+      --blue: #2563eb;
+      --blue-soft: #eaf1ff;
+      --green: #07875f;
+      --green-soft: #e8f7f0;
+      --red: #c23b3b;
+      --red-soft: #fff0f0;
+      --amber: #9a6700;
+      --amber-soft: #fff7dd;
+      --navy: #111827;
+      --shadow: 0 18px 45px rgba(17, 24, 39, 0.08);
+      --soft-shadow: 0 8px 22px rgba(17, 24, 39, 0.06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 20% -10%, rgba(37, 99, 235, 0.12), transparent 34%), linear-gradient(180deg, #f8fafc 0%, var(--bg) 260px);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+      line-height: 1.55;
+    }
+    button, select, input { font: inherit; }
+    .shell { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+    header { padding: 38px 0 24px; background: rgba(255,255,255,.78); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px); }
+    .eyebrow { margin: 0 0 6px; color: var(--blue); font-weight: 800; font-size: .86rem; }
+    h1 { margin: 0; color: var(--navy); font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; letter-spacing: 0; }
+    .summary { max-width: 780px; margin: 12px 0 0; color: var(--muted); }
+    .status { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 24px; }
+    .metric { min-height: 92px; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.88); box-shadow: var(--soft-shadow); }
+    .metric span { display: block; color: var(--muted); font-size: .84rem; }
+    .metric strong { display: block; margin-top: 6px; color: var(--navy); font-size: 1.65rem; line-height: 1.1; }
+    .toolbar-band { position: sticky; top: 0; z-index: 10; padding: 10px 0; background: rgba(243,245,248,.92); border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); }
+    .toolbar { display: grid; grid-template-columns: minmax(220px, 1.3fr) minmax(180px, .8fr) auto auto auto; gap: 8px; align-items: center; padding: 8px; border: 1px solid rgba(214,220,230,.9); border-radius: 8px; background: rgba(255,255,255,.86); box-shadow: var(--soft-shadow); }
+    .control { display: grid; gap: 5px; }
+    .control span { color: var(--muted); font-size: .78rem; font-weight: 800; }
+    input[type="search"], select { width: 100%; min-height: 42px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: var(--ink); padding: 0 12px; outline: none; }
+    input[type="search"]:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.14); }
+    .tool-button { min-height: 42px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: var(--ink); padding: 0 14px; cursor: pointer; white-space: nowrap; }
+    .tool-button.primary { border-color: var(--blue); background: var(--blue); color: #fff; font-weight: 800; }
+    main.shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 18px; align-items: start; padding: 24px 0 48px; }
+    .source-board { position: sticky; top: 92px; display: grid; gap: 8px; max-height: calc(100vh - 112px); overflow: auto; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.9); padding: 10px; box-shadow: var(--soft-shadow); }
+    .source-chip { border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 12px; cursor: pointer; text-align: left; transition: border-color .15s ease, background .15s ease, transform .15s ease; }
+    .source-chip:hover { border-color: rgba(37,99,235,.55); transform: translateY(-1px); }
+    .source-chip[aria-pressed="true"] { border-color: var(--blue); background: var(--blue-soft); box-shadow: inset 3px 0 0 var(--blue); }
+    .source-chip strong { display: block; font-size: .92rem; line-height: 1.35; }
+    .source-chip span { display: block; margin-top: 5px; color: var(--muted); font-size: .8rem; }
+    .quiz-list { display: grid; gap: 14px; }
+    .question-card { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); box-shadow: var(--shadow); overflow: hidden; }
+    .question-card.correct { border-color: rgba(7,135,95,.55); }
+    .question-card.incorrect { border-color: rgba(194,59,59,.55); }
+    .question-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; padding: 13px 16px; background: linear-gradient(180deg, #fff, #f8fafc); border-bottom: 1px solid var(--line); }
+    .q-number { display: inline-grid; place-items: center; min-width: 42px; height: 30px; border-radius: 999px; background: var(--navy); color: #fff; font-weight: 800; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    .badge { display: inline-flex; align-items: center; min-height: 26px; border-radius: 999px; padding: 0 9px; background: #eef2f7; color: #34435a; font-size: .78rem; font-weight: 800; }
+    .badge.source { background: var(--blue-soft); color: #174ea6; }
+    .badge.warning { background: var(--amber-soft); color: var(--amber); }
+    .question-body { padding: 18px; }
+    .stem { margin: 0 0 16px; white-space: pre-line; font-weight: 650; color: #202b3c; }
+    .options { display: grid; gap: 9px; }
+    .option { display: grid; grid-template-columns: 30px 1fr; gap: 11px; align-items: start; width: 100%; min-height: 50px; border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 11px 13px; color: var(--ink); text-align: left; cursor: pointer; transition: border-color .15s ease, background .15s ease, transform .15s ease; }
+    .option:hover { border-color: var(--blue); background: #fbfdff; transform: translateY(-1px); }
+    .option.selected { border-color: var(--blue); background: var(--blue-soft); }
+    .option.answer { border-color: var(--green); background: var(--green-soft); }
+    .option.wrong { border-color: var(--red); background: var(--red-soft); }
+    .mark { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 999px; background: #eef2f7; font-weight: 800; color: #364152; }
+    .feedback { display: none; margin-top: 14px; border-radius: 8px; padding: 12px; font-size: .92rem; }
+    .feedback.visible { display: block; }
+    .feedback.correct { background: var(--green-soft); color: var(--green); }
+    .feedback.incorrect { background: var(--red-soft); color: var(--red); }
+    .feedback.pending { background: var(--amber-soft); color: var(--amber); }
+    .empty { padding: 28px; border: 1px dashed var(--line); border-radius: 8px; background: #fff; color: var(--muted); text-align: center; }
+    footer { padding: 24px 0 36px; color: var(--muted); border-top: 1px solid var(--line); background: #fff; font-size: .9rem; }
+    @media (max-width: 980px) { main.shell { grid-template-columns: 1fr; } .source-board { position: static; max-height: none; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); } }
+    @media (max-width: 900px) { .status { grid-template-columns: repeat(2, minmax(0, 1fr)); } .toolbar { grid-template-columns: 1fr 1fr; } .toolbar .tool-button { width: 100%; } }
+    @media (max-width: 620px) { .shell { width: min(100% - 20px, 1160px); } .status, .toolbar { grid-template-columns: 1fr; } .question-head { align-items: flex-start; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell">
+      <p class="eyebrow">PDS4 CBT 복기</p>
+      <h1>2018 PDS4 형성평가</h1>
+      <p class="summary">문항마다 추출된 출처 강의를 붙였습니다. 강의 필터를 고르면 해당 범위 문제만 풀 수 있고, 선택 즉시 정답 여부가 표시됩니다.</p>
+      <div class="status" aria-live="polite">
+        <div class="metric"><span>전체 문항</span><strong id="total-count">0</strong></div>
+        <div class="metric"><span>현재 범위</span><strong id="visible-count">0</strong></div>
+        <div class="metric"><span>푼 문항</span><strong id="answered-count">0</strong></div>
+        <div class="metric"><span>정답률</span><strong id="score-rate">0%</strong></div>
+      </div>
+    </div>
+  </header>
+  <section class="toolbar-band">
+    <div class="shell toolbar">
+      <label class="control"><span>검색</span><input id="search-input" type="search" placeholder="문항, 보기, 강의명 검색" autocomplete="off" /></label>
+      <label class="control"><span>출처 강의</span><select id="source-select"></select></label>
+      <button id="toggle-unanswered" class="tool-button" type="button" aria-pressed="false">미풀이만</button>
+      <button id="show-answers" class="tool-button" type="button">정답 표시</button>
+      <button id="reset" class="tool-button primary" type="button">초기화</button>
+    </div>
+  </section>
+  <main class="shell">
+    <section class="source-board" id="source-board" aria-label="출처 강의별 필터"></section>
+    <section class="quiz-list" id="quiz-list" aria-label="퀴즈 문항"></section>
+  </main>
+  <footer>
+    <div class="shell">원본: 2018 PDS4 형성평가.pdf / 정답 표시 파일: 2018 PDS4 형성평가 답.pdf</div>
+  </footer>
+  <script>
+    const examData = {"title": "2018 PDS4 형성평가", "kind": "형성평가", "sourceFile": "2018 PDS4 형성평가.pdf", "answerFile": "2018 PDS4 형성평가 답.pdf", "notes": "", "questions": [{"id": 1, "source": "출처 미분류", "professor": "", "stem": "형성평가 문항중 문항복원 (92 ) 목 차 :: :: 법의학", "options": ["----- 의료와법", "----- 병원경영", "----- 의사소통", "----- 의료윤리", "----- 의사법규", "----- 보건관리", "----- 통합의학", "-----", "1 - [법의학] 죽음 시체현상 , ■ 다음중전신적생활반응에해당하는것을고르"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 2, "source": "출처 미분류", "professor": "", "stem": "실및안면의거인양외관이관찰되었다 이시신의 . 사망추정시각으로알맞은것을고르시오. 일", "options": ["3-5 일", "6-10 일", "11-15 알수없다 - 다음중침윤성시반이형성되는시점으로옳은"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 3, "source": "출처 미분류", "professor": "", "stem": "것을고르시오. 시간", "options": ["2-3 시간", "4-5 시간", "10 시간", "14 형사소송법제 조에따르면검시 의주"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 4, "source": "출처 미분류", "professor": "", "stem": "( ) 檢屍 체는누구인가?", "options": ["의사", "판사", "검사", "경찰 손상사 ■ 둔력에의해진피이하의연조직에좌멸과출혈"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 5, "source": "출처 미분류", "professor": "", "stem": "6 다 전신에광범위한좌상이있으며피부는창백하 . 였다 부검에서실질장기의울혈을비롯한이상은 . 발견되지않았다 사인은 . ?", "options": ["공기색전", "실혈", "원발성쇼크", "속발성쇼크 대퇴골골절이있는사망자에서손상부위의대"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 6, "source": "출처 미분류", "professor": "", "stem": ", 관찰할수있는다양한형태의손상을무엇이라고 하는가?", "options": ["방어손상", "미수손상", "저항손상", "억압손상 두부손상 ■ 다음중뇌진탕과관련이없는것은"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 7, "source": "출처 미분류", "professor": "", "stem": "?", "options": ["비가역적뇌손상", "일시적인의식소실", "구토", "서맥 다음중뇌좌상에관한설명으로옳은것은"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 8, "source": "출처 미분류", "professor": "", "stem": "?", "options": ["앉은자세에서전도시손상이더심하다.", "대개외력의방향에대해대측손상이생긴다.", "가격에의해대측충격좌상이생긴다.", "전도에의해동측충격좌상이생긴다.", "2 - 두부손상에관한다음설명중틀린것을고르"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 9, "source": "출처 미분류", "professor": "", "stem": "시오.", "options": ["봉합이개는파열골절이다.", "거미망형태의골절은분쇄골절에서보인다.", "전도에의한골절선은타격에의한골절선을넘 는다.", "모서리에전도되면함몰골절이발생할수있다. 다음골절은두개골의어느부위에외력이가"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 10, "source": "출처 미분류", "professor": "", "stem": "해져서발생하는가?", "options": ["좌측측두부", "우측측두부", "좌측두정부", "후두부 다음은어떠한두부손상인가"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 11, "source": "출처 미분류", "professor": "", "stem": "?", "options": ["급성경막외출혈", "급성경막하출혈", "급성지주막하출혈", "뇌실질내출혈 면이넓은둔체가작용하거나 넓고단단한면"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 12, "source": "출처 미분류", "professor": "", "stem": ", 에전도되었을때흔히발생하는골절은무엇인 가?", "options": ["선상골절", "함몰골절", "만입골절", "천공골절 경부 목의과신전으로인해추골동맥이"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 13, "source": "출처 미분류", "professor": "", "stem": "( ; ) 頸部 파열되어생길수있는손상은?", "options": ["급성경막외출혈", "급성경막하출혈", "급성지주막하출혈", "뇌실질내출혈 급성경막하출혈에관한다음설명중옳지않"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 14, "source": "출처 미분류", "professor": "", "stem": "은것은?", "options": ["교상정맥의파탄에의해생긴다.", "두개골골절은드물다.", "머리를세게흔들어도발생할수있다.", "잠복기가매우짧다.", "3 - 의료와법 [ ] 의료에서바라본법 ■ 주관식 의학과법학의공통점두가지를쓰"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 15, "source": "출처 미분류", "professor": "", "stem": "옳지않은것은?", "options": ["지역의료기관간협력체계구축을통한이차의료 기관의유지및발전", "정보기술활용을통한의료기관간정보공유를 통한환자관리", "환자증상중심의근거중심의학발전", "지역주민의자가건강및질병관리장려", "의료기관의시설및설비의개선에대한관심 증가 - 의료분야에서빅데이터활용의효과는"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 16, "source": "출처 미분류", "professor": "", "stem": ", 여하는신경전달물질은?", "options": ["노르에피네프린", "아세틸콜린", "도파민", "가바 년전부터고혈압과고지혈증으로치료를"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 17, "source": "출처 미분류", "professor": "", "stem": "10 받고있는 세남자가내원하였다 차례금연을 . 2 시도한적이있으나체중이증가하여다시피우게 되었으며 한달전당뇨병을진단받은이후다시 , 금연을결심하였다 이환자에게사용할수있는 . 금연전략은?", "options": ["반복적권유", "금연계획하기", "방해요인알기", "주기적상담", "스트레스상담 세남학생이최근흡연으로적발되어금연"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 18, "source": "출처 미분류", "professor": "", "stem": "15 클리닉으로의뢰되었다 매일 개비를친구들과 . 2~3 함께피우며 아직금연의필요성과흡연의폐해를 , 느끼지못하고있다 이환자에게사용할수있는 . 금연전략은?", "options": ["반복적권유", "금연계획하기", "방해요인알기", "주기적상담", "스트레스상담 스트레스관리황환식 ( ) ■ 기분이어때요 는정서적문제에대한약식"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 19, "source": "출처 미분류", "professor": "", "stem": "“ ?” 스크리닝기법인 에서무엇에해당하는가 BATHE ?", "options": ["B", "A", "T", "H", "E 다음은스트레스주기이다 빈칸에알맞은말"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 20, "source": "출처 미분류", "professor": "", "stem": "(SRRS) 것부터낮은것순으로나열한것은?", "options": ["자신의질병 결혼 이혼 사업파산 해고 > > > >", "이혼 자신의질병 결혼 해고 사업파산 > > > >", "결혼 이혼 해고 자신의질병 사업파산 > > > >", "사업파산 이혼 자신의질병 결혼 해고 > > > > anxiety physical symptoms reduced performance", "5 - 의료윤리 [ ] 이해상충 ■ 이해상충이란전문직의일차적이해관심사가"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 21, "source": "출처 미분류", "professor": "", "stem": "( 나진료비를지급하는기관이나단체를속인경우 만를위반하여면허취소를당한자는얼마가지난 ) 후면허를재교부받을수있는가? 년", "options": ["1 년", "2 년", "3 년", "4 년", "5 보건의료정책심의위원회구성으로알맞은사람"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 22, "source": "출처 미분류", "professor": "", "stem": "를저지른자에대해몇회범위내에서시험을 제한할수있는가? 회", "options": ["1 회", "2 회", "3 회", "4 회", "5 의료기관의장은의료기관인증결과에대한이"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 23, "source": "출처 미분류", "professor": "", "stem": "WHO . 에들어갈말로알맞은것을고르시오. Health is a state of complete ( ), mental and social well-being and not merely the absence of disease or infirmity", "options": ["spiritual", "physical", "technical", "psychological 보건의료의사회경제적특징으로맞는것은"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 24, "source": "출처 미분류", "professor": "", "stem": "로알맞은것은? 비적시성 안정성 효율성 - , , 효과성 안정성 형평성 - , ,", "options": ["적시성 변이성 효율성 , ,", "효율성 안정성 변이성 , , 미래의학의특징으로맞는것만묶은것은"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 25, "source": "출처 미분류", "professor": "", "stem": "? 개인맞춤형 예방적 예측적 - , ,", "options": ["예방적 대중적 예측적 , ,", "대중적 예측적 치료적 , ,", "개인맞춤형 대중적 예방적 , ,", "개인맞춤형 치료적 예측적 , , 정답없음", "8 - 보건의료정책 ■ 다음그림은보건의료정책의틀을모식화한것"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": true, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원문에 정답 없음 또는 문항 삭제 표시가 있어 채점 제외/검토 필요 문항으로 표시했습니다. 화면 표시를 위한 임시 후보: 1번. 원본 기준으로 최종 처리하세요."}, {"id": 26, "source": "출처 미분류", "professor": "", "stem": "? 을일으키지않는다", "options": ["Inflammation . 한약제를사용한다", "Pharmacological, active . 이나 에주입한다", "Tendon ligament . 주로 에이용된다 - neurologic pain .", "10 - 동종요법한승훈 ( ) ■ 다음중동종요법희석액의 와같은농도를"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 27, "source": "출처 미분류", "professor": "", "stem": "D6 뜻하는것은무엇인가?", "options": ["C1", "C2", "C3", "C4", "C5 다음중동종요법원액성분제조의단계가아닌"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 28, "source": "출처 미분류", "professor": "", "stem": "?", "options": ["Low sodium, Low potassium", "High sodium, High potassium", "High sodium, Low potassium", "Low sodium, High potassium", "Low sodium, High calcium 주관식 다음섭생법을사용하는자연의학은"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}, {"id": 29, "source": "출처 미분류", "professor": "", "stem": "( ) 무엇인가? 해뜨기전에일어난다 태양광선을바라본다 - . . 눈을뜬뒤방광과창자를비운다 - . 식사는천천히한다 - . 육체에신선한감각을주기위해서매일목 - 욕을한다. 아침또는저녁에 가지호흡훈련을하면 - 몸과마음이신선해진다. 시이전에아침을먹는다 식사전후에손", "options": ["8 . 을씻는다. 식사뒤 분간은가벼운산보를한다 음 - . 식에대해느껴가면서식사를하고 식사중에 , 는말을하지않는다 매일손가락에참기름을 . 묻혀잇몸을마사지한다 체내의독소를감소시 . 키는방법으로일주일에하루는단식을한다. 밤 시이전에잔다 - . ( ) 주관식 다음치료법을사용하는자연의학은"], "answers": [1], "uncertain": false, "provisional": false, "disputed": false, "deleted": false, "note": ""}, {"id": 30, "source": "출처 미분류", "professor": "", "stem": "은? 고시형원료는건강기능식품공전에제조기준 - 과규격이등재되어있는기능성원료이다. 개별인정형원료는식품의약품안전처장이개별 - 적으로인정한원료이다. 제품에질병의예방및처치효과를표기해야 - 한다.", "options": ["원료와동일한기능성을표기해야한다.", "동물과인체시험을통해효과를입증해야한다. 아유르베다 니시요법"], "answers": [1], "uncertain": true, "provisional": true, "disputed": false, "deleted": false, "note": "원본에서 정답 표시를 자동으로 확인하지 못했습니다. 원본에서 정답 표시를 자동으로 확인하지 못해 임시 정답 후보를 넣었습니다. 임시 후보: 1번. 반드시 원본/강의자료로 검토하세요."}]};
+    const questions = examData.questions || [];
+    questions.forEach(question => {
+      question.shuffledOptions = shuffleOptions(question.options.map((text, index) => ({
+        text,
+        originalNumber: index + 1,
+        correct: question.answers.includes(index + 1)
+      })));
+    });
+    const state = { source: "전체", query: "", onlyUnanswered: false, selections: new Map(), showAnswers: false };
+    const els = {
+      totalCount: document.querySelector("#total-count"),
+      visibleCount: document.querySelector("#visible-count"),
+      answeredCount: document.querySelector("#answered-count"),
+      scoreRate: document.querySelector("#score-rate"),
+      searchInput: document.querySelector("#search-input"),
+      sourceSelect: document.querySelector("#source-select"),
+      sourceBoard: document.querySelector("#source-board"),
+      quizList: document.querySelector("#quiz-list"),
+      toggleUnanswered: document.querySelector("#toggle-unanswered"),
+      showAnswers: document.querySelector("#show-answers"),
+      reset: document.querySelector("#reset")
+    };
+    const numberMarks = ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"];
+    function init() { els.totalCount.textContent = String(questions.length); renderSourceControls(); bindEvents(); render(); }
+    function bindEvents() {
+      els.searchInput.addEventListener("input", event => { state.query = event.target.value.trim(); render(); });
+      els.sourceSelect.addEventListener("change", event => { state.source = event.target.value; render(); });
+      els.toggleUnanswered.addEventListener("click", () => { state.onlyUnanswered = !state.onlyUnanswered; els.toggleUnanswered.setAttribute("aria-pressed", String(state.onlyUnanswered)); els.toggleUnanswered.textContent = state.onlyUnanswered ? "전체 보기" : "미풀이만"; render(); });
+      els.showAnswers.addEventListener("click", () => { state.showAnswers = !state.showAnswers; els.showAnswers.textContent = state.showAnswers ? "정답 숨김" : "정답 표시"; render(); });
+      els.reset.addEventListener("click", () => { state.selections.clear(); state.showAnswers = false; els.showAnswers.textContent = "정답 표시"; render(); });
+    }
+    function renderSourceControls() {
+      const sources = ["전체", ...Array.from(new Set(questions.map(item => item.source || "출처 미분류")))];
+      els.sourceSelect.replaceChildren(...sources.map(source => { const option = document.createElement("option"); option.value = source; option.textContent = source === "전체" ? "전체 강의" : source; return option; }));
+    }
+    function render() { const visible = getVisibleQuestions(); els.visibleCount.textContent = String(visible.length); renderStats(); renderSourceBoard(); renderQuestions(visible); }
+    function renderStats() { const answered = questions.filter(question => state.selections.has(question.id)); const scored = answered.filter(question => !question.uncertain); const correct = scored.filter(question => isCorrect(question, state.selections.get(question.id))).length; els.answeredCount.textContent = String(answered.length); els.scoreRate.textContent = scored.length ? `${Math.round((correct / scored.length) * 100)}%` : "0%"; }
+    function getVisibleQuestions() {
+      const normalizedQuery = normalize(state.query);
+      return questions.filter(question => {
+        const source = question.source || "출처 미분류";
+        const sourceOk = state.source === "전체" || source === state.source;
+        const unansweredOk = !state.onlyUnanswered || !state.selections.has(question.id);
+        const queryOk = !normalizedQuery || normalize([question.stem, source, question.professor, question.options.join(" ")].join(" ")).includes(normalizedQuery);
+        return sourceOk && unansweredOk && queryOk;
+      });
+    }
+    function renderSourceBoard() {
+      const grouped = questions.reduce((map, question) => { const source = question.source || "출처 미분류"; map.set(source, (map.get(source) || 0) + 1); return map; }, new Map());
+      els.sourceBoard.replaceChildren(createSourceButton("전체", questions.length), ...Array.from(grouped, ([source, count]) => createSourceButton(source, count)));
+    }
+    function createSourceButton(source, count) {
+      const button = document.createElement("button"); button.type = "button"; button.className = "source-chip"; button.setAttribute("aria-pressed", String(state.source === source));
+      button.innerHTML = `<strong>${escapeHtml(source === "전체" ? "전체 강의" : source)}</strong><span>${count}문항</span>`;
+      button.addEventListener("click", () => { state.source = source; els.sourceSelect.value = source; render(); });
+      return button;
+    }
+    function renderQuestions(items) {
+      if (!items.length) { els.quizList.innerHTML = `<div class="empty">현재 조건에 맞는 문항이 없습니다.</div>`; return; }
+      els.quizList.replaceChildren(...items.map(createQuestionCard));
+    }
+    function createQuestionCard(question) {
+      const selected = state.selections.get(question.id); const answered = Number.isInteger(selected); const correct = answered && isCorrect(question, selected); const reveal = state.showAnswers || answered;
+      const card = document.createElement("article"); card.className = "question-card"; if (answered) card.classList.add(correct ? "correct" : "incorrect");
+      const badges = [`<span class="badge source">${escapeHtml(question.source || "출처 미분류")}</span>`]; if (question.professor) badges.push(`<span class="badge">${escapeHtml(question.professor)}</span>`); if (question.provisional) badges.push(`<span class="badge warning">임시 정답</span>`); if (question.uncertain) badges.push(`<span class="badge warning">검토 필요</span>`);
+      card.innerHTML = `<div class="question-head"><span class="q-number">Q${question.id}</span><div class="badges">${badges.join("")}</div></div><div class="question-body"><p class="stem">${escapeHtml(question.stem)}</p><div class="options"></div><div class="feedback"></div></div>`;
+      const optionWrap = card.querySelector(".options");
+      optionWrap.replaceChildren(...question.shuffledOptions.map((option, index) => {
+        const isSelected = selected === option.originalNumber; const isAnswer = option.correct; const button = document.createElement("button"); button.type = "button"; button.className = "option";
+        if (isSelected) button.classList.add("selected"); if (reveal && isAnswer) button.classList.add("answer"); if (answered && isSelected && !isAnswer) button.classList.add("wrong");
+        button.innerHTML = `<span class="mark">${numberMarks[index] || String(index + 1)}</span><span>${escapeHtml(option.text)}</span>`;
+        button.addEventListener("click", () => { state.selections.set(question.id, option.originalNumber); render(); document.querySelector(`[data-question-id="${question.id}"]`)?.scrollIntoView({ block: "nearest" }); });
+        return button;
+      }));
+      card.dataset.questionId = String(question.id);
+      const feedback = card.querySelector(".feedback");
+      if (reveal) {
+        const answerText = question.shuffledOptions.map((option, index) => ({ option, index })).filter(item => item.option.correct).map(item => `${numberMarks[item.index] || String(item.index + 1)} ${item.option.text}`).join(" / ");
+        const stateLabel = question.uncertain ? (answered ? (correct ? "임시 후보와 일치" : "임시 후보와 다름") : "임시 정답 후보") : (answered ? (correct ? "정답" : "오답") : "정답");
+        const feedbackClass = question.uncertain ? "pending" : (answered ? (correct ? "correct" : "incorrect") : "pending");
+        feedback.className = `feedback visible ${feedbackClass}`;
+        feedback.innerHTML = `<strong>${stateLabel}</strong><div>${answerText ? `정답 후보: ${escapeHtml(answerText)}` : "정답 표시를 자동으로 확인하지 못했습니다."}</div>${question.note ? `<div>${escapeHtml(question.note)}</div>` : ""}`;
+      }
+      return card;
+    }
+    function isCorrect(question, selected) { return question.answers.includes(selected); }
+    function shuffleOptions(options) { const items = [...options]; for (let index = items.length - 1; index > 0; index -= 1) { const swapIndex = Math.floor(Math.random() * (index + 1)); [items[index], items[swapIndex]] = [items[swapIndex], items[index]]; } return items; }
+    function normalize(value) { return String(value || "").toLowerCase().replace(/\s+/g, " ").trim(); }
+    function escapeHtml(value) { return String(value || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"); }
+    init();
+  </script>
+</body>
+</html>

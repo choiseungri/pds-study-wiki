@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2025 PDS4 총괄평가 퀴즈</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f5f8;
+      --panel: #ffffff;
+      --ink: #182230;
+      --muted: #667085;
+      --line: #d6dce6;
+      --blue: #2563eb;
+      --blue-soft: #eaf1ff;
+      --green: #07875f;
+      --green-soft: #e8f7f0;
+      --red: #c23b3b;
+      --red-soft: #fff0f0;
+      --amber: #9a6700;
+      --amber-soft: #fff7dd;
+      --navy: #111827;
+      --shadow: 0 18px 45px rgba(17, 24, 39, 0.08);
+      --soft-shadow: 0 8px 22px rgba(17, 24, 39, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 20% -10%, rgba(37, 99, 235, 0.12), transparent 34%),
+        linear-gradient(180deg, #f8fafc 0%, var(--bg) 260px);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+      line-height: 1.55;
+    }
+
+    button,
+    select {
+      font: inherit;
+    }
+
+    .shell {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 38px 0 24px;
+      background: rgba(255, 255, 255, 0.78);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .topline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 0.86rem;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      letter-spacing: 0;
+      line-height: 1.15;
+      color: var(--navy);
+    }
+
+    .summary {
+      max-width: 760px;
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+
+    .status {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .metric {
+      min-height: 92px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 1.65rem;
+      line-height: 1.1;
+      color: var(--navy);
+    }
+
+    .toolbar-band {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 10px 0;
+      background: rgba(243, 245, 248, 0.92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(220px, 1.3fr) minmax(180px, 0.8fr) auto auto auto;
+      gap: 8px;
+      align-items: center;
+      padding: 8px;
+      border: 1px solid rgba(214, 220, 230, 0.9);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .control {
+      display: grid;
+      gap: 5px;
+    }
+
+    .control span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    input[type="search"],
+    select {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #ffffff;
+      color: var(--ink);
+      padding: 0 12px;
+      outline: none;
+    }
+
+    input[type="search"]:focus,
+    select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(47, 111, 235, 0.14);
+    }
+
+    .tool-button {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #ffffff;
+      color: var(--ink);
+      padding: 0 14px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .tool-button.primary {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .tool-button:hover {
+      border-color: var(--blue);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+      padding: 24px 0 48px;
+    }
+
+    .source-board {
+      position: sticky;
+      top: 92px;
+      display: grid;
+      gap: 8px;
+      max-height: calc(100vh - 112px);
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .source-chip {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 12px;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+    }
+
+    .source-chip:hover {
+      border-color: rgba(37, 99, 235, 0.55);
+      transform: translateY(-1px);
+    }
+
+    .source-chip[aria-pressed="true"] {
+      border-color: var(--blue);
+      background: var(--blue-soft);
+      box-shadow: inset 3px 0 0 var(--blue);
+    }
+
+    .source-chip strong {
+      display: block;
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+
+    .source-chip span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .quiz-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .question-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .question-card.correct {
+      border-color: rgba(15, 138, 95, 0.55);
+    }
+
+    .question-card.incorrect {
+      border-color: rgba(196, 61, 61, 0.55);
+    }
+
+    .question-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 16px;
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .q-number {
+      display: inline-grid;
+      place-items: center;
+      min-width: 42px;
+      height: 30px;
+      border-radius: 999px;
+      background: var(--navy);
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      border-radius: 999px;
+      padding: 0 9px;
+      background: #eef2f7;
+      color: #34435a;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .badge.source {
+      background: var(--blue-soft);
+      color: #174ea6;
+    }
+
+    .badge.warning {
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+
+    .question-body {
+      padding: 18px;
+    }
+
+    .stem {
+      margin: 0 0 16px;
+      white-space: pre-line;
+      font-weight: 650;
+      color: #202b3c;
+    }
+
+    .options {
+      display: grid;
+      gap: 9px;
+    }
+
+    .option {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 11px;
+      align-items: start;
+      width: 100%;
+      min-height: 50px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 11px 13px;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+    }
+
+    .option:hover {
+      border-color: var(--blue);
+      background: #fbfdff;
+      transform: translateY(-1px);
+    }
+
+    .option.selected {
+      border-color: var(--blue);
+      background: var(--blue-soft);
+    }
+
+    .option.answer {
+      border-color: var(--green);
+      background: var(--green-soft);
+    }
+
+    .option.wrong {
+      border-color: var(--red);
+      background: var(--red-soft);
+    }
+
+    .mark {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: #eef2f7;
+      font-weight: 800;
+      color: #364152;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 14px;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 0.92rem;
+    }
+
+    .feedback.visible {
+      display: block;
+    }
+
+    .feedback.correct {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .feedback.incorrect {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .feedback.pending {
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+
+    .empty {
+      padding: 28px;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer {
+      padding: 24px 0 36px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      background: #ffffff;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .status {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .toolbar .tool-button {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .shell {
+        width: min(100% - 20px, 1160px);
+      }
+
+      .status,
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .question-head {
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 980px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      .source-board {
+        position: static;
+        max-height: none;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell">
+      <div class="topline">
+        <div>
+          <p class="eyebrow">PDS4 CBT 복기</p>
+          <h1>2025학년도 환자.의사.사회4 총괄평가</h1>
+        </div>
+      </div>
+      <p class="summary">
+        문항마다 PDF 섹션 기준의 출처 강의를 붙였습니다. 강의 필터를 고르면 해당 범위 문제만 풀 수 있고, 선택 즉시 정답 여부가 표시됩니다.
+      </p>
+      <div class="status" aria-live="polite">
+        <div class="metric">
+          <span>전체 문항</span>
+          <strong id="total-count">0</strong>
+        </div>
+        <div class="metric">
+          <span>현재 범위</span>
+          <strong id="visible-count">0</strong>
+        </div>
+        <div class="metric">
+          <span>푼 문항</span>
+          <strong id="answered-count">0</strong>
+        </div>
+        <div class="metric">
+          <span>정답률</span>
+          <strong id="score-rate">0%</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="toolbar-band">
+    <div class="shell toolbar">
+      <label class="control">
+        <span>검색</span>
+        <input id="search-input" type="search" placeholder="문항, 보기, 강의명 검색" autocomplete="off" />
+      </label>
+      <label class="control">
+        <span>출처 강의</span>
+        <select id="source-select"></select>
+      </label>
+      <button id="toggle-unanswered" class="tool-button" type="button" aria-pressed="false">미풀이만</button>
+      <button id="show-answers" class="tool-button" type="button">정답 표시</button>
+      <button id="reset" class="tool-button primary" type="button">초기화</button>
+    </div>
+  </section>
+
+  <main class="shell">
+    <section class="source-board" id="source-board" aria-label="출처 강의별 필터"></section>
+    <section class="quiz-list" id="quiz-list" aria-label="퀴즈 문항"></section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      원본: Y/2025학년도 환자.의사.사회4 총괄평가 (251231).pdf. PDF에 별도 정답표가 없어 정답은 복기 문항 내용과 강의 주제 기준으로 입력했습니다.
+    </div>
+  </footer>
+
+  <script>
+    const questions = [
+      {
+        id: 1,
+        source: "보건관리: 임상예방의학과 건강진단",
+        professor: "신영전",
+        stem: "금연 의지가 없는 환자에 대한 동기부여 면담 기법 중, 다음 설명과 관련이 있는 것은?\n\n금연하였을 시 얻을 수 있는 이득과 장점에 대해 알려준다.",
+        options: ["관련성", "위험성", "보상", "장애물", "반복"],
+        answers: [3],
+        note: "5R 동기부여 면담의 Rewards에 해당합니다."
+      },
+      {
+        id: 2,
+        source: "보건관리: 국제보건",
+        professor: "신영전",
+        stem: "‘원조효과 제고에 관한 파리선언(2005)’에서 발표된 내용 중 다음 설명에 해당하는 것은?\n\n개발원조의 공여국 및 공여기관들이 수혜국의 국가적 전략, 제도 및 행정절차를 충분히 존중하여 그와 일치하는 방향으로 사업을 진행할 것.",
+        options: ["수혜국의 주도성 (Ownership)", "수혜국의 일치성 (Alignment)", "원조 공여자 간 협력 (Harmonization)", "성과지향적 관리 (Managing for results)", "상호책무성 (Mutual accountability)"],
+        answers: [2],
+        note: "공여자가 수혜국의 전략과 절차에 맞추는 원칙은 Alignment입니다."
+      },
+      {
+        id: 3,
+        source: "보건관리: 건강증진과 보건교육",
+        professor: "신영전",
+        stem: "다음이 설명하는 내용을 강조한 선언은 무엇인가?\n\n삶의 자원으로서의 건강의 가치\n건강 증진을 위한 노력과 부문 간 협조를 강조\n보건의료서비스의 방향을 재정립",
+        options: ["서울 선언", "오타와 선언", "방콕 선언", "멜버른 선언", "리오 선언"],
+        answers: [2],
+        note: "건강을 삶의 자원으로 보고 건강증진 전략을 제시한 선언은 오타와 헌장입니다."
+      },
+      {
+        id: 4,
+        source: "보건관리: 건강증진과 보건교육",
+        professor: "신영전",
+        stem: "보건 교육의 성과를 평가하는 측정항목이 알맞게 구성된 것은?",
+        options: ["행동의 빈도-행동의 지속 정도-행동의 신속성-바람직한 행위의 범위", "행위의 동기-행위의 지속 정도-행동의 신속성-바람직한 행위의 범위", "행위의 기술-행위의 지속 정도-행동의 신속성-바람직한 행위의 범위", "행위의 동기-행위의 기술-행위의 지속 정도-행위의 신속성"],
+        answers: [1],
+        note: "PDF에는 정답표가 없어 강의 내용 확인이 필요한 문항입니다."
+      },
+      {
+        id: 5,
+        source: "보건관리: 건강증진과 보건교육",
+        professor: "신영전",
+        stem: "26세 남성 홍길동씨의 BMI는 24였다. 홍길동씨의 체중으로 알맞은 것은?",
+        options: ["위험체중", "정상체중", "비만1기", "비만2기", "저체중"],
+        answers: [1],
+        note: "국내 BMI 분류에서 23.0-24.9는 비만 전단계/위험체중으로 분류됩니다."
+      },
+      {
+        id: 6,
+        source: "통합의학: 보완통합의학의 개요",
+        professor: "김미정",
+        stem: "고령화에 따른 만성질환의 일반적 특성이 아닌 것은?",
+        options: ["원인을 명확하게 알기 때문에 치료가 가능하다.", "복합적이고 다차원적이다.", "장기 치료 시 비용이 많이 든다.", "치료보다는 치유를 목표로 한다."],
+        answers: [1],
+        note: "만성질환은 원인이 단일하고 명확하다고 보기 어렵습니다."
+      },
+      {
+        id: 7,
+        source: "통합의학: 보완통합의학의 개요",
+        professor: "김미정",
+        stem: "통합의학의 발달배경과 가장 거리가 먼 것은?",
+        options: ["서양의학의 치료 중심적인 의학의 증가", "서양의학의 진료과목 세분화", "서양의학이 과학적이고 체계적임", "급속한 노령화로 인한 만성질환의 증가", "전통의학, 보완대체의학에 대한 검증요구 증가"],
+        answers: [3],
+        note: "통합의학의 배경은 세분화, 만성질환 증가, 보완요법 검증 요구 등과 관련됩니다."
+      },
+      {
+        id: 8,
+        source: "통합의학: 보완통합의학의 개요",
+        professor: "김미정",
+        stem: "통합의학에 대해 가장 올바른 설명은?",
+        options: ["통합의학은 안정성과 효과성 입증이 된 과학적 치료법을 기반으로 한다.", "암 환자가 치료를 받지 않고 식이요법을 하는 것은 보완요법이다.", "수술 후 통증에 대해서 아로마테라피를 진행하는 것은 대체요법이다.", "가장 효과가 증명된 분야는 한약이다.", "대체요법은 안전성과 효과성을 입증받은 분야이다."],
+        answers: [1],
+        note: "통합의학은 근거와 안전성이 확인된 보완요법을 표준치료와 함께 통합합니다."
+      },
+      {
+        id: 9,
+        source: "통합의학: 보완통합의학의 개요",
+        professor: "김미정",
+        stem: "CAM 중에서 효과가 입증되어서 전 세계적으로 가장 널리 쓰이는 것은?",
+        options: ["Acupuncture", "Aromatherapy", "Meditation", "Chiropractic"],
+        answers: [1],
+        note: "침술은 CAM 중 근거와 활용도가 높은 축에 속합니다."
+      },
+      {
+        id: 10,
+        source: "통합의학: IMS와 증식치료",
+        professor: "김미정",
+        stem: "IMS의 이론적 배경에 대한 설명으로 틀린 것은?",
+        options: ["Neuropathic pain model", "Denervation supersensitivity model", "Segmental spinal nerve dysfunction model", "Radiculopathic model", "Nociceptive pain model"],
+        answers: [5],
+        note: "IMS는 신경병성 통증과 탈신경 과민성 모델에 기반합니다."
+      },
+      {
+        id: 11,
+        source: "통합의학: IMS와 증식치료",
+        professor: "김미정",
+        stem: "Prolotherapy에 대해 옳은 설명은?",
+        options: ["Tendon 및 Ligament에 대해 사용한다.", "Pharmacologic 또는 active한 약제를 사용한다.", "염증 반응이 일어나지 않는다.", "근골격 통증보다 신경인성 통증에 사용한다.", "acute pain에 사용한다."],
+        answers: [1],
+        note: "증식치료는 힘줄과 인대 부위의 만성 근골격 통증에 주로 쓰입니다."
+      },
+      {
+        id: 12,
+        source: "통합의학: IMS와 증식치료",
+        professor: "김미정",
+        stem: "Neuropathic pain에 대한 설명으로 옳은 것은?",
+        options: ["pain에 대한 summation이 발생한다.", "조직 손상에 의해 통증이 발생한다.", "Mild stimuli로는 통증이 발생하지 않는다.", "Ongoing tissue damage 없이 통증이 발생한다.", "손상 후 즉각적으로 통증이 발생한다."],
+        answers: [4],
+        note: "신경병성 통증은 지속적인 조직 손상이 없어도 발생할 수 있습니다."
+      },
+      {
+        id: 13,
+        source: "통합의학: 자연의학",
+        professor: "박시복",
+        stem: "다음 섭생법을 사용하는 자연의학은 무엇인가?\n\n아침 8시 전에 일어난다. 식사는 천천히 하고, 음식에 대해 느껴 가면서 식사를 하고, 식사 중에는 말을 하지 않는다. 매일 손가락에 참기름을 묻혀 잇몸을 마사지한다. 체내의 독소를 감소시키는 방법으로 일주일에 하루는 단식을 한다.",
+        options: ["아유르베다", "유나니", "거슨요법", "니시의학", "침술요법"],
+        answers: [1],
+        note: "참기름 마사지와 식이/생활 섭생은 아유르베다 설명과 맞습니다."
+      },
+      {
+        id: 14,
+        source: "통합의학: 자연의학",
+        professor: "박시복",
+        stem: "유나니에서 다혈질은 어떤 체질인가?",
+        options: ["뜨겁고 습한 체질", "뜨겁고 건조한 체질", "차갑고 습한 체질", "차갑고 건조한 체질", "습하고 건조한 체질"],
+        answers: [1],
+        note: "유나니의 다혈질은 hot and moist에 해당합니다."
+      },
+      {
+        id: 15,
+        source: "통합의학: 자연의학",
+        professor: "박시복",
+        stem: "아래 영상은 어떤 자연의학에서 시행하는 운동인가?\n\n(사진을 넣었지만 실제로는 멀티미디어 문항이었습니다.)",
+        options: ["아유르베다", "유나니", "거슨요법", "니시의학", "침술요법"],
+        answers: [4],
+        uncertain: true,
+        note: "원본 PDF에 영상/사진이 없어 정답 재검토가 필요합니다. 자연의학 운동 문항이라 니시의학으로 임시 입력했습니다."
+      },
+      {
+        id: 16,
+        source: "통합의학: 자연의학",
+        professor: "박시복",
+        stem: "하루 13잔의 야채주스를 통한 초고용량의 야채요법을 통해 칼륨을 첨가 공급하여 세포 활성을 방해하는 나트륨의 강제배출 유도를 사용하는 자연의학은?",
+        options: ["아유르베다", "유나니", "거슨요법", "니시의학", "침술요법"],
+        answers: [3],
+        note: "고용량 야채주스와 칼륨 보충은 거슨요법의 특징입니다."
+      },
+      {
+        id: 17,
+        source: "통합의학: 에너지의학",
+        professor: "장성호",
+        stem: "전기치유, 능영아호(專氣致柔, 能嬰兒乎)?를 말하며 “기를 다스려 부드럽게 하여 진실로 어린아이와 같이 될 수 있는가?”라고 말한 이는 누구인가?",
+        options: ["장자", "공자", "노자", "열자", "화타"],
+        answers: [3],
+        note: "해당 구절은 도덕경의 노자 문맥입니다."
+      },
+      {
+        id: 18,
+        source: "통합의학: 에너지의학",
+        professor: "장성호",
+        stem: "Larry Dossey가 주장하는 Distant healing의 작동 원리는?",
+        options: ["플라시보", "답 없음", "성령에 의한 연결", "집단적인 치료", "간절히 기도"],
+        answers: [2],
+        uncertain: true,
+        note: "Larry Dossey의 설명은 nonlocal mind 쪽에 가까워 제시 보기 중 직접 대응 항목이 없어 ‘답 없음’으로 임시 입력했습니다."
+      },
+      {
+        id: 19,
+        source: "통합의학: 에너지의학",
+        professor: "장성호",
+        stem: "에너지의학에서 다루는 에너지 중 측정 불가능한 에너지는?",
+        options: ["Radiowave", "X-ray", "Chakra", "빛", "음파"],
+        answers: [3],
+        note: "Chakra는 측정 가능한 물리 에너지라기보다 putative energy field로 분류됩니다."
+      },
+      {
+        id: 20,
+        source: "통합의학: 에너지의학",
+        professor: "장성호",
+        stem: "측정 불가능한 에너지의 특징으로 옳은 것은?",
+        options: ["환자와 몸의 균형을 맞춘다.", "항상성을 회복한다.", "파동과 공명을 이용하여 인체를 치유한다.", "인간 에너지 장에 직접적으로 작용한다.", "근거중심의학이다."],
+        answers: [4],
+        note: "측정 불가능 에너지는 human energy field에 작용한다는 설명으로 다뤄집니다."
+      },
+      {
+        id: 21,
+        source: "의사법규: 국민건강보험법",
+        professor: "신영전",
+        stem: "국민건강보험법의 시행령에 따르면 보험급여의 피부양자에 해당하게 되는 때는?",
+        options: ["사망한 날", "국적을 잃은 날", "의료급여의 수급권자가 된 다음 날", "직장가입자가 자격을 상실한 날", "직장가입자의 피부양자의 자격을 취득한 날 다음 날"],
+        answers: [4, 5],
+        disputed: true,
+        note: "PDF 원문에 ‘답 논란 ④⑤’가 표시되어 있어 둘 다 정답 처리했습니다. 현행 시행규칙상 피부양자 자격 상실은 직장가입자가 자격을 상실한 날, 또는 다른 피부양자 자격을 취득한 날 등으로 규정됩니다."
+      },
+      {
+        id: 22,
+        source: "의사법규: 국민건강보험법",
+        professor: "신영전",
+        stem: "국민건강보험법에 따르면 보험급여 자격의 변동시기로 올바른 것은?",
+        options: ["직장가입자가 다른 적용대상사업장의 사용자로 된 날", "직장가입자인 근로자의 사용관계가 끝난 날", "지역가입자가 공무원으로 사용된 다음 날", "지역가입자가 교직원으로 사용된 다음 날", "지역가입자가 다른 세대에 전입한 날의 다음 날"],
+        answers: [1],
+        note: "직장가입자가 다른 적용대상사업장의 사용자 또는 근로자 등이 된 날은 자격 변동일입니다."
+      },
+      {
+        id: 23,
+        source: "의사법규: 국민건강보험법",
+        professor: "신영전",
+        stem: "국민건강보험법에 따르면 직장가입자 또는 지역가입자가 자격을 상실하는 시점으로 옳은 것은?",
+        options: ["국적을 잃은 날의 다음 날", "사망한 날", "국내에 거주하지 않게 된 날", "직장가입자의 피부양자가 된 다음 날", "수급권자가 된 다음 날"],
+        answers: [1],
+        note: "가입자는 국적을 잃은 날의 다음 날 자격을 상실합니다."
+      },
+      {
+        id: 24,
+        source: "의사법규: 국민건강보험법",
+        professor: "신영전",
+        stem: "국민건강보험법에 따르면 사업장의 사용자 중 폐업한 사람은 며칠 내에 보험자에게 신고해야 하나?",
+        options: ["즉시", "24시간", "72시간", "14일"],
+        answers: [4],
+        note: "자격 변동 및 상실 신고의 기본 기한은 14일입니다."
+      }
+    ];
+
+    questions.forEach(question => {
+      question.shuffledOptions = shuffleOptions(question.options.map((text, index) => ({
+        text,
+        originalNumber: index + 1,
+        correct: question.answers.includes(index + 1)
+      })));
+    });
+
+    const state = {
+      source: "전체",
+      query: "",
+      onlyUnanswered: false,
+      selections: new Map(),
+      showAnswers: false
+    };
+
+    const els = {
+      totalCount: document.querySelector("#total-count"),
+      visibleCount: document.querySelector("#visible-count"),
+      answeredCount: document.querySelector("#answered-count"),
+      scoreRate: document.querySelector("#score-rate"),
+      searchInput: document.querySelector("#search-input"),
+      sourceSelect: document.querySelector("#source-select"),
+      sourceBoard: document.querySelector("#source-board"),
+      quizList: document.querySelector("#quiz-list"),
+      toggleUnanswered: document.querySelector("#toggle-unanswered"),
+      showAnswers: document.querySelector("#show-answers"),
+      reset: document.querySelector("#reset")
+    };
+
+    const numberMarks = ["①", "②", "③", "④", "⑤", "⑥"];
+
+    function init() {
+      els.totalCount.textContent = String(questions.length);
+      renderSourceControls();
+      bindEvents();
+      render();
+    }
+
+    function bindEvents() {
+      els.searchInput.addEventListener("input", event => {
+        state.query = event.target.value.trim();
+        render();
+      });
+
+      els.sourceSelect.addEventListener("change", event => {
+        state.source = event.target.value;
+        render();
+      });
+
+      els.toggleUnanswered.addEventListener("click", () => {
+        state.onlyUnanswered = !state.onlyUnanswered;
+        els.toggleUnanswered.setAttribute("aria-pressed", String(state.onlyUnanswered));
+        els.toggleUnanswered.textContent = state.onlyUnanswered ? "전체 보기" : "미풀이만";
+        render();
+      });
+
+      els.showAnswers.addEventListener("click", () => {
+        state.showAnswers = !state.showAnswers;
+        els.showAnswers.textContent = state.showAnswers ? "정답 숨김" : "정답 표시";
+        render();
+      });
+
+      els.reset.addEventListener("click", () => {
+        state.selections.clear();
+        state.showAnswers = false;
+        els.showAnswers.textContent = "정답 표시";
+        render();
+      });
+    }
+
+    function renderSourceControls() {
+      const sources = ["전체", ...Array.from(new Set(questions.map(item => item.source)))];
+      els.sourceSelect.replaceChildren(...sources.map(source => {
+        const option = document.createElement("option");
+        option.value = source;
+        option.textContent = source === "전체" ? "전체 강의" : source;
+        return option;
+      }));
+    }
+
+    function render() {
+      const visible = getVisibleQuestions();
+      els.visibleCount.textContent = String(visible.length);
+      renderStats();
+      renderSourceBoard();
+      renderQuestions(visible);
+    }
+
+    function renderStats() {
+      const answered = questions.filter(question => state.selections.has(question.id));
+      const correct = answered.filter(question => isCorrect(question, state.selections.get(question.id))).length;
+      els.answeredCount.textContent = String(answered.length);
+      els.scoreRate.textContent = answered.length ? `${Math.round((correct / answered.length) * 100)}%` : "0%";
+    }
+
+    function getVisibleQuestions() {
+      const normalizedQuery = normalize(state.query);
+      return questions.filter(question => {
+        const sourceOk = state.source === "전체" || question.source === state.source;
+        const unansweredOk = !state.onlyUnanswered || !state.selections.has(question.id);
+        const queryOk = !normalizedQuery || normalize([
+          question.stem,
+          question.source,
+          question.professor,
+          question.options.join(" ")
+        ].join(" ")).includes(normalizedQuery);
+        return sourceOk && unansweredOk && queryOk;
+      });
+    }
+
+    function renderSourceBoard() {
+      const grouped = questions.reduce((map, question) => {
+        map.set(question.source, (map.get(question.source) || 0) + 1);
+        return map;
+      }, new Map());
+
+      const buttons = [
+        createSourceButton("전체", questions.length),
+        ...Array.from(grouped, ([source, count]) => createSourceButton(source, count))
+      ];
+      els.sourceBoard.replaceChildren(...buttons);
+    }
+
+    function createSourceButton(source, count) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "source-chip";
+      button.setAttribute("aria-pressed", String(state.source === source));
+      button.innerHTML = `
+        <strong>${escapeHtml(source === "전체" ? "전체 강의" : source)}</strong>
+        <span>${count}문항</span>
+      `;
+      button.addEventListener("click", () => {
+        state.source = source;
+        els.sourceSelect.value = source;
+        render();
+      });
+      return button;
+    }
+
+    function renderQuestions(items) {
+      if (!items.length) {
+        els.quizList.innerHTML = `<div class="empty">현재 조건에 맞는 문항이 없습니다.</div>`;
+        return;
+      }
+
+      els.quizList.replaceChildren(...items.map(createQuestionCard));
+    }
+
+    function createQuestionCard(question) {
+      const selected = state.selections.get(question.id);
+      const answered = Number.isInteger(selected);
+      const correct = answered && isCorrect(question, selected);
+      const reveal = state.showAnswers || answered;
+
+      const card = document.createElement("article");
+      card.className = "question-card";
+      if (answered) card.classList.add(correct ? "correct" : "incorrect");
+
+      const badges = [
+        `<span class="badge source">${escapeHtml(question.source)}</span>`,
+        `<span class="badge">${escapeHtml(question.professor)}</span>`
+      ];
+      if (question.disputed) badges.push(`<span class="badge warning">답 논란</span>`);
+      if (question.uncertain) badges.push(`<span class="badge warning">검토 필요</span>`);
+
+      card.innerHTML = `
+        <div class="question-head">
+          <span class="q-number">Q${question.id}</span>
+          <div class="badges">${badges.join("")}</div>
+        </div>
+        <div class="question-body">
+          <p class="stem">${escapeHtml(question.stem)}</p>
+          <div class="options"></div>
+          <div class="feedback"></div>
+        </div>
+      `;
+
+      const optionWrap = card.querySelector(".options");
+      optionWrap.replaceChildren(...question.shuffledOptions.map((option, index) => {
+        const displayNumber = index + 1;
+        const isSelected = selected === option.originalNumber;
+        const isAnswer = option.correct;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option";
+        if (isSelected) button.classList.add("selected");
+        if (reveal && isAnswer) button.classList.add("answer");
+        if (answered && isSelected && !isAnswer) button.classList.add("wrong");
+        button.innerHTML = `<span class="mark">${numberMarks[index]}</span><span>${escapeHtml(option.text)}</span>`;
+        button.addEventListener("click", () => {
+          state.selections.set(question.id, option.originalNumber);
+          render();
+          document.querySelector(`[data-question-id="${question.id}"]`)?.scrollIntoView({ block: "nearest" });
+        });
+        return button;
+      }));
+
+      card.dataset.questionId = String(question.id);
+      const feedback = card.querySelector(".feedback");
+      if (reveal) {
+        const answerText = question.shuffledOptions
+          .map((option, index) => ({ option, index }))
+          .filter(item => item.option.correct)
+          .map(item => `${numberMarks[item.index]} ${item.option.text}`)
+          .join(" / ");
+        feedback.className = `feedback visible ${answered ? (correct ? "correct" : "incorrect") : "pending"}`;
+        feedback.innerHTML = `
+          <strong>${answered ? (correct ? "정답" : "오답") : "정답"}</strong>
+          <div>정답: ${escapeHtml(answerText)}</div>
+          ${question.note ? `<div>${escapeHtml(question.note)}</div>` : ""}
+        `;
+      }
+
+      return card;
+    }
+
+    function isCorrect(question, selected) {
+      return question.answers.includes(selected);
+    }
+
+    function shuffleOptions(options) {
+      const items = [...options];
+      for (let index = items.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [items[index], items[swapIndex]] = [items[swapIndex], items[index]];
+      }
+      return items;
+    }
+
+    function normalize(value) {
+      return String(value || "").toLowerCase().replace(/\s+/g, " ").trim();
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    init();
+  </script>
+</body>
+</html>

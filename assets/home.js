@@ -1,6 +1,76 @@
 const data = window.PDS_SITE_DATA || { config: {}, pages: [] };
 const pages = Array.isArray(data.pages) ? data.pages : [];
 const config = data.config || {};
+const examArchive = [
+  {
+    year: "2025",
+    items: [
+      { label: "형성평가", href: "Y/2025-pds4-formative-quiz.html", questions: 197, note: "임시정답 2 · 검토표시 6" },
+      { label: "총괄평가", href: "Y/2025-pds4-summative-quiz.html", questions: 24 }
+    ]
+  },
+  {
+    year: "2023",
+    items: [
+      { label: "형성평가", href: "Y/2023-pds4-formative-quiz.html", questions: 65, note: "임시정답 2 · 검토표시 1" },
+      { label: "총괄평가", href: "Y/2023-pds4-summative-quiz.html", questions: 109, note: "검토표시 2" }
+    ]
+  },
+  {
+    year: "2022",
+    items: [
+      { label: "형성평가", href: "Y/2022-pds4-formative-quiz.html", questions: 49, note: "검토표시 1" },
+      { label: "총괄평가", href: "Y/2022-pds4-summative-quiz.html", questions: 166, note: "임시정답 4 · 검토표시 5" }
+    ]
+  },
+  {
+    year: "2021",
+    items: [
+      { label: "형성평가", href: "Y/2021-pds4-formative-quiz.html", questions: 52 },
+      { label: "총괄평가", href: "Y/2021-pds4-summative-quiz.html", questions: 137, note: "임시정답 2 · 검토표시 1" }
+    ]
+  },
+  {
+    year: "2020",
+    items: [
+      { label: "형성평가", href: "Y/2020-pds4-formative-quiz.html", questions: 50, note: "임시정답 1 · 검토표시 1" },
+      { label: "총괄평가", href: "Y/2020-pds4-summative-quiz.html", questions: 124, note: "임시정답 1 · 검토표시 6" }
+    ]
+  },
+  {
+    year: "2019",
+    items: [
+      { label: "1차시험", href: "Y/2019-pds4-1st-quiz.html", questions: 60, note: "임시정답 10 · 검토표시 1" },
+      { label: "2차시험", href: "Y/2019-pds4-2nd-quiz.html", questions: 115, note: "임시정답 8 · 검토표시 3" }
+    ]
+  },
+  {
+    year: "2018",
+    items: [
+      { label: "형성평가", href: "Y/2018-pds4-formative-quiz.html", questions: 30, note: "임시정답 29 · 검토표시 9" },
+      { label: "총괄평가", href: "Y/2018-pds4-summative-quiz.html", questions: 50, note: "임시정답 50 · 검토표시 3" }
+    ]
+  },
+  {
+    year: "2017",
+    items: [
+      { label: "복원", href: "Y/2017-pds4-restored-quiz.html", questions: 96, note: "임시정답 81 · 검토표시 40" }
+    ]
+  },
+  {
+    year: "2016",
+    items: [
+      { label: "형성평가", href: "Y/2016-pds4-formative-quiz.html", questions: 27, note: "임시정답 27" },
+      { label: "복원", href: "Y/2016-pds4-restored-quiz.html", questions: 42, note: "임시정답 24 · 검토표시 5" }
+    ]
+  },
+  {
+    year: "2015",
+    items: [
+      { label: "복원", href: "Y/2015-pds4-restored-quiz.html", questions: 95, note: "임시정답 93 · 검토표시 3" }
+    ]
+  }
+];
 
 const state = {
   query: "",
@@ -13,6 +83,8 @@ const els = {
   visibleCount: document.querySelector("#visible-count"),
   searchInput: document.querySelector("#search-input"),
   tagFilters: document.querySelector("#tag-filters"),
+  examArchive: document.querySelector("#exam-archive"),
+  examArchiveCount: document.querySelector("#exam-archive-count"),
   scheduleView: document.querySelector("#schedule-view"),
   lectureList: document.querySelector("#lecture-list")
 };
@@ -24,9 +96,10 @@ function init() {
   if (h1) h1.textContent = config.siteTitle || "PDS 학습 위키";
   if (subtitle) subtitle.textContent = config.subtitle || subtitle.textContent;
 
-  els.totalCount.textContent = `${pages.length}개`;
+  els.totalCount.textContent = `${pages.length + getExamCount()}개`;
   els.generatedAt.textContent = data.generatedAt ? `갱신 ${formatGeneratedDate(data.generatedAt)}` : "자동 생성 목록";
 
+  renderExamArchive();
   renderTagFilters();
   bindEvents();
   render();
@@ -54,6 +127,69 @@ function renderTagFilters() {
     });
     return button;
   }));
+}
+
+function renderExamArchive() {
+  if (!els.examArchive) return;
+
+  const totalExams = getExamCount();
+  const totalQuestions = examArchive.reduce((sum, group) => {
+    return sum + group.items.reduce((itemSum, item) => itemSum + item.questions, 0);
+  }, 0);
+
+  if (els.examArchiveCount) {
+    els.examArchiveCount.textContent = `${totalExams}개 시험지 · ${totalQuestions.toLocaleString("ko-KR")}문항`;
+  }
+
+  els.examArchive.replaceChildren(...examArchive.map(createExamYearGroup));
+}
+
+function getExamCount() {
+  return examArchive.reduce((sum, group) => sum + group.items.length, 0);
+}
+
+function createExamYearGroup(group) {
+  const article = document.createElement("article");
+  article.className = "exam-year";
+
+  const heading = document.createElement("div");
+  heading.className = "exam-year-heading";
+
+  const year = document.createElement("h3");
+  year.textContent = group.year;
+
+  const count = document.createElement("span");
+  const questions = group.items.reduce((sum, item) => sum + item.questions, 0);
+  count.textContent = `${group.items.length}개 · ${questions.toLocaleString("ko-KR")}문항`;
+  heading.append(year, count);
+
+  const links = document.createElement("div");
+  links.className = "exam-links";
+  links.replaceChildren(...group.items.map(createExamLink));
+
+  article.append(heading, links);
+  return article;
+}
+
+function createExamLink(item) {
+  const link = document.createElement("a");
+  link.className = `exam-link ${getExamTypeClass(item.label)}`;
+  link.href = encodeURI(item.href);
+  link.innerHTML = `
+    <span class="exam-link-top">
+      <strong>${escapeHtml(item.label)}</strong>
+      <span>${Number(item.questions).toLocaleString("ko-KR")}문항</span>
+    </span>
+    ${item.note ? `<span class="exam-note">${escapeHtml(item.note)}</span>` : `<span class="exam-note exam-note-ok">정답표시 확인</span>`}
+  `;
+  return link;
+}
+
+function getExamTypeClass(label) {
+  if (label.includes("형성")) return "exam-link-formative";
+  if (label.includes("총괄")) return "exam-link-summative";
+  if (label.includes("복원")) return "exam-link-restored";
+  return "exam-link-default";
 }
 
 function render() {
