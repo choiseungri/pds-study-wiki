@@ -145,3 +145,8 @@
 - `index.html`에 토글 버튼과 접힘 패널을 추가하고, `assets/home.js`에서 `aria-expanded`, 버튼 문구, `hidden` 상태를 동기화하도록 했다.
 - 사용자가 `0501_5`도 같이 업데이트하라고 요청했다. 루트의 `0501_5.html`은 파일명 규칙 때문에 빌드를 막고 있어 `0501_5_medical-service-act.html`로 정리했다.
 - 05/01 5교시 `의사법규: 의료법` 시간표 항목과 `site.config.json` 교수 매핑을 새 파일에 연결했다.
+
+## 2026-05-14 온라인 기출 토글 캐시 보정
+
+- 온라인에서 새 `index.html`은 반영됐지만 `assets/site.css`와 `assets/home.js`가 이전 캐시로 남으면 토글 버튼이 기본 버튼처럼 보이고 클릭 동작도 붙지 않는 문제가 생긴다.
+- 홈 HTML의 `site.css`, `site-data.js`, `home.js` 참조에 `?v=20260514-toggle-cache` 버전 쿼리를 붙여 GitHub Pages와 브라우저 캐시를 우회하도록 했다.
