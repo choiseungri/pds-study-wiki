@@ -2,6 +2,12 @@
   "siteTitle": "PDS 학습 위키",
   "subtitle": "본과 4학년 PDS HTML 학습자료",
   "academicYear": 2026,
+  "weekStarts": [
+    "2026-04-27",
+    "2026-05-04",
+    "2026-05-15",
+    "2026-06-05"
+  ],
   "periods": [
     { "period": 1, "label": "1교시", "time": "08:00-08:50" },
     { "period": 2, "label": "2교시", "time": "09:00-09:50" },

@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node scripts/generate-site-data.mjs",
     "check": "node scripts/generate-site-data.mjs",
+    "verify:weeks": "node scripts/verify-week-layout.mjs",
     "serve": "node scripts/serve.mjs"
   }
 }

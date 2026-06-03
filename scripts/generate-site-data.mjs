@@ -33,7 +33,7 @@ for (const file of htmlFiles) {
   const html = await readFile(path.join(root, file), "utf8");
   const title = extractTitle(html) || parsed.fallbackTitle;
   const professor = getProfessor(file, html, title, config);
-  const dateInfo = getDateInfo(year, parsed.month, parsed.day);
+  const dateInfo = getDateInfo(year, parsed.month, parsed.day, config);
   const periods = config.periods || [];
   const span = getPageSpan(file, config);
 
@@ -148,19 +148,31 @@ function getTimeRange(startTime, endTime) {
   return start && end ? `${start}-${end}` : "";
 }
 
-function getDateInfo(yearValue, month, day) {
+function getDateInfo(yearValue, month, day, siteConfig) {
   const date = new Date(Date.UTC(yearValue, month - 1, day));
   const weekdayIndex = date.getUTCDay();
   const monday = new Date(date);
   const offset = weekdayIndex === 0 ? -6 : 1 - weekdayIndex;
   monday.setUTCDate(date.getUTCDate() + offset);
+  const dateKey = formatDate(date);
 
   return {
-    dateKey: formatDate(date),
+    dateKey,
     dateLabel: `${pad(month)}/${pad(day)}`,
     weekday: `${weekdayLabels[weekdayIndex]}요일`,
-    weekKey: formatDate(monday)
+    weekKey: getWeekKey(dateKey, formatDate(monday), siteConfig)
   };
+}
+
+function getWeekKey(dateKey, fallbackWeekKey, siteConfig) {
+  const starts = Array.isArray(siteConfig.weekStarts)
+    ? siteConfig.weekStarts
+      .filter(value => /^\d{4}-\d{2}-\d{2}$/.test(String(value)))
+      .sort()
+    : [];
+
+  const start = starts.filter(value => value <= dateKey).at(-1);
+  return start || fallbackWeekKey;
 }
 
 function formatDate(date) {
