@@ -45,7 +45,23 @@
     "0507_1_health-security.html": "신영전",
     "0507_3_infectious-disease-control-act.html": "김민주",
     "0507_4_quarantine-aids-prevention-act.html": "김민주",
-    "0507_5_injury-death.html": "김원규"
+    "0507_5_injury-death.html": "김원규",
+    "0515_1_head-injury.html": "김원규",
+    "0515_2_asphyxia.html": "김원규",
+    "0515_4_sudden-natural-death.html": "김원규",
+    "0518_1_aromatherapy-theory-practice.html": "김석현",
+    "0518_2_drowning-temperature-injury.html": "김원규",
+    "0518_3_poisoning-sex-infant-maternal-death.html": "김원규",
+    "0519_1_clinical-preventive-medicine-health-screening.html": "신영전",
+    "0519_2_global-health.html": "신영전",
+    "0519_3_health-promotion-education.html": "신영전",
+    "0520_1_integrative-medicine-overview-status.html": "김미정",
+    "0520_2_ims-prolotherapy-taping.html": "김미정",
+    "0520_3_naturopathic-medicine.html": "박서특",
+    "0520_4_energy-medicine.html": "장성호",
+    "0521_1_comparative-healthcare-systems.html": "신영전",
+    "0521_3_national-health-insurance-act.html": "신영전",
+    "0521_4_blood-management-life-sustaining-treatment-act.html": "신영전"
   },
   "pageSpans": {
     "0429_5_healthcare-understanding.html": 2,
@@ -55,7 +71,10 @@
     "0501_3_community-health.html": 2,
     "0506_1_health-management-health-behaviors.html": 2,
     "0507_1_health-security.html": 2,
-    "0507_5_injury-death.html": 2
+    "0507_5_injury-death.html": 2,
+    "0515_2_asphyxia.html": 2,
+    "0519_3_health-promotion-education.html": 2,
+    "0521_1_comparative-healthcare-systems.html": 2
   },
   "professorRules": [
     { "professor": "박훈기", "keywords": ["박훈기"] },
@@ -66,6 +85,10 @@
     { "professor": "김민주", "keywords": ["김민주"] },
     { "professor": "이어진", "keywords": ["이어진"] },
     { "professor": "송은섭", "keywords": ["송은섭"] },
-    { "professor": "김원규", "keywords": ["김원규", "Won Kyu Kim"] }
+    { "professor": "김원규", "keywords": ["김원규", "Won Kyu Kim"] },
+    { "professor": "김석현", "keywords": ["김석현"] },
+    { "professor": "김미정", "keywords": ["김미정"] },
+    { "professor": "박서특", "keywords": ["박서특"] },
+    { "professor": "장성호", "keywords": ["장성호"] }
   ]
 }

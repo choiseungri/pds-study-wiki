@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>0521_4 혈액관리법 · 연명의료법 학습자료</title>
+<style>
+  :root {
+    --text:#171717; --muted:#626262; --line:#d8d8d8; --soft:#fafafa; --ink:#111;
+    --accent:#0f5f7a; --danger:#b42318; --mark:#fff38a;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    margin:0; color:var(--text); background:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;
+    line-height:1.74; word-break:keep-all; font-size:17px;
+  }
+  #progress { position:fixed; top:0; left:0; height:4px; background:var(--accent); width:0; z-index:1000; }
+  .wrap { max-width:1160px; margin:0 auto; padding:0 22px; }
+  header { padding:56px 0 30px; border-bottom:1px solid var(--line); }
+  h1 { font-size:clamp(2rem,4.2vw,4rem); letter-spacing:-.04em; margin:0 0 12px; line-height:1.12; }
+  h2 { font-size:clamp(1.55rem,2.9vw,2.25rem); letter-spacing:-.04em; margin:72px 0 20px; padding-bottom:10px; border-bottom:2px solid var(--line); }
+  h3 { font-size:1.32rem; letter-spacing:-.03em; margin:34px 0 10px; }
+  h4 { font-size:1.05rem; margin:22px 0 8px; }
+  p { margin:10px 0; }
+  a { color:var(--accent); text-decoration-thickness:.08em; text-underline-offset:.18em; }
+  nav { position:sticky; top:4px; z-index:900; background:rgba(255,255,255,.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  nav .wrap { display:flex; gap:10px; align-items:center; overflow:auto; padding-top:10px; padding-bottom:10px; }
+  nav a, nav button { white-space:nowrap; font-size:.92rem; color:var(--text); border:1px solid var(--line); border-radius:999px; padding:6px 12px; background:#fff; cursor:pointer; text-decoration:none; }
+  nav a:hover, nav button:hover { border-color:#777; }
+  .meta { color:var(--muted); font-size:.96rem; }
+  .lead { font-size:1.14rem; max-width:920px; }
+  .grid { display:grid; gap:18px; }
+  .two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  @media (max-width:860px) { .two,.three { grid-template-columns:1fr; } }
+  .plain-card { border:1px solid var(--line); border-radius:18px; padding:18px; background:#fff; }
+  .tight li { margin:4px 0; }
+  mark, .hl { background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 .08em; }
+  .exam { font-weight:800; text-decoration:underline; text-decoration-thickness:.14em; text-underline-offset:.18em; text-decoration-color:#e8c100; }
+  .red { color:var(--danger); font-weight:800; }
+  .muted { color:var(--muted); }
+  .small { font-size:.92rem; }
+  table { width:100%; border-collapse:collapse; margin:14px 0 24px; }
+  th, td { border-bottom:1px solid var(--line); padding:10px 8px; vertical-align:top; text-align:left; }
+  th { font-weight:800; }
+  details { border:1px solid var(--line); border-radius:16px; padding:12px 16px; background:#fff; margin:12px 0; }
+  summary { cursor:pointer; font-weight:800; }
+  .qa summary { display:flex; gap:8px; align-items:center; }
+  .source-label { color:var(--accent); font-weight:900; }
+  .stem { font-weight:800; margin-top:14px; }
+  .options { display:grid; gap:8px; margin:10px 0; }
+  .options button { text-align:left; border:1px solid var(--line); border-radius:12px; background:#fff; padding:10px 12px; cursor:pointer; font:inherit; }
+  .options button:hover { border-color:#888; }
+  .options button[aria-pressed="true"] { border-color:var(--ink); outline:2px solid #111; outline-offset:1px; }
+  .feedback { min-height:1.4em; font-weight:800; margin-top:8px; }
+  .answer { margin-top:10px; }
+  .toc { columns:2; column-gap:38px; }
+  .toc li { break-inside:avoid; margin:5px 0; }
+  @media (max-width:700px) { .toc { columns:1; } }
+  .exam-only { display:none; }
+  body.exam-mode .deep { display:none !important; }
+  body.exam-mode .exam-only { display:block; }
+  body.exam-mode h2 { margin-top:44px; }
+  .foot { border-top:1px solid var(--line); margin-top:70px; padding:26px 0 50px; color:var(--muted); }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<header>
+  <div class="wrap">
+    <p class="meta">0521_4 · 의사법규 · 혈액관리법, 연명의료법</p>
+    <h1>혈액관리법 · 연명의료법</h1>
+    <p class="lead">법제처 3단비교표와 필기 표시를 읽기 쉬운 학습 흐름으로 재구성했습니다. 시험 반복축은 <mark>채혈 가능/금지 기준</mark>, <mark>특정수혈부작용 신고</mark>, <mark>연명의료계획서 작성자와 보존기간</mark>, <mark>환자 의사 확인 절차</mark>입니다.</p>
+    <p class="meta">원본 범위: PDF 1-61쪽. 본문 중 <span class="exam">밑줄 표시</span>는 원본 강조·기출 반복 포인트입니다.</p>
+  </div>
+</header>
+<nav aria-label="본문 이동">
+  <div class="wrap">
+    <a href="#map">출제 지도</a>
+    <a href="#blood-core">혈액관리 핵심</a>
+    <a href="#donor">채혈금지</a>
+    <a href="#reaction">수혈부작용</a>
+    <a href="#life-core">연명의료 핵심</a>
+    <a href="#will">의사 확인</a>
+    <a href="#hospice">호스피스</a>
+    <a href="#archive">기출 모아보기</a>
+    <button type="button" onclick="toggleExamMode()">시험 직전 모드</button>
+  </div>
+</nav>
+<main class="wrap">
+  <section id="map">
+    <h2>1. 출제 지도</h2>
+    <p>표지 필기에는 “문제는 어느 정도 비슷하게 나오긴 하나 문제수가 적으니 수업을 듣는 것이 좋다”는 메모가 있습니다. 실제 제공된 문항은 적지만, 반복되는 포인트는 매우 뚜렷합니다.</p>
+    <table>
+      <thead><tr><th>연도</th><th>제공된 출제 기록</th><th>반복 포인트</th></tr></thead>
+      <tbody>
+        <tr><td>2025</td><td>총괄 0문제</td><td>제공 문항 없음</td></tr>
+        <tr><td>2023</td><td>총괄 4문제, 혈액 3 · 연명 1</td><td>특정수혈부작용 신고기간, 채혈 가능자, 채혈금지대상자, 연명의료계획서 작성자</td></tr>
+        <tr><td>2022</td><td>총괄 0문제</td><td>제공 문항 없음</td></tr>
+        <tr><td>2021</td><td>총괄 2문제, 혈액 1 · 연명 1</td><td>특정수혈부작용 신고상대, 연명의료계획서 보존기간</td></tr>
+        <tr><td>2020</td><td>총괄 3문제, 혈액 2 · 연명 1</td><td>채혈 가능자, 특정수혈부작용 신고기간, 국가 호스피스 연명의료위원회 위원장</td></tr>
+        <tr><td>2019 이하</td><td>없거나 출제자 미상</td><td>자료상 확인 어려움</td></tr>
+      </tbody>
+    </table>
+    <div class="grid three">
+      <div class="plain-card"><h3>혈액 1순위</h3><p><b>채혈 가능/금지</b>는 수치로 나옵니다. 남자 50kg, 이완기혈압 100mmHg, 맥박 100회, 체온 37.5도가 경계입니다.</p></div>
+      <div class="plain-card"><h3>혈액 2순위</h3><p><b>특정수혈부작용</b>은 신고상대와 기간을 묻습니다. <b>시ㆍ도지사</b>, <b>15일 이내</b>, 사망은 <b>지체 없이</b>입니다.</p></div>
+      <div class="plain-card"><h3>연명 1순위</h3><p><b>연명의료계획서</b>는 담당의사가 작성하고 의료기관이 등록ㆍ보관합니다. 보존기간은 <b>10년</b>입니다.</p></div>
+    </div>
+  </section>
+
+  <section id="blood-core">
+    <h2>2. 혈액관리법: 목적과 용어</h2>
+    <p class="exam-only"><b>시험 직전:</b> 혈액관리법은 <mark>수혈자와 헌혈자 보호</mark>, 적절한 혈액관리, 국민보건 향상을 목적으로 합니다. 특정수혈부작용은 사망, 장애, 입원치료 필요 부작용, 바이러스 등 감염질병, 유사 부작용입니다.</p>
+    <p>혈액관리법은 <b>혈액관리업무에 필요한 사항</b>을 정해 <b>수혈자와 헌혈자</b>를 보호하고, 혈액을 적절히 관리하여 국민보건 향상에 이바지하려는 법입니다.</p>
+    <table>
+      <thead><tr><th>용어</th><th>핵심 뜻</th><th>구별 포인트</th></tr></thead>
+      <tbody>
+        <tr><td>혈액</td><td>인체에서 채혈한 <b>혈구와 혈장</b></td><td>혈액제제의 원료</td></tr>
+        <tr><td>혈액관리업무</td><td>수혈 또는 혈액제제 제조에 필요한 혈액의 <b>채혈ㆍ검사ㆍ제조ㆍ보존ㆍ공급ㆍ품질관리</b></td><td>업무 주체가 제한됨</td></tr>
+        <tr><td>혈액원</td><td>혈액관리업무 수행을 위해 허가받은 자</td><td>허가와 변경허가 중요</td></tr>
+        <tr><td>헌혈자</td><td>자기 혈액을 혈액원에 <b>무상</b> 제공하는 사람</td><td>혈액 매매 금지와 연결</td></tr>
+        <tr><td>부적격혈액</td><td>채혈 시 또는 채혈 후 이상이 발견된 혈액 또는 혈액제제</td><td>발견 즉시 분리ㆍ폐기 원칙</td></tr>
+        <tr><td>채혈금지대상자</td><td>감염병 환자, 약물복용 환자 등 건강기준 미달로 헌혈 부적합한 사람</td><td>기출의 핵심</td></tr>
+        <tr><td>특정수혈부작용</td><td>수혈한 혈액제제로 발생한 법정 부작용</td><td>신고상대·기간 반복 출제</td></tr>
+        <tr><td>혈액제제</td><td>전혈, 농축적혈구, 신선동결혈장, 농축혈소판 등 혈액 관련 의약품</td><td>원료혈장과 구별</td></tr>
+        <tr><td>원료혈장</td><td>혈장분획제제 제조를 위해 혈장분획제제 제조업자에게 공급하는 혈장</td><td>안정적 수급계획</td></tr>
+        <tr><td>헌혈환급예치금</td><td>수혈비용 보상 또는 헌혈사업에 사용하기 위해 예치하는 금액</td><td>헌혈환급적립금으로 관리</td></tr>
+        <tr><td>채혈부작용</td><td>채혈 후 헌혈자에게 나타나는 혈관미주신경반응, 피하출혈 등 예상하지 못한 부작용</td><td>보상과 연결</td></tr>
+      </tbody>
+    </table>
+
+    <h3>특정수혈부작용</h3>
+    <p>시행규칙은 특정수혈부작용을 <b>사망</b>, <b>장애</b>, <b>입원치료를 요하는 부작용</b>, <b>바이러스 등으로 감염되는 질병</b>, 의료기관의 장이 이와 유사하다고 판단하는 부작용으로 봅니다.</p>
+
+    <h3>혈액 매매 금지</h3>
+    <p><b>금전, 재산상 이익 또는 대가적 급부</b>를 받거나 받기로 하고 자신의 혈액이나 헌혈증서를 제공하거나 제공을 약속할 수 없습니다. 반대로 대가를 주고 다른 사람의 혈액이나 헌혈증서를 제공받는 행위도 금지됩니다. 교사ㆍ방조ㆍ알선도 금지되고, 위반행위가 있음을 알면 관련 혈액을 채혈하거나 수혈해서도 안 됩니다.</p>
+  </section>
+
+  <section id="blood-system">
+    <h2>3. 헌혈 체계와 혈액원</h2>
+    <h3>헌혈 장려와 보호</h3>
+    <p>국가와 지방자치단체는 헌혈기부문화를 조성하고 건강한 국민의 헌혈을 장려하기 위한 교육ㆍ홍보 등 지원책을 수립ㆍ시행합니다. 매년 <span class="exam">6월 14일은 헌혈자의 날</span>입니다.</p>
+    <p>헌혈자는 헌혈 현장에서 존중받아야 하고, 신상 및 병력 정보를 사실대로 제공해야 합니다. 혈액원은 쾌적하고 안전한 환경에서 채혈하고, 유의사항을 설명하며, 채혈 동의를 받아야 합니다. 문진 기록과 면담은 개인비밀이 보호되는 환경에서 이루어져야 하고, 채혈부작용을 세심히 관찰ㆍ예방ㆍ조치해야 합니다.</p>
+    <table>
+      <thead><tr><th>조직ㆍ계획</th><th>핵심 내용</th></tr></thead>
+      <tbody>
+        <tr><td>국가헌혈추진협의회</td><td>보건복지부장관 소속. 헌혈기부문화 조성, 헌혈 장려 정책 방향, 제도 개선, 예산 지원 등을 심의합니다. 위원장 1명을 포함해 10명 이내이고 위원장은 보건복지부 제2차관입니다.</td></tr>
+        <tr><td>혈액관리기본계획</td><td><span class="exam">보건복지부장관이 5년마다 수립</span>합니다. 헌혈 증진과 발전 방향, 부처ㆍ기관 협조, 헌혈ㆍ수혈 안전성 향상, 혈액제제 안전성ㆍ수급ㆍ적정 사용 방안을 포함합니다.</td></tr>
+        <tr><td>헌혈추진협의회</td><td>시ㆍ도지사 또는 시장ㆍ군수ㆍ구청장이 지역사회 주민ㆍ단체ㆍ공공기관이 참여하는 협의회를 구성할 수 있습니다.</td></tr>
+        <tr><td>원료혈장 수급</td><td>보건복지부장관은 공급가격 관리, 배분 등 안정적 수급 조치를 할 수 있고 매년 원료혈장 수급계획을 수립합니다.</td></tr>
+        <tr><td>헌혈자 예우</td><td>국가와 지방자치단체는 헌혈자를 위한 예우 증진 사업을 할 수 있고, 공로자에게 훈장ㆍ포장 추천 또는 표창을 할 수 있습니다.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>혈액관리위원회</h3>
+    <p>보건복지부장관 소속의 혈액관리위원회는 혈액관리제도 개선, 헌혈환급적립금 활용, 혈액 수가 조정, 혈액제제 수급ㆍ안전성, 혈액원 개설ㆍ심사평가, 특정수혈부작용, 기본계획 등을 심의합니다. 위원장과 부위원장 각 1명을 포함해 <b>15명 이내</b>로 구성하며 임기는 <b>2년</b>입니다.</p>
+
+    <h3>혈액관리업무를 할 수 있는 자</h3>
+    <table>
+      <thead><tr><th>주체</th><th>가능 범위</th><th>주의점</th></tr></thead>
+      <tbody>
+        <tr><td>의료기관</td><td>혈액관리업무 가능</td><td>혈액원 개설 시 보건복지부장관 허가</td></tr>
+        <tr><td>대한적십자사</td><td>혈액관리업무 가능</td><td>헌혈경력 조회, 위탁업무와 연결</td></tr>
+        <tr><td>혈액제제제조업자</td><td>혈액제제 제조 관련 업무</td><td><span class="exam">채혈은 할 수 없음</span></td></tr>
+      </tbody>
+    </table>
+    <p>혈액원에는 <b>1명 이상의 의사</b>를 두어 검사ㆍ제조ㆍ보존 등 혈액제제 제조업무를 관리하게 해야 합니다. 제조관리자는 시설ㆍ장비를 위생적으로 관리하고, 종사자 교육을 <b>연 2회 이상</b> 실시하며, 업무지침서 준수 여부를 <b>연 1회 이상</b> 점검ㆍ기록하고, 제조과정 시험검사를 실시합니다.</p>
+    <p>혈액원의 휴업ㆍ폐업ㆍ재개업은 보건복지부장관에게 신고합니다. 폐업 또는 휴업 시에는 혈액관리업무기록, 미사용 헌혈증서, 헌혈환급예치금 관련 서류를 대한적십자사 회장에게 이관하는 것이 원칙입니다.</p>
+  </section>
+
+  <section id="donor">
+    <h2>4. 헌혈자 확인과 채혈금지</h2>
+    <p class="exam-only"><b>시험 직전:</b> 헌혈 가능 수치 경계는 <mark>남자 50kg, 여자 45kg, 체온 37.5도, 수축기 90-180mmHg, 이완기 100mmHg, 맥박 50-100회</mark>입니다.</p>
+    <h3>채혈 전 확인</h3>
+    <p>혈액원은 채혈 전에 헌혈자 신원을 확인하고 건강진단을 해야 합니다. 사진이 있는 주민등록증ㆍ여권ㆍ학생증 등 신분증으로 확인하며, 학생ㆍ군인 등 단체헌혈은 관리ㆍ감독자의 확인으로 갈음할 수 있습니다.</p>
+    <ol class="tight">
+      <li>과거 헌혈경력, 혈액검사결과, 채혈금지대상자 여부 조회</li>
+      <li>문진ㆍ시진ㆍ촉진</li>
+      <li>체온ㆍ맥박 측정</li>
+      <li>체중 측정</li>
+      <li>혈압 측정</li>
+      <li>빈혈검사: 황산구리법 혈액비중검사, 혈색소검사, 적혈구용적률검사 중 하나</li>
+      <li>혈소판성분채혈 시 혈소판계수검사</li>
+    </ol>
+    <p>신원이 확실하지 않거나 신원 확인 요구에 따르지 않는 사람에게서는 채혈할 수 없습니다. 다만 본인에게 수혈하기 위한 채혈, 재해 등으로 정보조회가 불가능한 경우, 긴급 수혈하지 않으면 생명이 위태로운 경우에는 과거 헌혈경력ㆍ검사결과 조회를 생략할 수 있습니다.</p>
+
+    <h3>공통 건강기준</h3>
+    <table>
+      <thead><tr><th>항목</th><th>채혈금지 기준</th><th>기출 판단</th></tr></thead>
+      <tbody>
+        <tr><td>체중</td><td>남자 <b>50kg 미만</b>, 여자 <b>45kg 미만</b></td><td><span class="exam">50kg 남자는 가능</span></td></tr>
+        <tr><td>체온</td><td><b>37.5도 초과</b></td><td>체온 38도는 금지</td></tr>
+        <tr><td>혈압</td><td>수축기혈압 <b>90mmHg 미만</b> 또는 <b>180mmHg 이상</b>, 이완기혈압 <b>100mmHg 이상</b></td><td>이완기혈압 110은 금지, 수축기혈압 95는 그 자체로 금지 아님</td></tr>
+        <tr><td>맥박</td><td>1분에 <b>50회 미만</b> 또는 <b>100회 초과</b></td><td>심박수 110회는 금지</td></tr>
+      </tbody>
+    </table>
+
+    <h3>질병 관련 기준</h3>
+    <table>
+      <thead><tr><th>구분</th><th>채혈금지 내용</th></tr></thead>
+      <tbody>
+        <tr><td>감염병</td><td>만성 B형간염, C형간염, 후천성면역결핍증, 바베스열원충증, 샤가스병, 크로이츠펠트-야콥병 등 혈액매개 감염병의 환자ㆍ의사환자ㆍ병원체보유자</td></tr>
+        <tr><td>일정기간 채혈금지</td><td><b>말라리아</b> 병력자: 치료종료 후 <b>3년</b> 미경과. <b>브루셀라증</b> 병력자: 치료종료 후 <b>2년</b> 미경과. <b>매독</b> 병력자: 치료종료 후 <b>1년</b> 미경과. <b>급성 B형간염</b> 병력자: 완치 후 <b>6개월</b> 미경과. 그 밖에 보건복지부장관이 정하는 혈액매개 감염병 환자 또는 병력자.</td></tr>
+        <tr><td>그 밖의 질병</td><td>발열ㆍ인후통ㆍ설사 등 급성 감염성 질환 의심 증상이 없어진 지 <b>3일</b>이 지나지 않은 사람. 암환자, 만성폐쇄성폐질환자, 간질환자, 심장병환자, 당뇨병환자, 류마티즘 등 자가면역질환자, 신부전, 신장질환자, 혈우병, 재생불량성 빈혈, 저혈당자, 성병환자, 결핵환자, 알코올중독자, 마약중독자, 경련환자 등. 다만 의사가 헌혈 가능하다고 판단하면 예외가 가능합니다.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>헌혈금지약물</h3>
+    <table>
+      <thead><tr><th>영구적 헌혈금지약물</th><th>상대적 헌혈금지약물</th></tr></thead>
+      <tbody><tr><td>에트레티네이트, 뇌하수체 유래 성장호르몬, 소 유래 인슐린, vCJD 위험지역 채혈혈액 혈청으로 제조된 진단시약, 그 밖에 영구 제한 필요 약물</td><td>아시트레틴, B형간염 면역글로불린 또는 태반주사제, 두타스테라이드, 이소트레티노인 또는 피나스테라이드, 그 밖에 일정기간 제한 필요 약물</td></tr></tbody>
+    </table>
+
+    <details class="deep"><summary>채혈금지대상자 관리</summary>
+      <p>보건복지부장관은 채혈금지대상자 명부를 작성ㆍ관리할 수 있고, 혈액원은 명부 대상자에게서 채혈해서는 안 됩니다. 다만 선별검사결과 부적격 요인 중 채혈금지기간이 지난 뒤 안전성 검사를 통과한 사람은 채혈할 수 있으며, 혈액원은 그 결과를 보고합니다. 명부 업무 종사자는 업무상 알게 된 비밀을 정당한 사유 없이 누설할 수 없습니다.</p>
+    </details>
+
+    <h3>기출 확인</h3>
+    
+    <details class="qa" id="q-2023-14">
+      <summary><span class="source-label">[23 총괄 14]</span> 다음 중 특별한 금기 사항이 없을 때, 다음 중 수혈할 수 있는 사람은? (문제 정말 수혈로 나옴)</summary>
+      <p class="stem">다음 중 특별한 금기 사항이 없을 때, 다음 중 수혈할 수 있는 사람은? (문제 정말 수혈로 나옴)</p>
+      <div class="options" data-answer="A">
+        <button type="button" data-opt="A"><b>A.</b> 50kg 남자</button>
+<button type="button" data-opt="B"><b>B.</b> 이완기 혈압 110 밀리미터(수은주압) 이상인 자</button>
+<button type="button" data-opt="C"><b>C.</b> 심박수 110회</button>
+<button type="button" data-opt="D"><b>D.</b> 체온 38도</button>
+<button type="button" data-opt="E"><b>E.</b> B형 간염 환자</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: A</b></p><p>채혈금지 공통기준에서 남자는 체중 50kg 미만이면 금지입니다. 따라서 <b>50kg 남자</b>는 체중 기준만 보면 금지가 아닙니다. 이완기혈압 100mmHg 이상, 맥박 100회 초과, 체온 37.5도 초과, 혈액매개 감염병은 금지 쪽으로 판단합니다.</p></details>
+    </details>
+    
+    
+    <details class="qa" id="q-2023-15">
+      <summary><span class="source-label">[23 총괄 15]</span> 다음 중 채혈 금지 대상자로 옳은 것은?</summary>
+      <p class="stem">다음 중 채혈 금지 대상자로 옳은 것은?</p>
+      <div class="options" data-answer="B">
+        <button type="button" data-opt="A"><b>A.</b> 말라리아 병력자로 치료종료 후 5년이 경과하지 아니한 자</button>
+<button type="button" data-opt="B"><b>B.</b> 브루셀라증 병력자로 치료종료 후 2년이 경과하지 아니한자</button>
+<button type="button" data-opt="C"><b>C.</b> 매독 병력자로 치료종료 후 2년이 경과하지 아니한자</button>
+<button type="button" data-opt="D"><b>D.</b> B형 간염 병력자로 완치 후 1년이 경과하지 아니한 자</button>
+<button type="button" data-opt="E"><b>E.</b> 수축기 혈압이 95 밀리미터(수은주압) 이상인 자</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: B</b></p><p><b>브루셀라증 병력자는 치료종료 후 2년이 경과하지 않으면 채혈금지</b>입니다. 말라리아는 치료종료 후 3년, 매독은 치료종료 후 1년, 급성 B형간염은 완치 후 6개월이 핵심입니다. 수축기혈압 95mmHg는 90mmHg 미만이 아니므로 그 자체로 금지 기준이 아닙니다.</p></details>
+    </details>
+    
+    
+    <details class="qa" id="q-2020-5">
+      <summary><span class="source-label">[20 총괄 5]</span> 다음 중 헌혈할 수 있는 사람은?</summary>
+      <p class="stem">다음 중 헌혈할 수 있는 사람은?</p>
+      <div class="options" data-answer="A">
+        <button type="button" data-opt="A"><b>A.</b> 50kg 남자</button>
+<button type="button" data-opt="B"><b>B.</b> 이완기 혈압 110</button>
+<button type="button" data-opt="C"><b>C.</b> 심박수 110</button>
+<button type="button" data-opt="D"><b>D.</b> 체온 38도</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: A</b></p><p>남자 체중 50kg은 금지 기준인 “50kg 미만”에 해당하지 않습니다. 이완기혈압 110mmHg는 100mmHg 이상, 심박수 110회는 100회 초과, 체온 38도는 37.5도 초과라서 금지 기준에 해당합니다.</p></details>
+    </details>
+    
+  </section>
+
+  <section id="safety">
+    <h2>5. 혈액 안전성, 보존, 공급</h2>
+    <h3>적격 여부 검사</h3>
+    <p>혈액원은 헌혈자로부터 혈액을 채혈하면 지체 없이 혈액의 적격 여부를 확인합니다. 수혈용 혈액은 간기능검사(ALT), B형간염검사, C형간염검사, 매독검사, 후천성면역결핍증검사, HTLV 검사 등을 시행합니다. 검사는 의사의 지도 아래 임상병리사가 실시해야 합니다.</p>
+    <p>검사 결과는 헌혈자에게 통보하지만, <b>후천성면역결핍증 검사 결과</b>는 제외됩니다. 적격으로 판정된 결과 통보를 헌혈자가 명시적으로 거부한 경우에도 통보하지 않을 수 있습니다.</p>
+    <h3>부적격혈액 처리</h3>
+    <p>부적격혈액을 발견하면 폐기처분하고 보건복지부장관에게 보고하는 것이 원칙입니다. 폐기 전에는 혈액용기 겉면에 부적격 사실과 사유를 표시하고, 적격혈액과 분리하여 잠금장치가 있는 별도 격리공간에 보관합니다.</p>
+    <table>
+      <thead><tr><th>폐기하지 않을 수 있는 예외</th><th>출고 후 발견 시 조치</th><th>수혈자 통보</th></tr></thead>
+      <tbody><tr><td>예방접종약 원료, 의학연구 또는 의약품ㆍ의료기기 개발, 혈액제제 등 의약품이나 의료기기 품질관리 시험</td><td>해당 의료기관에 부적격혈액 출고정보를 즉시 알리고, 사용하지 않은 혈액은 격리ㆍ폐기하도록 조치합니다.</td><td>혈액매개감염병 관련 선별검사 부적격혈액이 출고ㆍ수혈되었거나, 혈액관리업무 수행 기준 위반으로 부적격혈액이 수혈된 경우 등에는 수혈자에게 알려야 합니다.</td></tr></tbody>
+    </table>
+
+    <h3>채혈량과 보존온도</h3>
+    <table>
+      <thead><tr><th>업무</th><th>기준</th></tr></thead>
+      <tbody>
+        <tr><td>1인 1회 채혈량</td><td>항응고제 및 검사용 혈액 제외. 한도의 110% 초과 금지. 전혈채혈 <b>400mL</b>, 성분채혈 <b>500mL</b>, 다종성분채혈 <b>600mL</b>가 기준입니다. 희귀혈액 채혈은 예외가 있습니다.</td></tr>
+        <tr><td>채혈 방식</td><td>항응고제가 포함된 혈액백 또는 성분채혈키트를 사용해 무균적으로 합니다.</td></tr>
+        <tr><td>제조 전 관리온도</td><td>전혈채혈: <b>1-10℃</b>, 다만 혈소판제조용은 <b>20-24℃</b>. 혈소판성분채혈: <b>20-24℃</b>. 혈장성분채혈: <b>6℃ 이하</b>.</td></tr>
+        <tr><td>보존ㆍ공급</td><td>보존온도ㆍ보존방법ㆍ보존기간 기준을 지키고, 운송 시 보존온도 유지가 가능한 용기에 넣어 공급합니다. 혈액제제 운송 및 수령확인서는 공급자와 수령자가 각각 <b>3년</b> 보관합니다.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>의료기관의 수혈관리</h3>
+    <p>병상 수와 혈액 사용량을 고려해 정해지는 의료기관은 <b>수혈관리위원회</b>와 <b>수혈관리실</b>을 설치ㆍ운영하고 혈액 관련 업무 전담 인력을 두어야 합니다. 2021년 7월 이후 수혈관리위원회는 100병상 이상이면서 전년도 혈액제제 사용량 1천 단위 이상인 의료기관이 대상입니다. 2022년 7월 이후 수혈관리실은 100병상 이상이면서 전년도 혈액제제 사용량 5천 단위 이상인 의료기관이 대상입니다.</p>
+    <p>수혈관리위원회는 수혈관리계획, 자체규정, 혈액 보관량ㆍ사용량ㆍ폐기량 적정성, 수급 방안, 부작용 예방ㆍ대응, 교육ㆍ홍보를 심의합니다. 수혈관리실은 혈액 보관ㆍ사용ㆍ폐기 현황 관리, 자료 수집ㆍ분석ㆍ평가, 수혈 적정성 평가, 부작용 감시ㆍ대응, 교육ㆍ홍보를 수행합니다. 수혈관리실에는 의사 1명 이상, 간호사 1명 이상, 임상병리사 또는 필요 인력 1명 이상을 두고, 그중 1명 이상은 전담 근무해야 합니다.</p>
+  </section>
+
+  <section id="reaction">
+    <h2>6. 특정수혈부작용 신고와 보상</h2>
+    <p class="exam-only"><b>시험 직전:</b> 특정수혈부작용은 <mark>의료기관의 장 → 보건소장 경유 → 시ㆍ도지사</mark>입니다. 기간은 <mark>확인 후 15일 이내</mark>, 사망은 <mark>지체 없이</mark>입니다.</p>
+    <h3>신고 절차</h3>
+    <p>특정수혈부작용이 발생하면 <b>의료기관의 장</b>은 그 사실을 확인한 날부터 <span class="exam">15일 이내</span>에 해당 의료기관 소재지의 <b>보건소장을 거쳐 시ㆍ도지사</b>에게 신고합니다. <b>사망의 경우에는 지체 없이</b> 신고합니다.</p>
+    <p>시ㆍ도지사는 매월 말일 기준 발생현황 보고서를 작성하여 다음 달 10일까지 보건복지부장관에게 제출합니다. 사망은 지체 없이 제출합니다. 보건복지부장관은 통보를 받으면 발생 원인 파악 등을 위한 실태조사를 해야 하며, 의료기관과 혈액원은 협조해야 합니다.</p>
+    <h3>실태조사 내용</h3>
+    <ul class="tight">
+      <li>수혈자의 인적사항, 수혈기록, 의무기록 조사</li>
+      <li>헌혈자의 헌혈기록 및 과거 헌혈혈액 검사결과 조회</li>
+      <li>수혈자 및 헌혈자의 관련 진료내역ㆍ검사결과 확인</li>
+      <li>헌혈혈액 보관검체 검사결과와 헌혈자 채혈혈액 검사결과 확인</li>
+    </ul>
+
+    <h3>보상</h3>
+    <p>혈액원은 헌혈이 직접 원인이 되어 질병이 발생하거나 사망한 <b>채혈부작용자</b>, 또는 혈액원이 공급한 혈액이 직접 원인이 되어 질병이 발생하거나 사망한 <b>특정수혈부작용자</b>에게 보상금을 지급할 수 있습니다. 보상금은 혈액관리위원회의 심의로 결정합니다.</p>
+    <table>
+      <thead><tr><th>보상금 범위</th><th>지급하지 않을 수 있는 경우</th><th>산정 고려사항</th></tr></thead>
+      <tbody><tr><td>진료비, 장애 일시보상금, 사망 일시보상금, 장제비, 일실소득, 위자료. 혈액 공급과정에서 혈액원 과실이 없으면 위자료만 지급 가능.</td><td>채혈부작용이 헌혈자 본인의 고의 또는 중대한 과실로 발생한 경우, 채혈부작용자나 가족이 손해배상청구소송 등을 제기했거나 소송제기 의사를 표시한 경우.</td><td>혈액원 및 헌혈자의 과실 수준, 채혈 또는 수혈과 부작용 사이 직접적 인과관계, 부작용 유형ㆍ성격ㆍ피해정도 등.</td></tr></tbody>
+    </table>
+
+    <h3>기출 확인</h3>
+    
+    <details class="qa" id="q-2023-13">
+      <summary><span class="source-label">[23 총괄 13]</span> 특정수혈부작용이 발생했을 때 의료기관의 장이 소재지의 보건소장을 통해 시, 도지사에게 보고해야 하는 기간은?</summary>
+      <p class="stem">특정수혈부작용이 발생했을 때 의료기관의 장이 소재지의 보건소장을 통해 시, 도지사에게 보고해야 하는 기간은?</p>
+      <div class="options" data-answer="A">
+        <button type="button" data-opt="A"><b>A.</b> 15일 이내</button>
+<button type="button" data-opt="B"><b>B.</b> 즉시</button>
+<button type="button" data-opt="C"><b>C.</b> 24시간 이내</button>
+<button type="button" data-opt="D"><b>D.</b> 3일 이내</button>
+<button type="button" data-opt="E"><b>E.</b> 7일 이내</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: A</b></p><p>특정수혈부작용 발생 사실을 확인한 날부터 <b>15일 이내</b>에 보건소장을 거쳐 시ㆍ도지사에게 신고합니다. 다만 <b>사망은 지체 없이</b> 신고합니다.</p></details>
+    </details>
+    
+    
+    <details class="qa" id="q-2021-1">
+      <summary><span class="source-label">[21 총괄 1]</span> 의료기관의 장은 특정수혈부작용이 발생할 경우 그 사실을 누구에게 신고하여야 하는가?</summary>
+      <p class="stem">의료기관의 장은 특정수혈부작용이 발생할 경우 그 사실을 누구에게 신고하여야 하는가?</p>
+      <div class="options" data-answer="C">
+        <button type="button" data-opt="A"><b>A.</b> 보건복지부장관</button>
+<button type="button" data-opt="B"><b>B.</b> 질병관리청장</button>
+<button type="button" data-opt="C"><b>C.</b> 시,도지사</button>
+<button type="button" data-opt="D"><b>D.</b> 시,군,구청장</button>
+<button type="button" data-opt="E"><b>E.</b> 보건소장</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: C</b></p><p>법률상 신고 상대는 <b>시ㆍ도지사</b>입니다. 실제 절차는 소재지의 <b>보건소장을 거쳐</b> 신고한다는 점 때문에 보건소장과 헷갈리기 쉽습니다.</p></details>
+    </details>
+    
+    
+    <details class="qa" id="q-2020-4">
+      <summary><span class="source-label">[20 총괄 4]</span> 특별수혈 부작용을 확인한 후(사망 제외) 언제까지 보고해야 하는가?</summary>
+      <p class="stem">특별수혈 부작용을 확인한 후(사망 제외) 언제까지 보고해야 하는가?</p>
+      <div class="options" data-answer="A">
+        <button type="button" data-opt="A"><b>A.</b> 15일 이내</button>
+<button type="button" data-opt="B"><b>B.</b> 일주일</button>
+<button type="button" data-opt="C"><b>C.</b> 3일</button>
+<button type="button" data-opt="D"><b>D.</b> 24시간</button>
+<button type="button" data-opt="E"><b>E.</b> 즉시</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: A</b></p><p>사망을 제외한 특정수혈부작용은 확인한 날부터 <b>15일 이내</b>입니다. 사망은 지체 없이 신고하고 제출합니다.</p></details>
+    </details>
+    
+  </section>
+
+  <section id="records">
+    <h2>7. 기록, 헌혈증서, 재정, 처분</h2>
+    <h3>기록과 심사평가</h3>
+    <p>혈액원등은 혈액관리업무 기록을 작성ㆍ비치하고, 기록한 날부터 <b>10년</b> 보존합니다. 혈액관리업무 종사자는 건강진단ㆍ채혈ㆍ검사 등 업무상 알게 된 비밀을 누설하거나 발표할 수 없습니다. 전자혈액관리업무기록도 작성ㆍ보관할 수 있고, 정당한 사유 없이 개인정보를 탐지ㆍ누출ㆍ변조ㆍ훼손할 수 없습니다.</p>
+    <p>보건복지부장관은 혈액원등에 보고를 명하거나 출입ㆍ검사를 할 수 있고, 혈액관리업무 심사평가를 할 수 있습니다. 심사평가는 정기평가와 수시평가로 구분되며, 정기평가는 <b>2년마다</b> 실시합니다. 기준은 헌혈자 보호 등 채혈과정의 적정성, 혈액검사의 정확성, 혈액제제 제조ㆍ보존ㆍ공급ㆍ품질관리 안전성입니다.</p>
+
+    <h3>혈액 수급정보</h3>
+    <p>혈액원은 혈액 공급량ㆍ재고량ㆍ폐기량 등 혈액관리에 관한 정보를 보건복지부장관에게 제출합니다. 혈액을 공급받은 의료기관의 장도 사용량ㆍ재고량ㆍ폐기량 등 혈액 사용 정보를 제출합니다. 혈액원과 의료기관은 토요일 및 공휴일을 제외하고 매일 정오까지 전날 정보를 제출하는 것이 기본입니다. 의료기관은 수혈자의 성별ㆍ연령ㆍ혈액형ㆍ진료과목 정보는 월별로 다음 달 1일까지 일괄 제출할 수 있고, 전년도 일평균 사용량 등은 매년 1월 31일까지 제출합니다.</p>
+
+    <h3>헌혈증서와 수혈비용</h3>
+    <table>
+      <thead><tr><th>항목</th><th>핵심 내용</th></tr></thead>
+      <tbody>
+        <tr><td>발급</td><td>혈액원은 헌혈을 받으면 헌혈증서를 지체 없이 발급합니다. 문자메시지, 전자우편 등으로 제공할 수 있습니다.</td></tr>
+        <tr><td>재발급</td><td>분실ㆍ훼손 시 신원 확인 후 재발급할 수 있으나, 한 번 재발급되었거나 이미 무상수혈에 사용된 경우는 제외합니다.</td></tr>
+        <tr><td>무상수혈</td><td>헌혈자 또는 헌혈증서 양수인은 의료기관에 헌혈증서를 제출해 무상으로 혈액제제를 수혈받을 수 있습니다. <b>헌혈 1회당 혈액제제 1단위</b>입니다. 의료기관은 정당한 이유 없이 거부할 수 없습니다.</td></tr>
+        <tr><td>비용 보상</td><td>수혈비용 보상은 혈액공급가액, 혈액관리료, 수혈수수료를 합한 금액을 기준으로 하며, 대한적십자사 회장은 청구받은 날부터 <b>1개월 이내</b> 보상해야 합니다.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>헌혈환급예치금과 적립금</h3>
+    <p>혈액원이 헌혈을 받으면 헌혈환급예치금을 보건복지부장관에게 내고, 보건복지부장관은 이를 헌혈환급적립금으로 조성ㆍ관리합니다. 적립금은 <b>수혈비용 보상</b>, <b>헌혈 장려</b>, <b>혈액관리 관련 연구</b>, 특정수혈부작용 실태조사ㆍ연구, 혈액원 전산화 지원 등에 사용합니다.</p>
+
+    <h3>위임ㆍ위탁과 행정처분</h3>
+    <p>보건복지부장관은 채혈금지대상자 명부 작성ㆍ관리ㆍ통지, 헌혈자 혈액정보 관리, 수혈비용 보상, 헌혈환급예치금 수납, 적립금 조성ㆍ관리 등을 대한적십자사 회장에게 위탁할 수 있습니다.</p>
+    <p>혈액원은 회계를 다른 회계와 구분해야 하고, 회계연도는 정부 회계연도에 따릅니다. 사업계획ㆍ예산안은 회계연도 시작 1개월 전에, 수입ㆍ지출결산서와 회계감사 보고서는 회계연도 경과 후 3개월 이내 제출합니다. 혈액원 개설허가 후 3개월이 지나도록 정당한 사유 없이 업무를 시작하지 않거나, 시설ㆍ장비 기준 미달, 제조관리자 미배치, 심사평가에서 부적절, 회계서류 미제출, 법령 위반 등이 있으면 허가취소ㆍ업무정지ㆍ시정명령 대상이 됩니다.</p>
+
+    <details class="deep"><summary>혈액관리법 조문별 빠른 색인</summary>
+      <table>
+        <thead><tr><th>조문</th><th>정리</th></tr></thead>
+        <tbody>
+          <tr><td>제1-2조</td><td>목적과 정의: 혈액, 혈액관리업무, 혈액원, 헌혈자, 부적격혈액, 채혈금지대상자, 특정수혈부작용, 혈액제제, 원료혈장, 헌혈환급예치금, 채혈, 채혈부작용</td></tr>
+          <tr><td>제3조</td><td>혈액ㆍ헌혈증서 매매, 제공 약속, 알선, 위반 혈액 채혈ㆍ수혈 금지</td></tr>
+          <tr><td>제4조-제4조의8</td><td>국가ㆍ지자체 책무, 국가헌혈추진협의회, 헌혈자의 날, 헌혈자 보호, 기본계획 5년, 지역 협의회, 원료혈장 수급, 헌혈자 예우</td></tr>
+          <tr><td>제5조</td><td>혈액관리위원회 설치ㆍ운영, 심의사항, 위원 15명 이내, 임기 2년</td></tr>
+          <tr><td>제6조-제6조의4</td><td>혈액관리업무 주체, 혈액원 허가, 무허가 금지, 제조관리자, 휴업ㆍ폐업ㆍ재개업 신고와 기록 이관</td></tr>
+          <tr><td>제7조-제7조의2</td><td>헌혈자 신원 확인, 건강진단, 채혈금지대상자 조회ㆍ관리ㆍ안전성검사</td></tr>
+          <tr><td>제8조-제8조의2</td><td>혈액 안전성 검사, 부적격혈액 폐기ㆍ예외, 의료기관ㆍ수혈자 통보, 혈액사고 조치</td></tr>
+          <tr><td>제9조-제9조의2</td><td>채혈량ㆍ보존온도ㆍ공급기준, 혈액공급차량, 의료기관 수혈관리위원회와 수혈관리실</td></tr>
+          <tr><td>제10조-제10조의2</td><td>특정수혈부작용 신고ㆍ실태조사, 보상금 지급ㆍ범위ㆍ제외</td></tr>
+          <tr><td>제11-13조의2</td><td>혈액제제 수가, 기록 작성과 비밀보호, 전자기록, 검사ㆍ심사평가, 혈액 수급정보 제출</td></tr>
+          <tr><td>제14-15조</td><td>헌혈증서 발급ㆍ재발급ㆍ무상수혈, 수혈비용 보상, 헌혈환급예치금ㆍ적립금</td></tr>
+          <tr><td>제16-17조의4</td><td>군의료기관 특례, 권한 위임ㆍ위탁, 혈액원 회계와 사업계획, 개설허가 취소, 자체소비 혈액원 적용 배제</td></tr>
+          <tr><td>제18-23조</td><td>벌칙, 양벌규정, 과태료</td></tr>
+        </tbody>
+      </table>
+    </details>
+  </section>
+
+  <section id="life-core">
+    <h2>8. 연명의료법: 핵심 용어</h2>
+    <p class="exam-only"><b>시험 직전:</b> <mark>연명의료계획서 = 담당의사 작성</mark>, <mark>사전연명의료의향서 = 19세 이상 본인 직접 작성</mark>입니다. “임종과정” 판단은 원칙적으로 담당의사 + 해당 분야 전문의 1명입니다.</p>
+    <p>연명의료법은 호스피스ㆍ완화의료와 임종과정 환자의 연명의료결정 절차를 다룹니다. 원본의 법률 명칭은 “호스피스ㆍ완화의료 및 임종과정에 있는 환자의 연명의료결정에 관한 법률”입니다.</p>
+    <table>
+      <thead><tr><th>용어</th><th>핵심 뜻</th><th>시험 포인트</th></tr></thead>
+      <tbody>
+        <tr><td>임종과정</td><td>회생 가능성이 없고, 치료에도 회복되지 않으며, 급속도로 증상이 악화되어 사망에 임박한 상태</td><td>상태 자체</td></tr>
+        <tr><td>임종과정에 있는 환자</td><td>제16조에 따라 <b>담당의사와 해당 분야 전문의 1명</b>으로부터 임종과정이라는 의학적 판단을 받은 자</td><td>의사 2명 구조</td></tr>
+        <tr><td>말기환자</td><td>적극 치료에도 근원적 회복 가능성이 없고 증상이 악화되어 수개월 이내 사망 예상 진단을 받은 환자</td><td>말기환자 진단도 담당의사 + 전문의 1명</td></tr>
+        <tr><td>연명의료</td><td>임종과정 환자에게 하는 <b>심폐소생술, 혈액 투석, 항암제 투여, 인공호흡기 착용</b> 등 치료효과 없이 임종과정 기간만 연장하는 의학적 시술</td><td>중단해도 되는 의료의 범위</td></tr>
+        <tr><td>연명의료중단등결정</td><td>임종과정 환자에게 연명의료를 시행하지 않거나 중단하기로 하는 결정</td><td>호스피스나 통증완화 중단과 다름</td></tr>
+        <tr><td>호스피스ㆍ완화의료</td><td>호스피스대상환자와 가족에게 통증과 증상 완화, 신체적ㆍ심리사회적ㆍ영적 영역에 대한 종합 평가와 치료를 제공하는 의료</td><td>대상 질환과 신청 절차</td></tr>
+        <tr><td>담당의사</td><td>말기환자 또는 임종과정 환자를 직접 진료하는 의사</td><td>계획서 작성자</td></tr>
+        <tr><td>연명의료계획서</td><td>말기환자등의 의사에 따라 <b>담당의사</b>가 연명의료중단등결정 및 호스피스 사항을 계획해 문서로 작성한 것</td><td><span class="exam">담당의사가 작성</span></td></tr>
+        <tr><td>사전연명의료의향서</td><td><b>19세 이상</b>인 사람이 자신의 의사를 <b>직접</b> 문서로 작성한 것</td><td><span class="exam">본인이 작성</span></td></tr>
+      </tbody>
+    </table>
+    <p>호스피스 대상 질환은 <b>암, 후천성면역결핍증, 만성 폐쇄성 호흡기질환, 만성 간경화</b>와 그 밖에 보건복지부령으로 정하는 질환입니다. 원본 필기에는 “이 질병들은 보험급여가 됨”이라는 메모가 붙어 있습니다.</p>
+    <p>말기환자 여부는 임상적 증상, 다른 질병ㆍ질환의 존재, 약물 투여 또는 시술에 따른 개선 정도, 종전 진료 경과, 다른 진료 방법 가능 여부 등을 종합적으로 고려합니다.</p>
+
+    <h3>국가 체계</h3>
+    <p><b>국립연명의료관리기관</b>은 연명의료, 연명의료중단등결정 및 그 이행을 적정하게 관리하기 위해 설치됩니다. 연명의료계획서와 사전연명의료의향서 데이터베이스 구축ㆍ관리, 등록기관 지도ㆍ감독, 확인 조회 요청에 대한 회답, 현황 조사ㆍ연구ㆍ통계 산출, 정보처리시스템 구축ㆍ운영, 의료기관ㆍ의료인 교육ㆍ정보제공 등을 수행합니다.</p>
+    <p class="deep">제공된 “못 찾은 문제들”에는 <span class="exam">국가 호스피스 연명의료위원회 위원장 = 보건복지부 차관</span>으로 표시되어 있습니다. 함께 적힌 “계획은 5년마다”는 국가 차원의 종합계획 주기로 정리합니다.</p>
+    
+    <details class="qa" id="q-2020-3">
+      <summary><span class="source-label">[20 총괄 3]</span> 국가 호스피스 연명의료 위원회의 위원장은?</summary>
+      <p class="stem">국가 호스피스 연명의료 위원회의 위원장은?</p>
+      <div class="options" data-answer="A">
+        <button type="button" data-opt="A"><b>A.</b> 보건복지부 차관</button>
+<button type="button" data-opt="B"><b>B.</b> 보건복지부 장관</button>
+<button type="button" data-opt="C"><b>C.</b> 질병관리본부장</button>
+<button type="button" data-opt="D"><b>D.</b> 식품안전처장</button>
+<button type="button" data-opt="E"><b>E.</b> 행정안전부 차관</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: A</b></p><p>제공된 “못 찾은 문제들” 슬라이드에서 정답으로 표시된 항목은 <b>보건복지부 차관</b>입니다. 옆의 필기 “계획은 5년마다”는 종합계획 주기와 연결해 함께 기억합니다.</p></details>
+    </details>
+    
+  </section>
+
+  <section id="plan">
+    <h2>9. 연명의료계획서와 사전연명의료의향서</h2>
+    <h3>연명의료계획서</h3>
+    <p><span class="exam">연명의료계획서는 담당의사가 작성</span>합니다. 말기환자등은 의료기관에서 담당의사에게 작성 요청을 할 수 있고, 담당의사는 작성 전에 환자에게 내용을 설명하고 이해했음을 확인받아야 합니다. 환자가 미성년자라면 환자와 법정대리인 모두에게 설명하고 확인받습니다.</p>
+    <table>
+      <thead><tr><th>작성 전 설명사항</th><th>계획서 포함사항</th><th>등록ㆍ보관</th></tr></thead>
+      <tbody><tr><td>질병 상태와 치료방법, 연명의료 시행방법 및 중단등결정, 호스피스 선택ㆍ이용, 계획서 작성ㆍ등록ㆍ보관ㆍ통보, 변경ㆍ철회와 조치, 의료기관윤리위원회 이용</td><td>환자의 연명의료중단등결정 및 호스피스 이용, 설명 이해 확인, 담당의사 서명날인, 작성 연월일, 환자 성명ㆍ주민등록번호, 말기/임종과정 여부, 열람허용 여부, 담당의사의 소속ㆍ면허번호</td><td>의료기관의 장은 작성된 연명의료계획서를 <b>등록ㆍ보관</b>하고, 등록ㆍ변경ㆍ철회 결과를 관리기관의 장에게 통보합니다. 원본 필기와 기출은 <b>10년 보존</b>을 강조합니다.</td></tr></tbody>
+    </table>
+    <p>환자는 연명의료계획서의 변경 또는 철회를 언제든지 요청할 수 있고, 담당의사는 이를 반영해야 합니다. 담당의사는 작성ㆍ변경ㆍ철회 요청을 받은 경우 지체 없이 소속 의료기관의 장에게 보고합니다.</p>
+
+    <h3>사전연명의료의향서</h3>
+    <p><span class="exam">사전연명의료의향서는 19세 이상인 사람이 직접 작성</span>합니다. 등록기관은 작성 전 설명을 충분히 하고, 작성자가 이해했음을 확인받아야 합니다.</p>
+    <table>
+      <thead><tr><th>등록기관이 될 수 있는 기관</th><th>등록기관 업무</th><th>무효 사유</th></tr></thead>
+      <tbody><tr><td>지역보건의료기관, 의료기관, 관련 사업 수행 비영리법인ㆍ비영리단체, 공공기관, 노인복지관</td><td>의향서 등록, 설명ㆍ작성 지원, 상담ㆍ정보제공ㆍ홍보, 관리기관에 등록ㆍ변경ㆍ철회 결과 통보, 보존ㆍ관리, 업무 수행 결과 기록ㆍ보관ㆍ보고</td><td>본인이 직접 작성하지 않은 경우, 자발적 의사가 아닌 경우, 설명 제공이나 작성자 확인이 없는 경우, 작성ㆍ등록 후 연명의료계획서가 다시 작성된 경우</td></tr></tbody>
+    </table>
+    <p>사전연명의료의향서는 연명의료중단등결정, 호스피스 이용, 작성 연월일 등을 포함합니다. 작성자는 언제든지 의사를 변경하거나 철회할 수 있고, 등록기관의 장은 지체 없이 변경하거나 등록을 말소하고 관리기관의 장에게 통보해야 합니다. 등록기관이 폐업 또는 1개월 이상 휴업하거나 운영을 재개하려면 보건복지부장관에게 신고하고, 폐업ㆍ휴업 시 관련 기록을 관리기관에 이관합니다. 휴업ㆍ폐업 예정일 3일 전까지 이관하는 규정도 함께 정리합니다.</p>
+
+    <h3>기출 확인</h3>
+    
+    <details class="qa" id="q-2023-16">
+      <summary><span class="source-label">[23 총괄 16]</span> 연명의료결정에 관한 법률상 연명의료계획서를 작성하는 사람은?</summary>
+      <p class="stem">연명의료결정에 관한 법률상 연명의료계획서를 작성하는 사람은?</p>
+      <div class="options" data-answer="B">
+        <button type="button" data-opt="A"><b>A.</b> 환자</button>
+<button type="button" data-opt="B"><b>B.</b> 담당의사</button>
+<button type="button" data-opt="C"><b>C.</b> 병원장</button>
+<button type="button" data-opt="D"><b>D.</b> 국립연명의료관리기관장</button>
+<button type="button" data-opt="E"><b>E.</b> 보건복지부장관</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: B</b></p><p><b>연명의료계획서</b>는 말기환자등의 의사에 따라 <b>담당의사</b>가 작성합니다. 반대로 <b>사전연명의료의향서</b>는 19세 이상인 본인이 직접 작성합니다.</p></details>
+    </details>
+    
+    
+    <details class="qa" id="q-2021-2">
+      <summary><span class="source-label">[21 총괄 2]</span> 의료기관의 장은 연명의료계획서를 몇 년 동안 보존하여야 하는가?</summary>
+      <p class="stem">의료기관의 장은 연명의료계획서를 몇 년 동안 보존하여야 하는가?</p>
+      <div class="options" data-answer="E">
+        <button type="button" data-opt="A"><b>A.</b> 1년</button>
+<button type="button" data-opt="B"><b>B.</b> 2년</button>
+<button type="button" data-opt="C"><b>C.</b> 3년</button>
+<button type="button" data-opt="D"><b>D.</b> 5년</button>
+<button type="button" data-opt="E"><b>E.</b> 10년</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: E</b></p><p>원본 필기에서 별도로 “10년”이 표시되어 있습니다. 연명의료계획서는 등록ㆍ보관 대상이고, 시험에서는 보존기간을 <b>10년</b>으로 확인했습니다.</p></details>
+    </details>
+    
+  </section>
+
+  <section id="ethics">
+    <h2>10. 의료기관윤리위원회</h2>
+    <p>연명의료중단등결정과 그 이행 업무를 수행하려는 의료기관은 의료기관윤리위원회를 설치하고 보건복지부장관에게 등록해야 합니다. 윤리위원회를 설치한 날부터 <b>10일 이내</b> 등록하는 절차가 시행규칙에 나옵니다.</p>
+    <table>
+      <thead><tr><th>활동</th><th>구성</th><th>운영</th></tr></thead>
+      <tbody><tr><td>임종과정 환자ㆍ가족ㆍ의료인의 요청사항 심의, 담당의사 교체 심의, 환자와 가족 상담, 의료인 의료윤리교육</td><td>위원장 1명을 포함해 <b>5명 이상</b>. 해당 의료기관 종사자만으로 구성할 수 없고, 의료인이 아닌 사람으로서 종교계ㆍ법조계ㆍ윤리학계ㆍ시민단체 추천을 받은 사람 <b>2명 이상</b> 포함. 시행령상 <b>5명 이상 20명 이하</b>, 임기 <b>2년</b>.</td><td>위원장은 위원 중 호선합니다. 재적위원 과반수 출석, 출석위원 과반수 찬성으로 의결합니다. 다만 일부 심의안건은 재적위원 과반수 찬성으로 의결합니다.</td></tr></tbody>
+    </table>
+    <p>다른 의료기관의 윤리위원회 또는 공용윤리위원회와 업무 수행 위탁 협약을 맺으면 윤리위원회를 설치한 것으로 봅니다. 보건복지부장관은 공용윤리위원회를 지정할 수 있고, 정당한 사유 없이 업무를 수행하지 않거나 구성 요건을 갖추지 못하는 경우 지정 해제할 수 있습니다.</p>
+  </section>
+
+  <section id="will">
+    <h2>11. 임종과정 판단과 환자 의사 확인</h2>
+    <p class="exam-only"><b>시험 직전:</b> 환자 의사 확인은 ① 연명의료계획서, ② 사전연명의료의향서 확인, ③ 19세 이상 환자가 의사표현 불가능하면 가족 2명 이상 일치 진술입니다. 환자의 의사를 확인할 수 없으면 가족 <b>전원 합의</b> 구조로 넘어갑니다.</p>
+    <h3>임종과정 판단</h3>
+    <p>담당의사는 연명의료중단등결정을 이행하기 전에 환자가 임종과정에 있는지 여부를 <span class="exam">해당 분야 전문의 1명과 함께</span> 판단하고 기록해야 합니다. 다만 호스피스전문기관에서 호스피스를 이용하는 말기환자에 대해서는 <b>담당의사의 판단</b>으로 갈음할 수 있습니다.</p>
+
+    <h3>환자의 의사가 확인되는 경우</h3>
+    <table>
+      <thead><tr><th>방법</th><th>확인 방식</th></tr></thead>
+      <tbody>
+        <tr><td>연명의료계획서</td><td>의료기관에서 작성된 연명의료계획서가 있으면 이를 환자의 의사로 봅니다.</td></tr>
+        <tr><td>사전연명의료의향서</td><td>담당의사가 의향서 내용을 환자에게 확인하면 환자의 의사로 봅니다. 환자가 확인할 의사능력이 충분하지 않다는 의학적 판단과 적법 작성 사실을 담당의사 및 해당 분야 전문의 1명이 확인한 경우도 포함합니다.</td></tr>
+        <tr><td>가족 진술</td><td>19세 이상 환자가 의사를 표현할 수 없는 의학적 상태이고, 충분한 기간 동안 일관되게 표시된 의사에 대해 환자가족 <b>2명 이상</b>의 일치 진술이 있으면 담당의사와 전문의 1명의 확인으로 환자의 의사로 봅니다. 환자가족이 1명뿐이면 그 1명의 진술로 족합니다.</td></tr>
+      </tbody>
+    </table>
+    <p>가족 진술의 환자가족 범위는 <b>배우자 → 직계비속 → 직계존속 → 형제자매</b> 순서입니다. 다만 진술과 배치되는 다른 가족의 진술이나 객관적 증거가 있으면 인정하지 않습니다. 객관적 증거는 환자 본인이 직접 작성한 문서, 녹음물, 녹화물 또는 이에 준하는 기록물에서 환자가 의사를 직접 표명한 경우입니다.</p>
+
+    <h3>환자의 의사를 확인할 수 없는 경우</h3>
+    <p>환자의 의사를 확인할 수 없고 의사표현을 할 수 없는 의학적 상태라면, 다음 경우 해당 환자를 위한 연명의료중단등결정이 있는 것으로 봅니다. 다만 담당의사 또는 해당 분야 전문의 1명이 환자가 원하지 않았다는 사실을 확인하면 제외합니다.</p>
+    <table>
+      <thead><tr><th>상황</th><th>요건</th></tr></thead>
+      <tbody>
+        <tr><td>미성년자</td><td>법정대리인, 즉 <b>친권자</b>가 의사표시를 하고 담당의사와 해당 분야 전문의 1명이 확인합니다.</td></tr>
+        <tr><td>성인 환자</td><td>환자가족 중 19세 이상인 사람 <b>전원의 합의</b>와 담당의사 및 해당 분야 전문의 1명의 확인이 필요합니다. 순서는 <b>배우자 → 1촌 이내 직계 존속ㆍ비속 → 2촌 이내 직계 존속ㆍ비속 → 형제자매</b>입니다.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="implementation">
+    <h2>12. 연명의료중단등결정 이행</h2>
+    <p>담당의사는 요건에 해당하는 환자에 대하여 <span class="exam">즉시</span> 연명의료중단등결정을 이행해야 합니다. 이행 과정과 결과는 기록해야 하며, 의료기관의 장은 결과를 지체 없이 관리기관의 장에게 통보합니다.</p>
+    <p><span class="exam">통증완화를 위한 의료행위, 영양분 공급, 물 공급, 산소의 단순 공급은 시행하지 않거나 중단해서는 안 됩니다.</span> 연명의료중단등결정은 연명의료의 시행 보류 또는 중단이지, 기본적 돌봄과 완화치료를 중단하는 결정이 아닙니다.</p>
+    <p>담당의사가 이행을 거부하면 의료기관의 장은 윤리위원회 심의를 거쳐 담당의사를 교체해야 합니다. 이행 거부를 이유로 담당의사를 해고하거나 불리한 처우를 해서는 안 됩니다.</p>
+    <p>의료인이 과실로 법정 기록을 허위 작성한 경우 보건복지부장관은 의료기관의 장에게 해당 의료기관 의료인 교육을 명할 수 있습니다. 교육기관은 국립연명의료관리기관이고, 교육시간은 <b>2시간 이상</b>, 교육내용은 제도와 서식 작성 방법입니다. 의료기관의 장은 교육명령 후 <b>3개월 이내</b> 교육을 받도록 해야 합니다.</p>
+  </section>
+
+  <section id="hospice">
+    <h2>13. 호스피스 체계</h2>
+    <h3>중앙센터와 권역별센터</h3>
+    <table>
+      <thead><tr><th>기관</th><th>지정과 업무</th><th>지정기준ㆍ운영</th></tr></thead>
+      <tbody>
+        <tr><td>중앙호스피스센터</td><td>보건복지부장관이 기준을 충족하는 종합병원 중 지정하며, 국공립 의료기관을 우선합니다. 말기환자 연구, 정보ㆍ통계 수집ㆍ분석ㆍ제공, 사업계획 작성, 신기술 개발ㆍ보급, 호스피스 제공, 사업결과 평가ㆍ활용 등을 수행합니다.</td><td>호스피스전문기관 지정, 물리적으로 구분된 병동, 독립 사무실ㆍ연구실ㆍ회의실, 독립 온라인정보시스템, 1개 이상 전담부서와 <b>10명 이상</b> 전담인력이 필요합니다. 매년 사업운영계획ㆍ실적ㆍ재정운용계획ㆍ재정집행내역을 보고합니다.</td></tr>
+        <tr><td>권역별호스피스센터</td><td>해당 권역의 호스피스사업 지원, 호스피스전문기관 의료지원ㆍ평가, 호스피스 제공, 교육ㆍ훈련ㆍ홍보, 말기환자 등록통계자료 수집ㆍ분석ㆍ제공을 수행합니다.</td><td>중앙센터 기준을 준용하되 전담인력은 <b>4명 이상</b>으로 봅니다. 원칙적으로 시ㆍ도별 1개를 지정하지만, 의료자원 분포와 주민 수를 고려해 통합 지정 또는 복수 지정이 가능합니다.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>호스피스전문기관</h3>
+    <p>보건복지부장관은 호스피스대상환자를 대상으로 호스피스전문기관을 설치ㆍ운영하려는 의료기관 중 시설ㆍ인력ㆍ장비 기준을 충족하는 기관을 <b>입원형, 자문형, 가정형</b>으로 구분해 지정할 수 있습니다. 지정 신청에는 의료기관 개설신고증명서 또는 허가증 사본, 지정기준 적합 증명서류, 사업운영계획서, 최근 6개월 호스피스 진료실적보고서, 인증서 사본 등을 첨부합니다.</p>
+    <p>중요사항 변경 시에는 변경신고가 필요합니다. 변경사항은 소재지, 대표자, 인력ㆍ시설, 병동 전체 병상 수 또는 입원실 병상 수 등입니다. 폐업ㆍ휴업 시 지정서와 입원환자 조치계획서를 첨부해 신고합니다.</p>
+
+    <h3>호스피스 신청과 철회</h3>
+    <p>호스피스대상환자가 호스피스를 이용하려면 <b>호스피스 이용동의서</b>와 의사가 발급하는 <b>호스피스대상환자 의사소견서</b>를 첨부해 호스피스전문기관에 신청합니다. 의사결정능력이 없으면 미리 지정한 지정대리인이 신청하고, 지정대리인이 없으면 환자의 의사 확인에서 정한 가족 순서에 따라 신청할 수 있습니다. 환자는 언제든지 직접 또는 대리인을 통해 신청을 철회할 수 있습니다.</p>
+
+    <h3>정보시스템, 평가, 기록열람</h3>
+    <p>보건복지부장관은 호스피스종합정보시스템을 구축ㆍ운영할 수 있고, 중앙센터ㆍ권역별센터ㆍ호스피스전문기관과 정보연계를 할 수 있습니다. 연계 정보에는 잔여 병상 수ㆍ유형 등 사용 가능한 호스피스 병상 정보, 호스피스 이용신청 후 대기 중인 환자 관련 정보 등이 포함됩니다.</p>
+    <p>호스피스전문기관 평가는 매년 정기적으로 실시하고 필요 시 수시 평가가 가능합니다. 평가 방법은 서면조사와 현지조사가 기본이며, 평가 실시 30일 전에 미리 통보합니다. 거짓 지정, 지정 기준 미달, 정당한 사유 없는 평가 거부 등은 지정 취소 또는 6개월 이내 업무정지 사유이고, 지정 취소된 기관은 2년 이내 재지정 받을 수 없습니다.</p>
+    <p>환자가족은 관리기관의 장 또는 해당 의료기관의 장에게 연명의료중단등결정 또는 그 이행에 관한 기록 열람을 요청할 수 있습니다. 관리기관에는 연명의료계획서, 사전연명의료의향서, 이행 결과 기록을 요청할 수 있고, 의료기관에는 임종과정 판단 기록, 의향서 확인 결과, 가족 진술 자료, 의사표시 자료, 윤리위원회 심의 기록 등을 요청할 수 있습니다.</p>
+
+    <details class="deep"><summary>연명의료법 조문별 빠른 색인</summary>
+      <table>
+        <thead><tr><th>조문</th><th>정리</th></tr></thead>
+        <tbody>
+          <tr><td>제2조</td><td>임종과정, 임종과정에 있는 환자, 말기환자, 연명의료, 연명의료중단등결정, 호스피스, 담당의사, 연명의료계획서, 사전연명의료의향서 정의</td></tr>
+          <tr><td>제2조의2</td><td>호스피스 대상 질환: 별표 1 질환</td></tr>
+          <tr><td>제9조</td><td>국립연명의료관리기관 설치와 업무</td></tr>
+          <tr><td>제10조</td><td>연명의료계획서 작성ㆍ등록ㆍ보관ㆍ통보, 변경ㆍ철회</td></tr>
+          <tr><td>제11조</td><td>사전연명의료의향서 등록기관 지정, 업무, 폐업ㆍ휴업 신고와 기록 이관</td></tr>
+          <tr><td>제12조</td><td>사전연명의료의향서 직접 작성, 설명, 등록ㆍ보관, 변경ㆍ철회, 무효 사유</td></tr>
+          <tr><td>제14조</td><td>의료기관윤리위원회 설치ㆍ운영, 공용윤리위원회</td></tr>
+          <tr><td>제16조</td><td>환자가 임종과정에 있는지 담당의사와 전문의 1명이 판단, 호스피스전문기관 예외</td></tr>
+          <tr><td>제17조</td><td>환자 의사 확인: 계획서, 의향서, 가족 진술</td></tr>
+          <tr><td>제18조</td><td>환자 의사를 확인할 수 없는 경우: 미성년자 법정대리인 또는 가족 전원 합의</td></tr>
+          <tr><td>제19조</td><td>연명의료중단등결정 이행, 중단 불가 항목, 담당의사 교체, 기록ㆍ통보</td></tr>
+          <tr><td>제20조의2</td><td>과실로 기록 허위작성 시 교육명령</td></tr>
+          <tr><td>제23-24조</td><td>중앙호스피스센터와 권역별호스피스센터 지정ㆍ운영</td></tr>
+          <tr><td>제25-26조</td><td>호스피스전문기관 지정, 변경ㆍ폐업ㆍ휴업 신고</td></tr>
+          <tr><td>제28-28조의2</td><td>호스피스 신청ㆍ철회, 호스피스종합정보시스템</td></tr>
+          <tr><td>제29-30조</td><td>호스피스전문기관 평가와 지정 취소</td></tr>
+          <tr><td>제33조</td><td>환자가족의 기록 열람</td></tr>
+        </tbody>
+      </table>
+    </details>
+  </section>
+
+  <section id="archive">
+    <h2>14. 기출 모아보기</h2>
+    <p>아래 문항은 원본에 제공된 발문과 선지를 누락 없이 옮긴 것입니다. 같은 쟁점을 묻는 문항도 연도별로 따로 유지했습니다.</p>
+    <div class="grid two">
+      <div>
+        <h3>혈액관리법</h3>
+        <p class="muted">채혈 가능/금지와 특정수혈부작용 신고가 반복됩니다.</p>
+        
+    <details class="qa" id="q-2023-13">
+      <summary><span class="source-label">[23 총괄 13]</span> 특정수혈부작용이 발생했을 때 의료기관의 장이 소재지의 보건소장을 통해 시, 도지사에게 보고해야 하는 기간은?</summary>
+      <p class="stem">특정수혈부작용이 발생했을 때 의료기관의 장이 소재지의 보건소장을 통해 시, 도지사에게 보고해야 하는 기간은?</p>
+      <div class="options" data-answer="A">
+        <button type="button" data-opt="A"><b>A.</b> 15일 이내</button>
+<button type="button" data-opt="B"><b>B.</b> 즉시</button>
+<button type="button" data-opt="C"><b>C.</b> 24시간 이내</button>
+<button type="button" data-opt="D"><b>D.</b> 3일 이내</button>
+<button type="button" data-opt="E"><b>E.</b> 7일 이내</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: A</b></p><p>특정수혈부작용 발생 사실을 확인한 날부터 <b>15일 이내</b>에 보건소장을 거쳐 시ㆍ도지사에게 신고합니다. 다만 <b>사망은 지체 없이</b> 신고합니다.</p></details>
+    </details>
+    
+        
+    <details class="qa" id="q-2023-14">
+      <summary><span class="source-label">[23 총괄 14]</span> 다음 중 특별한 금기 사항이 없을 때, 다음 중 수혈할 수 있는 사람은? (문제 정말 수혈로 나옴)</summary>
+      <p class="stem">다음 중 특별한 금기 사항이 없을 때, 다음 중 수혈할 수 있는 사람은? (문제 정말 수혈로 나옴)</p>
+      <div class="options" data-answer="A">
+        <button type="button" data-opt="A"><b>A.</b> 50kg 남자</button>
+<button type="button" data-opt="B"><b>B.</b> 이완기 혈압 110 밀리미터(수은주압) 이상인 자</button>
+<button type="button" data-opt="C"><b>C.</b> 심박수 110회</button>
+<button type="button" data-opt="D"><b>D.</b> 체온 38도</button>
+<button type="button" data-opt="E"><b>E.</b> B형 간염 환자</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: A</b></p><p>채혈금지 공통기준에서 남자는 체중 50kg 미만이면 금지입니다. 따라서 <b>50kg 남자</b>는 체중 기준만 보면 금지가 아닙니다. 이완기혈압 100mmHg 이상, 맥박 100회 초과, 체온 37.5도 초과, 혈액매개 감염병은 금지 쪽으로 판단합니다.</p></details>
+    </details>
+    
+        
+    <details class="qa" id="q-2023-15">
+      <summary><span class="source-label">[23 총괄 15]</span> 다음 중 채혈 금지 대상자로 옳은 것은?</summary>
+      <p class="stem">다음 중 채혈 금지 대상자로 옳은 것은?</p>
+      <div class="options" data-answer="B">
+        <button type="button" data-opt="A"><b>A.</b> 말라리아 병력자로 치료종료 후 5년이 경과하지 아니한 자</button>
+<button type="button" data-opt="B"><b>B.</b> 브루셀라증 병력자로 치료종료 후 2년이 경과하지 아니한자</button>
+<button type="button" data-opt="C"><b>C.</b> 매독 병력자로 치료종료 후 2년이 경과하지 아니한자</button>
+<button type="button" data-opt="D"><b>D.</b> B형 간염 병력자로 완치 후 1년이 경과하지 아니한 자</button>
+<button type="button" data-opt="E"><b>E.</b> 수축기 혈압이 95 밀리미터(수은주압) 이상인 자</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: B</b></p><p><b>브루셀라증 병력자는 치료종료 후 2년이 경과하지 않으면 채혈금지</b>입니다. 말라리아는 치료종료 후 3년, 매독은 치료종료 후 1년, 급성 B형간염은 완치 후 6개월이 핵심입니다. 수축기혈압 95mmHg는 90mmHg 미만이 아니므로 그 자체로 금지 기준이 아닙니다.</p></details>
+    </details>
+    
+        
+    <details class="qa" id="q-2021-1">
+      <summary><span class="source-label">[21 총괄 1]</span> 의료기관의 장은 특정수혈부작용이 발생할 경우 그 사실을 누구에게 신고하여야 하는가?</summary>
+      <p class="stem">의료기관의 장은 특정수혈부작용이 발생할 경우 그 사실을 누구에게 신고하여야 하는가?</p>
+      <div class="options" data-answer="C">
+        <button type="button" data-opt="A"><b>A.</b> 보건복지부장관</button>
+<button type="button" data-opt="B"><b>B.</b> 질병관리청장</button>
+<button type="button" data-opt="C"><b>C.</b> 시,도지사</button>
+<button type="button" data-opt="D"><b>D.</b> 시,군,구청장</button>
+<button type="button" data-opt="E"><b>E.</b> 보건소장</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: C</b></p><p>법률상 신고 상대는 <b>시ㆍ도지사</b>입니다. 실제 절차는 소재지의 <b>보건소장을 거쳐</b> 신고한다는 점 때문에 보건소장과 헷갈리기 쉽습니다.</p></details>
+    </details>
+    
+        
+    <details class="qa" id="q-2020-4">
+      <summary><span class="source-label">[20 총괄 4]</span> 특별수혈 부작용을 확인한 후(사망 제외) 언제까지 보고해야 하는가?</summary>
+      <p class="stem">특별수혈 부작용을 확인한 후(사망 제외) 언제까지 보고해야 하는가?</p>
+      <div class="options" data-answer="A">
+        <button type="button" data-opt="A"><b>A.</b> 15일 이내</button>
+<button type="button" data-opt="B"><b>B.</b> 일주일</button>
+<button type="button" data-opt="C"><b>C.</b> 3일</button>
+<button type="button" data-opt="D"><b>D.</b> 24시간</button>
+<button type="button" data-opt="E"><b>E.</b> 즉시</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: A</b></p><p>사망을 제외한 특정수혈부작용은 확인한 날부터 <b>15일 이내</b>입니다. 사망은 지체 없이 신고하고 제출합니다.</p></details>
+    </details>
+    
+        
+    <details class="qa" id="q-2020-5">
+      <summary><span class="source-label">[20 총괄 5]</span> 다음 중 헌혈할 수 있는 사람은?</summary>
+      <p class="stem">다음 중 헌혈할 수 있는 사람은?</p>
+      <div class="options" data-answer="A">
+        <button type="button" data-opt="A"><b>A.</b> 50kg 남자</button>
+<button type="button" data-opt="B"><b>B.</b> 이완기 혈압 110</button>
+<button type="button" data-opt="C"><b>C.</b> 심박수 110</button>
+<button type="button" data-opt="D"><b>D.</b> 체온 38도</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: A</b></p><p>남자 체중 50kg은 금지 기준인 “50kg 미만”에 해당하지 않습니다. 이완기혈압 110mmHg는 100mmHg 이상, 심박수 110회는 100회 초과, 체온 38도는 37.5도 초과라서 금지 기준에 해당합니다.</p></details>
+    </details>
+    
+      </div>
+      <div>
+        <h3>연명의료법</h3>
+        <p class="muted">계획서 작성자, 보존기간, 국가위원회 위원장이 출제되었습니다.</p>
+        
+    <details class="qa" id="q-2023-16">
+      <summary><span class="source-label">[23 총괄 16]</span> 연명의료결정에 관한 법률상 연명의료계획서를 작성하는 사람은?</summary>
+      <p class="stem">연명의료결정에 관한 법률상 연명의료계획서를 작성하는 사람은?</p>
+      <div class="options" data-answer="B">
+        <button type="button" data-opt="A"><b>A.</b> 환자</button>
+<button type="button" data-opt="B"><b>B.</b> 담당의사</button>
+<button type="button" data-opt="C"><b>C.</b> 병원장</button>
+<button type="button" data-opt="D"><b>D.</b> 국립연명의료관리기관장</button>
+<button type="button" data-opt="E"><b>E.</b> 보건복지부장관</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: B</b></p><p><b>연명의료계획서</b>는 말기환자등의 의사에 따라 <b>담당의사</b>가 작성합니다. 반대로 <b>사전연명의료의향서</b>는 19세 이상인 본인이 직접 작성합니다.</p></details>
+    </details>
+    
+        
+    <details class="qa" id="q-2021-2">
+      <summary><span class="source-label">[21 총괄 2]</span> 의료기관의 장은 연명의료계획서를 몇 년 동안 보존하여야 하는가?</summary>
+      <p class="stem">의료기관의 장은 연명의료계획서를 몇 년 동안 보존하여야 하는가?</p>
+      <div class="options" data-answer="E">
+        <button type="button" data-opt="A"><b>A.</b> 1년</button>
+<button type="button" data-opt="B"><b>B.</b> 2년</button>
+<button type="button" data-opt="C"><b>C.</b> 3년</button>
+<button type="button" data-opt="D"><b>D.</b> 5년</button>
+<button type="button" data-opt="E"><b>E.</b> 10년</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: E</b></p><p>원본 필기에서 별도로 “10년”이 표시되어 있습니다. 연명의료계획서는 등록ㆍ보관 대상이고, 시험에서는 보존기간을 <b>10년</b>으로 확인했습니다.</p></details>
+    </details>
+    
+        
+    <details class="qa" id="q-2020-3">
+      <summary><span class="source-label">[20 총괄 3]</span> 국가 호스피스 연명의료 위원회의 위원장은?</summary>
+      <p class="stem">국가 호스피스 연명의료 위원회의 위원장은?</p>
+      <div class="options" data-answer="A">
+        <button type="button" data-opt="A"><b>A.</b> 보건복지부 차관</button>
+<button type="button" data-opt="B"><b>B.</b> 보건복지부 장관</button>
+<button type="button" data-opt="C"><b>C.</b> 질병관리본부장</button>
+<button type="button" data-opt="D"><b>D.</b> 식품안전처장</button>
+<button type="button" data-opt="E"><b>E.</b> 행정안전부 차관</button>
+      </div>
+      <p class="feedback" aria-live="polite"></p>
+      <details class="answer"><summary>정답과 해설</summary><p><b>정답: A</b></p><p>제공된 “못 찾은 문제들” 슬라이드에서 정답으로 표시된 항목은 <b>보건복지부 차관</b>입니다. 옆의 필기 “계획은 5년마다”는 종합계획 주기와 연결해 함께 기억합니다.</p></details>
+    </details>
+    
+      </div>
+    </div>
+  </section>
+
+  <section id="checklist">
+    <h2>15. 누락 점검표</h2>
+    <table>
+      <thead><tr><th>확인 항목</th><th>반영 위치</th></tr></thead>
+      <tbody>
+        <tr><td>혈액관리법 목적ㆍ정의, 혈액제제, 특정수혈부작용</td><td>2장</td></tr>
+        <tr><td>헌혈 장려, 헌혈자의 날, 헌혈자 보호, 기본계획, 위원회</td><td>3장</td></tr>
+        <tr><td>혈액관리업무 주체, 혈액원 허가, 제조관리자, 휴업ㆍ폐업</td><td>3장</td></tr>
+        <tr><td>헌혈자 건강진단, 채혈금지 공통기준과 질병 기준, 헌혈금지약물</td><td>4장</td></tr>
+        <tr><td>부적격혈액 검사ㆍ폐기ㆍ통보, 채혈량ㆍ온도, 수혈관리위원회ㆍ실</td><td>5장</td></tr>
+        <tr><td>특정수혈부작용 신고, 실태조사, 보상</td><td>6장</td></tr>
+        <tr><td>기록 10년, 심사평가 2년, 헌혈증서, 환급예치금, 위탁, 처분</td><td>7장</td></tr>
+        <tr><td>연명의료법 정의, 말기환자 기준, 호스피스 대상 질환</td><td>8장</td></tr>
+        <tr><td>국립연명의료관리기관, 국가위원회 보충 문항</td><td>8장</td></tr>
+        <tr><td>연명의료계획서, 사전연명의료의향서, 윤리위원회</td><td>9-10장</td></tr>
+        <tr><td>임종과정 판단, 환자의 의사 확인, 의사 확인 불가 시 결정</td><td>11장</td></tr>
+        <tr><td>연명의료중단등결정 이행, 중단 불가 항목, 교육명령</td><td>12장</td></tr>
+        <tr><td>중앙ㆍ권역별센터, 호스피스전문기관, 신청ㆍ철회, 정보시스템, 평가, 기록열람</td><td>13장</td></tr>
+        <tr><td>기출/못 찾은 문제 전체</td><td>각 관련 단원 및 14장</td></tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+<footer class="wrap foot">
+  <p>제작 기준: 업로드된 0521_4 PDF의 법제처 3단비교표, 필기 강조, 기출문항 이미지를 바탕으로 재구성했습니다. 시험 대비용 학습자료이며 실제 법령 적용 시 최신 법령 원문을 확인해야 합니다.</p>
+</footer>
+<script>
+function toggleExamMode() { document.body.classList.toggle('exam-mode'); }
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  document.getElementById('progress').style.width = scrolled + '%';
+});
+document.querySelectorAll('.options').forEach(group => {
+  group.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      group.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+      const correct = group.dataset.answer;
+      const chosen = btn.dataset.opt;
+      const fb = group.parentElement.querySelector('.feedback');
+      if (chosen === correct) { fb.textContent = '정답입니다.'; }
+      else { fb.textContent = '오답입니다. 정답은 ' + correct + '입니다.'; }
+    });
+  });
+});
+</script>
+</body>
+</html>

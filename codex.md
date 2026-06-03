@@ -150,3 +150,13 @@
 
 - 온라인에서 새 `index.html`은 반영됐지만 `assets/site.css`와 `assets/home.js`가 이전 캐시로 남으면 토글 버튼이 기본 버튼처럼 보이고 클릭 동작도 붙지 않는 문제가 생긴다.
 - 홈 HTML의 `site.css`, `site-data.js`, `home.js` 참조에 `?v=20260514-toggle-cache` 버전 쿼리를 붙여 GitHub Pages와 브라우저 캐시를 우회하도록 했다.
+
+## 2026-06-03 0515 이후 강의록 추가 반영
+
+- 사용자가 05/15 이후 강의록이 업데이트됐다고 알려 주었고, 기존 파일명 규칙에 맞게 새 HTML 16개를 ASCII 파일명으로 정리했다.
+- 2교시 연속 자료는 시작 교시 파일명만 유지하고 `site.config.json`의 `pageSpans`로 묶었다. 해당 자료는 `0515_2_asphyxia.html`, `0519_3_health-promotion-education.html`, `0521_1_comparative-healthcare-systems.html`이다.
+- `site.config.json`에 05/15-05/21 자료의 담당 교수 매핑을 추가했다. 새 교수 태그로 김석현, 김미정, 박서특, 장성호를 `professorRules`에 넣었다.
+- `timetable.md`의 05/15 이후 `현재 파일` 칸을 새 파일명으로 채웠고, 05/21 비교의료제도론실습은 한 파일이 1-2교시를 덮도록 span을 2로 정리했다.
+- 온라인 캐시를 피하기 위해 `index.html`의 `site.css`, `site-data.js`, `home.js` 버전 쿼리를 `20260603-lecture-update`로 올렸다.
+- `npm run build`를 실행해 `site-data.js`를 재생성했고, 전체 47개 페이지와 새 강의록 16개 매핑이 정상임을 별도 검증했다.
+- 로컬 서버를 `http://localhost:4173/`에서 띄웠고 첫 응답이 HTTP 200인지 확인했다.

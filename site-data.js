@@ -1,5 +1,5 @@
 window.PDS_SITE_DATA = {
-  "generatedAt": "2026-05-14T04:06:03.663Z",
+  "generatedAt": "2026-06-03T10:13:15.347Z",
   "config": {
     "siteTitle": "PDS 학습 위키",
     "subtitle": "본과 4학년 PDS HTML 학습자료",
@@ -87,7 +87,23 @@ window.PDS_SITE_DATA = {
       "0507_1_health-security.html": "신영전",
       "0507_3_infectious-disease-control-act.html": "김민주",
       "0507_4_quarantine-aids-prevention-act.html": "김민주",
-      "0507_5_injury-death.html": "김원규"
+      "0507_5_injury-death.html": "김원규",
+      "0515_1_head-injury.html": "김원규",
+      "0515_2_asphyxia.html": "김원규",
+      "0515_4_sudden-natural-death.html": "김원규",
+      "0518_1_aromatherapy-theory-practice.html": "김석현",
+      "0518_2_drowning-temperature-injury.html": "김원규",
+      "0518_3_poisoning-sex-infant-maternal-death.html": "김원규",
+      "0519_1_clinical-preventive-medicine-health-screening.html": "신영전",
+      "0519_2_global-health.html": "신영전",
+      "0519_3_health-promotion-education.html": "신영전",
+      "0520_1_integrative-medicine-overview-status.html": "김미정",
+      "0520_2_ims-prolotherapy-taping.html": "김미정",
+      "0520_3_naturopathic-medicine.html": "박서특",
+      "0520_4_energy-medicine.html": "장성호",
+      "0521_1_comparative-healthcare-systems.html": "신영전",
+      "0521_3_national-health-insurance-act.html": "신영전",
+      "0521_4_blood-management-life-sustaining-treatment-act.html": "신영전"
     },
     "pageSpans": {
       "0429_5_healthcare-understanding.html": 2,
@@ -97,7 +113,10 @@ window.PDS_SITE_DATA = {
       "0501_3_community-health.html": 2,
       "0506_1_health-management-health-behaviors.html": 2,
       "0507_1_health-security.html": 2,
-      "0507_5_injury-death.html": 2
+      "0507_5_injury-death.html": 2,
+      "0515_2_asphyxia.html": 2,
+      "0519_3_health-promotion-education.html": 2,
+      "0521_1_comparative-healthcare-systems.html": 2
     },
     "professorRules": [
       {
@@ -153,6 +172,30 @@ window.PDS_SITE_DATA = {
         "keywords": [
           "김원규",
           "Won Kyu Kim"
+        ]
+      },
+      {
+        "professor": "김석현",
+        "keywords": [
+          "김석현"
+        ]
+      },
+      {
+        "professor": "김미정",
+        "keywords": [
+          "김미정"
+        ]
+      },
+      {
+        "professor": "박서특",
+        "keywords": [
+          "박서특"
+        ]
+      },
+      {
+        "professor": "장성호",
+        "keywords": [
+          "장성호"
         ]
       }
     ]
@@ -591,6 +634,230 @@ window.PDS_SITE_DATA = {
       "endPeriod": 6,
       "span": 2,
       "periodLabel": "5-6교시 13:00-14:50"
+    },
+    {
+      "file": "0515_1_head-injury.html",
+      "title": "두부손상",
+      "professor": "김원규",
+      "tag": "김원규",
+      "dateKey": "2026-05-15",
+      "dateLabel": "05/15",
+      "weekday": "금요일",
+      "weekKey": "2026-05-11",
+      "period": 1,
+      "endPeriod": 1,
+      "span": 1,
+      "periodLabel": "1교시 08:00-08:50"
+    },
+    {
+      "file": "0515_2_asphyxia.html",
+      "title": "질식사",
+      "professor": "김원규",
+      "tag": "김원규",
+      "dateKey": "2026-05-15",
+      "dateLabel": "05/15",
+      "weekday": "금요일",
+      "weekKey": "2026-05-11",
+      "period": 2,
+      "endPeriod": 3,
+      "span": 2,
+      "periodLabel": "2-3교시 09:00-10:50"
+    },
+    {
+      "file": "0515_4_sudden-natural-death.html",
+      "title": "내인성 급사",
+      "professor": "김원규",
+      "tag": "김원규",
+      "dateKey": "2026-05-15",
+      "dateLabel": "05/15",
+      "weekday": "금요일",
+      "weekKey": "2026-05-11",
+      "period": 4,
+      "endPeriod": 4,
+      "span": 1,
+      "periodLabel": "4교시 11:00-11:50"
+    },
+    {
+      "file": "0518_1_aromatherapy-theory-practice.html",
+      "title": "아로마테라피 이론과 실제",
+      "professor": "김석현",
+      "tag": "김석현",
+      "dateKey": "2026-05-18",
+      "dateLabel": "05/18",
+      "weekday": "월요일",
+      "weekKey": "2026-05-18",
+      "period": 1,
+      "endPeriod": 1,
+      "span": 1,
+      "periodLabel": "1교시 08:00-08:50"
+    },
+    {
+      "file": "0518_2_drowning-temperature-injury.html",
+      "title": "익사 온도이상",
+      "professor": "김원규",
+      "tag": "김원규",
+      "dateKey": "2026-05-18",
+      "dateLabel": "05/18",
+      "weekday": "월요일",
+      "weekKey": "2026-05-18",
+      "period": 2,
+      "endPeriod": 2,
+      "span": 1,
+      "periodLabel": "2교시 09:00-09:50"
+    },
+    {
+      "file": "0518_3_poisoning-sex-infant-maternal-death.html",
+      "title": "중독사 · 성 관련 사망 · 신생아/소아 사망 · 모성사망",
+      "professor": "김원규",
+      "tag": "김원규",
+      "dateKey": "2026-05-18",
+      "dateLabel": "05/18",
+      "weekday": "월요일",
+      "weekKey": "2026-05-18",
+      "period": 3,
+      "endPeriod": 3,
+      "span": 1,
+      "periodLabel": "3교시 10:00-10:50"
+    },
+    {
+      "file": "0519_1_clinical-preventive-medicine-health-screening.html",
+      "title": "임상예방의학과 건강진단",
+      "professor": "신영전",
+      "tag": "신영전",
+      "dateKey": "2026-05-19",
+      "dateLabel": "05/19",
+      "weekday": "화요일",
+      "weekKey": "2026-05-18",
+      "period": 1,
+      "endPeriod": 1,
+      "span": 1,
+      "periodLabel": "1교시 08:00-08:50"
+    },
+    {
+      "file": "0519_2_global-health.html",
+      "title": "국제보건관리 북한 보건의료",
+      "professor": "신영전",
+      "tag": "신영전",
+      "dateKey": "2026-05-19",
+      "dateLabel": "05/19",
+      "weekday": "화요일",
+      "weekKey": "2026-05-18",
+      "period": 2,
+      "endPeriod": 2,
+      "span": 1,
+      "periodLabel": "2교시 09:00-09:50"
+    },
+    {
+      "file": "0519_3_health-promotion-education.html",
+      "title": "건강증진과 보건교육",
+      "professor": "신영전",
+      "tag": "신영전",
+      "dateKey": "2026-05-19",
+      "dateLabel": "05/19",
+      "weekday": "화요일",
+      "weekKey": "2026-05-18",
+      "period": 3,
+      "endPeriod": 4,
+      "span": 2,
+      "periodLabel": "3-4교시 10:00-11:50"
+    },
+    {
+      "file": "0520_1_integrative-medicine-overview-status.html",
+      "title": "통합의학의 개요와 현황",
+      "professor": "김미정",
+      "tag": "김미정",
+      "dateKey": "2026-05-20",
+      "dateLabel": "05/20",
+      "weekday": "수요일",
+      "weekKey": "2026-05-18",
+      "period": 1,
+      "endPeriod": 1,
+      "span": 1,
+      "periodLabel": "1교시 08:00-08:50"
+    },
+    {
+      "file": "0520_2_ims-prolotherapy-taping.html",
+      "title": "IMS와 증식치료 임상 테이핑",
+      "professor": "김미정",
+      "tag": "김미정",
+      "dateKey": "2026-05-20",
+      "dateLabel": "05/20",
+      "weekday": "수요일",
+      "weekKey": "2026-05-18",
+      "period": 2,
+      "endPeriod": 2,
+      "span": 1,
+      "periodLabel": "2교시 09:00-09:50"
+    },
+    {
+      "file": "0520_3_naturopathic-medicine.html",
+      "title": "자연의학 Naturopathic medicine",
+      "professor": "박서특",
+      "tag": "박서특",
+      "dateKey": "2026-05-20",
+      "dateLabel": "05/20",
+      "weekday": "수요일",
+      "weekKey": "2026-05-18",
+      "period": 3,
+      "endPeriod": 3,
+      "span": 1,
+      "periodLabel": "3교시 10:00-10:50"
+    },
+    {
+      "file": "0520_4_energy-medicine.html",
+      "title": "에너지 의학",
+      "professor": "장성호",
+      "tag": "장성호",
+      "dateKey": "2026-05-20",
+      "dateLabel": "05/20",
+      "weekday": "수요일",
+      "weekKey": "2026-05-18",
+      "period": 4,
+      "endPeriod": 4,
+      "span": 1,
+      "periodLabel": "4교시 11:00-11:50"
+    },
+    {
+      "file": "0521_1_comparative-healthcare-systems.html",
+      "title": "국가별 보건의료체계 미국·영국·독일·프랑스·일본·대만",
+      "professor": "신영전",
+      "tag": "신영전",
+      "dateKey": "2026-05-21",
+      "dateLabel": "05/21",
+      "weekday": "목요일",
+      "weekKey": "2026-05-18",
+      "period": 1,
+      "endPeriod": 2,
+      "span": 2,
+      "periodLabel": "1-2교시 08:00-09:50"
+    },
+    {
+      "file": "0521_3_national-health-insurance-act.html",
+      "title": "국민건강보험법",
+      "professor": "신영전",
+      "tag": "신영전",
+      "dateKey": "2026-05-21",
+      "dateLabel": "05/21",
+      "weekday": "목요일",
+      "weekKey": "2026-05-18",
+      "period": 3,
+      "endPeriod": 3,
+      "span": 1,
+      "periodLabel": "3교시 10:00-10:50"
+    },
+    {
+      "file": "0521_4_blood-management-life-sustaining-treatment-act.html",
+      "title": "혈액관리법 · 연명의료법",
+      "professor": "신영전",
+      "tag": "신영전",
+      "dateKey": "2026-05-21",
+      "dateLabel": "05/21",
+      "weekday": "목요일",
+      "weekKey": "2026-05-18",
+      "period": 4,
+      "endPeriod": 4,
+      "span": 1,
+      "periodLabel": "4교시 11:00-11:50"
     }
   ]
 };
